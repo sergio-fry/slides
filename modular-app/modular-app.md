@@ -100,16 +100,225 @@ digraph G {
 
 # Entities
 
-```bash
-app/entities (gem)
-```
+<table>
+<tr>
+
+<td>
+
+![height:10em](img/module.png)
+
+</td>
+
+<td>
+<pre>
+app/<span style="background: #FEFBBA">entities</span>
+app/<span style="background: #FEFBBA">entities</span>/lib
+app/<span style="background: #FEFBBA">entities</span>/entities.gemspec
+</pre>
+</td>
+
+</tr>
+</table>
+
+---
+
+# Modules
+
+<table>
+<tr>
+
+<td>
+
+![height:10em](img/module.png)
+
+</td>
+
+<td>
+<pre>
+app/modules
+app/modules/orders
+app/modules/accounts
+</pre>
+</td>
+
+</tr>
+</table>
+
+
+---
+
+# Module
+*Use Cases*
+
+<table>
+<tr>
+
+<td>
+
+![height:10em](img/module.png)
+
+</td>
+
+<td>
+<pre>
+app/modules
+app/modules/orders
+app/modules/orders/lib
+app/modules/orders/lib/<span style="background: #FFA09B">order_creator.rb</span>
+app/modules/orders/lib/<span style="background: #FFA09B">cart.rb</span>
+app/modules/orders/orders.gemspec
+</pre>
+
+</td>
+
+</tr>
+</table>
+
 
 ---
 
 # Module
 
+*Adapters*
 
-```bash
+<table>
+<tr>
+
+<td>
+
+![height:10em](img/module.png)
+
+</td>
+
+<td>
+<pre>
+app/modules
 app/modules/orders
-app/modules/accounts
-```
+app/modules/orders/lib
+app/modules/orders/lib/<span style="background: #A2FDBA">adapters</span>
+app/modules/orders/lib/<span style="background: #A2FDBA">adapters/orders_repo.rb</span>
+app/modules/orders/lib/<span style="background: #A2FDBA">adapters/order_serializer.rb</span>
+app/modules/orders/orders.gemspec
+</pre>
+
+</td>
+
+</tr>
+</table>
+
+---
+
+# Module
+
+*Frameworks & Drivers*
+
+<table>
+<tr>
+
+<td>
+
+![height:10em](img/module.png)
+
+</td>
+
+<td>
+<pre>
+app/modules
+app/modules/orders
+app/modules/orders/<span style="background: #A4D8FF">external</span>
+app/modules/orders/lib
+app/modules/orders/orders.gemspec
+</pre>
+
+</td>
+
+</tr>
+</table>
+
+---
+
+# Module
+
+*Adapters*
+
+<table>
+<tr>
+
+<td>
+
+![height:10em](img/module.png)
+
+</td>
+
+<td>
+<pre>
+app/modules
+app/modules/orders
+app/modules/orders/lib
+app/modules/orders/lib/<span style="background: #A2FDBA">adapters</span>
+app/modules/orders/lib/<span style="background: #A2FDBA">adapters/orders_repo.rb</span>
+app/modules/orders/lib/<span style="background: #A2FDBA">adapters/order_serializer.rb</span>
+app/modules/orders/orders.gemspec
+</pre>
+
+</td>
+
+</tr>
+</table>
+
+---
+
+# Module
+
+*Frameworks & Drivers*
+
+<table>
+<tr>
+
+<td>
+
+![height:10em](img/module.png)
+
+</td>
+
+<td>
+<pre>
+app/modules
+app/modules/orders
+app/modules/orders/<span style="background: #A4D8FF">external</span>
+app/modules/orders/lib
+app/modules/orders/orders.gemspec
+</pre>
+
+</td>
+
+</tr>
+</table>
+
+---
+
+# Module
+
+*Frameworks & Drivers*
+
+<table>
+<tr>
+
+<td>
+
+![height:10em](img/module.png)
+
+</td>
+
+<td>
+<pre>
+orders/<span style="background: #A4D8FF">external</span>
+orders/<span style="background: #A4D8FF">external/rails_engine</span>
+orders/<span style="background: #A4D8FF">external/rake_tasks</span>
+orders/<span style="background: #A4D8FF">external/workers</span>
+</pre>
+
+</td>
+
+</tr>
+</table>
