@@ -1,5 +1,12 @@
-# Modaular ruby app
+---
+theme: uncover
+paginate: true
+backgroundColor: #ddd
+---
 
+# Module vs Class
+
+Sergei O. Udalov
 
 ---
 
