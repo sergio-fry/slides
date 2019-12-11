@@ -23,13 +23,14 @@ Sergei O. Udalov
 
 ---
 
-# Fullstack Module
-
+# Vertical Module
 
 - Entites
 - Use Cases
 - Interface Adapters
 - Frameworks & Drivers
+
+
 
 ---
 
@@ -38,39 +39,39 @@ Sergei O. Udalov
 <div>
 
 @startuml
-skinparam dpi 100
+skinparam dpi 200
 
-component "Orders"  {
-  rectangle "Entites" as entities #FEFBBA
-  rectangle "Use Cases" as use_cases #FFA09B
-  rectangle "Interface Adapters" as adapters #A2FDBA
-  rectangle "Frameworks & Drivers" as external #A4D8FF
+digraph G {
+  node [shape="box" style="filled" width="2"]
 
-  use_cases -> entities
-  adapters -> use_cases
-  external -> adapters
-}
+  subgraph cluster3 {
+    entities [label="Entites" fillcolor="#FEFBBA"];
+  }
 
-@enduml
+  subgraph cluster1 {
+    label = "Orders";
 
-</div>
+    use_cases [label="Use Cases" fillcolor="#FFA09B"]
+    interface_adapters [label="Interface Adapters" fillcolor="#A2FDBA"]
+    framework_drivers [label="Frameworks & Drivers" fillcolor="#A4D8FF"]
 
-<div>
+    framework_drivers -> interface_adapters;
+		interface_adapters -> use_cases;
+    use_cases -> entities;
+	}
 
-@startuml
-skinparam dpi 100
+  subgraph cluster2 {
+    label = "Accounts";
 
-component "Accounts"  {
-  rectangle "Entites" as entities #FEFBBA
-  rectangle "Use Cases" as use_cases #FFA09B
-  rectangle "Interface Adapters" as adapters #A2FDBA
-  rectangle "Frameworks & Drivers" as external #A4D8FF
+    use_cases2 [label="Use Cases" fillcolor="#FFA09B"]
+    interface_adapters2 [label="Interface Adapters" fillcolor="#A2FDBA"]
+    framework_drivers2 [label="Frameworks & Drivers" fillcolor="#A4D8FF"]
 
-  use_cases -> entities
-  adapters -> use_cases
-  external -> adapters
-}
-
+    framework_drivers2 -> interface_adapters2;
+		interface_adapters2 -> use_cases2;
+    use_cases2 -> entities;
+	}
+} 
 @enduml
 
 </div>
