@@ -1,14 +1,16 @@
 ---
+marp: true
 theme: uncover
 paginate: true
 backgroundColor: #ddd
 ---
 
+
 <!-- _paginate: false -->
 
 # Modular Ruby app
 
-Сергей Удалов, отдел "Кредит наличными"
+Sergei O. Udalov
 
 ---
 <!-- _backgroundColor: white -->
@@ -23,13 +25,21 @@ backgroundColor: #ddd
 
 # Module CA
 
-- Entities
-- Use Cases
-- Interface Adapters
-- Frameworks
+* Entities
+* Use Cases
+* Interface Adapters
+* Frameworks
 
 
 ---
 
 # Fullstack
 
+<div>
+
+@startuml
+skinparam dpi 200
+Bob -> Alice : hello
+@enduml
+
+</div>

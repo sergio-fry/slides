@@ -5,5 +5,6 @@ Some slides
 ## Usage
 
 ```bash
-npx @marp-team/marp-cli -w module-vs-class.md
+./node_modules/@marp-team/marp-cli/marp-cli.js --engine ./engine.js -w modular-app/modular-app
+.md
 ```
