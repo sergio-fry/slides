@@ -13,6 +13,8 @@ Sergei O. Udalov
 
 * include module
 * inherit from base class
+* composition
+* etc
 
 ---
 
@@ -26,36 +28,20 @@ end
 
 ---
 
-# Class Inheritance
-
-```ruby
-class UsersRequest < HTTPRequest
-end
-```
-
----
-<!-- footer: Module -->
-
 # Module Example
 
 ```ruby
 module HTTPRequest
-  def http_get(url, options={})
-    Faraday.get url, query, { "Authorization": "Bearer #{ENV["TOKEN"]}" }
+  def http_get(url, q={})
+    Faraday.get url, { "api_token": ENV["TOKEN"] }.merge(q)
   end
 end
-```
 
----
-
-# Module Usage
-
-```ruby
 class UsersRequest
   include HTTPRequest
 
-  def call
-    http_get 'http://example.com/api/users', page: 1
+  def call(page)
+    http_get 'http://example.com/api/users', { page: page }
   end
 end
 ```
@@ -66,14 +52,14 @@ end
 
 ```ruby
 module HTTPRequest
-  def http_get(url, query={}, headers={})
-    Faraday.get url, query, headers
+  def http_get(url, q={})
+    Faraday.get url, query(q)
   end
 
   private
 
-  def headers
-    { "Authorization": "Bearer #{ENV["TOKEN"]}" }
+  def query(q)
+    { "Authorization": "Bearer #{ENV["TOKEN"]}" }.merge(q)
   end
 end
 ```
@@ -86,14 +72,14 @@ end
 module UsersRequest
   include HTTPRequest
 
-  def call
-    http_get 'http://example.com/api/users', page: 1
+  def call(page)
+    http_get 'http://example.com/api/users', query(page)
   end
 
   private
 
-  def headers
-    { "Authorization": "Bearer #{ENV["TOKEN"]}" }
+  def query(page) # is already taken
+    { page: page }
   end
 end
 ```
