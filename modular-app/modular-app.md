@@ -1,12 +1,21 @@
 ---
-marp: true
-theme: uncover
 paginate: true
-backgroundColor: #fff
+theme: gaia
 ---
+<style>
+  section {
+    background: white;
+  }
+  td {
+    background: white !important;
+    border: 0px !important;
+  }
+</style>
 
-
-<!-- _paginate: false -->
+<!--
+_paginate: false
+class: lead
+-->
 
 # Modular Ruby app
 
@@ -16,14 +25,14 @@ Sergei O. Udalov
 
 # Clean Architecture
 
-![](img/clean_architecture.jpeg)
+![height:15em](img/clean_architecture.jpeg)
 
 
 ---
 
 # Fullstack Module
 
-<div>
+<center>
 
 @startuml
 skinparam dpi 200
@@ -49,13 +58,13 @@ digraph G {
 } 
 @enduml
 
-</div>
+</center>
 
 ---
 
 # Fullstack Module
 
-<div>
+<center>
 
 @startuml
 skinparam dpi 200
@@ -93,7 +102,7 @@ digraph G {
 } 
 @enduml
 
-</div>
+</center>
 
 
 ---
@@ -237,7 +246,7 @@ modules/accounts
 
 # Dependencies
 
-<div>
+<center>
 
 @startuml
 skinparam dpi 200
@@ -265,4 +274,4 @@ digraph G {
 } 
 @enduml
 
-</div>
+</center>
