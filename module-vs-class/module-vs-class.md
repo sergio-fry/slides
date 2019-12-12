@@ -1,7 +1,6 @@
 ---
-theme: uncover
+@auto-scale: true
 paginate: true
-backgroundColor: #ddd
 ---
 
 # Module vs Class
@@ -10,12 +9,38 @@ Sergei O. Udalov
 
 ---
 
+# How to extend?
 
-# Module
+* include module
+* inherit from base class
+
+---
+
+# Include Module
+
+```ruby
+class UsersRequest
+  include HTTPRequest
+end
+```
+
+---
+
+# Class Inheritance
+
+```ruby
+class UsersRequest < HTTPRequest
+end
+```
+
+---
+<!-- footer: Module -->
+
+# Module Example
 
 ```ruby
 module HTTPRequest
-  def get(url, query={})
+  def http_get(url, options={})
     Faraday.get url, query, { "Authorization": "Bearer #{ENV["TOKEN"]}" }
   end
 end
@@ -30,17 +55,39 @@ class UsersRequest
   include HTTPRequest
 
   def call
-    get 'http://example.com/api/users', page: 1
+    http_get 'http://example.com/api/users', page: 1
   end
 end
 ```
 
 ---
 
+# Incapsulation
+
 ```ruby
 module HTTPRequest
-  def get(url, query={})
-    @resp = Faraday.get url, query, headers
+  def http_get(url, query={}, headers={})
+    Faraday.get url, query, headers
+  end
+
+  private
+
+  def headers
+    { "Authorization": "Bearer #{ENV["TOKEN"]}" }
+  end
+end
+```
+
+---
+
+# Incapsulation is Broken!
+
+```ruby
+module UsersRequest
+  include HTTPRequest
+
+  def call
+    http_get 'http://example.com/api/users', page: 1
   end
 
   private
