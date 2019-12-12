@@ -10,6 +10,9 @@ theme: gaia
     background: white !important;
     border: 0px !important;
   }
+  pre {
+    font-size: 18px;
+  }
 </style>
 
 <!--
@@ -27,6 +30,10 @@ Sergei O. Udalov
 
 ![height:15em](img/clean_architecture.jpeg)
 
+
+---
+
+# Monolith First
 
 ---
 
@@ -64,39 +71,7 @@ digraph G {
 
 <center>
 
-```plantuml
-digraph G {
-  node [shape="box" style="filled" width="2"]
-
-  subgraph cluster3 {
-    entities [label="Entites" fillcolor="#FEFBBA" width="3"];
-  }
-
-  subgraph cluster1 {
-    label = "Orders";
-
-    use_cases [label="Use Cases" fillcolor="#FFA09B"]
-    interface_adapters [label="Interface Adapters" fillcolor="#A2FDBA"]
-    framework_drivers [label="Frameworks & Drivers" fillcolor="#A4D8FF"]
-
-    framework_drivers -> interface_adapters;
-		interface_adapters -> use_cases;
-    use_cases -> entities;
-  }
-
-  subgraph cluster2 {
-    label = "Accounts";
-
-    use_cases2 [label="Use Cases" fillcolor="#FFA09B"]
-    interface_adapters2 [label="Interface Adapters" fillcolor="#A2FDBA"]
-    framework_drivers2 [label="Frameworks & Drivers" fillcolor="#A4D8FF"]
-
-    framework_drivers2 -> interface_adapters2;
-		interface_adapters2 -> use_cases2;
-    use_cases2 -> entities;
-  }
-} 
-```
+!!!include(_two_modules.md)!!!
 
 </center>
 
@@ -105,21 +80,37 @@ digraph G {
 
 # Entities
 
+<table><tr><td>
+
 <pre>
 app/<span style="background: #FEFBBA">entities</span>
 app/<span style="background: #FEFBBA">entities</span>/lib
 app/<span style="background: #FEFBBA">entities</span>/entities.gemspec
 </pre>
 
+</td><td>
+
+!!!include(_module.md)!!!
+
+</td></tr></table>
+
 ---
 
 # Modules
+
+<table><tr><td>
 
 <pre>
 app/modules
 app/modules/orders
 app/modules/accounts
 </pre>
+
+</td><td>
+
+!!!include(_two_modules.md)!!!
+
+</td></tr></table>
 
 
 ---
@@ -129,47 +120,22 @@ app/modules/accounts
 
 <table><tr><td>
 
-!!!include(_module.md)!!!
-
-</td><td>
-
 <pre>
 app/modules
 app/modules/orders
-app/modules/orders/lib
-app/modules/orders/lib/<span style="background: #FFA09B">order_creator.rb</span>
-app/modules/orders/lib/<span style="background: #FFA09B">cart.rb</span>
+app/modules/orders/<span style="background: #FFA09B">lib</span>
+app/modules/orders/<span style="background: #FFA09B">lib/order_creator.rb</span>
+app/modules/orders/<span style="background: #FFA09B">lib/cart.rb</span>
 app/modules/orders/orders.gemspec
 </pre>
+
+</td><td>
+
+!!!include(_module.md)!!!
 
 </td></tr></table>
 
 
-
----
-
-# Module
-
-*Adapters*
-
-
-<table><tr><td>
-
-!!!include(_module.md)!!!
-
-</td><td>
-
-<pre>
-app/modules
-app/modules/orders
-app/modules/orders/lib
-app/modules/orders/lib/<span style="background: #A2FDBA">adapters</span>
-app/modules/orders/lib/<span style="background: #A2FDBA">adapters/orders_repo.rb</span>
-app/modules/orders/lib/<span style="background: #A2FDBA">adapters/order_serializer.rb</span>
-app/modules/orders/orders.gemspec
-</pre>
-
-</td></tr></table>
 
 
 ---
@@ -179,10 +145,6 @@ app/modules/orders/orders.gemspec
 *Frameworks & Drivers*
 
 <table><tr><td>
-
-!!!include(_module.md)!!!
-
-</td><td>
 
 <pre>
 app/modules
@@ -192,6 +154,10 @@ app/modules/orders/lib
 app/modules/orders/orders.gemspec
 </pre>
 
+</td><td>
+
+!!!include(_module.md)!!!
+
 </td></tr></table>
 
 
@@ -203,16 +169,19 @@ app/modules/orders/orders.gemspec
 
 <table><tr><td>
 
-!!!include(_module.md)!!!
+<pre>
+orders/<span style="background: #A4D8FF">external</span> (engine)
+orders/<span style="background: #A4D8FF">external/app/controllers</span>
+orders/<span style="background: #A4D8FF">external/app/</span><span style="background: #A2FDBA">gateways</span>
+orders/<span style="background: #A4D8FF">external/app/models</span>
+orders/<span style="background: #A4D8FF">external/app/</span><span style="background: #A2FDBA">presenters</span>
+orders/<span style="background: #A4D8FF">external/views</span>
+orders/<span style="background: #A4D8FF">external/workers</span>
+</pre>
 
 </td><td>
 
-<pre>
-orders/<span style="background: #A4D8FF">external</span>
-orders/<span style="background: #A4D8FF">external/rails_engine</span>
-orders/<span style="background: #A4D8FF">external/rake_tasks</span>
-orders/<span style="background: #A4D8FF">external/workers</span>
-</pre>
+!!!include(_module.md)!!!
 
 </td></tr></table>
 
@@ -224,20 +193,18 @@ orders/<span style="background: #A4D8FF">external/workers</span>
 
 <table><tr><td>
 
-!!!include(_module.md)!!!
-
-</td><td>
-
 <pre>
 <span style="background: #FEFBBA">entities</span>
 <span style="background: #A4D8FF">external</span> # <-- Rails
-modules/orders
 modules/orders/<span style="background: #A4D8FF">external</span> # <-- engine
-modules/orders/lib/<span style="background: #A2FDBA">adapters</span>
-modules/orders/lib/<span style="background: #FFA09B">order_creator.rb</span>
-modules/orders/lib/<span style="background: #FFA09B">cart.rb</span>
-modules/accounts
+modules/orders/<span style="background: #FFA09B">lib</span>
+modules/accounts/<span style="background: #A4D8FF">external</span> # <-- engine
+modules/accounts/<span style="background: #FFA09B">lib</span>
 </pre>
+
+</td><td>
+
+!!!include(_module.md)!!!
 
 </td></tr></table>
 
@@ -245,7 +212,7 @@ modules/accounts
 
 # Result
 
-<center>
+<table><tr><td>
 
 ```plantuml
 digraph G {
@@ -253,14 +220,14 @@ digraph G {
 
   entities [label="Entities gem" fillcolor="#FEFBBA"];
 
-  orders_gem [label="Orders gem" fillcolor="#A2FDBA:#FFA09B"]
-  orders_rails_engine [label="Orders Rails Engine" fillcolor="#A4D8FF"]
+  orders_gem [label="Orders gem" fillcolor="#FFA09B"]
+  orders_rails_engine [label="Orders Rails Engine" fillcolor="#A4D8FF:#A2FDBA"]
 
   orders_gem -> entities;
   orders_rails_engine -> orders_gem;
 
-  accounts_gem [label="Accounts gem" fillcolor="#A2FDBA:#FFA09B"]
-  accounts_rails_engine [label="Accounts Rails Engine" fillcolor="#A4D8FF"]
+  accounts_gem [label="Accounts gem" fillcolor="#FFA09B"]
+  accounts_rails_engine [label="Accounts Rails Engine" fillcolor="#A4D8FF:#A2FDBA"]
 
   accounts_gem -> entities;
   accounts_rails_engine -> accounts_gem;
@@ -271,4 +238,8 @@ digraph G {
 } 
 ```
 
-</center>
+</td><td>
+
+!!!include(_module.md)!!!
+
+</td></tr></table>
