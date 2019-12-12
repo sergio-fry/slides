@@ -35,8 +35,6 @@ Sergei O. Udalov
 <center>
 
 @startuml
-skinparam dpi 200
-
 digraph G {
   node [shape="box" style="filled" width="2"]
 
@@ -67,8 +65,6 @@ digraph G {
 <center>
 
 @startuml
-skinparam dpi 200
-
 digraph G {
   node [shape="box" style="filled" width="2"]
 
@@ -201,8 +197,6 @@ orders/<span style="background: #A4D8FF">external/workers</span>
 <td>
 
 @startuml
-skinparam dpi 200
-
 digraph G {
   node [shape="box" style="filled" width="2"]
 
@@ -244,13 +238,11 @@ modules/accounts
 
 ---
 
-# Dependencies
+# Result
 
 <center>
 
 @startuml
-skinparam dpi 200
-
 digraph G {
   node [shape="box" style="filled" width="2" fillcolor="white"]
 
