@@ -34,7 +34,7 @@ Sergei O. Udalov
 
 <center>
 
-@startuml
+```plantuml
 digraph G {
   node [shape="box" style="filled" width="2"]
 
@@ -54,7 +54,7 @@ digraph G {
     use_cases -> entities;
 	}
 } 
-@enduml
+```
 
 </center>
 
@@ -64,7 +64,7 @@ digraph G {
 
 <center>
 
-@startuml
+```plantuml
 digraph G {
   node [shape="box" style="filled" width="2"]
 
@@ -96,7 +96,7 @@ digraph G {
     use_cases2 -> entities;
 	}
 } 
-@enduml
+```
 
 </center>
 
@@ -196,7 +196,7 @@ orders/<span style="background: #A4D8FF">external/workers</span>
 
 <td>
 
-@startuml
+```plantuml
 digraph G {
   node [shape="box" style="filled" width="2"]
 
@@ -216,7 +216,7 @@ digraph G {
     use_cases -> entities;
 	}
 } 
-@enduml
+```
 
 </td>
 
@@ -242,7 +242,7 @@ modules/accounts
 
 <center>
 
-@startuml
+```plantuml
 digraph G {
   node [shape="box" style="filled" width="2" fillcolor="white"]
 
@@ -264,6 +264,6 @@ digraph G {
   rails -> orders_rails_engine;
   rails -> accounts_rails_engine;
 } 
-@enduml
+```
 
 </center>
