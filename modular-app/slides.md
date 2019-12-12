@@ -52,7 +52,7 @@ digraph G {
     framework_drivers -> interface_adapters;
 		interface_adapters -> use_cases;
     use_cases -> entities;
-	}
+  }
 } 
 ```
 
@@ -82,7 +82,7 @@ digraph G {
     framework_drivers -> interface_adapters;
 		interface_adapters -> use_cases;
     use_cases -> entities;
-	}
+  }
 
   subgraph cluster2 {
     label = "Accounts";
@@ -94,7 +94,7 @@ digraph G {
     framework_drivers2 -> interface_adapters2;
 		interface_adapters2 -> use_cases2;
     use_cases2 -> entities;
-	}
+  }
 } 
 ```
 
