@@ -1517,6 +1517,11 @@ markdown-it-front-matter@^0.1.2:
   resolved "https://registry.yarnpkg.com/markdown-it-front-matter/-/markdown-it-front-matter-0.1.2.tgz#e50bf56e77e6a4f5ac4ffa894d4d45ccd9896b20"
   integrity sha1-5Qv1bnfmpPWsT/qJTU1FzNmJayA=
 
+markdown-it-include@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/markdown-it-include/-/markdown-it-include-1.1.0.tgz#c88fff73a97de4ab678da84c69a51de6105f390d"
+  integrity sha512-OeXvJHfEHrnXWH8+eqMeIX0aFJz4W2ULzfbEVGXBEXab7i3cqLWUxtiHUokZ0/A2uZvLXSaFns/BEVN/mINaCQ==
+
 markdown-it-plantuml@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/markdown-it-plantuml/-/markdown-it-plantuml-1.4.1.tgz#3bd5e7d92eaa5c6c68eb29802f7b46a8e05ca998"
