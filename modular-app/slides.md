@@ -10,7 +10,7 @@ theme: gaia
     background: white !important;
     border: 0px !important;
   }
-  pre {
+  .folders {
     font-size: 18px;
   }
 </style>
@@ -20,24 +20,24 @@ _paginate: false
 class: lead
 -->
 
-# Modular Ruby app
+# Модульное ruby-приложение
 
-Sergei O. Udalov
+Сергей Удалов
 
 ---
 
-# Clean Architecture
+# Чистая архитектура
 
 ![height:15em](img/clean_architecture.jpeg)
 
 
 ---
 
-# Monolith First
+# Сначала монолит
 
 ---
 
-# Fullstack Module
+# Fullstack-модуль
 
 <center>
 
@@ -82,7 +82,7 @@ digraph G {
 
 <table><tr><td>
 
-<pre>
+<pre class='folders'>
 app/<span style="background: #FEFBBA">entities</span>
 app/<span style="background: #FEFBBA">entities</span>/lib
 app/<span style="background: #FEFBBA">entities</span>/entities.gemspec
@@ -96,11 +96,22 @@ app/<span style="background: #FEFBBA">entities</span>/entities.gemspec
 
 ---
 
-# Modules
+# Entities
+
+```ruby
+module Entities
+  class Product; end
+  class Client; end
+end
+```
+
+---
+
+# Модули
 
 <table><tr><td>
 
-<pre>
+<pre class='folders'>
 app/modules
 app/modules/orders
 app/modules/accounts
@@ -115,12 +126,11 @@ app/modules/accounts
 
 ---
 
-# Module
-*Use Cases*
+# Use Cases
 
 <table><tr><td>
 
-<pre>
+<pre class='folders'>
 app/modules
 app/modules/orders
 app/modules/orders/<span style="background: #FFA09B">lib</span>
@@ -136,17 +146,27 @@ app/modules/orders/orders.gemspec
 </td></tr></table>
 
 
+---
+
+# Use Cases
+
+```ruby
+module Orders
+  class OrderCreator; end
+  class Cart; end
+end
+```
 
 
 ---
 
-# Module
+# Модуль
 
 *Frameworks & Drivers*
 
 <table><tr><td>
 
-<pre>
+<pre class='folders'>
 app/modules
 app/modules/orders
 app/modules/orders/<span style="background: #A4D8FF">external</span>
@@ -163,13 +183,13 @@ app/modules/orders/orders.gemspec
 
 ---
 
-# Module
+# Модуль
 
 *Frameworks & Drivers*
 
 <table><tr><td>
 
-<pre>
+<pre class='folders'>
 orders/<span style="background: #A4D8FF">external</span> (engine)
 orders/<span style="background: #A4D8FF">external/app/controllers</span>
 orders/<span style="background: #A4D8FF">external/app/</span><span style="background: #A2FDBA">gateways</span>
@@ -188,12 +208,12 @@ orders/<span style="background: #A4D8FF">external/workers</span>
 
 ---
 
-# Application
+# Приложение
 
 
 <table><tr><td>
 
-<pre>
+<pre class='folders'>
 <span style="background: #FEFBBA">entities</span>
 <span style="background: #A4D8FF">external</span> # <-- Rails
 modules/orders/<span style="background: #A4D8FF">external</span> # <-- engine
@@ -210,7 +230,7 @@ modules/accounts/<span style="background: #FFA09B">lib</span>
 
 ---
 
-# Result
+# Приложение
 
 <table><tr><td>
 
@@ -243,3 +263,7 @@ digraph G {
 !!!include(_module.md)!!!
 
 </td></tr></table>
+
+---
+
+# Спасибо!
