@@ -26,14 +26,27 @@ class: lead
 
 ---
 
+# Цели
+
+* контроль нарастания сложности
+* возмоножсть выделить микросервис
+* независимая разработка
+* быстрые тесты
+
+---
+
+# Принципы
+
+* Чистая архитектура
+* Сначала монолит
+* Кричащая архитектура
+
+--- 
+
 # Чистая архитектура
 
 ![height:15em](img/clean_architecture.jpeg)
 
-
----
-
-# Сначала монолит
 
 ---
 
@@ -67,7 +80,7 @@ digraph G {
 
 ---
 
-# Fullstack Module
+# Fullstack-модуль
 
 <center>
 
@@ -118,7 +131,7 @@ app/<span style="background: #FEFBBA">entities</span>/entities.gemspec
 # Entities
 
 ```ruby
-module Entities
+module MyApp::Entities
   class Product; end
   class Client; end
 end
@@ -213,7 +226,7 @@ app/modules/orders/orders.gemspec
 # Use Cases
 
 ```ruby
-module Orders
+module MyApp::Orders
   class OrderCreator; end
   class Cart; end
 end
@@ -221,6 +234,7 @@ end
 
 
 ---
+<!-- header: "" -->
 
 # Модуль
 
