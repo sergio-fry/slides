@@ -17,7 +17,7 @@ theme: gaia
 
 <!--
 _paginate: false
-class: lead
+_class: lead
 -->
 
 # Модульное ruby-приложение
@@ -32,6 +32,7 @@ class: lead
 
 
 ---
+<!-- _class: lead -->
 
 # Сначала монолит
 
@@ -265,5 +266,6 @@ digraph G {
 </td></tr></table>
 
 ---
+<!-- _class: lead -->
 
 # Спасибо!
