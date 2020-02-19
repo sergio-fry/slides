@@ -1,3 +1,6 @@
+spec_rails = File.expand_path("../../rails/spec", __FILE__)
+$LOAD_PATH.unshift(spec_rails) unless $LOAD_PATH.include?(spec_rails)
+
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
