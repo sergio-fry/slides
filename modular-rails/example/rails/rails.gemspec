@@ -7,9 +7,9 @@ Gem::Specification.new do |spec|
   spec.add_dependency "rails", "~> 6.0.2"
   spec.add_dependency "sqlite3"
   spec.add_dependency "sass-rails", ">= 6"
-  spec.add_dependency "webpacker", "~> 4.0"
+  # spec.add_dependency "webpacker", "~> 4.0"
   spec.add_dependency "bootsnap"
-  spec.add_dependency "jbuilder", "~> 2.7"
+  # spec.add_dependency "jbuilder", "~> 2.7"
 
   spec.add_development_dependency "rspec-rails"
   spec.add_development_dependency "listen"

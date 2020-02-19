@@ -3,11 +3,9 @@ PATH
   specs:
     rails-main (1.0.0)
       bootsnap
-      jbuilder (~> 2.7)
       rails (~> 6.0.2)
       sass-rails (>= 6)
       sqlite3
-      webpacker (~> 4.0)
 
 GEM
   remote: https://rubygems.org/
@@ -89,8 +87,6 @@ GEM
       activesupport (>= 4.2.0)
     i18n (1.8.2)
       concurrent-ruby (~> 1.0)
-    jbuilder (2.10.0)
-      activesupport (>= 5.0.0)
     listen (3.2.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -112,8 +108,6 @@ GEM
       mini_portile2 (~> 2.4.0)
     public_suffix (4.0.3)
     rack (2.2.2)
-    rack-proxy (0.6.5)
-      rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (6.0.2.1)
@@ -187,10 +181,6 @@ GEM
     tilt (2.0.10)
     tzinfo (1.2.6)
       thread_safe (~> 0.1)
-    webpacker (4.2.2)
-      activesupport (>= 4.2)
-      rack-proxy (>= 0.6.1)
-      railties (>= 4.2)
     websocket-driver (0.7.1)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.4)
