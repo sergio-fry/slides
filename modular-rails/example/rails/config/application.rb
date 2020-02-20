@@ -15,5 +15,22 @@ module Framework
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
+
+
+
+    class MyInflector < Zeitwerk::Inflector
+      def camelize(*args)
+        puts args
+        super
+      end
+    end
+    loader = Zeitwerk::Loader.new
+
+    loader.push_dir Rails.root.join("../apps/admin/app/controllers")
+    loader.setup
+    loader.log!
+    loader.inflector = MyInflector.new
+
+    paths["config/routes.rb"].concat(Dir[Rails.root.join("..", "apps", "*", "config/routes.rb")].sort)
   end
 end
