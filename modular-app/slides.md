@@ -29,17 +29,16 @@ class: lead
 # Цели
 
 * контроль нарастания сложности
-* возмоножсть выделить микросервис
 * независимая разработка
-* быстрые тесты
+* возмоножсть выделить микросервис
 
 ---
 
 # Принципы
 
-* Чистая архитектура
-* Сначала монолит
-* Кричащая архитектура
+* чистая архитектура
+* сначала монолит
+* кричащая архитектура
 
 --- 
 
@@ -99,6 +98,7 @@ digraph G {
 
 - общие для всех модулей
 - общие для будующих сервисов
+- ни от чего не зависят
 
 ---
 
@@ -115,9 +115,9 @@ digraph G {
 <table><tr><td>
 
 <pre class='folders'>
-app/<span style="background: #FEFBBA">entities</span>
-app/<span style="background: #FEFBBA">entities</span>/lib
-app/<span style="background: #FEFBBA">entities</span>/entities.gemspec
+my_app/<span style="background: #FEFBBA">entities</span>
+my_app/<span style="background: #FEFBBA">entities</span>/lib
+my_app/<span style="background: #FEFBBA">entities</span>/entities.gemspec
 </pre>
 
 </td><td>
@@ -154,6 +154,7 @@ end
 
 # Следовательно
 
+- содержат в себе все слои (use_cases, adapters, frameworks)
 - совпадают с ограниченными контекстами (DDD)
 - тестируются отдельно
 
@@ -164,9 +165,9 @@ end
 <table><tr><td>
 
 <pre class='folders'>
-app/modules
-app/modules/orders
-app/modules/accounts
+my_app/modules
+my_app/modules/orders
+my_app/modules/accounts
 </pre>
 
 </td><td>
@@ -179,6 +180,7 @@ app/modules/accounts
 <!-- header: "" -->
 
 # Use Cases
+Как часть модуля
 
 ---
 <!-- header: Модули. Use Cases -->
@@ -206,12 +208,12 @@ app/modules/accounts
 <table><tr><td>
 
 <pre class='folders'>
-app/modules
-app/modules/orders
-app/modules/orders/<span style="background: #FFA09B">lib</span>
-app/modules/orders/<span style="background: #FFA09B">lib/order_creator.rb</span>
-app/modules/orders/<span style="background: #FFA09B">lib/cart.rb</span>
-app/modules/orders/orders.gemspec
+my_app/modules
+my_app/modules/orders
+my_app/modules/orders/<span style="background: #FFA09B">lib</span>
+my_app/modules/orders/<span style="background: #FFA09B">lib/order_creator.rb</span>
+my_app/modules/orders/<span style="background: #FFA09B">lib/cart.rb</span>
+my_app/modules/orders/orders.gemspec
 </pre>
 
 </td><td>
@@ -243,11 +245,11 @@ end
 <table><tr><td>
 
 <pre class='folders'>
-app/modules
-app/modules/orders
-app/modules/orders/<span style="background: #A4D8FF">external</span>
-app/modules/orders/lib
-app/modules/orders/orders.gemspec
+my_app/modules
+my_app/modules/orders
+my_app/modules/orders/<span style="background: #A4D8FF">external</span>
+my_app/modules/orders/lib
+my_app/modules/orders/orders.gemspec
 </pre>
 
 </td><td>
