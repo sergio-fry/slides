@@ -129,24 +129,35 @@ class: lead
 
 
 
-# Схема
-
 <center>
 
 ```plantuml
+rectangle "Баланс-Платформа" {
+  package "Проект" as Project {
+    rectangle Ruby
+    rectangle Python
+    rectangle PHP
+  }
+  rectangle "Аналитика" as Analytics
+  database ClickHouse
+  rectangle "Отчеты" as Reports
+  actor "Саппорт" as User
+  actor "Аналитик" as Risk
 
-rectangle Project
-node Analytics
-database ClickHouse
-rectangle Reports
-cloud Bank
-actor User
+}
 
-Project --> Analytics: RMQ
+cloud "РГСБ" as Bank
+
+Ruby --> Analytics: RMQ
+Python --> Analytics: RMQ
+PHP --> Analytics: RMQ
+
+
 Analytics --> ClickHouse: write
-Reports --> Bank: Export
-Reports <-- ClickHouse: read
-Reports --> User: Dashboard
+Reports --> Bank: bank_proxy
+Reports --> ClickHouse: read
+Reports --> User: HTTP
+Risk --> ClickHouse: SQL
 
 ```
 </center>
