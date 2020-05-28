@@ -65,7 +65,19 @@ class: lead
 <!-- header: ClickHouse -->
 
 
-# Основное
+# Назначение
+
+* хранение фактов
+* логирование
+* аналилтика
+
+
+
+---
+
+
+
+# Возможности
 
 * быстрая вставка (throughput)
 * быстрые запросы
@@ -77,13 +89,11 @@ class: lead
 
 
 
-
-
 ---
 
 
 
-# Слабые стороны
+# Особенности
 
 * медленная вставка (latency)
 * RAM
@@ -107,12 +117,52 @@ class: lead
 
 ---
 
+
+
+# ClickHouse. События
+
+
+
+--- 
+<!-- header: ClickHouse. События -->
+
+
+
+
+# Схема
+
+<center>
+
+```plantuml
+
+rectangle Project
+node Analytics
+database ClickHouse
+rectangle Reports
+cloud Bank
+actor User
+
+Project --> Analytics: RMQ
+Analytics --> ClickHouse: write
+Reports --> Bank: Export
+Reports <-- ClickHouse: read
+Reports --> User: Dashboard
+
+```
+</center>
+
+
+
+---
+
+
+
 # Событие
 
 ```json
 {
   "uuid": "6f265bb0-78d6-0138-3362-2cde48001122",
-  "type": "sms",
+  "type": "sms_request",
   "dt": "2020-05-15T15:35:07+03:00",
   "data": {
     "phone": "79161234567",
@@ -126,28 +176,6 @@ class: lead
   }
 }
 ```
-
-
-
----
-
-
-
-# Схема
-
-<center>
-
-```plantuml
-
-database ClickHouse  {
-  database "Project" as db.project
-  database "Analytics" as db.analytics
-
-  db.analytics --> db.project: update views
-}
-
-```
-</center>
 
 
 
