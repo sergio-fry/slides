@@ -134,8 +134,8 @@ class: lead
 ```plantuml
 rectangle "Баланс-Платформа" {
   package "Проект" as Project {
-    rectangle Ruby
     rectangle Python
+    rectangle Ruby
     rectangle PHP
   }
   rectangle "Аналитика" as Analytics
@@ -143,21 +143,25 @@ rectangle "Баланс-Платформа" {
   rectangle "Отчеты" as Reports
   actor "Саппорт" as User
   actor "Аналитик" as Risk
-
 }
 
-cloud "РГСБ" as Bank
+cloud "Банк" as bank {
+  database "Oracle" as bank.db
+  actor "Сотрудник" as bank.operator
+}
 
-Ruby --> Analytics: RMQ
-Python --> Analytics: RMQ
-PHP --> Analytics: RMQ
+Ruby --> Analytics: RPC
+Python --> Analytics: RPC
+PHP --> Analytics: RPC
 
 
 Analytics --> ClickHouse: write
-Reports --> Bank: bank_proxy
 Reports --> ClickHouse: read
 Reports --> User: HTTP
 Risk --> ClickHouse: SQL
+
+Reports --> bank.db: bank_proxy
+Reports --> bank.operator: HTTP
 
 ```
 </center>
