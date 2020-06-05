@@ -41,7 +41,8 @@ class: lead
 
 
 ---
-<!-- header: Docker -->
+<!-- header: Docker для разработки -->
+
 
 # Легенда DTD
 
@@ -51,9 +52,9 @@ Develop.  Test. Deploy
 
 ```plantuml
 
-node Develop
-node Test
-node Deploy
+rectangle Develop
+rectangle Test
+rectangle Deploy
 
 Develop --> Test
 Test --> Deploy
@@ -68,11 +69,67 @@ Test --> Deploy
 
 # Deploy
 
-* оптимизаация размера
-* скорость сборки
+- оптимизаация размера
+
 
 ---
 
 # Test
 
 * дополнительные инструменты
+* скорость сборки
+
+
+---
+
+# Develop
+
+* дополнительные инструменты
+* скорость запуска
+
+---
+
+
+# Лучше без docker
+
+<!-- Кто использует на практике? --> 
+
+
+---
+
+
+# Docker Compose
+
+
+```yaml
+version: "3"
+
+services:
+
+  postgres:
+    image: postgres
+    ports:
+      - "5432:5432"
+
+  memcached:
+    image: memcached
+    ports:
+      - "11211:11211"
+```
+
+```bash
+$ docker-compose up -d
+```
+
+
+
+---
+
+# Notes
+
+- docker linux host
+- all in docker
+- docker stop all
+- docker: env, history, gems (deps)
+- docker sync
+- hyperkiy
