@@ -46,18 +46,23 @@ class: lead
 
 # Легенда DTD
 
-Develop.  Test. Deploy
-
 <center>
 
 ```plantuml
 
-rectangle Develop
-rectangle Test
-rectangle Deploy
 
-Develop --> Test
-Test --> Deploy
+node Image
+
+rectangle Ноутбук as laptop
+rectangle Gitlab
+cloud Cloud
+
+
+Image --> laptop: develop
+Image --> Gitlab: test
+Image --> Cloud: deploy
+
+
 
 ``` 
 
@@ -67,9 +72,11 @@ Test --> Deploy
 
 ---
 
-# Deploy
+# Develop
 
-- оптимизаация размера
+* дополнительные инструменты
+* скорость запуска
+
 
 
 ---
@@ -79,23 +86,21 @@ Test --> Deploy
 * дополнительные инструменты
 * скорость сборки
 
-
 ---
 
-# Develop
+# Deploy
 
-* дополнительные инструменты
-* скорость запуска
+- оптимизация размера
 
 ---
+<!-- header: "" -->
 
 
-# Лучше без docker
-
-<!-- Кто использует на практике? --> 
+# Разработка в docker
 
 
 ---
+<!-- header: Разработка в docker -->
 
 
 # Docker Compose
@@ -106,22 +111,53 @@ version: "3"
 
 services:
 
+  app:
+    build: .
+    depends_on:
+      - postgres
+    environment:
+      - DATABASE_URL=postgres://postgres@postgres/db
+    ports:
+      - "3000:3000"
+    volumes:
+      - "./:/app"
+
   postgres:
     image: postgres
-    ports:
-      - "5432:5432"
 
-  memcached:
-    image: memcached
-    ports:
-      - "11211:11211"
 ```
 
-```bash
-$ docker-compose up -d
+--- 
+
+    $ docker-compose run --rm app bash
+
+    # rails server
+
+---
+
+# Преимущества
+
+* легкая настройка сервисов
+
+---
+
+# Недостатки
+
+* установка зависимостей (gems, node_modules, php compose, ...)
+* низкая скорость
+* запуск тестов
+
+---
+
+# Установка зависимостей
+
 ```
+FROM ruby:1.9
 
-
+WORKDIR /app
+ADD Gemfile Gemfile.lock /app
+RUN bundle install
+```
 
 ---
 
@@ -132,4 +168,4 @@ $ docker-compose up -d
 - docker stop all
 - docker: env, history, gems (deps)
 - docker sync
-- hyperkiy
+- hyperkit
