@@ -129,3 +129,12 @@ script:
 
 
 # Спасибо!
+
+--- 
+
+# Bonus
+
+
+---
+
+# Gitlab CI + Tower
