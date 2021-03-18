@@ -133,11 +133,44 @@ script:
 
 # Bonus
 
+* Gitlab CI + Tower
+
+---
+
+<!-- header: Gitlab CI + Tower -->
+
+
+# Deploy to UAT
+
+```shell
+$ lead release bump
+```
+
+---
+
+# Deploy to UAT
+
+```shell
+72.0.2-rc.56
+...
+Waiting job to build tag "72.0.2-rc.56" https://gitlab.infra.b-pl.pro/cash/rgsb-product/-/jobs/298596
+.............................
+Tower deploy "72.0.2-rc.56" started at https://tower.infra.b-pl.pro/#/jobs/playbook/102669
+```
+
+<br />
+<br />
+<center>
+<img src="img/notification.png" width="40%" />
+</center>
 
 ---
 
 # Gitlab CI + Tower
 
+<br />
+<br />
+<br />
 <center>
 
 ```plantuml
@@ -151,27 +184,8 @@ Shell --> Slack: Notification
 ```
 </center>
 
----
-
-<!-- header: Gitlab CI + Tower -->
-
-# Shell
-
-```shell
-$ lead release bump
-72.0.2-rc.56
-...
-Waiting job to build tag "72.0.2-rc.56" https://gitlab.infra.b-pl.pro/cash/rgsb-product/-/jobs/298596
-.............................
-Tower deploy "72.0.2-rc.56" started at https://tower.infra.b-pl.pro/#/jobs/playbook/102669
-```
 
 ---
-
-# Slack
-
-<img src="img/notification.png" width="90%" />
-
----
+<!-- header: "" -->
 
 # Еще раз спасибо!
