@@ -22,17 +22,22 @@ Sergei O. Udalov
 
 <!-- footer: Jira. Sergei O. Udalov -->
 
+# Why?
 
 * Business
-* Issue
-  * Assigner
-  * Description
-  * Priority
-
-* Workflow
-* Communication
-* Reporting
 * Planning
+* Issue
+* Workflow
+* Reporting
+
+
+---
+
+# Issue
+
+* Description
+* Priority
+* Assignee
 
 
 ---
@@ -40,5 +45,23 @@ Sergei O. Udalov
 # Communication
 
 * Use comments
+* Use workflow
 * Respect notifications
 * Avoid chatting & calls
+
+
+---
+
+# Workflow
+
+* Real
+* Specific vs Universal
+* Responsibility
+
+
+---
+
+# Reporting
+
+* Control
+* Metrics
