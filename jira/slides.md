@@ -14,6 +14,13 @@ class: lead
     text-decoration-color: #FF5028;
     text-underline-offset: 0.3em;
     text-decoration-thickness: 0.1em;
+    padding-bottom: 0.3em;
+  }
+  img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
   }
 </style>
 <!--
@@ -30,37 +37,57 @@ Sergei O. Udalov
 
 <!-- footer: Jira. Sergei O. Udalov -->
 
-# Business
+# Business Values
 
-1. add issue
-2. delegate
-3. walk through workflow
-4. build report
-5. improve process
+* deliver issue
+* scale
+* stable
+* improve
+
+---
+
+# Chat Driven Development
+
+* no description
+* no priorities
+* polling
+* chat ninja is required
+* does **not scale**
+
 
 ---
 
-# Remote
+<!-- header: Chat Driven Development -->
 
-1. delayed communications
-2. switched context
-3. lost control
+# Energy
 
+<img src="img/wall_street_rush.jpeg" />
 
 ---
+
+<!-- header: "" -->
+
+# Boring
+
+<img src="img/issues.png" />
+
+---
+
 
 # Create issue, please!
 
 1. delegate
-2. track
+2. prioritize
+3. subscribe
 
 ---
 
-# Description
+# It shoud be clear...
 
-1. **what** to do
-2. **how** to do
-3. how to **test**
+* **what** to do
+* **how** to do
+* how to **test**
+* .. and be **compact**
 
 ---
 
@@ -71,39 +98,24 @@ Sergei O. Udalov
 * write comments
 * read comments
 * your issues are yours
+* respect priorities
 
 ---
 
 # Communicate
 
-1. comment with mention
-2. assign to notify if mention is ignored
-3. avoid slack & zoom
+* **comment** with mention
+* **assign** to notify if mention is ignored
+* wait for response, please
 
 ---
 
 # Notifications
 
-1. respect email
-2. prioritize
-3. group
-
-
----
-
-# Workflow
-
-1. real
-2. 1 click buttons
-3. **specific** over universal
-
----
-
-# Archivements
-
-* issue is **delegated**
-* **status** is known
-* **flow** is rescpected
+* respect email
+* prioritize
+* digest
+* ignore
 
 ---
 
