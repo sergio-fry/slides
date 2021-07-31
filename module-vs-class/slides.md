@@ -1,140 +1,90 @@
 ---
 paginate: true
-theme: gaia
+class: lead
 ---
 <style>
   section {
     background: white;
   }
-</style>
+  h1,body,li,p { color: black; }
 
+  h1 {
+    text-decoration: underline;
+    text-decoration-color: #FF5028;
+    text-underline-offset: 0.3em;
+    text-decoration-thickness: 0.1em;
+    padding-bottom: 0.3em;
+  }
+  img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+  }
+</style>
 <!--
 _paginate: false
 _class: lead
 -->
 
 
-# Module vs Class
+# Extend with Module
 
 Sergei O. Udalov
 
 ---
 
 
-# How to extend?
+# Intro
 
-* include module
-* inherit from base class
-* composition
-* etc
 
 ---
 
-# Include Module
+# Why to Extend?
 
-```ruby
-class UsersRequest
-  include HTTPRequest
-end
-```
+* SRP
+* Reuse
+* Rubocop
 
----
-
-# Module Example
-
-```ruby
-module HTTPRequest
-  def http_get(url, q={})
-    Faraday.get url, { "api_token": ENV["TOKEN"] }.merge(q)
-  end
-end
-
-class UsersRequest
-  include HTTPRequest
-
-  def call(page)
-    http_get 'http://example.com/api/users', { page: page }
-  end
-end
-```
 
 ---
 
-# Broken Incapsulation
-
 ```ruby
-module HTTPRequest
-  def http_get(url, q={})
-    Faraday.get url, query(q)
+class Products
+  def all
+    http_get("https://example.com/api/products")
   end
 
-  private
+  def request(url, q: {})
+    @response = JSON.parse(Faraday.get(url, query(q)))
+  end
 
   def query(q)
-    { "Authorization": "Bearer #{ENV["TOKEN"]}" }.merge(q)
-  end
-end
-
-module UsersRequest
-  include HTTPRequest
-
-  def call(page)
-    http_get 'http://example.com/api/users', query(page)
-  end
-
-  private
-
-  def query(page) # is already taken
-    { page: page }
+    { token: ENV["TOKEN"] }.merge(q)
   end
 end
 ```
 
 ---
 
-# Class
-
 
 ```ruby
-class HTTPRequest
-  def http_get(url, q={})
-    Faraday.get url, query(q)
+class Products
+  include HTTP
+
+  def all
+    http_get("https://example.com/api/products")
+  end
+end
+
+module HTTP
+  def request(url, q: {})
+    JSON.parse(Faraday.get(url, query(q)))
   end
 
-  private
-
   def query(q)
-    { "Authorization": "Bearer #{ENV["TOKEN"]}" }.merge(q)
+    { token: ENV["TOKEN"] }.merge(q)
   end
 end
 ```
 
----
-
-# Class usage
-
-```ruby
-class HTTPRequest
-  def http_get(url, q={})
-    Faraday.get url, query(q)
-  end
-
-  private
-
-  def query(q)
-    { "Authorization": "Bearer #{ENV["TOKEN"]}" }.merge(q)
-  end
-end
-
-module UsersRequest
-  def call(page)
-    HTTPRequest.new.http_get 'http://example.com/api/users', query(page)
-  end
-
-  private
-
-  def query(page)
-    { page: page }
-  end
-end
-```
