@@ -35,16 +35,60 @@ Sergei O. Udalov
 ---
 
 
-# Intro
+```plantuml
+@startuml
+
+node "Products" {
+}
+
+@enduml
+
+```
+
+---
+
+
+```plantuml
+@startuml
+
+node "Products" {
+  [Quering]
+  [Pricing]
+  [Presentation]
+  [HTTP]
+}
+
+@enduml
+
+```
+
+---
+
+
+```plantuml
+@startuml
+
+node "Products" {
+  [Pricing]
+  [Presentation]
+  [Quering]
+}
+
+[HTTP]
+
+Products --> HTTP
+
+@enduml
+
+```
 
 
 ---
 
-# Why to Extend?
+# Why to Extract?
 
-* SRP
-* Reuse
-* Rubocop
+- SRP
+- Reuse
 
 
 ---
@@ -88,3 +132,48 @@ module HTTP
 end
 ```
 
+
+---
+
+  - understandable
+  - flexible
+  - maintainable
+
+---
+
+# Issues
+
+* Incapsulation
+* Stateless
+* Cyclic Dependencies
+* Reuse
+* Testing
+
+
+---
+
+# Incapsulation
+
+---
+
+<!-- header: Incapsulation -->
+
+
+  * all visible
+  * shared state
+  * intersaction
+
+---
+<!-- header: -->
+
+# Incapsulation
+
+---
+<!-- header: -->
+
+---
+
+# Other
+
+* Why
+* Naming
