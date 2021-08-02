@@ -37,15 +37,15 @@ Sergei O. Udalov
 ---
 
 
-```plantuml
-@startuml
+# A lot of code!
 
-node "Products" {
-}
+---
 
-@enduml
+# Great Code
 
-```
+  - understandable
+  - flexible
+  - maintainable
 
 ---
 
@@ -87,26 +87,16 @@ Products --> HTTP
 
 ---
 
-# Why to Extract?
-
-- SRP
-- Reuse
-
-
----
-
 ```ruby
 class Products
+  BASE_URL = "https://example.com/api"
+
   def all
-    http_get("https://example.com/api/products")
+    parse get("/products")
   end
 
-  def request(url, q: {})
-    @response = JSON.parse(Faraday.get(url, query(q)))
-  end
-
-  def query(q)
-    { token: ENV["TOKEN"] }.merge(q)
+  def get(url)
+    Faraday.get(URI::join(BASE_URL, url))
   end
 end
 ```
@@ -119,47 +109,94 @@ class Products
   include HTTP
 
   def all
-    http_get("https://example.com/api/products")
+    parse get("https://example.com/api/products")
   end
 end
 
 module HTTP
-  def request(url, q: {})
-    JSON.parse(Faraday.get(url, query(q)))
-  end
+  BASE_URL = "https://example.com/api"
 
-  def query(q)
-    { token: ENV["TOKEN"] }.merge(q)
+  def get(url)
+    Faraday.get(URI::join(BASE_URL, url))
   end
 end
 ```
 
+---
+
+
+```ruby
+module HTTP
+  def connection
+    @connection ||= Faraday.new(url: Settings.alfa_api.base_url) do |faraday|
+      faraday.response(:logger, ::Logger.new(STDOUT), bodies: true) if Rails.env.development?
+      faraday.options[:timeout] = REQUEST_TIMEOUT
+      faraday.headers['Content-Type'] = 'application/json'
+      faraday.headers['Accept'] = 'application/json'
+      faraday.adapter Faraday.default_adapter
+    end
+  end
+
+  def add_authorization!(request)
+    header = Faraday::Request
+      .lookup_middleware(:authorization)
+      .header(:Bearer, AlfaToken.get)
+
+    request.headers[Faraday::Request::Authorization::KEY] = header
+  end
+end
+```
 
 ---
 
-  - understandable
-  - flexible
-  - maintainable
+```ruby
+class CreateFieldsForm < Web::BaseSchema
+  include TariffCalculator
+  include DadataFields
+  include WebDefaults
+  include FormExistence
+  include CodeNumberCheck
+  include VerificationFields
+  include CrmpRequest
+  include PartnerData
+end
+```
 
 ---
+
+```ruby
+module MoneyMath
+  def self.round_to_cents(cents)
+    return if cents.nil?
+
+    cents.to_i / 100 * 100
+  end
+end
+```
+
+<!-- _footer: iss -->
+
+---
+
 
 # Issues
 
-* Incapsulation
-* Stateless
-* Cyclic Dependencies
-* Reuse
-* Testing
+* broken incapsulation
+* stateless
+* cyclic dependencies
+* difficult to reuse
+* difficult to test
 
 
----
-
-# Incapsulation
-
+<!-- _footer: incp -->
 
 ---
 
-<!-- header: Incapsulation -->
+# Broken Incapsulation
+
+---
+
+<!-- header: Broken Incapsulation -->
 
 
   * all visible
@@ -182,8 +219,6 @@ module IndexQueryParamsParts
   end
 end
 ```
-
-shared state, intersaction
 
 
 ---
@@ -219,15 +254,12 @@ module QueueLatencyChecker
 end
 ```
 
----
 
-
-<!-- footer: stlss -->
+<!-- _footer: stlss -->
 
 ---
 
 <!-- header: "" -->
-<!-- footer: "" -->
 
 # Stateless
 
@@ -278,14 +310,11 @@ end
 
 TODO: Alfa Request Validator example
 
----
-
-<!-- footer: clc dpd -->
+<!-- _footer: cyc dep -->
 
 ---
 
 <!-- header: "" -->
-<!-- footer: "" -->
 
 # Cyclic Dependencies
 
@@ -317,25 +346,24 @@ end
 ```plantuml
 @startuml
 
-node "Products" {
+node "CreditCardTariffSetter" {
 }
 
-[Pricing]
+[PersistentCcRefuseCode]
 
-Products --> Pricing: price
-Pricing --> Products: list
+CreditCardTariffSetter --> PersistentCcRefuseCode: changeable_cc_refuse_code?
+PersistentCcRefuseCode --> CreditCardTariffSetter: payload
 
 @enduml
 
 ```
 
 
-<!-- footer: rse -->
+<!-- _footer: rse -->
 
 ---
 
 <!-- header: "" -->
-<!-- footer: "" -->
 
 # Resuse
 
@@ -391,7 +419,7 @@ end
 
 ---
 
-<!-- footer: tst -->
+<!-- _footer: tst -->
 
 ---
 
@@ -413,19 +441,39 @@ end
 <!-- header: "" -->
 
 
-
-
 # Class Inside
-
 
 ---
 
 <!-- header: "Class Inside" -->
 
 
+
+```ruby
+module TariffCalculating
+  def tariff_amount(invoker_id:, term_request:, loan_amount_request:, insurance_data: nil)
+    Tariff.new(
+      invoker_id: invoker_id,
+      invoker_type: :account,
+      payload: {
+        loan_term_request: term_request,
+        loan_initial_amount_request: loan_amount_request,
+        insurance_data: insurance_data,
+      }
+    ).amount
+  end
+end
+```
+
+
+
+---
+
+
 * Where is implementation?
 * No constructor
 
+---
 
 ```ruby
 class CreateFieldsForm < Web::BaseSchema
@@ -439,6 +487,39 @@ class CreateFieldsForm < Web::BaseSchema
   include PartnerData
 end
 ```
+
+---
+
+# New Class
+
+---
+
+
+```ruby
+class CreateFieldsForm < Web::BaseSchema
+  def form_data
+    return nil unless valid?
+
+    @form_data = fields_data.merge(
+      tariff_amount: tariff.amount
+    )
+  end
+
+  def tariff
+    Tariff.new(
+      invoker_id: invoker_id,
+      invoker_type: :account,
+      payload: {
+        loan_term_request: term_request,
+        loan_initial_amount_request: loan_amount_request,
+        insurance_data: insurance_data,
+      }
+    )
+  end
+end
+```
+
+---
 
 ---
 
