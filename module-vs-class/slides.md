@@ -30,7 +30,7 @@ _class: lead
 -->
 
 
-# Extend with Module
+# Extract Module with Ruby
 
 Sergei O. Udalov
 
@@ -174,7 +174,7 @@ module MoneyMath
 end
 ```
 
-<!-- _footer: iss -->
+<!-- _footer: → issues -->
 
 ---
 
@@ -188,7 +188,7 @@ end
 * difficult to test
 
 
-<!-- _footer: incp -->
+<!-- _footer: → incapsulation -->
 
 ---
 
@@ -255,7 +255,7 @@ end
 ```
 
 
-<!-- _footer: stlss -->
+<!-- _footer: → stateless -->
 
 ---
 
@@ -310,7 +310,7 @@ end
 
 TODO: Alfa Request Validator example
 
-<!-- _footer: cyc dep -->
+<!-- _footer: → cyclic dependencies -->
 
 ---
 
@@ -359,17 +359,17 @@ PersistentCcRefuseCode --> CreditCardTariffSetter: payload
 ```
 
 
-<!-- _footer: rse -->
+<!-- _footer: → reuse -->
 
 ---
 
 <!-- header: "" -->
 
-# Resuse
+# Difficult to Reuse
 
 ---
 
-<!-- header: Reuse -->
+<!-- header: Difficult to Reuse -->
 
   * high coupling
   * smooth responsibility
@@ -417,24 +417,21 @@ module WebDefaults
 end
 ```
 
----
-
-<!-- _footer: tst -->
+<!-- _footer: → testing -->
 
 ---
 
 <!-- header: "" -->
 
-# Testing
 
----
-
-<!-- header: Testing -->
+# Difficult to Test
 
   * difficult to test
   * no separate tests
   * DRY tests
   * missing tests
+
+<!-- _footer: → class -->
 
 ---
 
@@ -465,10 +462,9 @@ module TariffCalculating
 end
 ```
 
-
-
 ---
 
+# Issues
 
 * Where is implementation?
 * No constructor
@@ -488,11 +484,17 @@ class CreateFieldsForm < Web::BaseSchema
 end
 ```
 
+<!-- _footer: → class -->
+
 ---
+
+<!-- header: "" -->
 
 # New Class
 
 ---
+
+<!-- header: "New Class" -->
 
 
 ```ruby
@@ -521,15 +523,23 @@ end
 
 ---
 
+<!-- header: "" -->
+
+# Summary
+
+* `include` makes your class larger
+* Use class-powered modules
+* Extract logic to new classes
+* Reduce coupling
+
+
 ---
 
+# Thank you!
 
-# Other
 
-* Why
-* Naming
+"Extract Module with Ruby" by Sergei O. Udalov
 
----
+Slides: https://tinyurl.com/ytw5wvx6
 
-# Examples
 
