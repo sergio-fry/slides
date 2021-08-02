@@ -34,10 +34,6 @@ _class: lead
 
 Sergei O. Udalov
 
----
-
-
-# A lot of code!
 
 ---
 
@@ -46,6 +42,10 @@ Sergei O. Udalov
   - understandable
   - flexible
   - maintainable
+
+---
+
+# A lot of code!
 
 ---
 
@@ -419,12 +419,11 @@ end
 <!-- header: "" -->
 
 
-# Difficult to Test
+# Testing
 
-  * difficult to test
-  * no separate tests
+  * stub class
+  * no tests
   * DRY tests
-  * missing tests
 
 <!-- _footer: → class -->
 
