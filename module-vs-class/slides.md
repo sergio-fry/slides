@@ -305,11 +305,6 @@ module MoneyMath
 end
 ```
 
----
-
-
-TODO: Alfa Request Validator example
-
 <!-- _footer: → cyclic dependencies -->
 
 ---
