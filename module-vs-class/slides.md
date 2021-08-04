@@ -5,7 +5,7 @@ theme: gaia
 ---
 <style>
   section {
-    background: white;
+    background: #f2f2f2;
   }
   h1,body,li,p { color: black; }
 
@@ -37,6 +37,13 @@ Sergei O. Udalov
 
 ---
 
+# Balance Platform
+
+<img src="img/bp_info.png" style="height: 95%" />
+
+
+---
+
 # Great Code
 
   - understandable
@@ -52,6 +59,7 @@ Sergei O. Udalov
 
 ```plantuml
 @startuml
+skinparam backgroundColor #f2f2f2
 
 node "Products" {
   [Quering]
@@ -69,6 +77,7 @@ node "Products" {
 
 ```plantuml
 @startuml
+skinparam backgroundColor #f2f2f2
 
 node "Products" {
   [Pricing]
@@ -263,7 +272,7 @@ end
 
 
 
-  * long arg list
+  * too many args
   * no initializer
   * each method is initializer
   * procedural programming
@@ -337,6 +346,7 @@ end
 
 ```plantuml
 @startuml
+skinparam backgroundColor #f2f2f2
 
 node "CreditCardTariffSetter" {
 }
@@ -360,7 +370,7 @@ PersistentCcRefuseCode --> CreditCardTariffSetter: payload
 # Difficult to Reuse
 
   * high coupling
-  * smooth responsibility
+  * unlcear responsibility
 
 ---
 
@@ -455,8 +465,8 @@ end
 
 # Issues
 
-* Where is implementation?
-* No constructor
+* where is implementation?
+* no constructor
 
 ---
 
@@ -514,25 +524,26 @@ end
 
 # Module Name
 
-  * role (Reader, Model)
-  * adjective (Enumerable, Persisted)
-
----
-
-# When to use modules
-
-  * namespace
-  * extension (Enumerable, ActiveModel::Model, Dry::Equalizer)
+  * adjective `Enumerable` `Persisted`
+  * role `Reader` `Model`
 
 ---
 
 <!-- header: "" -->
 
+# When to use modules
+
+  * namespace
+  * extension `ActiveModel::Model` `Dry::Equalizer`
+
+---
+
+
 # Summary
 
   * `include` makes your class larger
-  * use class-powered modules
-  * extract logic to new classes
+  * class-powered modules
+  * extract new classes
   * reduce coupling
   * use `rubocop`
 
@@ -553,6 +564,9 @@ end
 
 "Extracting Ruby Module" by Sergei O. Udalov
 
+Balance Platform
+
 Slides: https://tinyurl.com/ytw5wvx6
+email: sergei@udalovs.ru
 
 
