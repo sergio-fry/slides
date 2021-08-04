@@ -30,7 +30,7 @@ _class: lead
 -->
 
 
-# Extract Module with Ruby
+# Extracting Ruby Module
 
 Sergei O. Udalov
 
@@ -128,12 +128,12 @@ end
 ```ruby
 module HTTP
   def connection
-    @connection ||= Faraday.new(url: Settings.alfa_api.base_url) do |faraday|
-      faraday.response(:logger, ::Logger.new(STDOUT), bodies: true) if Rails.env.development?
-      faraday.options[:timeout] = REQUEST_TIMEOUT
-      faraday.headers['Content-Type'] = 'application/json'
-      faraday.headers['Accept'] = 'application/json'
-      faraday.adapter Faraday.default_adapter
+    @connection ||= Faraday.new(url: Settings.alfa_api.base_url) do |conn|
+      conn.response(:logger, ::Logger.new(STDOUT), bodies: true)
+      conn.options[:timeout] = REQUEST_TIMEOUT
+      conn.headers['Content-Type'] = 'application/json'
+      conn.headers['Accept'] = 'application/json'
+      conn.adapter Faraday.default_adapter
     end
   end
 
@@ -194,16 +194,14 @@ end
 
 # Broken Incapsulation
 
----
 
-<!-- header: Broken Incapsulation -->
-
-
-  * all visible
-  * shared state
+  * global methods
+  * global state
   * intersaction
 
 ---
+
+<!-- header: Broken Incapsulation -->
 
 
 ```ruby
@@ -264,9 +262,6 @@ end
 # Stateless
 
 
----
-
-<!-- header: Stateless -->
 
   * long arg list
   * no initializer
@@ -274,6 +269,8 @@ end
   * procedural programming
 
 ---
+
+<!-- header: Stateless -->
 
 ```ruby
 module MoneyMath
@@ -362,14 +359,12 @@ PersistentCcRefuseCode --> CreditCardTariffSetter: payload
 
 # Difficult to Reuse
 
----
-
-<!-- header: Difficult to Reuse -->
-
   * high coupling
   * smooth responsibility
 
 ---
+
+<!-- header: Difficult to Reuse -->
 
 ```ruby
 module FormExistence
@@ -517,14 +512,38 @@ end
 
 ---
 
+# Module Name
+
+  * role (Reader, Model)
+  * adjective (Enumerable, Persisted)
+
+---
+
+# When to use modules
+
+  * namespace
+  * extension (Enumerable, ActiveModel::Model, Dry::Equalizer)
+
+---
+
 <!-- header: "" -->
 
 # Summary
 
-* `include` makes your class larger
-* Use class-powered modules
-* Extract logic to new classes
-* Reduce coupling
+  * `include` makes your class larger
+  * use class-powered modules
+  * extract logic to new classes
+  * reduce coupling
+  * use `rubocop`
+
+
+---
+
+# What next?
+
+  * "Practical Object-Oriented Design in Ruby: An Agile Primer" by Sandi Metz
+  * "Patterns of Enterprise Application Architecture" by Martin Fowler
+  * "Elegant Objects" by Yegor Bugayenko
 
 
 ---
@@ -532,7 +551,7 @@ end
 # Thank you!
 
 
-"Extract Module with Ruby" by Sergei O. Udalov
+"Extracting Ruby Module" by Sergei O. Udalov
 
 Slides: https://tinyurl.com/ytw5wvx6
 
