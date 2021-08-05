@@ -522,19 +522,19 @@ end
 
 ---
 
-# Module Name
-
-  * adjective `Enumerable` `Persisted`
-  * role `Reader` `Model`
-
----
-
 <!-- header: "" -->
 
 # When to use modules
 
   * namespace
-  * extension `ActiveModel::Model` `Dry::Equalizer`
+  * extension
+
+---
+
+# Module Name
+
+  * adjective `Enumerable` `Persisted`
+  * role `Reader` `Model`
 
 ---
 
