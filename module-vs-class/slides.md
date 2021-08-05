@@ -335,7 +335,7 @@ module PersistentCcRefuseCode
     current_cc_refuse_code == CODE
   end
 
-  def changeable_cc_refuse_code?
+  def refuse_code?
     !persistent_cc_refuse_code?
   end
 end
@@ -353,7 +353,7 @@ node "CreditCardTariffSetter" {
 
 [PersistentCcRefuseCode]
 
-CreditCardTariffSetter --> PersistentCcRefuseCode: changeable_cc_refuse_code?
+CreditCardTariffSetter --> PersistentCcRefuseCode: refuse_code?
 PersistentCcRefuseCode --> CreditCardTariffSetter: payload
 
 @enduml
@@ -371,6 +371,7 @@ PersistentCcRefuseCode --> CreditCardTariffSetter: payload
 
   * high coupling
   * unlcear responsibility
+  * how to use?
 
 ---
 
