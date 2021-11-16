@@ -38,41 +38,151 @@ Sergei O. Udalov
 
 # Intro 
 
-  - field
-  - strategy
-  - ABAC
+  * Form
+  * Field
+  * Strategy
+  * ABAC
 
 
 ---
 
 # Field
 
+```ruby
+{ name: :name, required: true, validators: [CamelCasedStringValidator] },
+{ name: :age, required: true, validators: [NummericValidator, AgeValidator] },
+```
+
 ---
 
 # Strategy
 
-  - subscription
-  - outcome
+```ruby
+class AgeCheck < Strategy
+  FIELDS = %w( age )
+
+  def call(payload)
+    if payload[:age] < 18
+      appply_strategy form_status: :declined
+    else
+      appply_strategy
+    end
+  end
+end
+```
 
 ---
 
-# Now
+# Lot of Strategies
+
 
 ---
 
-# State Machine
+# Before
 
 ---
+
+<!-- header: Before -->
+
+
+# Form Status Field
+
+```ruby
+{ name: :status, required: true },
+```
+
+
+---
+
+# Status Condition
+
+```ruby
+class TariffCalculator < Strategy
+  FIELDS = %w( status loan_amount channel loan_purpose )
+
+  class Rule
+    def self.call(payload)
+      payload[:status] == 'initial'
+    end
+  end
+
+  def call(payload)
+    # ...
+    appply_strategy tariff_name: tariff_name, status: :processing
+  end
+end
+```
+
+---
+
+# Issues
+
+  * No state machine 
+
+
+---
+
+<!-- header: "" -->
 
 # AASM
+
+```ruby
+class Form
+  include AASM
+
+  aasm do
+    state :new, initial: true
+    state :processing
+    # ...
+
+    event :process do
+      transitions from: :new, to: :processing
+    end
+
+    # ...
+  end
+end
+```
 
 ---
 
 # State Strategies
 
+```ruby
+aasm do
+  state :new, strategies: [
+    'AgeCheck' => {}
+  ]
+  state :processing, strategies: [
+    'PassportVerification' => {},
+    'FNSVerification' => {},
+  ]
+  state :approved, strategies: [
+    'SMSNotification' => {},
+  ]
+end
+```
+
+
 ---
 
 # Transitions
+
+
+```ruby
+aasm do
+  state :new, strategies: [
+    'AgeCheck' => { required: true }
+  ], on_complete:
+  state :processing, strategies: [
+    'PassportVerification' => { required: true },
+    'FNSVerification' => {},
+  ]
+  state :approved, strategies: [
+    'SMSNotification' => {},
+  ]
+end
+```
 
 ---
 
@@ -86,9 +196,6 @@ Sergei O. Udalov
 
 # Diagram
 
-
----
----
 ---
 
 # Thank you!
