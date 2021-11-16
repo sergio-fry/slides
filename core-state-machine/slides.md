@@ -20,8 +20,8 @@ theme: gaia
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: auto;
-    height:70%;
+    max-height: 70%;
+    max-width: 100%;
   }
 </style>
 <!--
@@ -75,6 +75,35 @@ end
 
 # Lot of Strategies
 
+```plantuml
+@startuml
+skinparam dpi 300 
+skinparam componentStyle rectangle
+
+[CheckDuplicate]
+[QFD::PersonalDataAgreement]
+[VerificationCallRulesSetter]
+[Verification::Underwriter]
+[QFD::PersonalDataAgreement]
+[Verification::PassportCheck::FirstPage::Producer]
+[Verification::PassportCheck::FirstRegistrationPage::Producer]
+[Verification::PassportCheck::IssuerPage::Producer]
+[Verification::Underwriter]
+[ApprovedRateCalculator]
+[BkiAgreementCheck]
+[ApprovedRateCalculator]
+[PrintForms::JurisdictionInsurance::Strategy]
+[Setters::DealRenewal::Setter]
+[Cft::ShortDecline::Producer]
+[Questions::CancelCall::Producer]
+[ApprovedRateCalculator]
+[BankDealApprove]
+[Cft::ShortDecline::Producer]
+[Questions::CancelCall::Producer]
+
+
+@enduml
+```
 
 ---
 
