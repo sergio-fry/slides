@@ -74,6 +74,7 @@ end
 
 # Lot of Strategies
 
+
 ```plantuml
 @startuml
 skinparam dpi 300 
@@ -103,6 +104,12 @@ skinparam componentStyle rectangle
 
 @enduml
 ```
+
+<!-- 
+* Strategies are grouped
+* Kind of status
+
+-->
 
 ---
 
