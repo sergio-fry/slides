@@ -29,7 +29,7 @@ _class: lead
 -->
 
 
-# Core. State Machine
+# CashCore. State Machine
 
 Sergei O. Udalov
 
