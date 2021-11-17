@@ -29,7 +29,7 @@ _class: lead
 -->
 
 
-# CashCore. State Machine
+# Core. State Machine
 
 Sergei O. Udalov
 
@@ -346,6 +346,26 @@ processing --> approved: approve
 
 ---
 
+# State Processing
+
+
+```plantuml
+@startuml
+
+state "Active" as active
+state "Next State" as next_state
+
+[*] --> active: clear
+active --> next_state : required startegies completed?
+next_state --> [*]
+
+
+@enduml
+```
+
+
+---
+
 # Scheduler
 
 
@@ -557,3 +577,9 @@ Feature: Strategy
     Then strategy "AgeChecker" is executed "1" time(s)
 ```
 
+---
+
+# Open Source
+
+source: https://gitlab.infra.b-pl.pro/lib/core
+IR: https://jira.balance-pl.ru/browse/IR-5141
