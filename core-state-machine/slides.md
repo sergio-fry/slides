@@ -224,6 +224,10 @@ aasm do
 end
 ```
 
+<!--
+Strategy runs only if required state is active
+-->
+
 ---
 
 
@@ -271,6 +275,18 @@ end
 
 ---
 
+# Manual Transition
+
+```ruby
+apply_strategy event_machine_event: :mark_duplicated
+```
+
+<!-- 
+check if event exists
+-->
+
+---
+
 
 ```plantuml
 @startuml
@@ -295,7 +311,7 @@ processing -[dashed]-> approved: approve
 
 ---
 
-# Default Transition
+# Base Line Transition
 
 ```ruby
 state :processing, strategies: [
@@ -330,11 +346,26 @@ processing --> approved: approve
 
 ---
 
-# Manual Transition
+# Scheduler
 
-```ruby
-apply_strategy event_machine_event: :mark_duplicated
+
+```plantuml
+@startuml
+
+[*] --> waiting
+
+
+waiting --> running : active?
+waiting --> scheduled : NOT active?
+
+scheduled --> running : state active
+
+running --> completed 
+
+
+@enduml
 ```
+
 
 ---
 
@@ -478,6 +509,14 @@ processing -[dashed]-> refinement: request_refinement
 
 @enduml
 ```
+
+<!--
+* required strategies are marked
+* clickable
+* forms number
+* form details
+
+-->
 
 
 ---
