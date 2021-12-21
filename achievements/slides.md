@@ -195,3 +195,10 @@ https://is.gd/JpttNc
 
 # Бюрократия
 
+
+---
+
+
+
+slack: @udalov
+
