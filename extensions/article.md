@@ -56,8 +56,8 @@ _class: lead
 
 # Rack
 
+https://github.com/rack/rack/blob/a7747ec32e9971649257e838b0b49b9588945107/lib/rack/builder.rb#L148    
 ```ruby
-# https://github.com/rack/rack/blob/a7747ec32e9971649257e838b0b49b9588945107/lib/rack/builder.rb#L148    
 def use(middleware, *args, &block)
   if @map
     mapping, @map = @map, nil
@@ -68,8 +68,8 @@ end
 ```
 
 
+https://github.com/rack/rack/blob/a7747ec32e9971649257e838b0b49b9588945107/lib/rack/builder.rb#L226
 ```ruby
-# https://github.com/rack/rack/blob/a7747ec32e9971649257e838b0b49b9588945107/lib/rack/builder.rb#L226
 def to_app
   app = @map ? generate_map(@run, @map) : @run
   fail "missing run or map statement" unless app
@@ -247,9 +247,9 @@ end
 
 # Sidekiq
 
-```ruby
-# https://github.com/getsentry/sentry-ruby/blob/master/sentry-sidekiq/lib/sentry-sidekiq.rb
+https://github.com/getsentry/sentry-ruby/blob/master/sentry-sidekiq/lib/sentry-sidekiq.rb
 
+```ruby
 Sidekiq.configure_server do |config|
   config.error_handlers << Sentry::Sidekiq::ErrorHandler.new
   config.server_middleware do |chain|

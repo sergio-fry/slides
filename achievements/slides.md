@@ -1,6 +1,7 @@
 ---
 paginate: true
 class: lead
+marp: true
 ---
 <style>
   {font-family: Monaco}
