@@ -53,7 +53,6 @@ SOLID
 * rspec (include)
 * devise
 * redmine
-* jekyll
 * dry-types
 * huginn
 * nokogiri
@@ -62,6 +61,69 @@ SOLID
 
 
 ---
+
+
+# Jekyll
+
+Не дает возможности изменить поведение внутри core, но дает возможность добавить новые: tags, generators, convertors, filters, hooks
+
+
+## Liquid Tag
+```ruby
+class YouTubeEmbed < Liquid::Tag
+  def render(conext)
+    # ...
+  end
+end
+
+Liquid::Template.register_tag "youtube", YouTubeEmbed
+
+```
+
+## Converter
+
+```ruby
+module Jekyll
+  class UpcaseConverter < Converter
+    safe true
+    priority :low
+
+    def matches(ext)
+      ext =~ /^\.upcase$/i
+    end
+
+    def output_ext(ext)
+      ".html"
+    end
+
+    def convert(content)
+      content.upcase
+    end
+  end
+end
+```
+
+```ruby
+    def setup
+      ensure_not_in_dest
+
+      plugin_manager.conscientious_require
+
+      self.converters = instantiate_subclasses(Jekyll::Converter)
+      self.generators = instantiate_subclasses(Jekyll::Generator)
+    end
+```
+
+
+## Hooks
+
+```ruby
+Jekyll::Hooks.register [:pages, :documents], :post_render do |doc|
+  Jekyll::Emoji.emojify(doc) if Jekyll::Emoji.emojiable?(doc)
+end
+```
+
+TODO
 
 # Logger
 
@@ -302,9 +364,15 @@ end
 
 # Technics
 
-  - inheritance
-  - settings, descision maker
-  - rack
-  - event
-  - class autoload (guess by name, list)
-  - dependency injection
+  * inheritance
+  * settings, descision maker
+  * rack
+  * event
+  * class autoload (guess by name, list)
+  * dependency injection
+
+# Anti-patterns
+
+ * monkey patching
+ * method overriding 
+ * global config without local
