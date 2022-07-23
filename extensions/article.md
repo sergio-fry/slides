@@ -33,26 +33,59 @@ _class: lead
 
 # Ruby Extensions
 
+---
+# Open–closed principle
+> software entities (classes, modules, functions, etc.) should be open for extension, but closed for modification
+
+SOLID
+
+<!-- The benefit of writing open-closed code is that it makes it easier to handle new requirements. Modifying the internals of a class/module is more difficult and error prone than creating a new class/module to extend functionality. -->
+
+---
 
 
-# Extentions
+# TODO
 
 
 * monkey patching
 * dependecy injection
 * ActiveRecord (callbacks)
-* rack
-* faraday
-* ActiveJob (adapter, hooks)
 * rspec (include)
 * devise
 * redmine
 * jekyll
 * dry-types
 * huginn
-* logger
-* sidekiq
+* nokogiri
+* enumerable
+* ruby stdlib (csv, stringio)
 
+
+---
+
+# Logger
+
+
+```ruby
+logger = Logger.new(logdev, level: Logger::INFO)
+logger.level = Logger::DEBUG
+logger.formatter = proc do |severity, datetime, progname, msg|
+  "#{datetime}: #{msg}\n"
+end
+```
+
+```ruby
+@logdev.write(
+  format_message(format_severity(severity), Time.now, progname, message)
+)
+```
+
+```ruby
+Logger.new(BufferedDevice.new(logdev))
+```
+
+
+---
 
 # Rack
 
@@ -267,3 +300,11 @@ Sidekiq.configure_client do |config|
 end
 ```
 
+# Technics
+
+  - inheritance
+  - settings, descision maker
+  - rack
+  - event
+  - class autoload (guess by name, list)
+  - dependency injection
