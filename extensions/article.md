@@ -121,6 +121,36 @@ end
 Jekyll::Hooks.register [:pages, :documents], :post_render do |doc|
   Jekyll::Emoji.emojify(doc) if Jekyll::Emoji.emojiable?(doc)
 end
+
+
+def self.insert_hook(owner, event, priority, &block)
+  @hook_priority[block] = [-priority, @hook_priority.size]
+  @registry[owner][event] << block
+end
+
+    # initial empty hooks
+    @registry = {
+      :site      => {
+        :after_init  => [],
+        :after_reset => [],
+        :post_read   => [],
+        :pre_render  => [],
+        :post_render => [],
+        :post_write  => [],
+      },
+      :pages     => {
+        :post_init    => [],
+        :pre_render   => [],
+        :post_convert => [],
+        :post_render  => [],
+        :post_write   => [],
+      },
+
+
+
+Jekyll::Hooks.trigger :site, :after_init, self
+#...
+
 ```
 
 TODO
