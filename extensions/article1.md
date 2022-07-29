@@ -23,7 +23,7 @@ class HTTPResource
 end
 ```
 
-А теперь нам потребовалось добавить добавить следование переадресации, если код 30x
+А теперь нам потребовалось добавить добавить следование переадресации, если код 30x. Так как у нас ruby, мы можем открыть класс и переопределить метод.
 
 ```ruby
 class HTTPResource
@@ -127,3 +127,36 @@ resource.size
 С одной стороны, наш метод "автоматически" стал показывать размер распакованного документа, что может показаться удачей. Однако, мы потеряли возможность узнать размер исходного тела. Кроме этого, может сломаться функциональность, которая рассчитывала, что `.size` - это именно исходный размер тела. Например, сопоставление с Content-Length заголовком.
 
 
+## Dependency Injection
+
+Предлагаю доработать наш класс, чтобы в нем появились "закладки" для будущих изменений.
+
+
+```ruby
+class HTTPResource
+  def initialize(url, retry_policy: ->(code, body) { true })
+    @url = url
+    @retry_policy = retry_policy
+  end
+
+  def body
+    make_request
+    @body
+  end
+
+  def code
+    make_request
+    @code
+  end
+
+  private
+
+  def make_request
+    @body, @code = # make request
+
+    while @retry_policy.call(@code, @body)
+      @body, @code = # make request
+    end
+  end
+end
+```
