@@ -28,3 +28,6 @@
 [submodule "extensions/vendor/rspec-expectations"]
 	path = extensions/vendor/rspec-expectations
 	url = https://github.com/rspec/rspec-expectations.git
+[submodule "extensions/vendor/warden"]
+	path = extensions/vendor/warden
+	url = https://github.com/wardencommunity/warden.git

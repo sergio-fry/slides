@@ -111,6 +111,24 @@ Warden::Strategies.add(:password) do
 end
 ```
 
+```ruby
+def add(label, strategy = nil, &block)
+  strategy ||= Class.new(Warden::Strategies::Base)
+  strategy.class_eval(&block) if block_given?
+
+  unless strategy.method_defined?(:authenticate!)
+    raise NoMethodError, "authenticate! is not declared in the #{label.inspect} strategy"
+  end
+
+  base = Warden::Strategies::Base
+  unless strategy.ancestors.include?(base)
+    raise "#{label.inspect} is not a #{base}"
+  end
+
+  _strategies[label] = strategy
+end
+```
+
 ### Failure App
 
 ```ruby
