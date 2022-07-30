@@ -16,7 +16,6 @@ SOLID
 
 * dependecy injection
 * ActiveRecord (callbacks)
-* devise
 * redmine
 * dry-types
 * huginn
@@ -28,6 +27,113 @@ SOLID
 ---
 
 
+# Devise
+
+```ruby
+devise :database_authenticatable, :registerable, :confirmable, :uid
+```
+
+```ruby
+Devise.add_module :uid, :model => "devise_uid/model"
+```
+
+```ruby
+module Devise
+  module Models
+    module Uid
+      extend ActiveSupport::Concern
+
+      included do
+        before_save :generate_uid
+      end
+
+      module ClassMethods
+        def uid
+          loop do
+            token = Devise.friendly_token
+            break token unless to_adapter.find_first({ :uid => token })
+          end
+        end
+      end
+
+      private
+
+      def generate_uid
+        self.uid = self.class.uid if self.uid.nil?
+      end
+    end
+  end
+end
+```
+
+## Warden
+
+### Callbacks
+
+With all callbacks, you can add as many as you like, and they will be executed in the order they were declared. If you want to prepend a callback, you should prefix each callback name with "prepend_", e.g. prepend_before_failure, prepend_before_logout and so on, and pass the same arguments described below.
+
+* after_set_user
+* after_authentication
+* after_fetch
+* before_failure
+* after_failed_fetch
+* before_logout
+* on_request
+
+```ruby
+Warden::Manager.after_set_user do |user, auth, opts|
+  unless user.active?
+    auth.logout
+    throw(:warden, :message => "User not active")
+  end
+end
+```
+
+### Strategies
+
+```ruby
+use Warden::Manager do |manager|
+  manager.default_strategies :password, :basic
+  manager.failure_app = BadAuthenticationEndsUpHere
+end
+```
+
+```ruby
+Warden::Strategies.add(:password) do
+  def valid?
+    params['username'] || params['password']
+  end
+
+  def authenticate!
+    u = User.authenticate(params['username'], params['password'])
+    u.nil? ? fail!("Could not log in") : success!(u)
+  end
+end
+```
+
+### Failure App
+
+```ruby
+manager.failure_app = Proc.new { |_env|
+  ['401', {'Content-Type' => 'application/json'}, { error: 'Unauthorized', code: 401 }]
+}
+```
+
+Devise:
+
+```ruby
+class CustomFailureApp < Devise::FailureApp
+  def redirect
+    store_location!
+    message = warden.message || warden_options[:message]
+    if message == :timeout     
+      redirect_to attempted_path
+    else 
+      super
+    end
+  end
+end
+```
 
 
 # Jekyll
