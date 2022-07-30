@@ -1,36 +1,3 @@
----
-paginate: true
-class: lead
-marp: false
----
-<style>
-  {font-family: Monaco}
-  section {
-    /* background: #f2f2f2; */
-  }
-  h1,body,li,p { color: black; }
-
-  h1 {
-    text-decoration: underline;
-    text-decoration-color: #FF5028;
-    text-underline-offset: 0.3em;
-    text-decoration-thickness: 0.1em;
-    padding-bottom: 0.3em;
-  }
-  img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    max-height: 70%;
-    max-width: 100%;
-  }
-</style>
-<!--
-_paginate: false
-_class: lead
--->
-
-
 # Ruby Extensions
 
 ---
@@ -47,10 +14,8 @@ SOLID
 # TODO
 
 
-* monkey patching
 * dependecy injection
 * ActiveRecord (callbacks)
-* rspec (include)
 * devise
 * redmine
 * dry-types
@@ -61,6 +26,8 @@ SOLID
 
 
 ---
+
+
 
 
 # Jekyll
@@ -152,8 +119,6 @@ Jekyll::Hooks.trigger :site, :after_init, self
 #...
 
 ```
-
-TODO
 
 # Logger
 
