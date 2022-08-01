@@ -13,18 +13,36 @@ SOLID
 
 # TODO
 
-
-* dependecy injection
-* ActiveRecord (callbacks)
 * redmine
 * dry-types
 * huginn
 * nokogiri
-* enumerable
-* ruby stdlib (csv, stringio)
 
 
 ---
+
+# ActiveRecord
+
+* relations
+* validations
+* STI
+* configuration
+* callbacks
+* inheritance
+
+# Enumerable
+
+```ruby
+class RemoteItems
+  include Enumerable
+
+  def each
+    CSV.parse(open('http://example.com/items.csv')).each do |item|
+      yield item
+    end
+  end
+end
+```
 
 
 # Devise
