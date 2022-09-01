@@ -21,6 +21,19 @@ SOLID
 
 ---
 
+# Rails Engine
+
+## Redmine
+
+* новые модели, контроллеры, view
+* Rails callbacks
+* Redmine hooks
+
+Можно переопределить view, но не дополнить.
+
+
+---
+
 # ActiveRecord
 
 * relations
