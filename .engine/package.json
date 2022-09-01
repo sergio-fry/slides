@@ -1,6 +1,9 @@
 {
   "dependencies": {
-    "@marp-team/marp-cli": "^1.4.2",
+    "@marp-team/marp-core": "^3.3.2"
+  },
+  "devDependencies": {
+    "@marp-team/marp-cli": "^2.1.2",
     "markdown-it-include": "^2.0.0",
     "markdown-it-plantuml": "^1.4.1"
   }
