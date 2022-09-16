@@ -55,6 +55,13 @@ _class: lead
 
 ---
 
+```ruby
+class User
+end
+```
+
+---
+
 # Оформление MR
 
 * Gitlab

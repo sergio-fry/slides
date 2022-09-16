@@ -6,7 +6,7 @@ Some slides
 
 Install dependencies:
 
-    cd .engine && yarn install
+    cd .engine && npm install
 
 
 
