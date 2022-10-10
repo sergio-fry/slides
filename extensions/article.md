@@ -31,7 +31,7 @@ SOLID
 
 Можно переопределить view, но не дополнить. Есть возможножсть встроить свой экран в настйроки (админка) через partial.
 
-Ксати, интересным сделано хранение настроек плагинов через единый класс Settings. А для управления плагином есть класс Plugin.
+Кстати, интересным сделано хранение настроек плагинов через единый класс Settings. А для управления плагином есть класс Plugin.
 
 А вот как происходит расширение пользователя:
 
@@ -63,7 +63,6 @@ module RedmineWorkload
     end
   end
 end
-```
 
 # Apply patch
 Rails.configuration.to_prepare do
@@ -72,6 +71,7 @@ Rails.configuration.to_prepare do
   end
 end
 
+```
 
 
 
@@ -85,6 +85,8 @@ end
 * configuration
 * callbacks
 * inheritance
+
+---
 
 # Enumerable
 
@@ -100,6 +102,8 @@ class RemoteItems
 end
 ```
 
+
+---
 
 # Devise
 
