@@ -13,10 +13,9 @@ SOLID
 
 # TODO
 
-* redmine
-* dry-types
-* huginn
-* nokogiri
+[ ] dry-types
+[ ] huginn
+[ ] nokogiri
 
 
 ---
