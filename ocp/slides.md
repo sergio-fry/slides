@@ -42,6 +42,14 @@ https://blog.cleancoder.com/uncle-bob/2014/05/12/TheOpenClosedPrinciple.html
 
 ---
 
+```mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+```
+
 ```plantuml
 
 package "Shop gem" {
