@@ -1,4 +1,5 @@
 ---
+
 paginate: true
 class: lead
 marp: true
@@ -33,44 +34,35 @@ _class: lead
 
 ---
 
-# SOLID
 
-O - open-closed principle
+> Мы должны иметь возможность расширения системы без необходимости ее модифицировать
 
-Bob Martin https://web.archive.org/web/20150905081105/http://www.objectmentor.com/resources/articles/ocp.pdf
-
+S**O**LID by Bob Martin 
+https://blog.cleancoder.com/uncle-bob/2014/05/12/TheOpenClosedPrinciple.html
 
 ---
 
 ```plantuml
 
-class Product {
-  +price()
+package "Shop gem" {
+  class Product {
+    +price()
+  }
 }
 
 ```
 
 ---
 
-```ruby
-class Product
-  def price
-    if user.lucky?
-      @price * 0.9
-    else
-      @price
-    end
-  end
-end
-```
-
 ---
 
-# Inheritance
+# Наследование
 
 ```plantuml
-class Product {
-  +price()
+package "Shop gem" {
+  class Product {
+    +price()
+  }
 }
 
 class ProductWithBonusPrice {
@@ -80,45 +72,77 @@ class ProductWithBonusPrice {
 ProductWithBonusPrice -up-|> Product
 ```
 
-
 ---
 
-# Composition
-
-
-```plantuml
-class Product {
-  +price()
-}
-
-class Price {
-  +value()
-}
-
-Product --* Price
-```
-
----
 
 # Dependecy Injection
 
-
 ```plantuml
-class Product {
-  +price()
-}
-
-interface Price {
-  +value()
+package "Shop gem" {
+  class Product {
+    +price()
+  }
+  interface Price {
+    +value()
+  }
 }
 
 Product --* Price
+
+class BonusPrice {
+  +value()
+}
+
+BonusPrice ..|> Price
 ```
+
+---
+
+```ruby
+# gem
+class Product
+  def initialize(price:)
+    @price = price
+  end
+
+  def price
+    @price.value
+  end
+end
+```
+
+---
+
+```ruby
+# app
+class BonusPrice
+  def initialize(user:, base_value:)
+    @user = user
+    @base_value = base_value
+  end
+
+  def value
+    if user.lucky?
+      @base_value * 0.9
+    else
+      @base_value
+    end
+  end
+end
+
+product = Product.new(BonusPrice.new(user, 10.0))
+product.price
+```
+
 
 ---
 
 # History
 
-* large gem 
+* large gem
 * extract core
 * extend with modules
+
+---
+
+# In a Wild
