@@ -6,7 +6,6 @@ marp: true
 ---
 <style>
   section {
-    background: #f2f2f2;
   }
   h1,body,li,p { color: black; }
 
@@ -34,21 +33,22 @@ _class: lead
 
 ---
 
+# Формулировка 1
 
-> Мы должны иметь возможность расширения системы без необходимости ее модифицировать
-
-S**O**LID by Bob Martin 
-https://blog.cleancoder.com/uncle-bob/2014/05/12/TheOpenClosedPrinciple.html
+Modules should be open for extension and closed for modification
 
 ---
 
-```mermaid
-graph TD;
-    A-->B;
-    A-->C;
-    B-->D;
-    C-->D;
-```
+# Формулировка 2
+You should be able to extend a classes behavior, without modifying it
+
+---
+
+# Формулировка 3
+
+You should be able to extend the behavior of a system without having to modify that system.
+
+---
 
 ```plantuml
 
@@ -59,8 +59,6 @@ package "Shop gem" {
 }
 
 ```
-
----
 
 ---
 
@@ -79,6 +77,13 @@ class ProductWithBonusPrice {
 
 ProductWithBonusPrice -up-|> Product
 ```
+
+---
+
+# Стоит избегать
+
+* monkey patching
+* переопределения методов
 
 ---
 
@@ -138,19 +143,157 @@ class BonusPrice
   end
 end
 
-product = Product.new(BonusPrice.new(user, 10.0))
+product = Product.new(price: BonusPrice.new(user, 10.0))
 product.price
 ```
 
+---
+
+# Что если нужно внедрить расширение несколько раз?
 
 ---
 
 # History
 
-* large gem
-* extract core
-* extend with modules
+- large gem
+- extract core
+- extend with modules
 
 ---
 
 # In a Wild
+
+---
+
+[x] Rack
+[ ] ActiveJob
+[ ] Faraday
+[ ] Logger
+[ ] Jekyll
+[ ] Warden
+[ ] Enumerable
+[ ] Redmine
+
+
+---
+ # Rack
+---
+<!-- header: Rack -->
+
+
+```ruby
+class Middleware
+  def initialize(app)
+    @app = app
+  end
+
+  def call(env)
+    env["rack.some_header"] = "setting an example"
+    @app.call(env)
+  end
+end
+
+use Middleware
+run lambda { |env| [200, { "content-type" => "text/plain" }, ["OK"]] }
+```
+
+---
+
+```ruby
+def use(middleware, *args, &block)
+  # ...
+  @use << proc { |app| middleware.new(app, *args, &block) }
+end
+```
+
+```ruby
+def to_app
+  # ..
+  app = @use.reverse.inject(app) { |a, e| e[a].tap { |x| x.freeze if @freeze_app } }
+  @warmup.call(app) if @warmup
+  app
+end
+```
+
+
+---
+
+<!-- header: "" -->
+
+---
+
+# ActiveJob
+
+```ruby
+class MyJob < ActiveJob::Base
+  queue_as :my_jobs
+
+  def perform(record)
+    record.do_work
+  end
+end
+```
+
+---
+
+<!-- header: ActiveJob -->
+
+```ruby
+class InlineAdapter
+  def enqueue(job) # :nodoc:
+    Base.execute(job.serialize)
+  end
+
+  def enqueue_at(*) # :nodoc:
+    raise NotImplementedError, "Use a queueing backend to enqueue jobs in the future. Read more at https://guides.rubyonrails.org/active_job_basics.html"
+  end
+end
+
+ActiveJob::Base.queue_adapter = :inline
+```
+
+---
+
+```ruby
+
+module ActiveJob
+  module Execution
+    # Includes methods for executing and performing jobs instantly.
+    module ClassMethods
+      def perform_now(...)
+        job_or_instantiate(...).perform_now
+      end
+
+      def execute(job_data) # :nodoc:
+        ActiveJob::Callbacks.run_callbacks(:execute) do
+        job = deserialize(job_data)
+        job.perform_now
+      end
+    end
+  end
+end
+```
+
+
+---
+
+# Итоги
+
+* точки расширения
+* middleware
+* callbacks
+* не все OCP
+
+---
+
+# Tips
+
+* `.call`
+*  ActiveSupport Load Hooks
+
+
+---
+
+# Материалы
+
+- https://blog.cleancoder.com/uncle-bob/2014/05/12/TheOpenClosedPrinciple.html
