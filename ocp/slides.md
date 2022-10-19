@@ -319,7 +319,32 @@ end
 
 ---
 
-TODO: Logger
+# Logger
+
+---
+
+
+```ruby
+logger = Logger.new(logdev, level: Logger::INFO)
+logger.level = Logger::DEBUG
+logger.formatter = proc do |severity, datetime, progname, msg|
+  "#{datetime}: #{msg}\n"
+end
+```
+
+---
+
+```ruby
+@logdev.write(
+  format_message(format_severity(severity), Time.now, progname, message)
+)
+```
+
+---
+
+```ruby
+Logger.new(BufferedDevice.new(logdev))
+```
 
 ---
 
@@ -353,6 +378,7 @@ TODO: Redmine
 * `.call`
 * ActiveSupport Load Hooks
 * ActiveSupport Callbacks
+* pipeline
 
 ---
 
