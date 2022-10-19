@@ -163,16 +163,6 @@ product.price
 
 ---
 
-[x] Rack
-[ ] ActiveJob
-[ ] Faraday
-[ ] Logger
-[ ] Jekyll
-[ ] Warden
-[ ] Enumerable
-[ ] Redmine
-
----
 
 # Rack
 
@@ -251,7 +241,10 @@ ActiveJob::Base.queue_adapter = :inline
 
 ---
 
+
 ```ruby
+
+TODO: 
 
 module ActiveJob
   module Execution
@@ -263,13 +256,86 @@ module ActiveJob
 
       def execute(job_data) # :nodoc:
         ActiveJob::Callbacks.run_callbacks(:execute) do
-        job = deserialize(job_data)
-        job.perform_now
+          job = deserialize(job_data)
+          job.perform_now
+        end
       end
     end
   end
 end
 ```
+
+---
+
+# Faraday
+
+---
+
+
+```ruby
+Faraday.new(...) do |f|
+  f.adapter :florp_http, pool_size: 5 do |client|
+    client.some_fancy_florp_http_property = 10
+  end
+end
+```
+
+---
+
+```ruby
+# You can use @connection_options and @config_block in your adapter code
+class FlorpHttp < ::Faraday::Adapter
+  dependency do
+    require 'florp_http'
+  end
+  def call(env)
+    # `connection` internally calls `build_connection` and yields the result
+    connection do |conn|
+      # perform the request using configured `conn`
+    end
+  end
+
+  def build_connection(env)
+    conn = FlorpHttp::Client.new(pool_size: @connection_options[:pool_size] || 10)
+    @config_block&.call(conn)
+    conn
+  end
+end
+
+Faraday::Adapter.register_middleware(florp_http: FlorpHttp)
+```
+
+---
+
+```ruby
+ruby2_keywords def adapter(klass = NO_ARGUMENT, *args, &block)
+  return @adapter if klass == NO_ARGUMENT || klass.nil?
+
+  klass = Faraday::Adapter.lookup_middleware(klass) if klass.is_a?(Symbol)
+  @adapter = self.class::Handler.new(klass, *args, &block)
+end
+
+```
+
+---
+
+TODO: Logger
+
+---
+
+TODO: Jekyll
+
+---
+
+TODO: Warden
+
+---
+
+TODO: Enumerable
+
+---
+
+TODO: Redmine
 
 ---
 
@@ -286,6 +352,7 @@ end
 
 * `.call`
 * ActiveSupport Load Hooks
+* ActiveSupport Callbacks
 
 ---
 
