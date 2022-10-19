@@ -28,7 +28,6 @@ _paginate: false
 _class: lead
 -->
 
-
 # Принцип открытости/закрытости
 
 ---
@@ -86,7 +85,6 @@ ProductWithBonusPrice -up-|> Product
 * переопределения методов
 
 ---
-
 
 # Dependecy Injection
 
@@ -155,9 +153,9 @@ product.price
 
 # History
 
-- large gem
-- extract core
-- extend with modules
+* large gem
+* extract core
+* extend with modules
 
 ---
 
@@ -174,12 +172,12 @@ product.price
 [ ] Enumerable
 [ ] Redmine
 
-
 ---
- # Rack
+
+# Rack
+
 ---
 <!-- header: Rack -->
-
 
 ```ruby
 class Middleware
@@ -214,7 +212,6 @@ def to_app
   app
 end
 ```
-
 
 ---
 
@@ -274,7 +271,6 @@ module ActiveJob
 end
 ```
 
-
 ---
 
 # Итоги
@@ -289,11 +285,10 @@ end
 # Tips
 
 * `.call`
-*  ActiveSupport Load Hooks
-
+* ActiveSupport Load Hooks
 
 ---
 
 # Материалы
 
-- https://blog.cleancoder.com/uncle-bob/2014/05/12/TheOpenClosedPrinciple.html
+* https://blog.cleancoder.com/uncle-bob/2014/05/12/TheOpenClosedPrinciple.html
