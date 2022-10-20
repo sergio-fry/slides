@@ -370,12 +370,6 @@ Liquid::Template.register_tag "youtube", YouTubeEmbed
 
 ---
 
-# Liquid How?
-
-TODO: How?
-
----
-
 # Converter
 
 ```ruby
@@ -465,15 +459,155 @@ Jekyll::Hooks.trigger :site, :after_init, self
 
 ---
 
-TODO: Warden
+# Warden
+
+---
+<!-- header: Warden -->
+
+# Callbacks
+
+```ruby
+Warden::Manager.after_set_user do |user, auth, opts|
+  unless user.active?
+    auth.logout
+    throw(:warden, :message => "User not active")
+  end
+end
+```
+
+---
+
+# Strategy
+
+```ruby
+use Warden::Manager do |manager|
+  manager.default_strategies :password, :basic
+  manager.failure_app = BadAuthenticationEndsUpHere
+end
+```
+
+```ruby
+Warden::Strategies.add(:password) do
+  def valid?
+    params['username'] || params['password']
+  end
+
+  def authenticate!
+    u = User.authenticate(params['username'], params['password'])
+    u.nil? ? fail!("Could not log in") : success!(u)
+  end
+end
+```
+
+# Strategy
+
+
+```ruby
+def add(label, strategy = nil, &block)
+  strategy ||= Class.new(Warden::Strategies::Base)
+  strategy.class_eval(&block) if block_given?
+
+  unless strategy.method_defined?(:authenticate!)
+    raise NoMethodError, "authenticate! is not declared in the #{label.inspect} strategy"
+  end
+
+  base = Warden::Strategies::Base
+  unless strategy.ancestors.include?(base)
+    raise "#{label.inspect} is not a #{base}"
+  end
+
+  _strategies[label] = strategy
+end
+```
+
+---
+
+# Failure App
+
+```ruby
+manager.failure_app = Proc.new { |_env|
+  ['401', {'Content-Type' => 'application/json'}, { error: 'Unauthorized', code: 401 }]
+}
+```
 
 ---
 
 TODO: Enumerable
+<!-- header: Enumerable -->
 
 ---
 
-TODO: Redmine
+# Redmine
+
+---
+<!-- header: Redmine -->
+
+# Rails Engine
+
+* new controllers
+* new views
+* new models
+
+
+---
+
+# Extend User
+
+```ruby
+module RedmineWorkload
+  module Extensions
+    module UserPatch
+      def self.prepended(base)
+        base.prepend(InstanceMethods)
+        base.class_eval do
+          has_one :wl_user_data, inverse_of: :user
+          has_many :wl_user_vacations, inverse_of: :user
+          delegate :main_group, to: :wl_user_data, allow_nil: true
+        end
+      end
+
+      module InstanceMethods
+        ##
+        # Prefer to use main_group_id over User#wl_user_data.main_group since
+        # the latter may lead to
+        # NoMethodError Exception: undefined method `main_group' for nil:NilClass
+        # when no data set for wl_user_data exists. In contrast, the delegation
+        # of main_group, as used below, will handle this case.
+        #
+        def main_group_id
+          main_group
+        end
+      end
+    end
+  end
+end
+
+# Apply patch
+Rails.configuration.to_prepare do
+  unless User.included_modules.include?(RedmineWorkload::Extensions::UserPatch)
+    User.prepend RedmineWorkload::Extensions::UserPatch
+  end
+end
+
+```
+
+---
+
+# Admin Menu
+
+```ruby
+<% @plugins.each do |plugin| %>
+  <tr id="plugin-<%= plugin.id %>">
+  <td class="name"><span class="name"><%= plugin.name %></span>
+      <%= content_tag('span', plugin.description, :class => 'description') unless plugin.description.blank? %>
+      <%= content_tag('span', link_to(plugin.url, plugin.url), :class => 'url') unless plugin.url.blank? %>
+  </td>
+  <td class="author"><%= plugin.author_url.blank? ? plugin.author : link_to(plugin.author, plugin.author_url) %></td>
+  <td class="version"><span class="icon"><%= plugin.version %></span></td>
+  <td class="configure"><%= link_to(l(:button_configure), plugin_settings_path(plugin)) if plugin.configurable? %></td>
+  </tr>
+<% end %>
+```
 
 ---
 
