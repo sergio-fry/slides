@@ -695,6 +695,7 @@ end
 ```
 
 ---
+<!-- header: "" -->
 
 # Стоит избегать
 
@@ -706,6 +707,7 @@ end
 
 # Итоги
 
+* причина для OCP
 * точки расширения
 * конфигурация
 * adapter
@@ -714,6 +716,79 @@ end
 * простые API, например `.call`
 
 ---
+
+# Core
+
+---
+
+<!-- header: Core -->
+
+# Middleware
+
+```ruby
+module Core
+  module Config
+    class Middlewares
+      def initialize
+        @middlewares = []
+      end
+
+      def call(payload)
+        @middlewares.inject(payload) do |payload, middleware|
+          middleware.call(payload)
+        end
+      end
+
+      def add(middleware)
+        @middlewares << middleware
+      end
+    end
+  end
+end
+```
+
+---
+
+```ruby
+def log_run(data)
+  StrategyRunLog::Scheduled.create!(
+    strategy_run: self,
+    data: ::Core.wrapped(:initial_payload, data)
+  )
+end
+```
+
+---
+
+# Module Inject
+
+```ruby
+require "core/audited/entity"
+require "core/audited/strategy_run"
+
+module Core
+  module Audited
+    class Plugin
+      def call(core)
+        core.config.entity_modules << Audited::Entity
+        core.config.strategy_run_modules << Audited::StrategyRun
+      end
+    end
+  end
+end
+```
+
+---
+
+# Ссылки
+
+- https://gitlab.infra.b-pl.pro/lib/core
+- https://gitlab.infra.b-pl.pro/lib/core-audited
+- https://gitlab.infra.b-pl.pro/lib/core-rabbitmq
+
+---
+
+<!-- header: "" -->
 
 # Спасибо!
 
