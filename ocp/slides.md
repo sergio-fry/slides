@@ -28,7 +28,9 @@ _paginate: false
 _class: lead
 -->
 
-# Принцип открытости/закрытости
+# Принцип Open Closed
+
+Сергей Удалов
 
 ---
 
@@ -46,6 +48,8 @@ You should be able to extend a classes behavior, without modifying it
 # Формулировка 3
 
 You should be able to extend the behavior of a system without having to modify that system.
+
+
 
 ---
 
@@ -77,12 +81,6 @@ class ProductWithBonusPrice {
 ProductWithBonusPrice -up-|> Product
 ```
 
----
-
-# Стоит избегать
-
-* monkey patching
-* переопределения методов
 
 ---
 
@@ -147,24 +145,129 @@ product.price
 
 ---
 
-# Что если нужно внедрить расширение несколько раз?
+# Немного истории
 
 ---
 
-# History
+# Монолит
 
-* large gem
-* extract core
-* extend with modules
+```plantuml
+package "core.gem" {
+  class Strategy {
+  }
+  class ABAC {
+  }
+  class Search {
+  }
+  class Versioning {
+  }
+  class RabbitMQ {
+  }
+}
+```
+
+---
+
+# Plugin
+
+```plantuml
+package "core.gem" {
+  class Strategy {
+  }
+}
+package "core-audited.gem" {
+  class Search {
+  }
+}
+package "core-audited.gem" {
+  class Versioning {
+  }
+}
+package "core-rabbitmq.gem" {
+  class RabbitMQ {
+  }
+}
+package Application {
+  class ABAC {
+  }
+}
+
+
+Application --> "core.gem"
+"core-audited.gem" --> "core.gem"
+"core-rabbitmq.gem" --> "core.gem"
+```
 
 ---
 
 # In a Wild
 
 ---
+<!-- header: "" -->
 
+# Enumerable
+
+---
+<!-- header: Enumerable -->
+
+```ruby
+class RemoteItems
+  include Enumerable
+
+  def each
+    CSV.parse(open('http://example.com/items.csv')).each do |item|
+      yield item
+    end
+  end
+end
+
+items = RemoteItems.new
+items.count
+items.any? { .. }
+items.detect? { .. }
+```
+
+---
+<!-- header: "" -->
+
+# Logger
+
+- device
+- level
+- formatter
+
+---
+<!-- header: Logger -->
+
+
+```ruby
+logger = Logger.new(logdev, level: Logger::INFO)
+logger.level = Logger::DEBUG
+logger.formatter = proc do |severity, datetime, progname, msg|
+  "#{datetime}: #{msg}\n"
+end
+```
+
+---
+
+```ruby
+@logdev.write(
+  format_message(format_severity(severity), Time.now, progname, message)
+)
+```
+
+---
+
+```ruby
+Logger.new(BufferedDevice.new(logdev))
+```
+
+---
+<!-- header: "" -->
 
 # Rack
+
+- middleware
 
 ---
 <!-- header: Rack -->
@@ -207,9 +310,13 @@ end
 
 <!-- header: "" -->
 
----
 
 # ActiveJob
+
+- adapter
+
+---
+<!-- header: "ActiveJob" -->
 
 ```ruby
 class MyJob < ActiveJob::Base
@@ -232,7 +339,7 @@ class InlineAdapter
   end
 
   def enqueue_at(*) # :nodoc:
-    raise NotImplementedError, "Use a queueing backend to enqueue jobs in the future. Read more at https://guides.rubyonrails.org/active_job_basics.html"
+    raise NotImplementedError, "Use a queueing backend to enqueue..."
   end
 end
 
@@ -243,8 +350,6 @@ ActiveJob::Base.queue_adapter = :inline
 
 
 ```ruby
-
-TODO: 
 
 module ActiveJob
   module Execution
@@ -266,8 +371,11 @@ end
 ```
 
 ---
+<!-- header: "" -->
 
 # Faraday
+
+- adapter
 
 ---
 <!-- header: Faraday -->
@@ -318,39 +426,16 @@ end
 
 ```
 
----
-
-# Logger
 
 ---
-<!-- header: Logger -->
-
-
-```ruby
-logger = Logger.new(logdev, level: Logger::INFO)
-logger.level = Logger::DEBUG
-logger.formatter = proc do |severity, datetime, progname, msg|
-  "#{datetime}: #{msg}\n"
-end
-```
-
----
-
-```ruby
-@logdev.write(
-  format_message(format_severity(severity), Time.now, progname, message)
-)
-```
-
----
-
-```ruby
-Logger.new(BufferedDevice.new(logdev))
-```
-
----
+<!-- header: "" -->
 
 # Jekyll
+
+- tag
+- converter
+- hooks
+- generator
 
 ---
 <!-- header: Jekyll -->
@@ -360,6 +445,9 @@ Logger.new(BufferedDevice.new(logdev))
 
 ```ruby
 class YouTubeEmbed < Liquid::Tag
+  def initiliaze(tagName, content, tokens)
+    # ...
+  end
   def render(conext)
     # ...
   end
@@ -458,6 +546,7 @@ Jekyll::Hooks.trigger :site, :after_init, self
 
 
 ---
+<!-- header: "" -->
 
 # Warden
 
@@ -499,6 +588,8 @@ Warden::Strategies.add(:password) do
 end
 ```
 
+---
+
 # Strategy
 
 
@@ -530,26 +621,20 @@ manager.failure_app = Proc.new { |_env|
 }
 ```
 
----
-
-TODO: Enumerable
-<!-- header: Enumerable -->
 
 ---
+<!-- header: "" -->
 
-# Redmine
+# Rails Engine (Redmine)
+
+- controllers
+- views
+- models
+- ...
+
 
 ---
 <!-- header: Redmine -->
-
-# Rails Engine
-
-* new controllers
-* new views
-* new models
-
-
----
 
 # Extend User
 
@@ -611,24 +696,34 @@ end
 
 ---
 
-# Итоги
+# Стоит избегать
 
-* точки расширения
-* middleware
-* callbacks
-* не все OCP
+* monkey patching
+* переопределения методов
+* сложных API
 
 ---
 
-# Tips
+# Итоги
 
-* `.call`
-* ActiveSupport Load Hooks
-* ActiveSupport Callbacks
+* точки расширения
+* конфигурация
+* adapter
 * pipeline
+* callbacks (ActiveSupport Callbacks)
+* простые API, например `.call`
+
+---
+
+# Спасибо!
+
+<!--
 
 ---
 
 # Материалы
 
 * https://blog.cleancoder.com/uncle-bob/2014/05/12/TheOpenClosedPrinciple.html
+
+
+-->
