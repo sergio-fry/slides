@@ -28,6 +28,7 @@ _paginate: false
 _class: lead
 -->
 
+
 # Принцип "Open Closed" в Ruby
 
 Сергей Удалов
@@ -843,3 +844,12 @@ end
 
 
 -->
+
+---
+
+# TODO
+
+* monkey patching, переопределение методов использовать с острожностью
+* pipeline - commands pattern (Design Patterns in Ruby)
+* Hooks - observable
+* search core не в том модуле?
