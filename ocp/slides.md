@@ -28,11 +28,12 @@ _paginate: false
 _class: lead
 -->
 
-# Принцип Open Closed
+# Принцип "Open Closed" в Ruby
 
 Сергей Удалов
 
 ---
+<!-- footer: Принцип "Open Closed" в Ruby -->
 
 # Формулировка 1
 
@@ -153,6 +154,8 @@ product.price
 
 ```plantuml
 package "core.gem" {
+  class Entity {
+  }
   class Strategy {
   }
   class ABAC {
@@ -172,6 +175,8 @@ package "core.gem" {
 
 ```plantuml
 package "core.gem" {
+  class Entity {
+  }
   class Strategy {
   }
 }
@@ -200,7 +205,15 @@ Application --> "core.gem"
 
 ---
 
-# In a Wild
+# В полевых условиях
+
+- Enumerable
+- Logger
+- Rack
+- Faraday
+- Jekyll
+- Warden
+- Redmine
 
 ---
 <!-- header: "" -->
@@ -242,9 +255,8 @@ items.detect? { .. }
 
 ```ruby
 logger = Logger.new(logdev, level: Logger::INFO)
-logger.level = Logger::DEBUG
 logger.formatter = proc do |severity, datetime, progname, msg|
-  "#{datetime}: #{msg}\n"
+  { dt: datetime, message: msg }.to_json
 end
 ```
 
@@ -268,6 +280,31 @@ Logger.new(BufferedDevice.new(logdev))
 # Rack
 
 - middleware
+
+```plantuml
+class App {
++call()
+}
+class Session {
++call()
+}
+class Logging {
++call()
+}
+
+circle HTTP
+
+
+HTTP --> Logging: request
+Logging --> Session
+Session --> App
+
+App --> Session
+Session --> Logging
+Logging --> HTTP: response
+
+
+```
 
 ---
 <!-- header: Rack -->
@@ -314,6 +351,7 @@ end
 # ActiveJob
 
 - adapter
+- hooks
 
 ---
 <!-- header: "ActiveJob" -->
@@ -520,7 +558,7 @@ Jekyll::Hooks.trigger :site, :after_init, self
 
 ---
 
-# Hook variants
+# Hooks
 
 
 ```ruby
@@ -530,15 +568,13 @@ Jekyll::Hooks.trigger :site, :after_init, self
     :after_reset => [],
     :post_read   => [],
     :pre_render  => [],
-    :post_render => [],
-    :post_write  => [],
+    # ...
   },
   :pages     => {
     :post_init    => [],
     :pre_render   => [],
     :post_convert => [],
-    :post_render  => [],
-    :post_write   => [],
+    # ...
   },
   # ...
 }
@@ -549,6 +585,10 @@ Jekyll::Hooks.trigger :site, :after_init, self
 <!-- header: "" -->
 
 # Warden
+
+- hooks
+- auth strategies
+- failure_app
 
 ---
 <!-- header: Warden -->
@@ -714,6 +754,7 @@ end
 * pipeline
 * callbacks (ActiveSupport Callbacks)
 * простые API, например `.call`
+* lookup / явное указание объекта/класса
 
 ---
 
