@@ -270,6 +270,7 @@ end
 # Faraday
 
 ---
+<!-- header: Faraday -->
 
 
 ```ruby
@@ -322,6 +323,7 @@ end
 # Logger
 
 ---
+<!-- header: Logger -->
 
 
 ```ruby
@@ -348,7 +350,118 @@ Logger.new(BufferedDevice.new(logdev))
 
 ---
 
-TODO: Jekyll
+# Jekyll
+
+---
+<!-- header: Jekyll -->
+
+
+# Liquid Tag
+
+```ruby
+class YouTubeEmbed < Liquid::Tag
+  def render(conext)
+    # ...
+  end
+end
+
+Liquid::Template.register_tag "youtube", YouTubeEmbed
+```
+
+---
+
+# Liquid How?
+
+TODO: How?
+
+---
+
+# Converter
+
+```ruby
+module Jekyll
+  class UpcaseConverter < Converter
+    safe true
+    priority :low
+
+    def matches(ext)
+      ext =~ /^\.upcase$/i
+    end
+
+    def output_ext(ext)
+      ".html"
+    end
+
+    def convert(content)
+      content.upcase
+    end
+  end
+end
+```
+
+---
+
+# Converter Register
+
+```ruby
+def setup
+  ensure_not_in_dest
+
+  plugin_manager.conscientious_require
+
+  self.converters = instantiate_subclasses(Jekyll::Converter)
+  self.generators = instantiate_subclasses(Jekyll::Generator)
+end
+```
+
+
+---
+
+# Hook
+
+```ruby
+# describe
+Jekyll::Hooks.register [:pages, :documents], :post_render do |doc|
+  Jekyll::Emoji.emojify(doc) if Jekyll::Emoji.emojiable?(doc)
+end
+
+
+# regsiter
+def self.insert_hook(owner, event, priority, &block)
+  @hook_priority[block] = [-priority, @hook_priority.size]
+  @registry[owner][event] << block
+end
+
+# Call
+Jekyll::Hooks.trigger :site, :after_init, self
+```
+
+---
+
+# Hook variants
+
+
+```ruby
+@registry = {
+  :site      => {
+    :after_init  => [],
+    :after_reset => [],
+    :post_read   => [],
+    :pre_render  => [],
+    :post_render => [],
+    :post_write  => [],
+  },
+  :pages     => {
+    :post_init    => [],
+    :pre_render   => [],
+    :post_convert => [],
+    :post_render  => [],
+    :post_write   => [],
+  },
+  # ...
+}
+```
+
 
 ---
 
