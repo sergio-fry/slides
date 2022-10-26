@@ -853,3 +853,8 @@ end
 * pipeline - commands pattern (Design Patterns in Ruby)
 * Hooks - observable
 * search core не в том модуле?
+* формулировки на одной странице
+* формулировка про плагины
+* причина: отделять то, что неизменно, от того, что меняется часто
+* YAGNI
+
