@@ -35,15 +35,13 @@ _class: lead
 
 ---
 
-# Intro 
+# Core 
 
-  * Form
-  * Field
-  * Strategy
-  * ABAC
-  * Search
-  * Validation
-  * HTTP API
+* Form
+* Field
+* Strategy
+* ABAC
+* Validation
 
 ---
 
@@ -109,6 +107,18 @@ end
 
 # Product
 
+* Auth (Gatekeeper)
+* Strategies
+* Configs
+* Search
+* Tariffs
+* HTTP API
+* Front2
+
+---
+
+# Product
+
 ```plantuml
 package "Product" {
   component Core {
@@ -125,11 +135,26 @@ package "Product" {
   [MegafonStrategy]
   [DocumentsStrategy]
 
+  [Tariffs]
+
+  [Unloads]
 
   Core --> Configuration
 }
-database DB
+database Postgres as DB
+
 Core -up-> DB
+Tariffs --> DB
+
+database Clickhouse
+DB --> Clickhouse: sync
+Unloads --> Clickhouse
+
+() BankProxy
+Unloads --> BankProxy
+
+cloud Bank
+BankProxy --> Bank
 
 () HTTP
 HTTP -- Core
@@ -143,6 +168,40 @@ NBKIStrategy <--> DataHunter: RMQ
 rectangle Bumaga
 DocumentsStrategy --> Bumaga: HTTP
 
+```
+
+---
+
+# Tariffs
+
+```csv
+product,name,starts_at,ends_at,channel,insurance_sj,insurance_ramk,risk_grade,min_amount,max_amount,term,commission_income,cof,axp,min_rate,max_rate,min_roa_kharitonov,min_product_amount,max_product_amount,comm_new,discount_gibrid,loan_purpose
+Кредит Наличными,Базовый,2019-08-01,2019-11-14,ДО/МАБ,нет,нет,MA,500,30000,12,0,7.9,2.42,14.9,19.9,4,500,30000,1.8,0,
+Кредит Наличными,Базовый,2019-08-01,2019-11-14,ДО/МАБ,нет,нет,MA,500,30000,13,0,7.9,2.42,14.9,19.9,4,500,30000,1.8,0,
+```
+
+---
+
+# Tariffs
+
+```ruby
+def tariffs
+  suitable_tariffs = References::CashLoanTariff
+    .suitable(
+      term_request: loan_term_request,
+      amount_request: loan_amount_request,
+      channel: payload[:sales_channel],
+      loan_purpose: payload[:loan_purpose],
+    )
+
+  suitable_tariffs = suitable_tariffs.where(name: tariff_name) if payload[:tariff_name].present?
+
+  @tariffs ||= Array.wrap(
+    suitable_tariffs
+      .select { |tariff| tariff.insurance_sj == insurance_sj? && tariff.insurance_ramk == insurance_ramk? }
+      .min_by(&:min_rate)
+  )
+end
 ```
 
 
@@ -220,7 +279,9 @@ processing -[dashed]-> refinement: request_refinement
 
 @enduml
 ```
+---
 
+# Core 3
 
 ---
 
