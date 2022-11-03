@@ -51,6 +51,16 @@ You should be able to extend a classes behavior, without modifying it
 
 You should be able to extend the behavior of a system without having to modify that system.
 
+---
+
+# Варианты
+
+DRAFT
+
+* наследование
+* observable
+* adapter
+* strategy
 
 
 ---
@@ -844,17 +854,3 @@ end
 
 
 -->
-
----
-
-# TODO
-
-* monkey patching, переопределение методов использовать с острожностью
-* pipeline - commands pattern (Design Patterns in Ruby)
-* Hooks - observable
-* search core не в том модуле?
-* формулировки на одной странице
-* формулировка про плагины
-* причина: отделять то, что неизменно, от того, что меняется часто
-* YAGNI
-
