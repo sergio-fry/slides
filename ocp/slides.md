@@ -36,20 +36,18 @@ _class: lead
 ---
 <!-- footer: Принцип "Open Closed" в Ruby -->
 
-# Формулировка 1
-
-Modules should be open for extension and closed for modification
+# SOLID
 
 ---
 
-# Формулировка 2
-You should be able to extend a classes behavior, without modifying it
+# Принцип открытости-закрытости
 
----
+"Вы должны иметь возможность расширять поведение системы без необходимости ее модификации", Роберт Мартин
 
-# Формулировка 3
 
-You should be able to extend the behavior of a system without having to modify that system.
+# Плагин 
+
+"Plugin systems are the ultimate consummation, the apotheosis, of the Open-Closed Principle", Robert C. Martin
 
 ---
 
@@ -57,103 +55,13 @@ You should be able to extend the behavior of a system without having to modify t
 
 DRAFT
 
+* monkey patching
 * наследование
+* dependency injection
 * observable
 * adapter
 * strategy
 
-
----
-
-```plantuml
-
-package "Shop gem" {
-  class Product {
-    +price()
-  }
-}
-
-```
-
----
-
-# Наследование
-
-```plantuml
-package "Shop gem" {
-  class Product {
-    +price()
-  }
-}
-
-class ProductWithBonusPrice {
-  +price()
-}
-
-ProductWithBonusPrice -up-|> Product
-```
-
-
----
-
-# Dependecy Injection
-
-```plantuml
-package "Shop gem" {
-  class Product {
-    +price()
-  }
-  interface Price {
-    +value()
-  }
-}
-
-Product --* Price
-
-class BonusPrice {
-  +value()
-}
-
-BonusPrice ..|> Price
-```
-
----
-
-```ruby
-# gem
-class Product
-  def initialize(price:)
-    @price = price
-  end
-
-  def price
-    @price.value
-  end
-end
-```
-
----
-
-```ruby
-# app
-class BonusPrice
-  def initialize(user:, base_value:)
-    @user = user
-    @base_value = base_value
-  end
-
-  def value
-    if user.lucky?
-      @base_value * 0.9
-    else
-      @base_value
-    end
-  end
-end
-
-product = Product.new(price: BonusPrice.new(user, 10.0))
-product.price
-```
 
 ---
 
@@ -191,7 +99,7 @@ package "core.gem" {
   class Strategy {
   }
 }
-package "core-audited.gem" {
+package "core-search.gem" {
   class Search {
   }
 }
@@ -767,90 +675,28 @@ end
 * простые API, например `.call`
 * lookup / явное указание объекта/класса
 
----
-
-# Core
 
 ---
 
-<!-- header: Core -->
+# Выводы
 
-# Middleware
-
-```ruby
-module Core
-  module Config
-    class Middlewares
-      def initialize
-        @middlewares = []
-      end
-
-      def call(payload)
-        @middlewares.inject(payload) do |payload, middleware|
-          middleware.call(payload)
-        end
-      end
-
-      def add(middleware)
-        @middlewares << middleware
-      end
-    end
-  end
-end
-```
-
----
-
-```ruby
-def log_run(data)
-  StrategyRunLog::Scheduled.create!(
-    strategy_run: self,
-    data: ::Core.wrapped(:initial_payload, data)
-  )
-end
-```
-
----
-
-# Module Inject
-
-```ruby
-require "core/audited/entity"
-require "core/audited/strategy_run"
-
-module Core
-  module Audited
-    class Plugin
-      def call(core)
-        core.config.entity_modules << Audited::Entity
-        core.config.strategy_run_modules << Audited::StrategyRun
-      end
-    end
-  end
-end
-```
+* отдельить то, что неизменно, от того, что меняется
+* YAGNI
 
 ---
 
 # Ссылки
 
-- https://gitlab.infra.b-pl.pro/lib/core
-- https://gitlab.infra.b-pl.pro/lib/core-audited
-- https://gitlab.infra.b-pl.pro/lib/core-rabbitmq
 
----
-
-<!-- header: "" -->
-
-# Спасибо!
-
-<!--
 
 ---
 
 # Материалы
 
+- https://github.com/sergio-fry/slides/blob/master/ocp/slides.md
 * https://blog.cleancoder.com/uncle-bob/2014/05/12/TheOpenClosedPrinciple.html
+* https://web.archive.org/web/20150905081105/http://www.objectmentor.com/resources/articles/ocp.pdf
 
+---
 
--->
+# Спасибо!
