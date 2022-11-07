@@ -54,7 +54,7 @@ Sergei O. Udalov, Balance Platform
 
 > You should be able to extend the behavior of a system without having to modify that system
 
-Robert C. Marting
+Robert C. Martin
 
 ---
 
@@ -144,7 +144,6 @@ package Application {
 - Redmine
 - Jekyll
 - ActiveJob
-- Faraday
 - Rack
 - Warden
 
@@ -302,12 +301,16 @@ end
 <% @plugins.each do |plugin| %>
   <tr id="plugin-<%= plugin.id %>">
   <td class="name"><span class="name"><%= plugin.name %></span>
-      <%= content_tag('span', plugin.description, :class => 'description') unless plugin.description.blank? %>
-      <%= content_tag('span', link_to(plugin.url, plugin.url), :class => 'url') unless plugin.url.blank? %>
+      <%= content_tag('span', plugin.description, :class => 'description')
+        unless plugin.description.blank? %>
+      <%= content_tag('span', link_to(plugin.url, plugin.url), :class => 'url')
+        unless plugin.url.blank? %>
   </td>
-  <td class="author"><%= plugin.author_url.blank? ? plugin.author : link_to(plugin.author, plugin.author_url) %></td>
+  <td class="author"><%= plugin.author_url.blank? ? plugin.author :
+    link_to(plugin.author, plugin.author_url) %></td>
   <td class="version"><span class="icon"><%= plugin.version %></span></td>
-  <td class="configure"><%= link_to(l(:button_configure), plugin_settings_path(plugin)) if plugin.configurable? %></td>
+  <td class="configure"><%= link_to(l(:button_configure), plugin_settings_path(plugin))
+    if plugin.configurable? %></td>
   </tr>
 <% end %>
 ```
@@ -338,6 +341,99 @@ class PluginLoader
 end
 ```
 
+---
+<!-- header: "" -->
+
+# Jekyll
+
+1. Liquid: tags, filters
+1. converter
+1. hooks
+1. generator
+
+---
+<!-- header: Jekyll -->
+
+```ruby
+module Jekyll
+  class UpcaseConverter < Converter
+    safe true
+    priority :low
+
+    def matches(ext)
+      ext =~ /^\.upcase$/i
+    end
+
+    def output_ext(ext)
+      ".html"
+    end
+
+    def convert(content)
+      content.upcase
+    end
+  end
+end
+```
+
+---
+
+# Register Converter
+
+```ruby
+def setup
+  ensure_not_in_dest
+
+  plugin_manager.conscientious_require
+
+  self.converters = instantiate_subclasses(Jekyll::Converter)
+  self.generators = instantiate_subclasses(Jekyll::Generator)
+end
+```
+
+---
+
+# Hook
+
+```ruby
+# describe
+Jekyll::Hooks.register [:pages, :documents], :post_render do |doc|
+  Jekyll::Emoji.emojify(doc) if Jekyll::Emoji.emojiable?(doc)
+end
+
+
+# regsiter
+def self.insert_hook(owner, event, priority, &block)
+  @hook_priority[block] = [-priority, @hook_priority.size]
+  @registry[owner][event] << block
+end
+
+# Call
+Jekyll::Hooks.trigger :site, :after_init, self
+```
+
+---
+
+# Available Hooks
+
+
+```ruby
+@registry = {
+  :site      => {
+    :after_init  => [],
+    :after_reset => [],
+    :post_read   => [],
+    :pre_render  => [],
+    # ...
+  },
+  :pages     => {
+    :post_init    => [],
+    :pre_render   => [],
+    :post_convert => [],
+    # ...
+  },
+  # ...
+}
+```
 
 ---
 
@@ -465,178 +561,6 @@ class PersonRecord < Record
 end
 ```
 
----
-
-<!-- header: "" -->
-
-# Faraday
-
-- adapter
-
----
-<!-- header: Faraday -->
-
-
-```ruby
-Faraday.new(...) do |f|
-  f.adapter :florp_http, pool_size: 5 do |client|
-    client.some_fancy_florp_http_property = 10
-  end
-end
-```
-
----
-
-```ruby
-# You can use @connection_options and @config_block in your adapter code
-class FlorpHttp < ::Faraday::Adapter
-  dependency do
-    require 'florp_http'
-  end
-  def call(env)
-    # `connection` internally calls `build_connection` and yields the result
-    connection do |conn|
-      # perform the request using configured `conn`
-    end
-  end
-
-  def build_connection(env)
-    conn = FlorpHttp::Client.new(pool_size: @connection_options[:pool_size] || 10)
-    @config_block&.call(conn)
-    conn
-  end
-end
-
-Faraday::Adapter.register_middleware(florp_http: FlorpHttp)
-```
-
----
-
-```ruby
-ruby2_keywords def adapter(klass = NO_ARGUMENT, *args, &block)
-  return @adapter if klass == NO_ARGUMENT || klass.nil?
-
-  klass = Faraday::Adapter.lookup_middleware(klass) if klass.is_a?(Symbol)
-  @adapter = self.class::Handler.new(klass, *args, &block)
-end
-
-```
-
-
----
-<!-- header: "" -->
-
-# Jekyll
-
-- tag
-- converter
-- hooks
-- generator
-
----
-<!-- header: Jekyll -->
-
-
-# Liquid Tag
-
-```ruby
-class YouTubeEmbed < Liquid::Tag
-  def initiliaze(tagName, content, tokens)
-    # ...
-  end
-  def render(conext)
-    # ...
-  end
-end
-
-Liquid::Template.register_tag "youtube", YouTubeEmbed
-```
-
----
-
-# Converter
-
-```ruby
-module Jekyll
-  class UpcaseConverter < Converter
-    safe true
-    priority :low
-
-    def matches(ext)
-      ext =~ /^\.upcase$/i
-    end
-
-    def output_ext(ext)
-      ".html"
-    end
-
-    def convert(content)
-      content.upcase
-    end
-  end
-end
-```
-
----
-
-# Converter Register
-
-```ruby
-def setup
-  ensure_not_in_dest
-
-  plugin_manager.conscientious_require
-
-  self.converters = instantiate_subclasses(Jekyll::Converter)
-  self.generators = instantiate_subclasses(Jekyll::Generator)
-end
-```
-
-
----
-
-# Hook
-
-```ruby
-# describe
-Jekyll::Hooks.register [:pages, :documents], :post_render do |doc|
-  Jekyll::Emoji.emojify(doc) if Jekyll::Emoji.emojiable?(doc)
-end
-
-
-# regsiter
-def self.insert_hook(owner, event, priority, &block)
-  @hook_priority[block] = [-priority, @hook_priority.size]
-  @registry[owner][event] << block
-end
-
-# Call
-Jekyll::Hooks.trigger :site, :after_init, self
-```
-
----
-
-# Hooks
-
-
-```ruby
-@registry = {
-  :site      => {
-    :after_init  => [],
-    :after_reset => [],
-    :post_read   => [],
-    :pre_render  => [],
-    # ...
-  },
-  :pages     => {
-    :post_init    => [],
-    :pre_render   => [],
-    :post_convert => [],
-    # ...
-  },
-  # ...
-}
-```
 
 ---
 <!-- header: "" -->
@@ -790,11 +714,8 @@ manager.failure_app = Proc.new { |_env|
 
 # Ways to Go
 
-1. configuration
 1. inheritance
 1. composition 
-1. dependency injection
-1. strategy 
 1. observer
 1. adapter
 1. pipeline
@@ -807,6 +728,7 @@ manager.failure_app = Proc.new { |_env|
 1. monkey patching
 2. method overriding
 3. complex API
+4. type casting
 
 ---
 
@@ -823,6 +745,7 @@ manager.failure_app = Proc.new { |_env|
 1. https://github.com/sergio-fry/slides/blob/master/ocp/slides.md
 2. https://blog.cleancoder.com/uncle-bob/2014/05/12/TheOpenClosedPrinciple.html
 3. https://web.archive.org/web/20150905081105/http://www.objectmentor.com/resources/articles/ocp.pdf
+4. "Design Patterns in Ruby", *Russ Olsen*
 
 ---
 
