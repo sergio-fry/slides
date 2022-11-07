@@ -348,9 +348,9 @@ end
 # Jekyll
 
 1. Liquid: tags, filters
-1. converter
-1. hooks
-1. generator
+2. converter
+3. hooks
+4. generator
 
 ---
 <!-- header: Jekyll -->
@@ -443,7 +443,8 @@ Jekyll::Hooks.trigger :site, :after_init, self
 # ActiveJob
 
 1. adapter
-1. hooks
+2. hooks
+3. serializer
 
 ---
 <!-- header: "ActiveJob" -->
@@ -643,8 +644,8 @@ TimeNow.new(
 # Warden
 
 1. auth strategies
-1. hooks
-1. failure_app
+2. hooks
+3. failure_app
 
 ---
 <!-- header: Warden -->
@@ -771,15 +772,15 @@ manager.failure_app = Proc.new { |_env|
 # Ways to Go
 
 1. inheritance
-1. composition 
-1. observer
-1. adapter
-1. pipeline
-1. DSL
+2. composition 
+3. observer
+4. adapter
+5. pipeline
+6. DSL
 
 ---
 
-# Warning!
+# Try not to
 
 1. monkey patching
 2. method overriding
