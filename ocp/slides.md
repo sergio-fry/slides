@@ -386,25 +386,87 @@ ActiveJob::Base.queue_adapter = :inline
 ```ruby
 
 module ActiveJob
-  module Execution
-    # Includes methods for executing and performing jobs instantly.
+  module Enqueuing
     module ClassMethods
-      def perform_now(...)
-        job_or_instantiate(...).perform_now
+      def perform_later(...)
+        job = job_or_instantiate(...)
+        enqueue_result = job.enqueue
+	# ..
       end
+    end
 
-      def execute(job_data) # :nodoc:
-        ActiveJob::Callbacks.run_callbacks(:execute) do
-          job = deserialize(job_data)
-          job.perform_now
+    def enqueue(options = {})
+      # ..
+
+      run_callbacks :enqueue do
+        if scheduled_at
+          queue_adapter.enqueue_at self, scheduled_at
+        else
+          queue_adapter.enqueue self
         end
+	# ..
       end
+	# ..
+    end
+  end
+end
+```
+
+
+---
+
+# Callbacks
+
+```ruby
+class VideoProcessJob < ActiveJob::Base
+  queue_as :default
+
+  before_perform do |job|
+    UserMailer.notify_video_started_processing(job.arguments.first)
+  end
+
+  def perform(video_id)
+    Video.find(video_id).process
+  end
+end
+```
+
+---
+
+# Define Callback
+
+```ruby
+class Record
+  include ActiveSupport::Callbacks
+  define_callbacks :save
+
+  def save
+    run_callbacks :save do
+      puts "- save"
     end
   end
 end
 ```
 
 ---
+
+# Use Callback
+
+```ruby
+class PersonRecord < Record
+  set_callback :save, :before, :saving_message
+  def saving_message
+    puts "saving..."
+  end
+
+  set_callback :save, :after do |object|
+    puts "saved"
+  end
+end
+```
+
+---
+
 <!-- header: "" -->
 
 # Faraday
