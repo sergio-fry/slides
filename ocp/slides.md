@@ -31,20 +31,22 @@ _class: lead
 
 # Open-Closed Principle in Ruby
 
-Сергей Удалов
+Sergei O. Udalov, Balance Platform
 
 ---
 
-# Balance Platform
-
-TODO
+![](img/balance-platform.svg)
 
 ---
-<!-- footer: OCP in Ruby -->
+<!-- footer: OCP in Ruby, Sergei O. Udalov, Balance Platform -->
 
 # SOLID
 
-1. Single res
+1. Single-responsibility principl
+2. **Open–closed principle**
+3. Liskov substitution principle
+4. Interface segregation principle
+5. Dependency inversion principle
 
 ---
 
@@ -56,7 +58,7 @@ Robert C. Marting
 
 ---
 
-# Plugin 
+# Plugin System
 
 > Plugin systems are the ultimate consummation, the apotheosis, of the Open-Closed Principle
 
@@ -133,20 +135,20 @@ package Application {
 # But how?
 
 ---
+<!-- header: "" -->
 
 # In the Wild
 
 - Enumerable
 - Logger
-- Rack
+- Redmine
+- Jekyll
 - ActiveJob
 - Faraday
-- Jekyll
+- Rack
 - Warden
-- Redmine
 
 ---
-<!-- header: "" -->
 
 # Enumerable
 
@@ -179,16 +181,33 @@ items.detect? { .. }
 
 # Logger
 
-- device
 - level
+- device
 - formatter
 
 ---
 <!-- header: Logger -->
 
+# Log Level
 
 ```ruby
-logger = Logger.new(BufferedDevice.new(STDOUT), level: Logger::INFO)
+logger = Logger.new(STDOUT, level: Logger::INFO)
+logger.level = Logger::WARN
+```
+
+---
+
+# Device
+
+```ruby
+logger = Logger.new(BufferedDevice.new(STDOUT))
+```
+---
+
+# Fromatter
+
+```ruby
+logger = Logger.new(STDOUT)
 logger.formatter = proc do |severity, datetime, progname, msg|
   { dt: datetime, message: msg }.to_json
 end
@@ -197,67 +216,127 @@ end
 ---
 
 ```ruby
-@logdev.write(
-  format_message(format_severity(severity), Time.now, progname, message)
-)
+def add(severity, message = nil, progname = nil)
+  # ..
+  @logdev.write(
+    format_message(format_severity(severity), Time.now, progname, message))
+  true
+end
+
+def format_message(severity, datetime, progname, msg)
+  (@formatter || @default_formatter).call(severity, datetime, progname, msg)
+end
+```
+
+---
+
+# Inheritance
+
+```ruby
+class JSONLogger < Logger
+  def format_message(severity, datetime, progname, msg)
+    { dt: datetime, message: msg }.to_json
+  end
+end
 ```
 
 ---
 <!-- header: "" -->
 
-# Rack
+# Redmine (Rails Engine)
 
-- middleware
+- controllers
+- views
+- models
+- ...
+
 
 ---
-<!-- header: Rack -->
+<!-- header: Redmine -->
+
+# Extend User
 
 ```ruby
-class Middleware
-  def initialize(app)
-    @app = app
-  end
+module RedmineWorkload
+  module Extensions
+    module UserPatch
+      def self.prepended(base)
+        base.prepend(InstanceMethods)
+        base.class_eval do
+          has_one :wl_user_data, inverse_of: :user
+          has_many :wl_user_vacations, inverse_of: :user
+          delegate :main_group, to: :wl_user_data, allow_nil: true
+        end
+      end
 
-  def call(env)
-    env["rack.some_header"] = "setting an example"
-    @app.call(env)
+      module InstanceMethods
+        ##
+        # Prefer to use main_group_id over User#wl_user_data.main_group since
+        # the latter may lead to
+        # NoMethodError Exception: undefined method `main_group' for nil:NilClass
+        # when no data set for wl_user_data exists. In contrast, the delegation
+        # of main_group, as used below, will handle this case.
+        #
+        def main_group_id
+          main_group
+        end
+      end
+    end
   end
 end
 
-use Middleware
-run lambda { |env| [200, { "content-type" => "text/plain" }, ["OK"]] }
+# Apply patch
+Rails.configuration.to_prepare do
+  unless User.included_modules.include?(RedmineWorkload::Extensions::UserPatch)
+    User.prepend RedmineWorkload::Extensions::UserPatch
+  end
+end
+
 ```
 
 ---
 
+# Admin Menu
+
 ```ruby
-def use(middleware, *args, &block)
+<% @plugins.each do |plugin| %>
+  <tr id="plugin-<%= plugin.id %>">
+  <td class="name"><span class="name"><%= plugin.name %></span>
+      <%= content_tag('span', plugin.description, :class => 'description') unless plugin.description.blank? %>
+      <%= content_tag('span', link_to(plugin.url, plugin.url), :class => 'url') unless plugin.url.blank? %>
+  </td>
+  <td class="author"><%= plugin.author_url.blank? ? plugin.author : link_to(plugin.author, plugin.author_url) %></td>
+  <td class="version"><span class="icon"><%= plugin.version %></span></td>
+  <td class="configure"><%= link_to(l(:button_configure), plugin_settings_path(plugin)) if plugin.configurable? %></td>
+  </tr>
+<% end %>
+```
+
+---
+
+# Plugin Loader
+
+```ruby
+class PluginLoader
+  # Absolute path to the directory where plugins are located
+  cattr_accessor :directory
+  self.directory = Rails.root.join('plugins')
+
   # ...
-  @use << proc { |app| middleware.new(app, *args, &block) }
-end
-```
 
-```ruby
-def to_app
+  def self.load
+    setup
+    add_autoload_paths
+
+    Rails.application.config.to_prepare do
+      PluginLoader.directories.each(&:run_initializer)
+
+      Redmine::Hook.call_hook :after_plugins_loaded
+    end
+  end
   # ..
-  app = @use.reverse.inject(app) { |a, e| e[a].tap { |x| x.freeze if @freeze_app } }
-  @warmup.call(app) if @warmup
-  app
 end
 ```
-
----
-
-# Pipeline
-
-TODO
-
-Composition
-
-```ruby
-# Code here
-```
-
 
 
 ---
@@ -497,6 +576,63 @@ Jekyll::Hooks.trigger :site, :after_init, self
 }
 ```
 
+---
+<!-- header: "" -->
+
+# Rack
+
+- middleware
+
+---
+<!-- header: Rack -->
+
+```ruby
+class Middleware
+  def initialize(app)
+    @app = app
+  end
+
+  def call(env)
+    env["rack.some_header"] = "setting an example"
+    @app.call(env)
+  end
+end
+
+use Middleware
+run lambda { |env| [200, { "content-type" => "text/plain" }, ["OK"]] }
+```
+
+---
+
+```ruby
+def use(middleware, *args, &block)
+  # ...
+  @use << proc { |app| middleware.new(app, *args, &block) }
+end
+```
+
+```ruby
+def to_app
+  # ..
+  app = @use.reverse.inject(app) { |a, e| e[a].tap { |x| x.freeze if @freeze_app } }
+  @warmup.call(app) if @warmup
+  app
+end
+```
+
+---
+
+# Pipeline
+
+TODO
+
+Composition
+
+```ruby
+# Code here
+```
+
+
 
 ---
 <!-- header: "" -->
@@ -578,79 +714,6 @@ end
 manager.failure_app = Proc.new { |_env|
   ['401', {'Content-Type' => 'application/json'}, { error: 'Unauthorized', code: 401 }]
 }
-```
-
-
----
-<!-- header: "" -->
-
-# Rails Engine (Redmine)
-
-- controllers
-- views
-- models
-- ...
-
-
----
-<!-- header: Redmine -->
-
-# Extend User
-
-```ruby
-module RedmineWorkload
-  module Extensions
-    module UserPatch
-      def self.prepended(base)
-        base.prepend(InstanceMethods)
-        base.class_eval do
-          has_one :wl_user_data, inverse_of: :user
-          has_many :wl_user_vacations, inverse_of: :user
-          delegate :main_group, to: :wl_user_data, allow_nil: true
-        end
-      end
-
-      module InstanceMethods
-        ##
-        # Prefer to use main_group_id over User#wl_user_data.main_group since
-        # the latter may lead to
-        # NoMethodError Exception: undefined method `main_group' for nil:NilClass
-        # when no data set for wl_user_data exists. In contrast, the delegation
-        # of main_group, as used below, will handle this case.
-        #
-        def main_group_id
-          main_group
-        end
-      end
-    end
-  end
-end
-
-# Apply patch
-Rails.configuration.to_prepare do
-  unless User.included_modules.include?(RedmineWorkload::Extensions::UserPatch)
-    User.prepend RedmineWorkload::Extensions::UserPatch
-  end
-end
-
-```
-
----
-
-# Admin Menu
-
-```ruby
-<% @plugins.each do |plugin| %>
-  <tr id="plugin-<%= plugin.id %>">
-  <td class="name"><span class="name"><%= plugin.name %></span>
-      <%= content_tag('span', plugin.description, :class => 'description') unless plugin.description.blank? %>
-      <%= content_tag('span', link_to(plugin.url, plugin.url), :class => 'url') unless plugin.url.blank? %>
-  </td>
-  <td class="author"><%= plugin.author_url.blank? ? plugin.author : link_to(plugin.author, plugin.author_url) %></td>
-  <td class="version"><span class="icon"><%= plugin.version %></span></td>
-  <td class="configure"><%= link_to(l(:button_configure), plugin_settings_path(plugin)) if plugin.configurable? %></td>
-  </tr>
-<% end %>
 ```
 
 ---
