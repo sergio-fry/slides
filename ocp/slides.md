@@ -291,7 +291,6 @@ Rails.configuration.to_prepare do
     User.prepend RedmineWorkload::Extensions::UserPatch
   end
 end
-
 ```
 
 ---
@@ -481,7 +480,6 @@ ActiveJob::Base.queue_adapter = :inline
 
 
 ```ruby
-
 module ActiveJob
   module Enqueuing
     module ClassMethods
