@@ -29,106 +29,117 @@ _class: lead
 -->
 
 
-# Принцип "Open Closed" в Ruby
+# Open-Closed Principle in Ruby
 
 Сергей Удалов
 
 ---
-<!-- footer: Принцип "Open Closed" в Ruby -->
+
+# Balance Platform
+
+TODO
+
+---
+<!-- footer: OCP in Ruby -->
 
 # SOLID
 
----
-
-# Принцип открытости-закрытости
-
-"Вы должны иметь возможность расширять поведение системы без необходимости ее модификации", Роберт Мартин
-
-
-# Плагин 
-
-"Plugin systems are the ultimate consummation, the apotheosis, of the Open-Closed Principle", Robert C. Martin
+1. Single res
 
 ---
 
-# Варианты
+# Open-Closed Principal
 
-DRAFT
+> You should be able to extend the behavior of a system without having to modify that system
 
-* monkey patching
-* наследование
-* dependency injection
-* observable
-* adapter
-* strategy
-
+Robert C. Marting
 
 ---
 
-# Немного истории
+# Plugin 
+
+> Plugin systems are the ultimate consummation, the apotheosis, of the Open-Closed Principle
+
+Robert C. Martin
 
 ---
 
-# Монолит
+# Intro
+
+---
+<!-- header: "Intro" -->
+
+# Monolith gem
 
 ```plantuml
-package "core.gem" {
-  class Entity {
-  }
-  class Strategy {
-  }
-  class ABAC {
-  }
-  class Search {
-  }
-  class Versioning {
-  }
-  class RabbitMQ {
-  }
+package Application {
+	package "core.gem" {
+	  class Entity {
+	  }
+	  class Strategy {
+	  }
+	  class ABAC {
+	  }
+	  class Search {
+	  }
+	  class Versioning {
+	  }
+	  class RabbitMQ {
+	  }
+	}
 }
 ```
 
 ---
 
-# Plugin
+# Pluggable
 
 ```plantuml
-package "core.gem" {
-  class Entity {
-  }
-  class Strategy {
-  }
-}
-package "core-search.gem" {
-  class Search {
-  }
-}
-package "core-audited.gem" {
-  class Versioning {
-  }
-}
-package "core-rabbitmq.gem" {
-  class RabbitMQ {
-  }
-}
 package Application {
+  package "core.gem" {
+    class Entity {
+    }
+    class Strategy {
+    }
+  }
+
+  package "core-search.gem" {
+    class Search {
+    }
+  }
+
+  package "core-audited.gem" {
+    class Versioning {
+    }
+  }
+
+  package "core-rabbitmq.gem" {
+    class RabbitMQ {
+    }
+  }
+
   class ABAC {
   }
 }
 
 
-Application --> "core.gem"
 "core-audited.gem" --> "core.gem"
 "core-rabbitmq.gem" --> "core.gem"
+"core-search.gem" --> "core.gem"
 ```
 
 ---
 
-# В полевых условиях
+# But how?
+
+---
+
+# In the Wild
 
 - Enumerable
 - Logger
 - Rack
+- ActiveJob
 - Faraday
 - Jekyll
 - Warden
@@ -146,14 +157,18 @@ Application --> "core.gem"
 class RemoteItems
   include Enumerable
 
+  def initialize(source)
+    @source = source
+  end
+
   def each
-    CSV.parse(open('http://example.com/items.csv')).each do |item|
+    CSV.parse(open(@source)).each do |item|
       yield item
     end
   end
 end
 
-items = RemoteItems.new
+items = RemoteItems.new 'http://example.com/items.csv'
 items.count
 items.any? { .. }
 items.detect? { .. }
@@ -173,7 +188,7 @@ items.detect? { .. }
 
 
 ```ruby
-logger = Logger.new(logdev, level: Logger::INFO)
+logger = Logger.new(BufferedDevice.new(STDOUT), level: Logger::INFO)
 logger.formatter = proc do |severity, datetime, progname, msg|
   { dt: datetime, message: msg }.to_json
 end
@@ -188,42 +203,11 @@ end
 ```
 
 ---
-
-```ruby
-Logger.new(BufferedDevice.new(logdev))
-```
-
----
 <!-- header: "" -->
 
 # Rack
 
 - middleware
-
-```plantuml
-class App {
-+call()
-}
-class Session {
-+call()
-}
-class Logging {
-+call()
-}
-
-circle HTTP
-
-
-HTTP --> Logging: request
-Logging --> Session
-Session --> App
-
-App --> Session
-Session --> Logging
-Logging --> HTTP: response
-
-
-```
 
 ---
 <!-- header: Rack -->
@@ -261,6 +245,20 @@ def to_app
   app
 end
 ```
+
+---
+
+# Pipeline
+
+TODO
+
+Composition
+
+```ruby
+# Code here
+```
+
+
 
 ---
 
@@ -505,7 +503,7 @@ Jekyll::Hooks.trigger :site, :after_init, self
 
 # Warden
 
-- hooks
+- hooks (как называется?)
 - auth strategies
 - failure_app
 
@@ -526,6 +524,8 @@ end
 ---
 
 # Strategy
+
+TODO можно ли несколько стратегий сразу?
 
 ```ruby
 use Warden::Manager do |manager|
@@ -654,49 +654,53 @@ end
 ```
 
 ---
+
 <!-- header: "" -->
 
-# Стоит избегать
-
-* monkey patching
-* переопределения методов
-* сложных API
+# Summary
 
 ---
 
-# Итоги
+<!-- header: "Summary" -->
 
-* причина для OCP
-* точки расширения
-* конфигурация
-* adapter
-* pipeline
-* callbacks (ActiveSupport Callbacks)
-* простые API, например `.call`
-* lookup / явное указание объекта/класса
+# Ways to Go
 
-
----
-
-# Выводы
-
-* отдельить то, что неизменно, от того, что меняется
-* YAGNI
+1. configuration
+1. inheritance
+1. composition 
+1. dependency injection
+1. strategy 
+1. observer
+1. adapter
+1. pipeline
+1. DSL
 
 ---
 
-# Ссылки
+# Warning!
 
-
-
----
-
-# Материалы
-
-- https://github.com/sergio-fry/slides/blob/master/ocp/slides.md
-* https://blog.cleancoder.com/uncle-bob/2014/05/12/TheOpenClosedPrinciple.html
-* https://web.archive.org/web/20150905081105/http://www.objectmentor.com/resources/articles/ocp.pdf
+1. monkey patching
+2. method overriding
+3. complex API
 
 ---
 
-# Спасибо!
+# Summary
+
+1. OCP exists
+2. separate different code
+3. not only for gems
+
+---
+
+# Links
+
+1. https://github.com/sergio-fry/slides/blob/master/ocp/slides.md
+2. https://blog.cleancoder.com/uncle-bob/2014/05/12/TheOpenClosedPrinciple.html
+3. https://web.archive.org/web/20150905081105/http://www.objectmentor.com/resources/articles/ocp.pdf
+
+---
+
+# Thanks!
+
+Sergei Udalov. Balance Platform
