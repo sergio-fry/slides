@@ -3,6 +3,7 @@
 paginate: true
 class: lead
 marp: true
+size: 4:3
 ---
 <style>
   section {
@@ -139,13 +140,13 @@ package Application {
 
 # In the Wild
 
-- Enumerable
-- Logger
-- Redmine
-- Jekyll
-- ActiveJob
-- Rack
-- Warden
+1. Enumerable
+1. Logger
+1. Redmine
+1. Jekyll
+1. ActiveJob
+1. Rack
+1. Warden
 
 ---
 
@@ -180,9 +181,9 @@ items.detect? { .. }
 
 # Logger
 
-- level
-- device
-- formatter
+1. level
+1. device
+1. formatter
 
 ---
 <!-- header: Logger -->
@@ -218,7 +219,8 @@ end
 def add(severity, message = nil, progname = nil)
   # ..
   @logdev.write(
-    format_message(format_severity(severity), Time.now, progname, message))
+    format_message(format_severity(severity), Time.now, progname, message)
+  )
   true
 end
 
@@ -244,10 +246,10 @@ end
 
 # Redmine (Rails Engine)
 
-- controllers
-- views
-- models
-- ...
+1. controllers
+1. views
+1. models
+1. ...
 
 
 ---
@@ -396,18 +398,17 @@ end
 
 ```ruby
 # describe
-Jekyll::Hooks.register [:pages, :documents], :post_render do |doc|
-  Jekyll::Emoji.emojify(doc) if Jekyll::Emoji.emojiable?(doc)
-end
-
-
-# regsiter
 def self.insert_hook(owner, event, priority, &block)
   @hook_priority[block] = [-priority, @hook_priority.size]
   @registry[owner][event] << block
 end
 
-# Call
+# register
+Jekyll::Hooks.register [:pages, :documents], :post_render do |doc|
+  Jekyll::Emoji.emojify(doc) if Jekyll::Emoji.emojiable?(doc)
+end
+
+# invoke
 Jekyll::Hooks.trigger :site, :after_init, self
 ```
 
@@ -442,8 +443,8 @@ Jekyll::Hooks.trigger :site, :after_init, self
 
 # ActiveJob
 
-- adapter
-- hooks
+1. adapter
+1. hooks
 
 ---
 <!-- header: "ActiveJob" -->
@@ -546,7 +547,7 @@ end
 
 ---
 
-# Use Callback
+# Register Callback
 
 ```ruby
 class PersonRecord < Record
@@ -573,18 +574,19 @@ end
 <!-- header: Rack -->
 
 ```ruby
-class Middleware
+class TimeNow
   def initialize(app)
     @app = app
   end
 
   def call(env)
-    env["rack.some_header"] = "setting an example"
-    @app.call(env)
+    status, headers, body = @app.call(env)
+
+    [status, headers.merge("time" => Time.now.to_s) , body]
   end
 end
 
-use Middleware
+use TimeNow
 run lambda { |env| [200, { "content-type" => "text/plain" }, ["OK"]] }
 ```
 
@@ -595,9 +597,7 @@ def use(middleware, *args, &block)
   # ...
   @use << proc { |app| middleware.new(app, *args, &block) }
 end
-```
 
-```ruby
 def to_app
   # ..
   app = @use.reverse.inject(app) { |a, e| e[a].tap { |x| x.freeze if @freeze_app } }
@@ -610,14 +610,32 @@ end
 
 # Pipeline
 
-TODO
-
-Composition
-
 ```ruby
-# Code here
+# config.ru
+
+use TimeNow
+use Rack::Runtime
+use Rack::ETag
+
+run App.new
 ```
 
+
+---
+
+# Composition
+
+
+```ruby
+# meta language
+TimeNow.new(
+  Rack::Runtime.new(
+    Rack::ETag.new(
+      App.new
+    )
+  )
+)
+```
 
 
 ---
@@ -625,14 +643,33 @@ Composition
 
 # Warden
 
-- hooks (как называется?)
-- auth strategies
-- failure_app
+1. hooks
+1. auth strategies
+1. failure_app
 
 ---
 <!-- header: Warden -->
 
-# Callbacks
+
+# Describe Hook
+
+```ruby
+def after_set_user(options = {}, method = :push, &block)
+  raise BlockNotGiven unless block_given?
+
+  if options.key?(:only)
+    options[:event] = options.delete(:only)
+  elsif options.key?(:except)
+    options[:event] = [:set_user, :authentication, :fetch] - Array(options.delete(:except))
+  end
+
+  _after_set_user.send(method, [block, options])
+end
+```
+
+---
+
+# Register Hook
 
 ```ruby
 Warden::Manager.after_set_user do |user, auth, opts|
@@ -645,16 +682,7 @@ end
 
 ---
 
-# Strategy
-
-TODO можно ли несколько стратегий сразу?
-
-```ruby
-use Warden::Manager do |manager|
-  manager.default_strategies :password, :basic
-  manager.failure_app = BadAuthenticationEndsUpHere
-end
-```
+# Register Strategy
 
 ```ruby
 Warden::Strategies.add(:password) do
@@ -666,6 +694,34 @@ Warden::Strategies.add(:password) do
     u = User.authenticate(params['username'], params['password'])
     u.nil? ? fail!("Could not log in") : success!(u)
   end
+end
+```
+
+---
+
+# Inheritance
+
+```ruby
+class PasswordStrategy < Warden::Strategies::Base
+  def valid?
+    params['username'] || params['password']
+  end
+
+  def authenticate!
+    u = User.authenticate(params['username'], params['password'])
+    u.nil? ? fail!("Could not log in") : success!(u)
+  end
+end
+```
+
+---
+
+# Configure
+
+```ruby
+use Warden::Manager do |manager|
+  manager.default_strategies :password, :basic
+  manager.failure_app = BadAuthenticationEndsUpHere
 end
 ```
 
