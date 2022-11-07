@@ -141,12 +141,12 @@ package Application {
 # In the Wild
 
 1. Enumerable
-1. Logger
-1. Redmine
-1. Jekyll
-1. ActiveJob
-1. Rack
-1. Warden
+2. Logger
+3. Redmine
+4. Jekyll
+5. ActiveJob
+6. Rack
+7. Warden
 
 ---
 
@@ -182,8 +182,8 @@ items.detect? { .. }
 # Logger
 
 1. level
-1. device
-1. formatter
+2. device
+3. formatter
 
 ---
 <!-- header: Logger -->
@@ -246,10 +246,9 @@ end
 
 # Redmine (Rails Engine)
 
-1. controllers
-1. views
-1. models
-1. ...
+1. Rails Engine: controllers, views, models, ...
+2. settings
+3. hooks
 
 
 ---
@@ -643,44 +642,12 @@ TimeNow.new(
 
 # Warden
 
-1. hooks
 1. auth strategies
+1. hooks
 1. failure_app
 
 ---
 <!-- header: Warden -->
-
-
-# Describe Hook
-
-```ruby
-def after_set_user(options = {}, method = :push, &block)
-  raise BlockNotGiven unless block_given?
-
-  if options.key?(:only)
-    options[:event] = options.delete(:only)
-  elsif options.key?(:except)
-    options[:event] = [:set_user, :authentication, :fetch] - Array(options.delete(:except))
-  end
-
-  _after_set_user.send(method, [block, options])
-end
-```
-
----
-
-# Register Hook
-
-```ruby
-Warden::Manager.after_set_user do |user, auth, opts|
-  unless user.active?
-    auth.logout
-    throw(:warden, :message => "User not active")
-  end
-end
-```
-
----
 
 # Register Strategy
 
@@ -750,11 +717,44 @@ end
 
 ---
 
+
+# Describe Hook
+
+```ruby
+def after_set_user(options = {}, method = :push, &block)
+  raise BlockNotGiven unless block_given?
+
+  if options.key?(:only)
+    options[:event] = options.delete(:only)
+  elsif options.key?(:except)
+    options[:event] = [:set_user, :authentication, :fetch] - Array(options.delete(:except))
+  end
+
+  _after_set_user.send(method, [block, options])
+end
+```
+
+---
+
+# Register Hook
+
+```ruby
+Warden::Manager.after_set_user do |user, auth, opts|
+  unless user.active?
+    auth.logout
+    throw(:warden, :message => "User not active")
+  end
+end
+```
+
+---
+
+
 # Failure App
 
 ```ruby
 manager.failure_app = Proc.new { |_env|
-  ['401', {'Content-Type' => 'application/json'}, { error: 'Unauthorized', code: 401 }]
+  [401, {'Content-Type' => 'text/plain'}, ['No Access']]
 }
 ```
 
@@ -792,7 +792,8 @@ manager.failure_app = Proc.new { |_env|
 
 1. OCP exists
 2. separate different code
-3. not only for gems
+3. abstractions
+4. not only for gems
 
 ---
 
@@ -807,4 +808,5 @@ manager.failure_app = Proc.new { |_env|
 
 # Thanks!
 
-Sergei Udalov. Balance Platform
+Sergei O. Udalov, Balance Platform
+sergei@udalovs.ru
