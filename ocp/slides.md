@@ -204,7 +204,7 @@ logger = Logger.new(BufferedDevice.new(STDOUT))
 ```
 ---
 
-# Fromatter
+# Formatter
 
 ```ruby
 logger = Logger.new(STDOUT)
