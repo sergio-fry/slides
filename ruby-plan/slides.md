@@ -29,54 +29,82 @@ _class: lead
 -->
 
 
-# Ruby Plan
+# Развитие направления Ruby
 
-Sergei O. Udalov
-
----
-
-# Intro
-
-* supervising
-* arch
+Удалов Сергей
 
 ---
 
-# Logging
+# Предисловие
+
+* супервайзинг
+* RFC 
+* Операционный Департамент
+
+--- 
+
+# Практики для улучшения
+
+|             |                    |
+|-------------|--------------------|
+|  :x:        | Логирование 
+|  :x:        | Тех. Документация
+|  :warning:  | Мониторинг ошибок
+|  :white_check_mark:  | Codereview 
+|  :warning:  | CI 
+|  :warning:  | Tests 
+|  :x:        | Feature Toggle 
+|  :warning:  | Code Quality 
+|  :warning:  | Окружение разработчика
+
+---
+
+# Логирование
 
 * graylog
-* format
-* requirements
-* Next: Core Module
+* логируется все необходимое
+* удобно искать
+* совместимость с Core Module 
 
+<!-- footer: https://confluence.infra.b-pl.pro/x/Rq5xxQ -->
 
 ---
+<!-- footer: "" -->
 
-# Docs
+# Техническая документация
 
+* актуальность
+* полнота
+
+<!--
 * swager
 * RDoc
 * State Machine
 * confluence
+-->
 
 ---
 
-# Error Monitoring
+# Мониторинг ошибок
 
 * sentry
-* zero errors
-* linked issue
+* связанные задачи
+* отсутствие открытых ошибок
 * SLA
 
 ---
 
 # Codereview
 
-* regular
-* targets
+* цели
 * SLA
 
+<!--
+footer: https://confluence.infra.b-pl.pro/x/x7FxxQ
+-->
 ---
+
+<!-- footer: "" -->
 
 # CI
 
