@@ -37,62 +37,130 @@ Sergei O. Udalov
 # Intro
 
 * Value Object
-* Data (Ruby 3.2 RC)
-* Pros / Cons
-* Plain Ruby
+* Data in Ruby
+* Alternatives
 
+---
 
---- 
+# Definition
 
-# Entity
+> An object that represents a descriptive aspect of the domain with no conceptual identity is called a Value Object
 
 
 ---
 
-<!-- 
-footer: Entity
--->
+# Attributes
 
-# Different
-
-```ruby
-user1 = User.new(1)
-user1.update(name: 'Ivan')
-
-user2 = User.new(2)
-user2.update(name: 'Ivan')
-
-user1 == user2
-# => false
-```
+* has no identity
+* immutable
+* short lifetime
 
 ---
 
-# The Same
+# Entity vs Value
+
+| Entity | Value |
+|--------|-------|
+| UserProfile | Age |
+| City   | Address |
+| Account | Money |
+| UserLocation | Location |
+
+---
+
+# Data (Ruby 3.2.rc)
 
 ```ruby
-user1 = User.new(1)
-user1.update(name: 'Ivan')
+Money = Data.define(:amount, :currency)
+money = Money.new(100, 'RUB')
 
-user2 = User.new(1)
-user2.update(name: 'Petr')
+moeny.amount
+# => 100
 
-user1 == user2
+money == Money.new(100, 'RUB')
 # => true
 ```
 
+--- 
+
+# Imutable
+
+```ruby
+money.amount = 200
+# => undefined method `amount=' for #<data Money amount=100, currency="RUB"> (NoMethodError)
+```
+
 ---
-<!-- 
-footer: ""
--->
+
+# Behaviour
+
+```ruby
+Money = Data.define(:amount, :currency) do
+  def +(other)
+    raise 'Different currencies' if currency != other.currency
+
+    Money.new(amount + other.amount, currency)
+  end
+end
+
+money = Money.new(100, 'RUB') + Money.new(100, 'RUB')
+money.amount
+```
+
+---
+
+# Inheritance
+
+```ruby
+class Coordinates < Data.define(:x, :y)
+  def to_s
+    "#{x}, #{y}"
+  end
+end
+
+class Vector < Coordinates
+  def +(other)
+    Vector.new(x + other.x, y + other.y)
+  end
+end
+```
+
+
+---
+
+# Naming
+
+> There are only two hard things in Computer Science: cache invalidation and naming things.
+
+*Phil Karlton*
+
+
+---
+
+# Object
+
+**data** + behaviour
+
+---
+
+# Struct
+
+---
+
+# DTO. Anemic Model
+
 ---
 
 # Summary
 
 
+
 ---
 
 # Links
+
+- https://enterprisecraftsmanship.com/posts/entity-vs-value-object-the-ultimate-list-of-differences/
+- https://github.com/ruby/ruby/pull/6353
 
 ---
 

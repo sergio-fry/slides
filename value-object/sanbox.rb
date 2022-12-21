@@ -1,4 +1,11 @@
-Money = Data.define(:amount, :unit)
-a = Money.new(1, 'USD')
-b = Money.new(1, 'USD')
-a == b # true
+class Coordinates < Data.define(:x, :y)
+  def to_s
+    "#{x}, #{y}"
+  end
+end
+
+class Vector < Coordinates
+  def +(other)
+    Vector.new(x + other.x, y + other.y)
+  end
+end
