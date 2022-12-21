@@ -1,11 +1,14 @@
-class Coordinates < Data.define(:x, :y)
-  def to_s
-    "#{x}, #{y}"
+class Coordinates
+  attr_reader :x, :y
+
+  def initialize(x, y)
+    @x, @y = x, y
+  end
+
+  def ===(other)
+    other.x == x && other.y == y
   end
 end
 
-class Vector < Coordinates
-  def +(other)
-    Vector.new(x + other.x, y + other.y)
-  end
-end
+puts Position.new(1, 1) == Coordinates.new(1, 1)
+# => false

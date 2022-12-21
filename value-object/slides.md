@@ -34,18 +34,9 @@ Sergei O. Udalov
 
 ---
 
-# Intro
-
-* Value Object
-* Data in Ruby
-* Alternatives
-
----
-
 # Definition
 
 > An object that represents a descriptive aspect of the domain with no conceptual identity is called a Value Object
-
 
 ---
 
@@ -54,6 +45,15 @@ Sergei O. Udalov
 * has no identity
 * immutable
 * short lifetime
+
+---
+
+# Primitives
+
+- String
+- Integer
+- Date
+- ...
 
 ---
 
@@ -81,9 +81,13 @@ money == Money.new(100, 'RUB')
 # => true
 ```
 
+---
+
+# Why Imutable?
+
 --- 
 
-# Imutable
+# Imutablity
 
 ```ruby
 money.amount = 200
@@ -92,7 +96,15 @@ money.amount = 200
 
 ---
 
+```ruby
+Money.new(100, 'RUB') + Money.new(20, 'RUB')
+# => Money.new(120, 'RUB')
+```
+
+---
+
 # Behaviour
+
 
 ```ruby
 Money = Data.define(:amount, :currency) do
@@ -125,6 +137,20 @@ class Vector < Coordinates
 end
 ```
 
+---
+
+# Equal?
+
+```ruby
+Position = Data.define(:x, :y)
+Coordinates = Data.define(:x, :y)
+
+puts Coordinates.new(1, 1) == Coordinates.new(1, 1)
+# => true
+
+puts Position.new(1, 1) == Coordinates.new(1, 1)
+# => false
+```
 
 ---
 
@@ -134,10 +160,9 @@ end
 
 *Phil Karlton*
 
-
 ---
 
-# Object
+# Naming
 
 **data** + behaviour
 
@@ -145,15 +170,58 @@ end
 
 # Struct
 
+![](img/struct.png)
+
+
+<!-- footer: https://github.com/ruby/ruby/pull/6353 -->
+
+---
+<!-- footer: "" -->
+
+# Struct
+
+```ruby
+Coordinates = Struct.new(:x, :y)
+
+position = Coordinates.new(1, 1)
+
+position == Coordinates.new(1, 1)
+# => true
+
+# Agrrr.....
+position.x = 2
+```
+
 ---
 
 # DTO. Anemic Model
 
 ---
 
+# Handmade
+
+```ruby
+class Coordinates
+  attr_reader :x, :y
+
+  def initialize(x, y)
+    @x, @y = x, y
+  end
+
+  def ===(other)
+    other.x == x && other.y == y
+  end
+end
+```
+
+---
+
 # Summary
 
-
+* immutable
+* equal
+* performance
+* semantics
 
 ---
 
