@@ -123,13 +123,21 @@ package "Microservice Architecture" as microservices {
 # Boundaries
 
 * stable
-* independent deployment
-* testing in isolation
 * refactoring
 
 ---
 
+# Testing
+
+* independent deployment
+* testing in isolation
+
+---
+
 # Team
+
+* size
+* heterogeneity
 
 ---
 
@@ -149,13 +157,13 @@ package "Microservice Architecture" as microservices {
 * Логирование
 * Валидация и оценка
 
-
 ---
 
 # Quotes
 
-
 ---
+
+<!-- header: Monolith First. Martin Fowler -->
 
 # Monolith First
 
@@ -168,15 +176,14 @@ package "Microservice Architecture" as microservices {
 
 > This pattern has led many of my colleagues to argue that you shouldn't start a new project with microservices, even if you're sure your application will be big enough to make it worthwhile. .
 
-Martin Fowler
-
 ---
 
 ![](img/monolith-first.png)
 
 
-
 ---
+
+<!-- header: Builing Microservices. Sam Newman -->
 
 <img src="img/builing-microservices.png" height=80% />
 
@@ -191,6 +198,8 @@ Martin Fowler
 > Во многих отношениях куда проще иметь весть исходный код, требующий декомпозиции и разбиения на микросервисы, чем пытаться создавать микросервисы с самого начала.
 
 ---
+
+<!-- header: Builing Microservices. "" -->
 
 # Summary
 
