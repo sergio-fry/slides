@@ -1,7 +1,7 @@
 ---
 paginate: true
 class: lead
-marp: true
+marp: false
 ---
 <style>
   section {
@@ -33,44 +33,62 @@ _class: lead
 Sergei O. Udalov
 
 ---
+<!-- footer: Ruby Platform -->
 
 # Intro
 
+
 ---
 
-# Issues
+# Challenges
 
 * bootstrap
-* testing / linters / security / other checks
-* CI / CD
-* outdated versions
-* unknown status
-
----
-
-# lot of services
-
-* projects
-* modules & services
-* platform services
+* best practices
+* deliver new features
+* lot of apps
 
 ---
 
 # Application Boilerplate
 
----
-
-# Updates
-
-* report
-* update command
+* configs
+* HTTP
+* RMQ
 
 ---
 
-# Healthcheck
+# High Availability
+
+* Redis Sentinel
+* RMQ cluster
+    
+---
+
+# Database
+
+* migrations
+* database reconnect
+
+---
+
+# Monitoring
 
 * healthcheck
 * monitoring
+
+---
+
+# Background Jobs
+
+```ruby
+class MegafonResponseWorker < BP::RPC::ResponseWorker
+  queue :megafon
+  
+  def work(data)
+    # ...
+  end
+end 
+```
 
 ---
 
@@ -92,15 +110,17 @@ Sergei O. Udalov
 
 ---
 
-# Background Jobs
-
-
----
-
 # Error handling
 
 * reporting
 * retries
+
+---
+
+# Up to Date
+
+* ruby version
+* gems
 
 ---
 
@@ -109,6 +129,16 @@ Sergei O. Udalov
 * grape
 * sinatra / roda / hanami
 
+    
+---
+
+# Mount Rack
+
+```ruby
+
+match "/api" => MySinatraApp, anchor: false
+
+```
 
 ---
 
@@ -123,20 +153,116 @@ Sergei O. Udalov
 
 ---
 
-# New Features
+# Rails Template
+
+* bootstrap
+* CI
+* testing
+* healthcheck
+
+<!-- _footer: https://gitlab.infra.b-pl.pro/lib/gems/rails_template -->
 
 ---
 
-# Summary
+<!-- header: Rails Template -->
 
+```ruby
+gem_group :development, :test do
+  gem "rspec-rails"
+end
+```
+
+---
+
+```ruby
+generate(:scaffold, "person name:string")
+```
+
+---
+
+```ruby
+file 'app/components/foo.rb', <<-CODE
+  class Foo
+  end
+CODE
+```
+
+---
+
+# Issues
+
+* missing features
+* no update workflow
+* no outdate versions monitoring
+
+---
+
+# New Features
+
+
+
+---
+
+# Updates
+
+
+---
+
+```ruby
+bin/rails app:template LOCATION=http://example.com/template.rb
+```
+
+---
+
+# Heatmap
+
+| Project | App       | Platform | Ruby | Redis |
+|---------|-----------|----------|------|-------|
+| AB Auto | partnerka | 1.0      | 2.4  | no    |
+| ZT Auto | partnerka | 1.1      | 2.6  | yes   |
+| ZT Auto | bumaga    | 1.9      | 3.2  | no    |
+
+---
+
+# Monitoring
+
+```plantuml
+@startuml
+
+[Registry]
+[Dashboard] --> Registry
+
+ab_partnerka as [AB Partnerka]
+zt_partnerka as [ZT Partnerka]
+zt_bumaga as [ZT Bumaga]
+
+ab_partnerka .up.> Registry: ping
+zt_partnerka .up.> Registry: ping
+zt_bumaga .up.> Registry: ping
+@enduml
+```
+
+---
+
+<!-- header: "" -->
+
+# Summary
 
 ---
 
 # What Next?
 
+* python
+* php
+* etc..
+
 ---
 
 # Links
+
+* https://guides.rubyonrails.org/rails_application_templates.html
+* https://gitlab.infra.b-pl.pro/lib/gems/rails_template
+
 
 ---
 
