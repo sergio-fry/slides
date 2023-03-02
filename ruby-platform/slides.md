@@ -1,7 +1,7 @@
 ---
 paginate: true
 class: lead
-marp: false
+marp: true
 ---
 <style>
   section {
@@ -37,142 +37,248 @@ Sergei O. Udalov
 
 # Intro
 
+---
+
+<!-- header: Intro -->
+
+```plantuml
+component "Project A" {
+
+  [Application] #CC342D
+  [Auth]
+  [Reports]
+  [Documents]
+  
+}
+
+component DocumentsModule as "Documents" {
+  [A] #CC342D
+  [B]
+  [SM1] AS "SM" #CC342D
+}
+
+Documents ..> DocumentsModule
+
+component ReportsModule as "Reports" {
+  [C]
+  [D] #CC342D
+  [SM2] AS "SM" #CC342D
+}
+
+Reports ..> ReportsModule
+
+component Platform {
+
+  [SM3] as "SM" #CC342D
+  [Crypto] #CC342D
+  [Other] #1199FF
+  
+}
+
+SM1 ..> SM3
+SM2 ..> SM3
+
+hide Platform
+hide ReportsModule
+hide DocumentsModule
+```
+
+---
+```plantuml
+component "Project A" {
+
+  [Application] #CC342D
+  [Auth]
+  [Reports]
+  [Documents]
+  
+}
+
+component DocumentsModule as "Documents" {
+  [A] #CC342D
+  [B]
+  [SM1] AS "SM" #CC342D
+}
+
+Documents ..> DocumentsModule
+
+component ReportsModule as "Reports" {
+  [C]
+  [D] #CC342D
+  [SM2] AS "SM" #CC342D
+}
+
+Reports ..> ReportsModule
+
+component Platform {
+
+  [SM3] as "SM" #CC342D
+  [Crypto] #CC342D
+  [Other] #1199FF
+  
+}
+
+SM1 ..> SM3
+SM2 ..> SM3
+hide Platform
+```
+
+---
+
+```plantuml
+component "Project A" {
+
+  [Application] #CC342D
+  [Auth]
+  [Reports]
+  [Documents]
+  
+}
+
+component DocumentsModule as "Documents" {
+  [A] #CC342D
+  [B]
+  [SM1] AS "SM" #CC342D
+}
+
+Documents ..> DocumentsModule
+
+component ReportsModule as "Reports" {
+  [C]
+  [D] #CC342D
+  [SM2] AS "SM" #CC342D
+}
+
+Reports ..> ReportsModule
+
+component Platform {
+
+  [SM3] as "SM" #CC342D
+  [Crypto] #CC342D
+  [Other] #1199FF
+  
+}
+
+SM1 ..> SM3
+SM2 ..> SM3
+
+```
+
+---
+
+# Ruby Platform
+
+```plantuml
+
+component Cryptopro {
+  [RubyPlatform] as "Ruby Platform" #CC342D
+  [Logic] -down-> RubyPlatform
+}
+
+component SM {
+  [RubyPlatform2] as "Ruby Platform" #CC342D
+  [Logic2] -down-> RubyPlatform2
+}
+
+```
+
+---
+
+<!-- header: "" -->
+
+# Why?
+
+* bootstrap
+* best practices
 
 ---
 
 # Challenges
 
-* bootstrap
-* best practices
-* deliver new features
+* deliver updates
 * lot of apps
+ 
 
 ---
 
-# Application Boilerplate
+# Bootstrap
+
+`rails new new-app-name -m http://example.com/template`
+
+---
+
+# Best Practices. Part 1
 
 * configs
-* HTTP
-* RMQ
+* testing & coverage
+* dev tools
+* linters & other checks
+* docker builds
 
 ---
 
-# High Availability
+# Best Practices. Part 2
+
+* feature toggling
+* high availability
+* conntection pool, reconnect
+* background jobs 
+* cron scheduler
+
+<!--
 
 * Redis Sentinel
 * RMQ cluster
-    
----
 
-# Database
-
-* migrations
-* database reconnect
+-->
 
 ---
 
-# Monitoring
+# Best Practices. Part 3
 
+* RPC
 * healthcheck
 * monitoring
+* error handling
+* docs
+
+<!-- generate docs, export -->
 
 ---
 
-# Background Jobs
+# Best Practices. Part 4
 
-```ruby
-class MegafonResponseWorker < BP::RPC::ResponseWorker
-  queue :megafon
-  
-  def work(data)
-    # ...
-  end
-end 
-```
+* logging
+* auth
+* anlytics
 
 ---
 
-# Logging
+# rails_template
 
----
 
-# Documentation
+![](img/rails_template.png)
 
----
-
-# Gitlab CI
-
-* build
-* tests
-* linter
-* security checks
-* performance issues
-
----
-
-# Error handling
-
-* reporting
-* retries
-
----
-
-# Up to Date
-
-* ruby version
-* gems
-
----
-
-# Efficency
-
-* grape
-* sinatra / roda / hanami
-
-    
----
-
-# Mount Rack
-
-```ruby
-
-match "/api" => MySinatraApp, anchor: false
-
-```
-
----
-
-# Dev Tools
-
-* docker compose
-* dip.yml
-
----
-
-# Feature Toggling
-
----
-
-# Rails Template
-
-* bootstrap
-* CI
-* testing
-* healthcheck
-
-<!-- _footer: https://gitlab.infra.b-pl.pro/lib/gems/rails_template -->
+<!-- why rails template -->
 
 ---
 
 <!-- header: Rails Template -->
 
+# Gems
+
 ```ruby
 gem_group :development, :test do
   gem "rspec-rails"
+  gem "bp-platform-development"
 end
+
+gem "bp-platform"
 ```
 
 ---
+
+# Tasks
 
 ```ruby
 generate(:scaffold, "person name:string")
@@ -180,33 +286,37 @@ generate(:scaffold, "person name:string")
 
 ---
 
+# Files
+
 ```ruby
 file 'app/components/foo.rb', <<-CODE
   class Foo
   end
 CODE
 ```
+---
+
+# Docs
+
+https://guides.rubyonrails.org/rails_application_templates.html
 
 ---
 
-# Issues
+<!-- header: "" -->
 
-* missing features
-* no update workflow
-* no outdate versions monitoring
+# What's wrong?
 
----
-
-# New Features
-
-
+* bootstrap only
+* no update process
+* unknown status
 
 ---
 
 # Updates
 
-
 ---
+
+<!-- header: Updates -->
 
 ```ruby
 bin/rails app:template LOCATION=http://example.com/template.rb
@@ -244,14 +354,74 @@ zt_bumaga .up.> Registry: ping
 
 ---
 
+# Update Notes
+
+* changelog
+* manual actions
+
+---
+
+<!-- header: "" -->
+
+# Efficency
+
+* grape
+* sinatra / roda / hanami
+* rom-rb
+
+<!-- We have updates, so we can move -->
+
+---
+
+# Mount Rack
+
+```ruby
+
+match "/api" => MySinatraApp, anchor: false
+
+```
+
+---
+
+# Background Jobs
+
+```ruby
+class MegafonResponseWorker < BP::Platform::ResponseWorker
+  queue :megafon
+  
+  def work(data)
+    # ...
+  end
+end 
+```
+
+---
+
+# Up to Date
+
+* ruby version
+* gems
+
+---
+
+# New Features
+
+
+---
+
 <!-- header: "" -->
 
 # Summary
+
+* bootstrap
+* best practices
+* deliver updates
 
 ---
 
 # What Next?
 
+* improve rails_template
 * python
 * php
 * etc..
@@ -262,7 +432,7 @@ zt_bumaga .up.> Registry: ping
 
 * https://guides.rubyonrails.org/rails_application_templates.html
 * https://gitlab.infra.b-pl.pro/lib/gems/rails_template
-
+* https://github.com/sergio-fry/slides/blob/master/ruby-platform/slides.md
 
 ---
 
