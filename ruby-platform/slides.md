@@ -177,7 +177,9 @@ component Cryptopro {
 
 component SM {
   [RubyPlatform2] as "Ruby Platform" #CC342D
-  [Logic2] -down-> RubyPlatform2
+  [Logic2] as "Logic"
+
+  Logic2 -down-> RubyPlatform2
 }
 
 ```
@@ -422,6 +424,7 @@ end
 # What Next?
 
 * improve rails_template
+* gem template
 * python
 * php
 * etc..
