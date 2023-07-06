@@ -2,11 +2,22 @@
 marp: true
 ---
 
-# RSpec
+# Effective RSpec
+
+---
+
+# About Me
+
+---
+
+# Why?
+
+```bash
+$ rspec
+............................
+```
 
 
 ---
 
-```bash
-rspec --init
-```
+
