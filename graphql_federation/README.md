@@ -1,10 +1,14 @@
 ---
 marp: true
+paginate: true
 ---
 
-# GraphQL Federation
+# GraphQL Federation Namespace
+
 
 ---
+<!-- footer: GraphQL Federation Namespace -->
+<!-- header: As Is -->
 
 # Subgraph A
 
@@ -41,15 +45,19 @@ marp: true
 
 # Why Prefix?
 
-* **dam**File
-* **dam**Directory
-* **auth**User
+- **dam**File
+- **dam**Directory
+- **auth**User
 
 ---
+<!-- header: "" -->
 
 # Namespace
 
+<!-- Appolo Federation does not support namespaces -->
+
 ---
+<!-- header: "Namespace" -->
 
 # Queries
 
@@ -84,10 +92,11 @@ marp: true
 
 # Types
 
-* DamFile
-* DamDirectory
-* AuthUser
+- DamFile
+- DamDirectory
+- AuthUser
 
+<!-- Can't fix -->
 
 ---
 
@@ -95,9 +104,11 @@ marp: true
 
 ![](https://avatars.githubusercontent.com/u/1946920)
 
+graphql-rules.com
+
 ---
 
 # Links
 
-* https://t.ly/_b5a GraphQL Best practices
-* https://t.ly/AZHrp Apollo Federation Namespace
+- https://graphql-rules.com GraphQL Rules by Paul Damnhorns
+- https://t.ly/AZHrp Apollo Federation Namespace
