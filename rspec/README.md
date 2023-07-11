@@ -11,7 +11,7 @@ marp: true
 # Test First
 
 # Rare Execution
-# excat file / line / focus (filter) / example matcher / --pattern
+# exact file / line / focus (filter) / example matcher / --pattern
 # Fail Fast
 # Only Failures
 # Next Failure
@@ -26,11 +26,13 @@ marp: true
 
 # Predictable
 # Faker in a Factory
+# Random Seed (--seed, --order)
+# Timecop
 
+# Tags / define / if / unless
+    # Tags feature flags example
 
 # spec helpers
-# Tags / define / if / unless
-# Random Seed (--seed, --order)
 # default config (.rspec, .rspec-local)
 
 # Other
