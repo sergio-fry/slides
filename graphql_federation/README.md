@@ -10,25 +10,6 @@ paginate: true
 <!-- footer: GraphQL Federation Namespace -->
 <!-- header: As Is -->
 
-# Subgraph A
-
-```graphql
-{
-  damDirectory(id: UUID!): DamDirectory!
-  damFile(id: UUID!): DamFile!
-}
-```
-
----
-
-# Subgraph B
-
-```graphql
-{
-  authUser(id: UUID!): AuthUser!
-}
-```
-
 ---
 
 # Supergraph
@@ -38,6 +19,9 @@ paginate: true
   damDirectory(id: UUID!): DamDirectory!
   damFile(id: UUID!): DamFile!
   authUser(id: UUID!): AuthUser!
+  cmsCategory(id: UUID!): CmsCategory!
+  cmsFeature(id: UUID!): CmsFeature!
+  cmsStory(id: UUID!): CmsStory!
 }
 ```
 
