@@ -20,3 +20,4 @@ paginate: true
 # No Modification
 # Upload S3 Event
 # WebDav
+# Upload zip
