@@ -35,7 +35,7 @@ paginate: true
 
 # S3 Structure
 
-```
+```text
 2023/
   07/
     d9d3493e-9696-458d-8030-790245ef1be7
