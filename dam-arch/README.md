@@ -7,7 +7,21 @@ paginate: true
 
 # DAM Arch
 
---- 
+---
+
+# Requirements
+
+* 5 Tb
+* + 2Tb/Year
+* 1Gb per file
+* 200 users
+
+
+---
+
+# MVP
+
+---
 
 # Ruby
 
@@ -81,3 +95,33 @@ paginate: true
 ---
 
 # Upload S3 Event
+
+---
+
+# TODO
+
+- слайд про задачу на MVP - ретуширование
+- Upload seqeunce
+- S3 Structure. слайд вложенность s3 - storage - dam
+-  перед слайдом структуры
+  - s3 key value
+  - s3 не директорий
+- erd версионирование
+- передвинуть no modification на до rename, versioning, move
+- permissions
+  - unix
+  - groups
+
+- сценарии
+  - тригеры
+  - действия
+  - обязательность полей
+  - условия для статусных переходов
+  - контекстное меню
+
+
+- режимы
+
+- слайд os native - перед webdav
+
+- Download file desposition
