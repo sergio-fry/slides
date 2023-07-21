@@ -165,9 +165,9 @@ Browser --> DAM: File Updated Event!
 
 # Summary
 
-* don't use Ruby
-* no updates
-* modularity
+* storage first
+* less Ruby
+* less updates
 
 
 <!--
