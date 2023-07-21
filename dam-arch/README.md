@@ -160,6 +160,15 @@ Browser --> DAM: File Updated Event!
 # Modes
 
 
+---
+
+# Outro
+
+* dont use Ruby
+* no updates
+* modularity
+
+
 <!--
 
 # TODO
