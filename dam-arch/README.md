@@ -51,7 +51,7 @@ paginate: true
 
 ---
 
-# Asset is File or Dir
+# Everything is File or Dir
 
 ---
 
@@ -137,10 +137,12 @@ Browser --> DAM: File Updated Event!
 
 # Automation
 
-* action
+* scenario
 * trigger
+* asset type
 * required fields
 * events
+* context menu
 
 
 ---
@@ -159,12 +161,11 @@ Browser --> DAM: File Updated Event!
 
 # Modes
 
-
 ---
 
-# Outro
+# Summary
 
-* dont use Ruby
+* don't use Ruby
 * no updates
 * modularity
 
