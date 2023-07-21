@@ -11,12 +11,15 @@ paginate: true
     margin-left: auto;
     margin-right: auto;
     max-width: 90%;
+    max-height: 90%;
   }
 </style>
 
-# DAM Arch
+# DAM Architecture
 
 ---
+
+<!-- footer: DAM Architecture -->
 
 # Requirements
 
@@ -33,10 +36,10 @@ paginate: true
 
 # Roadmap
 
-- photos
-- videos
-- documents
-- ?
+1. photos
+1. videos
+1. documents
+1. ?
 
 ---
 
@@ -97,6 +100,7 @@ entity Blob {
   --
   * s3_key
   * status
+  * size
   * file_id
 }
 
@@ -113,10 +117,12 @@ Blob }|-- File
 # Upload
 
 ```plantuml
+actor Browser
+
 Browser --> DAM: Create file
 DAM --> Browser:  Presigned URL
 Browser --> S3: Upload
-Browser --> Dam: File Updated Event!
+Browser --> DAM: File Updated Event!
 ```
 
 ---
@@ -133,11 +139,9 @@ Browser --> Dam: File Updated Event!
 
 * action
 * trigger
-* request fields
+* required fields
+* events
 
----
-
-# Native Client
 
 ---
 
@@ -145,8 +149,11 @@ Browser --> Dam: File Updated Event!
 
 ---
 
-# Recalculate Size
+# Directory Size
 
+---
+
+# Native Client
 
 ---
 
