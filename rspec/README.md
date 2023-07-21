@@ -1,5 +1,6 @@
 ---
 marp: true
+paginate: true
 ---
 <style>
   img {
@@ -13,12 +14,9 @@ marp: true
 # Effective RSpec
 
 ---
-<!-- header: Effective RSpec. Sergei O. Udalov -->
+<!-- footer: Effective RSpec. Sergei O. Udalov -->
 
-# Testing Reasons
-
-* protect
-* be stupid
+# Testing Matters
 
 ---
 # CI
@@ -132,9 +130,7 @@ config.example_status_persistence_file_path = "spec/examples.txt"
 
 ```bash
 $ rspec --profile 5
-Run options: exclude {:failing=>true}
 
-Randomized with seed 18281
 ..............
 
 Top 5 slowest examples (4.02 seconds, 57.4% of total time):
@@ -148,30 +144,21 @@ Top 5 slowest examples (4.02 seconds, 57.4% of total time):
     0.81053 seconds ./spec/profile_spec.rb:11
   Profile
     0.72669 seconds ./spec/profile_spec.rb:9
-
-Top 2 slowest example groups:
-  Profile
-    0.53897 seconds average (7.01 seconds / 13 examples) ./spec/profile_spec.rb:1
-  doubl example
-    0.00046 seconds average (0.00046 seconds / 1 example) ./spec/double_spec.rb:1
-
-Finished in 7.01 seconds (files took 0.05331 seconds to load)
-14 examples, 0 failures
-
-Randomized with seed 18281
 ```
+
+---
+
+# Single Expectation
 
 ---
 
 # Aggregate Failures
 
 ```ruby
-describe 'Response' do
-  let(:response) { Internet.new.get('http://example.com/test') }
+let(:response) { Internet.new.get('http://example.com/test') }
 
-  it { expect(response['x-time'].to_f).to be < 0.1 }
-  it { expect(response.status).to eq 200 }
-end
+it { expect(response['x-time'].to_f).to be < 0.1 }
+it { expect(response.status).to eq 200 }
 ```
 
 ---
@@ -198,52 +185,138 @@ end
 # `aggregate_failures` bloack
 
 ```ruby
-describe 'Response' do
-  let(:response) { Internet.new.get('http://example.com/test') }
+let(:response) { Internet.new.get('http://example.com/test') }
 
-  it {
-    expect(response.status).to eq 200
+it {
+  expect(response.status).to eq 200
 
-    aggregate_failures do
-      expect(response['x-time'].to_f).to be < 0.1
-      expect(response['content-type']).to eq 'application/json'
-    end
-  }
-end
+  aggregate_failures do
+    expect(response['x-time'].to_f).to be < 0.1
+    expect(response['content-type']).to eq 'application/json'
+  end
+}
 ```
 
 ---
 
 # Double
----
-# Veifiying Double
----
-# Fake Object
----
-
-
-# Predictable
----
-# Factory
 
 ---
-# Factory
+
+# Double
 
 ```ruby
-Faker in a factory
+ subject { CachedStats.new(cache:) }
+
+ let(:cache) { double(:cache, get: 123) }
+
+ it { expect(subject.count).to eq 123 }
 ```
 
 ---
+
+# Verifying Double
+
+---
+
+# Verifying Double
+
+```ruby
+require 'lib/cache' # dependency
+
+let(:cache) { instance_double(Cache, get: 123) }
+```
+
+---
+
+# Fake Object
+
+---
+
+# Fake Object
+
+```ruby
+module Testing
+  class FakeCache
+    def initialize
+      @data = {}
+    end
+  
+    def get(key) = @data[key]
+    def put(key, value) = @data[key] = value
+  end
+end
+```
+
+---
+
+# Factory
+
+---
+
+# Factory
+
+```ruby
+factory :user do
+  email { FFaker::Internet.email }
+end
+```
+
+---
+
+# Factory Sequence
+
+```ruby
+factory :user do
+  sequence(:email) { |n| "user#{n}@example.com" }
+end
+```
+
+---
+
+# Predictable
+
+---
+
 # Timecop
 
+```ruby
+before { Timecop.travel '2023-01-01 12:00' }
+after { Timecop.return }
+```
+
 ---
-# Random Seed (--seed, --order)
+
+```bash
+$ rspec
+
+Randomized with seed 18281
+.FFFF...............
+```
+
 ---
 
+# Random Seed
 
-# Tags / define / if / unless
+```bash
+$ rspec --seed 18281
 
-* config.infer_spec_type_from_file_location!
+Randomized with seed 18281
+.FFFF...............
+
+```
+
+---
+
+# Random Seed Config
+
+```ruby
+Kernel.srand config.seed
+```
+
+---
+
+# Tags
 
 ---
 # Tags feature flags
@@ -282,14 +355,6 @@ end
 
 ---
 
-# Other
-* hooks before/after/around (also in config)
-* --bisect
-* pending / skip
-* when_first_matching_example_defined
-* subject / described_class
----
-
 # Investigate Most Used
 
 ---
@@ -301,6 +366,7 @@ end
 RSpec tested with Cucmeber
 
  -->
+
 ---
 
 # Links
@@ -314,19 +380,7 @@ RSpec tested with Cucmeber
 
 # TODO
 
-- double example
-- verifying double typo
-- verifying double example
-- fake object example
-- add factory slide
-- factory faker example
-- factory sequence example
-- seed slide
-- order slide
-- timecop example
-- timecop spec_helper after hook
-- timecop after enable with tag config
-- if / unless - убарть
+- timecop spec_helper after hook with tag config
 - tag slide (key)
 - meta slide (key => value)
 - faeture toggle tags example
@@ -343,3 +397,19 @@ RSpec tested with Cucmeber
 - RSpec book (read)
 - spec_helper slides (если что-то не вошло в примеры)
 - RSpec rubocop
+
+- about: bio, photo, projects
+- testing matters
+  - сделать 3 пункта
+  - теряем контроль над софтом
+- что-то убрать
+- убрать example matches, pattern
+- предсказуемость сместить в первую часть - где проблемы
+- убрать double?
+- пункты должны быть сгруппированы по проблемам - должно быть явно, что решает
+- ошибки сгруппировать
+- сгруппировать antipattern
+  - rails_helper
+  - double verifining
+  - faker factory (not only)
+- итоги (советы) пунктами

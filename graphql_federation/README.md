@@ -8,9 +8,8 @@ paginate: true
 
 ---
 <!-- footer: GraphQL Federation Namespace -->
-<!-- header: As Is -->
 
----
+<!-- _header: As Is -->
 
 # Supergraph
 
@@ -27,6 +26,8 @@ paginate: true
 
 ---
 
+<!-- _header: As Is -->
+
 # Why Prefix?
 
 - **dam**File
@@ -34,14 +35,13 @@ paginate: true
 - **auth**User
 
 ---
-<!-- header: "" -->
 
 # Namespace
 
 <!-- Appolo Federation does not support namespaces -->
 
 ---
-<!-- header: "Namespace" -->
+<!-- _header: Namespace -->
 
 # Queries
 
@@ -58,6 +58,7 @@ paginate: true
 ```
 
 ---
+<!-- _header: Namespace -->
 
 # Mutations
 

@@ -5,6 +5,15 @@ paginate: true
 
 ---
 
+<style>
+  img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 90%;
+  }
+</style>
+
 # DAM Arch
 
 ---
@@ -12,14 +21,9 @@ paginate: true
 # Requirements
 
 * 5 Tb
-* + 2Tb/Year
+* 2Tb/Year
 * 1Gb per file
 * 200 users
-
-
----
-
-# MVP
 
 ---
 
@@ -27,46 +31,93 @@ paginate: true
 
 ---
 
-# Storage
+# Roadmap
+
+- photos
+- videos
+- documents
+- ?
 
 ---
 
-# Everything File or Dir
+# Layers
+
+* S3
+* Storage
+* Automation
 
 ---
 
-# Upload
-
-1. create file placeholder
-2. upload to s3
-3. uploaded event
+# Asset is File or Dir
 
 ---
 
-# S3 Structure. Natural
+# S3
+
+* key / value
+* rename
+* move
+* copy
+
+---
+
+# Natural Structure
+
+```bash
+root
+├── docs
+│   ├── readme.md
+│   └── rules.docx
+└── photos
+    ├── 001.jpeg
+    └── retouched.psd
+```
 
 ---
 
 # S3 Structure
 
-```text
-2023/
-  07/
-    d9d3493e-9696-458d-8030-790245ef1be7
-    047217d7-5b99-4d22-96f7-97a71fd1d545
-    ...
-  08/
-    678a550d-9e11-46bc-820f-ebac29907342
-    ...
+```bash
+s3
+└── 2023
+    ├── 07
+    │   ├── 047217d7-5b99-4d22-96f7-97a71fd1d545
+    │   └── d9d3493e-9696-458d-8030-790245ef1be7
+    └── 08
+        ├── 678a550d-9e11-46bc-820f-ebac29907342
+        └── d607e4f9-2758-4364-a6e1-a72965be3c5b
 ```
 
 ---
 
-# Versioning
+# DB
+
+```plantuml
+entity Blob {
+  --
+  * s3_key
+  * status
+  * file_id
+}
+
+entity File {
+  --
+  * name
+}
+
+Blob }|-- File
+```
 
 ---
 
-# Move / Rename
+# Upload
+
+```plantuml
+Browser --> DAM: Create file
+DAM --> Browser:  Presigned URL
+Browser --> S3: Upload
+Browser --> Dam: File Updated Event!
+```
 
 ---
 
@@ -74,15 +125,19 @@ paginate: true
 
 ---
 
+# Versioning
+
+---
+
 # Automation
 
+* action
+* trigger
+* request fields
+
 ---
 
-# WebDav
-
----
-
-# Upload zip
+# Native Client
 
 ---
 
@@ -92,25 +147,15 @@ paginate: true
 
 # Recalculate Size
 
----
-
-# Upload S3 Event
 
 ---
+
+# Modes
+
+
+<!--
 
 # TODO
-
-- слайд про задачу на MVP - ретуширование
-- Upload seqeunce
-- S3 Structure. слайд вложенность s3 - storage - dam
--  перед слайдом структуры
-  - s3 key value
-  - s3 не директорий
-- erd версионирование
-- передвинуть no modification на до rename, versioning, move
-- permissions
-  - unix
-  - groups
 
 - сценарии
   - тригеры
@@ -119,9 +164,4 @@ paginate: true
   - условия для статусных переходов
   - контекстное меню
 
-
-- режимы
-
-- слайд os native - перед webdav
-
-- Download file desposition
+      -->
