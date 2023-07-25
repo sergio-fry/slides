@@ -1,47 +1,26 @@
 # TODO
 
-- timecop spec_helper after hook with tag config
 - tag slide (key)
 - meta slide (key => value)
-- faeture toggle tags example
-- spec_helper 
-  - spec_helper
-  - rails_helper
-  - feature_helper
-  - do not require by default
-- .rspec example
-  - exclude integration
-- .rspec-local example
+- feature toggle tags example
+-  spec_helper,  rails_helper,  feature_helper
+- do not require rails_helper by default
+- .rspec example  require env.rb
+- .rspec-local exclude integration
 - bisect slide with example
-- when_first_matching_example_defined ? что это
-- RSpec book (read)
-- spec_helper slides (если что-то не вошло в примеры)
-- RSpec rubocop
 
-- testing matters
-  - сделать 3 пункта
-  - теряем контроль над софтом
-- что-то убрать
-- убрать example matches, pattern
 - предсказуемость сместить в первую часть - где проблемы
 - убрать double?
 - пункты должны быть сгруппированы по проблемам - должно быть явно, что решает
-- ошибки сгруппировать
-- сгруппировать antipattern
-  - rails_helper
-  - double verifining
-  - faker factory (not only)
 - итоги (советы) пунктами
 
-- bdd 
-- спокойствие
-- bio: начал использовать RSpec с 2009
 - читаемая ошибка - сообщение
     - .inspect для читаемости объекта в ошибках
 - coderay ruby highlight
 - запускай то, что требуется
 - rspec --tag last_run_status:failed
 - запускатся ли код полсле pending?
+
 - цель докалад - сократить время запуска тестов
     - что запускать
     - проивзодительность
@@ -53,14 +32,11 @@
     - рефакторинг
     - дизайн кода
     - стабильный уровень стоимости изменений (перефразировать)
-- писать тесты вначале - сместить в конец доклада
-    - мы можем не увидеть падение теста - таким образом не будем уврены, что он что-то проверяет
-- настройка Editor перенести в конец (?)
-- быстрая обратная связь - не нарушается поток
-    - насколько быстрыми должны быть тесты? чтобы после запуска у меня не было времени подумать
-    - цикл работы над тестами с отвлечением и повторным погружением 
-- Изоляция - слайд перед double/faker
-- config.filter_gems_from_backtrace 'rack', 'rack-test', 'sequel', 'sinatra' 
-    - —backtrace - чтобы снова увидеть полный trace
-- воспроизвести ошибку в тестах, даже если не собираемся оставлять этот тест
+
+# Next
+
+- bdd 
 - сложные match include_hash ,,, чтобы не воспроизводить полную структуру, а только значимое (composable matchers)
+
+- when_first_matching_example_defined ? что это
+- RSpec rubocop

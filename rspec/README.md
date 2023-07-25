@@ -1,6 +1,8 @@
 ---
+
 marp: true
 paginate: true
+
 ---
 
 <style>
@@ -22,6 +24,7 @@ paginate: true
 
 - PTL DAM
 - тимлид с 2017
+- пишу тесты на RSpec с 2009
 - разработчик с 2006
 - платные дороги, SEO-инструменты, СМИ, HR
 
@@ -35,13 +38,14 @@ paginate: true
 * быстрая обратная связь
 * документирование
 * это прикольно
+* спокойствие
 
 ---
 
 # Проблемы
 
-* неудобный запуск
-* медлнное исполнение
+* неудобно запускать
+* долго ждать
 * ненадежность
 
 ---
@@ -60,19 +64,7 @@ paginate: true
 
 CI Example
 
----
 
-# Запуск из среды разработки
-
-![](img/vscode_test_explorer.png)
-
----
-
-
-# Test First
-
-* Acceptance test
-* успешная линия
 
 
 ---
@@ -116,8 +108,6 @@ end
 
 ---
 
-<!-- _header: Fail Fast -->
-
 # Suite
 
 ```bash
@@ -127,8 +117,6 @@ $ rspec
 ```
 
 ---
-
-<!-- _header: Fail Fast -->
 
 # Fail Fast
 
@@ -148,8 +136,6 @@ config
 
 ---
 
-<!-- _header: Fail Fast -->
-
 # Only Failures
 
 ```bash
@@ -160,8 +146,6 @@ FFFFFFF
 ```
 
 ---
-
-<!-- _header: Fail Fast -->
 
 # Next Failure
 
@@ -174,8 +158,6 @@ F
 OR `rspec -n`
 
 ---
-
-<!-- _header: Fail Fast -->
 
 # Config
 
@@ -200,7 +182,9 @@ config.example_status_persistence_file_path = "spec/examples.txt"
 <!-- header: меделленное исполнение -->
 
 # Performance
+
 ---
+
 # Profile
 
 ```bash
@@ -238,8 +222,6 @@ it { expect(response.status).to eq 200 }
 
 ---
 
-<!-- _header: Aggregate Failures -->
-
 # `:aggregate_failures` tag
 
 ```ruby
@@ -254,8 +236,6 @@ end
 ```
 
 ---
-
-<!-- _header: Aggregate Failures -->
 
 # `aggregate_failures` bloack
 
@@ -274,7 +254,7 @@ it {
 
 ---
 
-# Double
+# Isolation
 
 ---
 
@@ -300,23 +280,6 @@ end
 
 ---
 
-# Verifying Double
-
-* изменение интерфеса
-* нужны интеграционные тесты
-
----
-
-# Verifying Double
-
-```ruby
-require 'lib/cache' # dependency
-
-let(:cache) { instance_double(Cache, get: 123) }
-```
-
----
-
 # Fake Object
 
 ---
@@ -338,35 +301,7 @@ end
 
 ---
 
-<!-- header: ненадежность -->
 
-# Factory
-
----
-
-# Factory
-
-```ruby
-factory :user do
-  email { FFaker::Internet.email }
-end
-```
-
----
-
-# Factory Sequence
-
-```ruby
-factory :user do
-  sequence(:email) { |n| "user#{n}@example.com" }
-end
-```
-
----
-
-# Predictable
-
----
 
 # Timecop
 
@@ -456,10 +391,67 @@ end
 
 ---
 
+# Backtrace
+
 ```ruby
-describe User, "with no roles assigned" { ... } => User with no roles assigned
+config.filter_gems_from_backtrace 'rack', 'rack-test', 'sequel', 'sinatra' 
 ```
+
+```bash
+rspec --backtrace
+```
+
 ---
+
+# Ошибки
+
+---
+
+# Factory
+
+```ruby
+factory :user do
+  email { FFaker::Internet.email }
+end
+```
+
+---
+
+# Verifying Double
+
+```ruby
+require 'lib/cache' # dependency
+
+let(:cache) { instance_double(Cache, get: 123) }
+```
+
+---
+
+.rspec
+
+```
+--require rails_helper
+```
+
+---
+
+# Запуск из среды разработки
+
+![](img/vscode_test_explorer.png)
+
+---
+
+
+# Test First
+
+* Acceptance test
+* успешная линия
+
+<!--
+мы можем не увидеть падение теста - таким образом не будем уврены, что он что-то проверяет
+-->
+---
+
 
 # Итоги
 
