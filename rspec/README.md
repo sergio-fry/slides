@@ -2,6 +2,7 @@
 marp: true
 paginate: true
 ---
+
 <style>
   img {
     display: block;
@@ -15,48 +16,99 @@ paginate: true
 
 ---
 
-# Обо мне
+# Сергей Удлов
 
-* PTL DAM
-* разработчик с 2006
-* тимлид с 2017
-* платные дороги, SEO-инструменты, СМИ
+![bg right](img/su.jpeg)
+
+- PTL DAM
+- тимлид с 2017
+- разработчик с 2006
+- платные дороги, SEO-инструменты, СМИ, HR
+
 
 ---
 <!-- footer: Effective RSpec. Sergei O. Udalov -->
 
-# Testing Matters
+# Тестирование важно
+
+* корректность
+* быстрая обратная связь
+* документирование
+* это прикольно
 
 ---
+
+# Проблемы
+
+* неудобный запуск
+* медлнное исполнение
+* ненадежность
+
+---
+
+<!-- header: удобный запуск -->
+
+# Редкий запуск
+
+---
+
 # CI
----
-# Test First
----
-
-# Rare Execution
 
 ---
 
-# Editor
+# JUnit Format
+
+CI Example
+
+---
+
+# Запуск из среды разработки
 
 ![](img/vscode_test_explorer.png)
 
 ---
 
+
+# Test First
+
+* Acceptance test
+* успешная линия
+
+
+---
+
+# Pending
+
+```ruby
+RSpec.describe Stats do
+  describe '#average' do
+    it 'should be 0 when no items'
+    it 'should be average of items'
+  end
+end
+```
+
+---
+
+# Partial Pending
+
+``` ruby
+it 'should calculate average' do
+  expect(stats).to have(3).items
+
+  pending 'fix nil error'
+  expect(stats.average).to eq 1
+end
+```
+
+---
+
+
 # Exact File
 
-`rspec spec/models/user_spec.rb`
-
-
----
-
-# Exact Line
-
-`rspec spec/models/user_spec.rb:42`
-
----
-
-# --example-matches  / --pattern
+* `rspec spec/models/user_spec.rb`
+* `rspec spec/models/user_spec.rb:42`
+* `rspec spec/models`
 
 ---
 
@@ -86,6 +138,13 @@ $ rspec --fail-fast
 ........F
 ```
 
+---
+
+# Fail Fast Single file
+
+config
+```ruby
+```
 
 ---
 
@@ -131,7 +190,14 @@ config.example_status_persistence_file_path = "spec/examples.txt"
 ```
 
 
+
 ---
+
+# Удобные сообщения об ошибке
+
+---
+
+<!-- header: меделленное исполнение -->
 
 # Performance
 ---
@@ -224,7 +290,20 @@ it {
 
 ---
 
+# Double Stub
+
+```ruby
+context 'when no cache' do
+  before { cache.stub(:get).and_return(nil) }
+end
+```
+
+---
+
 # Verifying Double
+
+* изменение интерфеса
+* нужны интеграционные тесты
 
 ---
 
@@ -258,6 +337,8 @@ end
 ```
 
 ---
+
+<!-- header: ненадежность -->
 
 # Factory
 
@@ -325,14 +406,25 @@ Kernel.srand config.seed
 
 ---
 
-# Tags
+# Meta
 
 ---
-# Tags feature flags
+# Feature Flags
 
 ```ruby
-example
+context "when caching disabled", caching: false do
+end
+
+context "when caching enabled", caching: true do
+end
 ```
+
+
+---
+
+Так ли это?
+`rspec --tag ~@caching`
+
 ---
 
 
@@ -364,11 +456,17 @@ end
 
 ---
 
-# Investigate Most Used
-
+```ruby
+describe User, "with no roles assigned" { ... } => User with no roles assigned
+```
 ---
 
-# Read Code
+# Итоги
+
+* изучайте инструменты
+* читайте тесты библиотек
+* читайте книги
+* настройте среду разработки
 
 <!--
 
@@ -380,6 +478,7 @@ RSpec tested with Cucmeber
 
 # Links
 
+* `rspec --help`
 * RSpec references
 * https://rspec.info/features/3-12/rspec-core/example-groups/
 * RSpec Book
