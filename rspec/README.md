@@ -154,8 +154,6 @@ end
 
 # Запуск тестов
 
-TODO
-
 <!-- header: Запуск тестов -->
 
 ---
@@ -222,6 +220,15 @@ config.example_status_persistence_file_path = "spec/examples.txt"
 /spec/examples.txt
 ```
 
+
+---
+
+# .rspec
+
+```
+--require spec_helper
+```
+
 ---
 
 # .rspec-local
@@ -236,10 +243,13 @@ config.example_status_persistence_file_path = "spec/examples.txt"
 # Pending
 
 ```ruby
-RSpec.describe Stats do
-  describe '#average' do
-    it 'should be 0 when no items'
-    it 'should be average of items'
+let(:collection) { Collection.new([1, 2, 3]) }
+
+describe '#average' do
+  it 'should be 0 when no items'
+
+  it 'should be average of items', pending: true do
+    expect(stats.average).to eq 2
   end
 end
 ```
@@ -258,8 +268,11 @@ it 'should calculate average' do
 end
 ```
 
+---
 
+# Запуск из среды разработки
 
+![](img/vscode_test_explorer.png)
 
 
 ---
@@ -334,29 +347,32 @@ Kernel.srand config.seed
 
 ---
 
-# Meta
-
----
-# Feature Flags
+# Tags
 
 ```ruby
 context "when caching disabled", caching: false do
+  # ...
 end
 
 context "when caching enabled", caching: true do
+  # ...
 end
 ```
 
 
+TODO check
+
+```bash
+rspec --tag ~@caching
+```
+
 ---
 
-Так ли это?
-`rspec --tag ~@caching`
+# Spec Helpers
 
----
-
-
-# spec helpers
+```ruby
+require 'spec_helper'
+```
 
 ---
 
@@ -394,18 +410,6 @@ require 'lib/cache' # dependency
 let(:cache) { instance_double(Cache, get: 123) }
 ```
 
----
-
-.rspec
-```
---require rails_helper
-```
-
----
-
-# Запуск из среды разработки
-
-![](img/vscode_test_explorer.png)
 
 ---
 
