@@ -14,7 +14,9 @@ paginate: true
 </style>
 
 
-# Effective RSpec
+# Эффективное использование RSpec
+
+Сергей Удалов, PTL DAM
 
 ---
 
@@ -29,12 +31,11 @@ paginate: true
 - финтех, платные дороги, SEO-инструменты, СМИ, HR
 
 ---
-<!-- footer: Effective RSpec. Sergei O. Udalov -->
+<!-- footer: Эффективное использование RSpec, Сергей Удалов -->
 
 # Тестирование важно
 
 * поддерживаемость
-* спокойствие
 * быстрая обратная связь
 * дизайн кода
 * документирование
@@ -59,9 +60,11 @@ paginate: true
 
 # Производительность
 
-TODO bg
+![bg right](img/performance.jpeg)
 
 <!-- header: Производительность -->
+
+<!-- _footer: Photo by Marc Sendra Martorell -->
 
 ---
 
@@ -136,7 +139,7 @@ Finished in 0.01258 seconds (files took 0.11336 seconds to load)
 
 # Isolation
 
-TODO bg
+![bg right](img/clean_architectur.jpeg)
 
 ---
 
@@ -180,14 +183,18 @@ end
 
 # Запуск тестов
 
-TODO bg
-
 <!-- header: Запуск тестов -->
+
+
+
+![bg right](img/launch.jpeg)
+
+<!-- _footer: Photo by Bill Jelen -->
 
 ---
 
 
-# Exact File
+# Что именно запускать
 
 * `rspec spec/models/user_spec.rb`
 * `rspec spec/models/user_spec.rb:42`
@@ -243,23 +250,6 @@ config.example_status_persistence_file_path = "spec/examples.txt"
 
 ---
 
-# .rspec
-
-```
---require spec_helper
-```
-
----
-
-# .rspec-local
-
-```bash
---exclude spec/integration/**
---seed 123
-```
-
----
-
 # Pending
 
 ```ruby
@@ -297,24 +287,15 @@ end
 ![](img/vscode_test_explorer.png)
 
 
-
----
-
-# Coderay
-
-```ruby
-gem 'coderay'
-```
-
-![](img/coderay.png)
-
 ---
 
 # Надежность
 
-TODO bg
+![bg right](img/hammer.jpeg)
 
 <!-- header: Надежность -->
+
+<!-- _footer: Photo by iMattSmart -->
 
 ---
 
@@ -381,11 +362,30 @@ require 'spec_helper'
 
 ---
 
+# .rspec
+
+```
+--require spec_helper
+```
+
+---
+
+# .rspec-local
+
+```bash
+--exclude spec/integration/**
+--seed 123
+```
+
+---
+
 # Ошибки
 
-TODO bg
-
 <!-- header: Ошибки -->
+
+![bg right](img/broken.jpeg)
+
+<!-- _footer: Photo by Marianna Smiley -->
 
 ---
 
@@ -425,7 +425,6 @@ require 'lib/cache' # dependency
 let(:cache) { instance_double(Cache, get: 123) }
 ```
 
-
 ---
 
 
@@ -462,10 +461,8 @@ RSpec tested with Cucmeber
 
 # Links
 
-TODO
-
+* "Effective Testing with RSpec 3", Myron Marston and Ian Dees
 * `rspec --help`
-* RSpec references
 * https://rspec.info/features/3-12/rspec-core/example-groups/
-* RSpec Book
-* spec_helper
+* https://github.com/sergio-fry/spec_helper
+* https://www.linkedin.com/in/sergeiudalov/
