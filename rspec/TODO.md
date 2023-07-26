@@ -9,14 +9,8 @@
 - .rspec-local exclude integration
 - bisect slide with example
 
-- предсказуемость сместить в первую часть - где проблемы
-- убрать double?
 - пункты должны быть сгруппированы по проблемам - должно быть явно, что решает
-- итоги (советы) пунктами
 
-- читаемая ошибка - сообщение
-    - .inspect для читаемости объекта в ошибках
-- coderay ruby highlight
 - запускай то, что требуется
 - rspec --tag last_run_status:failed
 - запускатся ли код полсле pending?
@@ -40,3 +34,5 @@
 
 - when_first_matching_example_defined ? что это
 - RSpec rubocop
+- читаемая ошибка - сообщение
+    - .inspect для читаемости объекта в ошибках

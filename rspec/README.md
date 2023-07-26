@@ -26,19 +26,23 @@ paginate: true
 - тимлид с 2017
 - пишу тесты на RSpec с 2009
 - разработчик с 2006
-- платные дороги, SEO-инструменты, СМИ, HR
-
+- финтех, платные дороги, SEO-инструменты, СМИ, HR
 
 ---
 <!-- footer: Effective RSpec. Sergei O. Udalov -->
 
 # Тестирование важно
 
-* корректность
+* поддерживаемость
+* спокойствие
 * быстрая обратная связь
+* дизайн кода
 * документирование
 * это прикольно
-* спокойствие
+
+---
+
+# Быстрая обратная связь
 
 ---
 
@@ -48,15 +52,68 @@ paginate: true
 * долго ждать
 * ненадежность
 
+
 ---
 
-<!-- header: удобный запуск -->
+# Производительность
+# Частичный запуск
+# Надежность
 
-# Редкий запуск
+---
+
+# Profile
+
+```bash
+$ rspec --profile 5
+
+..............
+
+Top 5 slowest examples (4.02 seconds, 57.4% of total time):
+  Profile
+    0.85078 seconds ./spec/profile_spec.rb:6
+  Profile
+    0.81927 seconds ./spec/profile_spec.rb:7
+  Profile
+    0.81688 seconds ./spec/profile_spec.rb:8
+  Profile
+    0.81053 seconds ./spec/profile_spec.rb:11
+  Profile
+    0.72669 seconds ./spec/profile_spec.rb:9
+```
+
+---
+
+# Single Expectation
+
+```ruby
+let(:response) { Internet.new.get('http://example.com/test') }
+
+it { expect(response['x-time'].to_f).to be < 0.1 }
+it { expect(response.status).to eq 200 }
+```
+
+---
+
+# `:aggregate_failures` tag
+
+```ruby
+describe 'Response', :aggregate_failures do
+  let(:response) { Internet.new.get('http://example.com/test') }
+
+  it {
+    expect(response['x-time'].to_f).to be < 0.1
+    expect(response.status).to eq 200
+  }
+end
+```
 
 ---
 
 # CI
+
+* источник правды
+* Merge request
+* полнота обратной связи
 
 ---
 
@@ -84,6 +141,7 @@ end
 
 # Partial Pending
 
+TODO запускается ли строчка ниже?
 ``` ruby
 it 'should calculate average' do
   expect(stats).to have(3).items
@@ -177,80 +235,18 @@ config.example_status_persistence_file_path = "spec/examples.txt"
 
 # Удобные сообщения об ошибке
 
----
-
-<!-- header: меделленное исполнение -->
-
-# Performance
+TODO
 
 ---
 
-# Profile
-
-```bash
-$ rspec --profile 5
-
-..............
-
-Top 5 slowest examples (4.02 seconds, 57.4% of total time):
-  Profile
-    0.85078 seconds ./spec/profile_spec.rb:6
-  Profile
-    0.81927 seconds ./spec/profile_spec.rb:7
-  Profile
-    0.81688 seconds ./spec/profile_spec.rb:8
-  Profile
-    0.81053 seconds ./spec/profile_spec.rb:11
-  Profile
-    0.72669 seconds ./spec/profile_spec.rb:9
-```
-
----
-
-# Single Expectation
-
----
-
-# Aggregate Failures
+# Coderay
 
 ```ruby
-let(:response) { Internet.new.get('http://example.com/test') }
-
-it { expect(response['x-time'].to_f).to be < 0.1 }
-it { expect(response.status).to eq 200 }
+gem 'coderay'
 ```
 
----
+TODO
 
-# `:aggregate_failures` tag
-
-```ruby
-describe 'Response', :aggregate_failures do
-  let(:response) { Internet.new.get('http://example.com/test') }
-
-  it {
-    expect(response['x-time'].to_f).to be < 0.1
-    expect(response.status).to eq 200
-  }
-end
-```
-
----
-
-# `aggregate_failures` bloack
-
-```ruby
-let(:response) { Internet.new.get('http://example.com/test') }
-
-it {
-  expect(response.status).to eq 200
-
-  aggregate_failures do
-    expect(response['x-time'].to_f).to be < 0.1
-    expect(response['content-type']).to eq 'application/json'
-  end
-}
-```
 
 ---
 
@@ -428,7 +424,6 @@ let(:cache) { instance_double(Cache, get: 123) }
 ---
 
 .rspec
-
 ```
 --require rails_helper
 ```
@@ -450,6 +445,11 @@ let(:cache) { instance_double(Cache, get: 123) }
 <!--
 мы можем не увидеть падение теста - таким образом не будем уврены, что он что-то проверяет
 -->
+
+---
+
+# Редкий запуск
+
 ---
 
 
@@ -469,6 +469,8 @@ RSpec tested with Cucmeber
 ---
 
 # Links
+
+TODO
 
 * `rspec --help`
 * RSpec references
