@@ -56,8 +56,8 @@ paginate: true
 ---
 
 # Производительность
-# Частичный запуск
-# Надежность
+
+<!-- header: Производительность -->
 
 ---
 
@@ -106,22 +106,63 @@ describe 'Response', :aggregate_failures do
   }
 end
 ```
+---
+
+# Isolation
 
 ---
 
-# CI
+# Double
 
-* источник правды
-* Merge request
-* полнота обратной связи
+```ruby
+ subject { CachedStats.new(cache:) }
+
+ let(:cache) { double(:cache, get: 123) }
+
+ it { expect(subject.count).to eq 123 }
+```
+
+---
+
+# Double Stub
+
+```ruby
+context 'when no cache' do
+  before { cache.stub(:get).and_return(nil) }
+end
+```
+
+---
+
+# Fake Object
+
+```ruby
+module Testing
+  class FakeCache
+    def initialize
+      @data = {}
+    end
+  
+    def get(key) = @data[key]
+    def put(key, value) = @data[key] = value
+  end
+end
+```
+---
+
+# Частичный запуск
+
+TODO
+
+<!-- header: Частичный запуск -->
+
+
 
 ---
 
 # JUnit Format
 
 CI Example
-
-
 
 
 ---
@@ -247,56 +288,16 @@ gem 'coderay'
 
 TODO
 
-
 ---
 
-# Isolation
+# Надежность
+
+TODO
+
+<!-- header: Надежность -->
+
 
 ---
-
-# Double
-
-```ruby
- subject { CachedStats.new(cache:) }
-
- let(:cache) { double(:cache, get: 123) }
-
- it { expect(subject.count).to eq 123 }
-```
-
----
-
-# Double Stub
-
-```ruby
-context 'when no cache' do
-  before { cache.stub(:get).and_return(nil) }
-end
-```
-
----
-
-# Fake Object
-
----
-
-# Fake Object
-
-```ruby
-module Testing
-  class FakeCache
-    def initialize
-      @data = {}
-    end
-  
-    def get(key) = @data[key]
-    def put(key, value) = @data[key] = value
-  end
-end
-```
-
----
-
 
 
 # Timecop
@@ -360,30 +361,14 @@ end
 
 
 # spec helpers
+
 ---
+
 # default config (.rspec, .rspec-local)
 
 * --format documentation
 * --seed 123
 - --exclude spec/integration/**
----
-
-# Define Method
-
-```ruby
-let(:user) { create(:user) }
-
-def create_user
-  create(:user)
-end
-
-it do
-  expect do
-    create_user
-    create_user
-  end.to change{ User.count }.by(2)
-end
-```
 
 ---
 
@@ -400,6 +385,18 @@ rspec --backtrace
 ---
 
 # Ошибки
+
+<!-- header: Ошибки -->
+
+---
+
+# Не настроен CI
+
+<!--
+* источник правды
+* Merge request
+* полнота обратной связи
+-->
 
 ---
 
@@ -437,7 +434,7 @@ let(:cache) { instance_double(Cache, get: 123) }
 ---
 
 
-# Test First
+# Тест после кода
 
 * Acceptance test
 * успешная линия
