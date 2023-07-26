@@ -44,6 +44,8 @@ paginate: true
 
 # Быстрая обратная связь
 
+<!-- главным образом будем говорить об этом -->
+
 ---
 
 # Проблемы
@@ -150,47 +152,11 @@ end
 ```
 ---
 
-# Частичный запуск
+# Запуск тестов
 
 TODO
 
-<!-- header: Частичный запуск -->
-
-
-
----
-
-# JUnit Format
-
-CI Example
-
-
----
-
-# Pending
-
-```ruby
-RSpec.describe Stats do
-  describe '#average' do
-    it 'should be 0 when no items'
-    it 'should be average of items'
-  end
-end
-```
-
----
-
-# Partial Pending
-
-TODO запускается ли строчка ниже?
-``` ruby
-it 'should calculate average' do
-  expect(stats).to have(3).items
-
-  pending 'fix nil error'
-  expect(stats.average).to eq 1
-end
-```
+<!-- header: Запуск тестов -->
 
 ---
 
@@ -200,20 +166,6 @@ end
 * `rspec spec/models/user_spec.rb`
 * `rspec spec/models/user_spec.rb:42`
 * `rspec spec/models`
-
----
-
-# Fail Fast
-
----
-
-# Suite
-
-```bash
-$ rspec
-.......F...F....F..................F..F............F...F...F............F.......
-...................F
-```
 
 ---
 
@@ -270,6 +222,44 @@ config.example_status_persistence_file_path = "spec/examples.txt"
 /spec/examples.txt
 ```
 
+---
+
+# .rspec-local
+
+```bash
+--exclude spec/integration/**
+--seed 123
+```
+
+---
+
+# Pending
+
+```ruby
+RSpec.describe Stats do
+  describe '#average' do
+    it 'should be 0 when no items'
+    it 'should be average of items'
+  end
+end
+```
+
+---
+
+# Partial Pending
+
+TODO запускается ли строчка ниже?
+``` ruby
+it 'should calculate average' do
+  expect(stats).to have(3).items
+
+  pending 'fix nil error'
+  expect(stats.average).to eq 1
+end
+```
+
+
+
 
 
 ---
@@ -277,6 +267,13 @@ config.example_status_persistence_file_path = "spec/examples.txt"
 # Удобные сообщения об ошибке
 
 TODO
+
+
+---
+
+# JUnit Format
+
+CI Example
 
 ---
 
@@ -295,7 +292,6 @@ TODO
 TODO
 
 <!-- header: Надежность -->
-
 
 ---
 
@@ -361,26 +357,6 @@ end
 
 
 # spec helpers
-
----
-
-# default config (.rspec, .rspec-local)
-
-* --format documentation
-* --seed 123
-- --exclude spec/integration/**
-
----
-
-# Backtrace
-
-```ruby
-config.filter_gems_from_backtrace 'rack', 'rack-test', 'sequel', 'sinatra' 
-```
-
-```bash
-rspec --backtrace
-```
 
 ---
 
