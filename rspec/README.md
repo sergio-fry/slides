@@ -59,6 +59,8 @@ paginate: true
 
 # Производительность
 
+TODO bg
+
 <!-- header: Производительность -->
 
 ---
@@ -114,11 +116,27 @@ end
 
 # Spring
 
-TODO
+```ruby
+group :development do
+  gem 'spring'
+  gem 'spring-commands-rspec'
+end
+```
+
+```bash
+$ bundle exec spring rspec
+Running via Spring preloader in process 90905
+...............................................................
+
+Finished in 0.01258 seconds (files took 0.11336 seconds to load)
+63 examples, 0 failures
+```
 
 ---
 
 # Isolation
+
+TODO bg
 
 ---
 
@@ -162,6 +180,8 @@ end
 
 # Запуск тестов
 
+TODO bg
+
 <!-- header: Запуск тестов -->
 
 ---
@@ -181,16 +201,6 @@ end
 $ rspec --fail-fast
 
 ........F
-```
-
----
-
-# Fail Fast Single file
-
-TODO 
-
-config
-```ruby
 ```
 
 ---
@@ -268,13 +278,15 @@ end
 
 # Partial Pending
 
-TODO запускается ли строчка ниже?
 ``` ruby
-it 'should calculate average' do
-  expect(stats).to have(3).items
+it 'sign in with form' do
+  visit '/'
+  fill_in :name, with: 'sergei'
+  fill_in :password, with: 'secret123'
 
-  pending 'fix nil error'
-  expect(stats.average).to eq 1
+  expect(page).to have_content 'signed in'
+  pending 'add greeting'
+  expect(page).to have_content 'hello sergei!'
 end
 ```
 
@@ -285,18 +297,6 @@ end
 ![](img/vscode_test_explorer.png)
 
 
----
-
-# Удобные сообщения об ошибке
-
-TODO
-
-
----
-
-# JUnit Format
-
-CI Example
 
 ---
 
@@ -306,13 +306,13 @@ CI Example
 gem 'coderay'
 ```
 
-TODO
+![](img/coderay.png)
 
 ---
 
 # Надежность
 
-TODO
+TODO bg
 
 <!-- header: Надежность -->
 
@@ -360,20 +360,15 @@ Kernel.srand config.seed
 # Tags
 
 ```ruby
-context "when caching disabled", caching: false do
-  # ...
-end
-
+# rspec --tag @caching
 context "when caching enabled", caching: true do
   # ...
 end
-```
 
-
-TODO check
-
-```bash
-rspec --tag ~@caching
+# rspec --tag ~@caching
+context "when caching disabled", caching: false do
+  # ...
+end
 ```
 
 ---
@@ -388,6 +383,8 @@ require 'spec_helper'
 
 # Ошибки
 
+TODO bg
+
 <!-- header: Ошибки -->
 
 ---
@@ -399,6 +396,14 @@ require 'spec_helper'
 * Merge request
 * полнота обратной связи
 -->
+
+---
+
+# JUnit Format
+
+`rspec --format RspecJunitFormatter --out rspec.xml`
+
+![](img/junit_test_report.png)
 
 ---
 
