@@ -142,6 +142,18 @@ Finished in 0.01258 seconds (files took 0.11336 seconds to load)
 
 ---
 
+# Spec Helpers
+
+```ruby
+require 'spec_helper'
+```
+vs 
+```ruby
+require 'rails_helper'
+```
+
+---
+
 # Double
 
 ```ruby
@@ -288,25 +300,6 @@ context "when caching disabled", caching: false do
 end
 ```
 
----
-
-# Spec Helpers
-
-```ruby
-require 'spec_helper'
-```
-vs 
-```ruby
-require 'rails_helper'
-```
-
----
-
-# .rspec
-
-```
---require spec_helper
-```
 
 ---
 
@@ -347,6 +340,14 @@ require 'rails_helper'
 
 ---
 
+# Всегда полное окружение
+
+```bash
+--require rails_helper
+```
+
+---
+
 # Factory
 
 ```ruby
@@ -367,20 +368,41 @@ let(:cache) { instance_double(Cache, get: 123) }
 
 ---
 
-
 # Тест после кода
 
-TODO
-
-* сам себе заказчик
-* не нужно вручную дебажить
-* меньше нагрузка на голову - можно подумать об абстракциях
+* ручной дебаг
+* отравление техническими деталями
+* тратим мыслетоплива на рутину
 
 <!--
 * Acceptance test
 * успешная линия
 * мы можем не увидеть падение теста - таким образом не будем уврены, что он что-то проверяет
 -->
+
+---
+
+# Тесты вначале
+
+```ruby
+describe 'Reports' do
+  context 'when admin user' do
+    let(:user) { create(:user, :admin) }
+
+    it do
+      login_as user
+      visit '/reports'
+      expect(page).to have_content 'Reports'
+
+      penging 'does not work below this line'
+
+      click_on 'Month report'
+      expect(page).to have_content 'Average revenue'
+      # ...
+    end
+  end
+end
+```
 
 ---
 
