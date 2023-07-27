@@ -1,12 +1,16 @@
 # TODO
 
--  spec_helper,  rails_helper,  feature_helper
-- do not require rails_helper by default
-- .rspec example  require env.rb
-- .rspec-local exclude integration
-- bisect slide with example
 
-- rspec --tag last_run_status:failed
+NEW
+
+- rails_helper - проивзодительность?
+- .rspec .rspec - запуск
+- после слайда проблем указать слайд с пунктами, о которых пойдет речь
+- можно ли добавить 1/10 на слайдах внутри раздела
+- tags перенести в запуск
+- в антипаттерны добавление везде rails_helper
+- тест после кода: булеты, табличка, текст?
+- DAM - рассказать про продукт
 
 
 # Next

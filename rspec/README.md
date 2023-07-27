@@ -20,7 +20,7 @@ paginate: true
 
 ---
 
-# Сергей Удлов
+# Сергей Удалов
 
 ![bg right](img/su.jpeg)
 
@@ -51,10 +51,9 @@ paginate: true
 
 # Проблемы
 
-* неудобно запускать
 * долго ждать
+* неудобно запускать
 * ненадежность
-
 
 ---
 
@@ -155,16 +154,6 @@ Finished in 0.01258 seconds (files took 0.11336 seconds to load)
 
 ---
 
-# Double Stub
-
-```ruby
-context 'when no cache' do
-  before { cache.stub(:get).and_return(nil) }
-end
-```
-
----
-
 # Fake Object
 
 ```ruby
@@ -235,52 +224,12 @@ OR `rspec -n`
 
 ---
 
-# Config
-
-spec_helper.rb
-```ruby
-config.example_status_persistence_file_path = "spec/examples.txt"
-```
-
-.gitignore
-```
-/spec/examples.txt
-```
-
-
----
-
-# Pending
-
-```ruby
-let(:collection) { Collection.new([1, 2, 3]) }
-
-describe '#average' do
-  it 'should be 0 when no items'
-
-  it 'should be average of items', pending: true do
-    expect(stats.average).to eq 2
-  end
-end
-```
-
----
-
-# Partial Pending
-
-``` ruby
-it 'sign in with form' do
-  visit '/'
-  fill_in :name, with: 'sergei'
-  fill_in :password, with: 'secret123'
-
-  expect(page).to have_content 'signed in'
-  pending 'add greeting'
-  expect(page).to have_content 'hello sergei!'
-end
-```
-
----
+<style scoped>
+  img {
+    display: block;
+    max-width: 70%;
+  }
+</style>
 
 # Запуск из среды разработки
 
@@ -309,16 +258,11 @@ after { Timecop.return }
 
 ---
 
-```bash
-$ rspec
-
-Randomized with seed 18281
-.FFFF...............
-```
-
----
-
 # Random Seed
+
+```ruby
+Kernel.srand config.seed
+```
 
 ```bash
 $ rspec --seed 18281
@@ -326,14 +270,6 @@ $ rspec --seed 18281
 Randomized with seed 18281
 .FFFF...............
 
-```
-
----
-
-# Random Seed Config
-
-```ruby
-Kernel.srand config.seed
 ```
 
 ---
@@ -358,6 +294,10 @@ end
 
 ```ruby
 require 'spec_helper'
+```
+vs 
+```ruby
+require 'rails_helper'
 ```
 
 ---
@@ -430,11 +370,16 @@ let(:cache) { instance_double(Cache, get: 123) }
 
 # Тест после кода
 
-* Acceptance test
-* успешная линия
+TODO
+
+* сам себе заказчик
+* не нужно вручную дебажить
+* меньше нагрузка на голову - можно подумать об абстракциях
 
 <!--
-мы можем не увидеть падение теста - таким образом не будем уврены, что он что-то проверяет
+* Acceptance test
+* успешная линия
+* мы можем не увидеть падение теста - таким образом не будем уврены, что он что-то проверяет
 -->
 
 ---
