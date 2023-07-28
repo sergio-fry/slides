@@ -145,9 +145,9 @@ Finished in 0.01258 seconds (files took 0.11336 seconds to load)
 
 ---
 
-# Isolation
+# Изоляция
 
-![bg right](img/clean_architectur.jpeg)
+![](img/clean_architectur.jpeg)
 
 ---
 
@@ -245,6 +245,31 @@ OR `rspec -n`
 
 ---
 
+# Tags
+
+```ruby
+# rspec --tag @caching
+context "when caching enabled", caching: true do
+  # ...
+end
+
+# rspec --tag ~@caching
+context "when caching disabled", caching: false do
+  # ...
+end
+```
+
+---
+
+# .rspec-local
+
+```bash
+--exclude spec/integration/**
+--seed 123
+```
+
+---
+
 <style scoped>
   img {
     display: block;
@@ -255,7 +280,6 @@ OR `rspec -n`
 # Запуск из среды разработки
 
 ![](img/vscode_test_explorer.png)
-
 
 ---
 
@@ -293,31 +317,6 @@ Randomized with seed 18281
 
 ```
 
----
-
-# Tags
-
-```ruby
-# rspec --tag @caching
-context "when caching enabled", caching: true do
-  # ...
-end
-
-# rspec --tag ~@caching
-context "when caching disabled", caching: false do
-  # ...
-end
-```
-
-
----
-
-# .rspec-local
-
-```bash
---exclude spec/integration/**
---seed 123
-```
 
 ---
 
@@ -435,10 +434,11 @@ RSpec tested with Cucmeber
 
 ---
 
-# Links
+# Ссылки
 
 * "Effective Testing with RSpec 3", Myron Marston and Ian Dees
 * `rspec --help`
 * https://rspec.info/features/3-12/rspec-core/example-groups/
 * https://github.com/sergio-fry/spec_helper
 * https://www.linkedin.com/in/sergeiudalov/
+
