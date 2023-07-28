@@ -16,7 +16,7 @@ paginate: true
 
 # Эффективное использование RSpec
 
-Сергей Удалов, PTL DAM
+Сергей Удалов, PTL DAM Ecom
 
 ---
 
@@ -24,7 +24,7 @@ paginate: true
 
 ![bg right](img/su.jpeg)
 
-- PTL DAM
+- PTL DAM, Ecom
 - тимлид с 2017
 - пишу тесты на RSpec с 2009
 - разработчик с 2006
@@ -380,37 +380,13 @@ let(:cache) { instance_double(Cache, get: 123) }
 
 * ручной дебаг
 * отравление техническими деталями
-* тратим мыслетоплива на рутину
+* тратим мыслетопливо на рутину
 
 <!--
 * Acceptance test
 * успешная линия
 * мы можем не увидеть падение теста - таким образом не будем уврены, что он что-то проверяет
 -->
-
----
-
-# Тесты вначале
-
-```ruby
-describe 'Reports' do
-  context 'when admin user' do
-    let(:user) { create(:user, :admin) }
-
-    it do
-      login_as user
-      visit '/reports'
-      expect(page).to have_content 'Reports'
-
-      penging 'does not work below this line'
-
-      click_on 'Month report'
-      expect(page).to have_content 'Average revenue'
-      # ...
-    end
-  end
-end
-```
 
 ---
 
