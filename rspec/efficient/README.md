@@ -416,6 +416,7 @@ RSpec tested with Cucmeber
 * `rspec --help`
 * https://rspec.info/features/3-12/rspec-core/example-groups/
 * https://github.com/sergio-fry/spec_helper
+* https://github.com/sergio-fry/slides rspec/efficient
 
 ---
 

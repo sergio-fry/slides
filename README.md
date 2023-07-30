@@ -2,18 +2,25 @@
 
 Some slides
 
-## Usage
+## Install
 
 Install dependencies:
 
     cd .engine && npm install
 
 
+## Build slides
 
-Go to slide dir and build it:
+Copy from template
 
-    cd modular-app && make
+    cp -r template new-slides
 
-Also interactive mode is available;
+Go to slides dir
 
-    cd modular-app && make watch
+    cd new-slides
+
+
+Development mode with slideshow: `make`
+Build: `make build`
+Build PDF: `make pdf`
+
