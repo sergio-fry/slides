@@ -416,5 +416,13 @@ RSpec tested with Cucmeber
 * `rspec --help`
 * https://rspec.info/features/3-12/rspec-core/example-groups/
 * https://github.com/sergio-fry/spec_helper
-* https://www.linkedin.com/in/sergeiudalov/
+
+---
+
+# Контакты
+
+- https://sergei.udalovs.ru
+- udalov.x@mail.ru
+- tg @SergeiUdalov
+- linkedin @sergeiudalov
 
