@@ -1,8 +1,5 @@
 # TODO
 
-
-# Next
-
 - bdd 
 - сложные match include_hash ,,, чтобы не воспроизводить полную структуру, а только значимое (composable matchers)
 
