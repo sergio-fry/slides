@@ -1,0 +1,70 @@
+---
+
+marp: true
+paginate: true
+
+---
+
+<style>
+  img {
+    display: block;
+    max-height: 100%;
+    max-width: 80%;
+  }
+</style>
+
+
+# Rspec. Readability
+
+---
+
+# Сергей Удалов
+
+![bg right](img/su.jpeg)
+
+- PTL DAM, Ecom
+- тимлид с 2017
+- пишу тесты на RSpec с 2009
+- разработчик с 2006
+- финтех, платные дороги, SEO-инструменты, СМИ, HR
+
+---
+<!-- footer: Эффективное использование RSpec, Сергей Удалов, Samokat.tech -->
+
+# Тестирование важно
+
+* поддерживаемость
+* быстрая обратная связь
+* дизайн кода
+* документирование
+* это прикольно
+
+---
+
+# Поддерживаемость
+
+---
+
+# Проблемы
+
+* нечитаемость
+* хрупкость
+
+---
+
+# How to fix
+
+---
+
+# Issues
+
+
+---
+
+# Summary
+
+---
+
+# Links
+
+* https://github.com/sergio-fry/slides/template
