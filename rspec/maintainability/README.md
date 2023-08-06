@@ -2,19 +2,17 @@
 
 marp: true
 paginate: true
-
 ---
 
 <style>
-  img {
-    display: block;
-    max-height: 100%;
-    max-width: 80%;
-  }
+img {
+display: block;
+max-height: 100%;
+max-width: 80%;
+}
 </style>
 
-
-# Rspec. Readability
+# Rspec. Mantainability
 
 ---
 
@@ -29,6 +27,7 @@ paginate: true
 - финтех, платные дороги, SEO-инструменты, СМИ, HR
 
 ---
+
 <!-- footer: Эффективное использование RSpec, Сергей Удалов, Samokat.tech -->
 
 # Тестирование важно
@@ -50,6 +49,7 @@ paginate: true
 TODO
 
 * низкая читаемость кода
+* код, который сложно тестировать
 * хрупкость
 
 ---
@@ -66,11 +66,13 @@ TODO
 
 ---
 
-# Issues
+# Ошибки
 
 ---
 
 # Тесты как чулан
+
+<!-- тесты - это тоже код и к нему применимы все критерии качества, что и к остальному коду -->
 
 ---
 
