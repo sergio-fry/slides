@@ -2,7 +2,8 @@
 
 * посмотреть тесты, которые генерирует rails
 * посмотреть доклады по RSpec
-* посмотреть тесты rails
+* BDD важен словарь, термины
+* можно ли сформулиррвать sumary в виде checklist? или опубликовать checklist
 
 ---
 
@@ -17,11 +18,11 @@
 
 ## Ошибки
 
-* непонятные названия: user_1, user_2
-* Expect to receive: нарушает Arrange Act Assert
+* названия: user_1, user_2
+* Expect to receive: нарушает Arrange Act Assert (TODO: как исправить)
 * subject as action
-* не нужно использовать в тесте скрытые значения в factory
-* expected_result, невозможно понять, что именно проверяется
+* использовать в тесте скрытые значения в factory
+* expected_result: невозможно понять, что именно проверяется
 
 ---
 
@@ -30,8 +31,6 @@
 * большая связанность тестов и кода
 * тестировать поведение, а не техническую реализацию
 * если хочется протестировать реализцию, то нужно вынести это в класс
-* unit-тесты мешают при рефакторинге, интеграционные - помогают
-* обернуть сложный интерфейс, который не контролируем
 
 ## Ошибки
 
@@ -39,8 +38,7 @@
   * проверять только значимые поля из струкутры, composable matchers
   * если порядок не важен, то не требовать
 * тестировать одно и тоже несколько раз
-* expect instance_of to receive
-* allow to receive chaining
+* expect instance_of to receive, allow to receive chaining (cop)
 * expect kind of
 
 ---
@@ -50,7 +48,7 @@
 * тест должен общаться с кодом на том же уровне абстракции, использовать API кода.
 * describe / context / .. + aliaeses
 * встроенные matcher-ы
-* свои matchers: пример + свой текст ошибки
+* свои matchers: пример + свой текст ошибки + alias
 
 ---
 
@@ -68,7 +66,6 @@
 * минимальность
 * абстрагирование от деталей
 * сначала важные тесты
-
 
 ---
 
@@ -103,3 +100,4 @@
 * меньше ветвлений логики в acceptance/integration тестах. веротяно, тут можно про пирамиду
 * Сначала сделать корректный тест и код, а потом рефайторинг (workflow)
 * Start writing dirty tests, with long descriptions, without contexts, making multiple expectations for test, but then refactor and next time follow the right way.
+* unit-тесты мешают при рефакторинге, интеграционные - помогают
