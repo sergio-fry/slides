@@ -2,6 +2,7 @@
 
 marp: true
 paginate: true
+
 ---
 
 <style>
@@ -63,7 +64,7 @@ max-width: 80%;
 
 ---
 
-<!-- _class: section -->
+<!-- _class: lead -->
 <!-- header: Читаемость -->
 
 # Читаемость
