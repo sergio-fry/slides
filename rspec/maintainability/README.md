@@ -48,7 +48,7 @@ max-width: 80%;
 
 * низкая читаемость кода
 * хрупкость
-* третий пункт (?)
+* третий пункт (?) TODO
 
 ---
 
@@ -57,6 +57,108 @@ max-width: 80%;
 - читаемость
 - антихрупкость
 - BDD
+
+
+
+
+---
+
+<!-- _class: section -->
+<!-- header: Читаемость -->
+
+# Читаемость
+
+---
+
+# Краткость
+
+---
+
+# Контекст
+
+<!-- описан в самом тесте, поэтому не fixtures, а faker -->
+
+---
+
+# Context
+
+---
+
+# Describe
+
+---
+
+# it / specify
+
+---
+
+# Oneliner
+
+<!-- меньше комментариев, читаться должен код -->
+
+
+---
+
+<!-- header: Читаемость. Ошибки -->
+
+# Раз, два, три
+
+```ruby
+let(:user_1) { User.new(role: :admin) }
+let(:user_2) { User.new(role: :manager) }
+```
+
+---
+
+# Expect to receive
+
+<!-- нарушает Arrange Act Assert (TODO: как исправить) -->
+
+---
+
+# Subject как действие
+
+```ruby
+subject { post :create, params: { id: 1, title: "New title" } }
+
+it do
+  subject
+  expect(response).to be_success
+end
+```
+
+---
+
+# Factory Defaults
+
+```ruby
+let(:user) { create :user }
+let(:repo) { UsersRepo.new }
+let(:found_user) { repo[user.id] }
+
+it { expect(found_user.role).to eq "guest" }
+```
+
+---
+
+# Ожидаемое ожидание
+
+```ruby
+it { expect(result).to eq expected }
+```
+
+---
+
+# expected_result
+
+```ruby
+it { expect(response).to include(status: "ok") }
+it { expect(response).to include(id: user.id) }
+```
+
+
+
+
 
 ---
 
