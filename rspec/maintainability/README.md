@@ -2,7 +2,6 @@
 
 marp: true
 paginate: true
-
 ---
 
 <style>
@@ -10,6 +9,11 @@ img {
 display: block;
 max-height: 100%;
 max-width: 80%;
+
+}
+pre {
+background: white ;
+border: 0px;
 }
 </style>
 
@@ -29,7 +33,7 @@ max-width: 80%;
 
 ---
 
-<!-- footer: RSpec. Поддерживаемость, Сергей Удалов, Samokat.tech -->
+<!-- footer: https://bit.ly/RspecRR23 @SergeiUdalov -->
 
 # Тестирование важно
 
@@ -59,13 +63,11 @@ max-width: 80%;
 - антихрупкость
 - BDD
 
-
-
-
 ---
 
 <!-- _class: lead -->
 <!-- header: Читаемость -->
+<!-- _header: "" -->
 
 # Читаемость
 
@@ -96,7 +98,6 @@ max-width: 80%;
 # Oneliner
 
 <!-- меньше комментариев, читаться должен код -->
-
 
 ---
 
@@ -157,9 +158,50 @@ it { expect(response).to include(status: "ok") }
 it { expect(response).to include(id: user.id) }
 ```
 
+---
+
+<!-- _class: lead -->
+<!-- header: Антихрупкость -->
+<!-- _header: "" -->
+
+# Антихрупкость
+
+---
+
+# Высокое зацепление (Coupling)
+
+---
+
+# Тестировать поведение
+
+TODO пример
+
+<!--
+* а не техническую реализацию
+* если хочется протестировать реализцию, то нужно вынести это в класс
+-->
 
 
+---
+<!-- header: Антихрупкость. Ошибки -->
 
+
+# Требовать лишнего
+
+TODO пример сложной структуры
+TODO пример порядок id
+
+---
+
+# Многократное тестирование
+
+---
+
+# Сложные stubs
+
+TODO пример allow to receive
+TODO пример allow any_instance_of to receive
+TODO пример allow class to receive new
 
 ---
 
