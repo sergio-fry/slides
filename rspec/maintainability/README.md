@@ -257,11 +257,20 @@ end
 
 ---
 
-# Сложные stubs
+# Сложные stubs №1
 
-TODO пример allow to receive
-TODO пример allow any_instance_of to receive
-TODO пример allow class to receive new
+TODO: как улучшить
+
+```ruby
+allow(Redis).to receive(:new).and_return(mock_redis)
+
+allow(GeoMapping::ShowcaseEntityInteractor).to receive(:call)
+  .and_return(OpenStruct.new(success?: true))
+
+
+allow(uploader).to receive(:bucket).and_return(bucket)
+allow(bucket).to receive(:object).and_return(s3_object)
+```
 
 ---
 
@@ -270,6 +279,8 @@ TODO пример allow class to receive new
 <!-- _header: "" -->
 
 # Behavior-driven development
+
+TODO пример запутанного кода
 
 ---
 
@@ -285,13 +296,21 @@ TODO пример allow class to receive new
 
 # Синонимы
 
-TODO: пример describe / context / .. + aliaeses
+```ruby
+RSpec.configure do |c|
+  c.alias_example_group_to :detail, :detailed => true
+    config.alias_it_behaves_like_to(:it_has_behavior, 'has behavior:')
+
+end
+```
 
 ---
 
 # Встроенные matcher-ы
 
-TODO
+* be_xxx
+* have_xxx
+* match
 
 ---
 
@@ -300,6 +319,21 @@ TODO
 TODO: пример + свой текст ошибки + alias
 
 ---
+
+```ruby
+feature 'Sallary report' do
+  let(:user) { create :user }
+
+  scenario 'Employer has worked during a week with fixed salary' do
+    let(:day_price) { 10.0 }
+    let(:period) { 7 }
+
+    it { expect(report).to calculate_without_error }
+    it { expect{ report.notify }.to send_notification_via_sms(/Salary/) }
+  end
+end
+```
+
 
 # Ошибки
 
@@ -332,3 +366,5 @@ TODO: пример + свой текст ошибки + alias
 # Links
 
 * https://github.com/sergio-fry/slides/template
+* TODO matchers
+* TODO checklist
