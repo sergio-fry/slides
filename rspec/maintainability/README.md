@@ -114,9 +114,39 @@ let(:user_2) { User.new(role: :manager) }
 
 ---
 
-# Expect to receive
+# Arrange Act Assert
+
+---
+
+# AAA сломан
 
 <!-- нарушает Arrange Act Assert (TODO: как исправить) -->
+
+```ruby
+# Arrange
+let(:rmq) { double(:rmq) }
+let(:interactor) { Interactor.new(rmq:) }
+
+it do
+  expect(rmq).to receive(:produce) # Assert
+  interactor.call # Act
+end
+```
+
+---
+
+# AAA
+
+```ruby
+# Arrange
+let(:rmq) { spy(:rmq) } # <-- SPY
+let(:interactor) { Interactor.new(rmq:) }
+
+it do
+  interactor.call # Act
+  expect(rmq).to have_receive(:produce) # Assert
+end
+```
 
 ---
 
