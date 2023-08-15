@@ -2,6 +2,8 @@
 
 marp: true
 paginate: true
+size: 16:9
+
 ---
 
 <style>
@@ -202,6 +204,42 @@ TODO пример порядок id
 TODO пример allow to receive
 TODO пример allow any_instance_of to receive
 TODO пример allow class to receive new
+
+---
+
+<!-- _class: lead -->
+<!-- header: Behavior-driven development -->
+<!-- _header: "" -->
+
+# Behavior-driven development
+
+---
+
+# Язык
+
+---
+
+# Уровень абстракции
+
+<!-- тест должен общаться с кодом на том же уровне абстракции, использовать API кода. -->
+
+---
+
+# Синонимы
+
+TODO: пример describe / context / .. + aliaeses
+
+---
+
+# Встроенные matcher-ы
+
+TODO
+
+---
+
+# Свой matcher
+
+TODO: пример + свой текст ошибки + alias
 
 ---
 
