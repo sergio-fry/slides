@@ -220,8 +220,36 @@ TODO пример
 
 # Требовать лишнего
 
-TODO пример сложной структуры
-TODO пример порядок id
+```ruby
+is_expected.to eq({
+  data: { user: { name: 'Ivan', age: 23, updated_at: Time.now.to_s } },
+  meta: { ... } 
+}.to_json)
+```
+
+---
+
+# Проверяем что-то одно
+
+```ruby
+is_expected.to match(user: hash_including({ name: 'Ivan' }))
+```
+
+---
+
+# Проверяем структуру
+
+```ruby
+it do
+  is_expected.to match(
+    hash_including(
+      time: kind_of(Time),
+      user_ids: array_including(user_id),
+      meta: hash_including(x_time: anything)
+    )
+  )
+end
+```
 
 ---
 
