@@ -5,6 +5,7 @@
 * BDD важен словарь, термины
 * можно ли сформулиррвать summary в виде checklist? или опубликовать checklist
 * изучить все keywords rspec
+* ratio 16:9
 
 
 ---
