@@ -336,14 +336,10 @@ end
 
 ---
 
-# Сложные stubs №1
-
-TODO: как улучшить
-TODO dependecy injection
-TODO оборачивание сложного интерфейса
+# Сложные stubs
 
 ```ruby
-allow(Redis).to receive(:new).and_return(mock_redis)
+allow(Redis).to receive(:new).and_return(FakeRedis.new)
 
 allow(GeoMapping::ShowcaseEntityInteractor).to receive(:call)
   .and_return(OpenStruct.new(success?: true))
@@ -354,13 +350,24 @@ allow(bucket).to receive(:object).and_return(s3_object)
 
 ---
 
+```ruby
+class FakeStorage
+  def object(key)
+    uploader.bucket.s3_object(key)
+  end
+end
+
+let(:storage) { FakeStorage.new }
+let(:interactor) { Interactor.new(storage:) }
+```
+
+---
+
 <!-- _class: lead -->
-<!-- header: Behavior-driven development -->
+<!-- header: Domain Specific Language (DSL) -->
 <!-- _header: "" -->
 
-# Behavior-driven development
-
-TODO раздел DSL?
+# Domain Specific Language (DSL)
 
 TODO пример запутанного кода
 
