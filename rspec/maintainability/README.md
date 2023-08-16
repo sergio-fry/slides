@@ -185,37 +185,29 @@ let(:manager) { User.new(role: :manager) }
 
 ---
 
-# AAA сломан
+# Arrange Act Assert. Нарушение
 
-<!-- нарушает Arrange Act Assert (TODO: как исправить) -->
-
-
-TODO пример без вложенности для более простого восприятия
 
 ```ruby
-# Arrange
-let(:rmq) { double(:rmq) }
-let(:interactor) { Interactor.new(rmq:) }
+rmq = double(:rmq)                # Arrange
+interactor = Interactor.new(rmq:) # Arrange
 
-it do
-  expect(rmq).to receive(:produce) # Assert
-  interactor.call # Act
-end
+expect(rmq).to receive(:produce)  # Assert
+
+interactor.call                   # Act
 ```
 
 ---
 
-# AAA
+# Arrange Act Assert. Исправлено
 
 ```ruby
-# Arrange
-let(:rmq) { spy(:rmq) } # <-- SPY
-let(:interactor) { Interactor.new(rmq:) }
+rmq = spy(:rmq)                       # Arrange
+interactor = Interactor.new(rmq:)     # Arrange
 
-it do
-  interactor.call # Act
-  expect(rmq).to have_receive(:produce) # Assert
-end
+interactor.call                       # Act
+
+expect(rmq).to have_receive(:produce) # Assert
 ```
 
 ---
