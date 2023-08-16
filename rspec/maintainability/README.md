@@ -25,6 +25,8 @@ border: 0px;
 
 # Сергей Удалов
 
+TODO другое фото
+
 ![bg right](img/su.jpeg)
 
 - PTL DAM, Ecom
@@ -35,7 +37,7 @@ border: 0px;
 
 ---
 
-<!-- footer: https://bit.ly/RspecRR23 @SergeiUdalov -->
+<!-- footer: https://bit.ly/RspecRR23 @SergeiUdalov Ecom -->
 
 # Тестирование важно
 
@@ -53,9 +55,9 @@ border: 0px;
 
 # Проблемы
 
-* низкая читаемость кода
+* низкая читаемость
 * хрупкость
-* третий пункт (?) TODO
+* низкая выразительность
 
 ---
 
@@ -63,7 +65,7 @@ border: 0px;
 
 - читаемость
 - антихрупкость
-- BDD
+- DSL
 
 ---
 
@@ -77,6 +79,7 @@ border: 0px;
 
 # Краткость
 
+
 ---
 
 # Контекст
@@ -85,15 +88,37 @@ border: 0px;
 
 ---
 
+```ruby
+include_context "with authenticated user"
+include_context "when cache is unavailable"
+```
+
+---
+
 # Context
+
+```ruby
+context "when user is manager" do
+  let(:user) { build :user, :manager }
+
+  context "and no entries" do
+    before { entries.clear }
+
+    # ...
+
+  end
+end
+```
 
 ---
 
 # Describe
 
+TODO пример
+
 ---
 
-# it / specify
+TODO сборный пример describe context it
 
 ---
 
@@ -114,13 +139,29 @@ let(:user_2) { User.new(role: :manager) }
 
 ---
 
+# Раз, два, три
+
+```ruby
+let(:admin) { User.new(role: :admin) }
+let(:manager) { User.new(role: :manager) }
+```
+
+---
+
 # Arrange Act Assert
+
+* подготовка
+* выполнение
+* проверка
 
 ---
 
 # AAA сломан
 
 <!-- нарушает Arrange Act Assert (TODO: как исправить) -->
+
+
+TODO пример без вложенности для более простого восприятия
 
 ```ruby
 # Arrange
@@ -161,9 +202,13 @@ it do
 end
 ```
 
+TODO пример исправленный
+
 ---
 
 # Factory Defaults
+
+TODO примрер сложный
 
 ```ruby
 let(:user) { create :user }
@@ -172,6 +217,8 @@ let(:found_user) { repo[user.id] }
 
 it { expect(found_user.role).to eq "guest" }
 ```
+
+TODO пример исправленный
 
 ---
 
@@ -222,17 +269,17 @@ TODO пример
 
 ```ruby
 is_expected.to eq({
-  data: { user: { name: 'Ivan', age: 23, updated_at: Time.now.to_s } },
+  data: { user: { name: "Ivan", age: 23, updated_at: Time.now.to_s } },
   meta: { ... } 
 }.to_json)
 ```
 
 ---
 
-# Проверяем что-то одно
+# Проверяем необходимое
 
 ```ruby
-is_expected.to match(user: hash_including({ name: 'Ivan' }))
+is_expected.to match(user: hash_including({ name: "Ivan" }))
 ```
 
 ---
@@ -260,13 +307,14 @@ end
 # Сложные stubs №1
 
 TODO: как улучшить
+TODO dependecy injection
+TODO оборачивание сложного интерфейса
 
 ```ruby
 allow(Redis).to receive(:new).and_return(mock_redis)
 
 allow(GeoMapping::ShowcaseEntityInteractor).to receive(:call)
   .and_return(OpenStruct.new(success?: true))
-
 
 allow(uploader).to receive(:bucket).and_return(bucket)
 allow(bucket).to receive(:object).and_return(s3_object)
@@ -280,15 +328,13 @@ allow(bucket).to receive(:object).and_return(s3_object)
 
 # Behavior-driven development
 
+TODO раздел DSL?
+
 TODO пример запутанного кода
 
 ---
 
-# Язык
-
----
-
-# Уровень абстракции
+# Язык важен
 
 <!-- тест должен общаться с кодом на том же уровне абстракции, использовать API кода. -->
 
@@ -298,15 +344,16 @@ TODO пример запутанного кода
 
 ```ruby
 RSpec.configure do |c|
-  c.alias_example_group_to :detail, :detailed => true
-    config.alias_it_behaves_like_to(:it_has_behavior, 'has behavior:')
-
+  c.alias_example_group_to :scenario, integration: true
+  c.alias_example_group_to :scenario, integration: true
 end
 ```
 
 ---
 
 # Встроенные matcher-ы
+
+TODO сикро примеры в одну строку
 
 * be_xxx
 * have_xxx
@@ -320,22 +367,29 @@ TODO: пример + свой текст ошибки + alias
 
 ---
 
+
 ```ruby
-feature 'Sallary report' do
+feature "Sallary report" do
   let(:user) { create :user }
 
-  scenario 'Employer has worked during a week with fixed salary' do
+  scenario "Employer has worked during a week with fixed salary" do
     let(:day_price) { 10.0 }
     let(:period) { 7 }
 
-    it { expect(report).to calculate_without_error }
+    it { expect(report).to calculate_with_success }
     it { expect{ report.notify }.to send_notification_via_sms(/Salary/) }
+    it { expect(report).to report_with_ } # TODO
   end
+
+  
 end
 ```
 
+---
 
 # Ошибки
+
+TODO списком на одном слайде, так как нет текста
 
 ---
 
@@ -347,7 +401,7 @@ end
 
 # Нетестируемый код
 
-* Даже, если тесты для кода не пишутся, проектировать код следует так, чтобы его можно было протестировать при необходимости.
+<!-- Даже, если тесты для кода не пишутся, проектировать код следует так, чтобы его можно было протестировать при необходимости. -->
 
 ---
 
@@ -355,9 +409,11 @@ end
 
 ---
 
-# Summary
+# Итоги
 
-* Кратко
+TODO как будто что-то упущено
+
+* краткость
 * абстрагироваться от деталей
 * сначала важные тесты
 
@@ -365,6 +421,6 @@ end
 
 # Links
 
-* https://github.com/sergio-fry/slides/template
 * TODO matchers
 * TODO checklist
+* TODO books
