@@ -223,7 +223,18 @@ it do
 end
 ```
 
-TODO пример исправленный
+---
+
+```ruby
+def run_request = post :create, params: { id: 1, title: "New title" }
+
+it do
+  run_request
+  expect(response).to be_success
+end
+```
+
+<!-- тут удобнее повторный вызов -->
 
 ---
 
