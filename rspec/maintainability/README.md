@@ -238,19 +238,19 @@ end
 
 ---
 
-# Factory Defaults
-
-TODO примрер сложный
+# Скрытый контекст
 
 ```ruby
-let(:user) { create :user }
-let(:repo) { UsersRepo.new }
-let(:found_user) { repo[user.id] }
-
-it { expect(found_user.role).to eq "guest" }
+subject { create :user }
+it_behaves_like "A user of age", 42
 ```
 
-TODO пример исправленный
+---
+
+```ruby
+subject { create :user, age: 42 }
+it_behaves_like "A user of age", 42
+```
 
 ---
 
