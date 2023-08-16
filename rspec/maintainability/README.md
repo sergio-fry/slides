@@ -97,6 +97,8 @@ include_context "when cache is unavailable"
 
 # Context
 
+---
+
 ```ruby
 context "when user is manager" do
   let(:user) { build :user, :manager }
@@ -105,7 +107,6 @@ context "when user is manager" do
     before { entries.clear }
 
     # ...
-
   end
 end
 ```
@@ -114,17 +115,45 @@ end
 
 # Describe
 
-TODO пример
-
 ---
 
-TODO сборный пример describe context it
+```ruby
+describe "Salary Report" do
+  subject(:report) { SalaryReport.new }
+
+  describe "summary" do
+    subject { report.summary }
+
+    # ...
+  end
+end
+```
 
 ---
 
 # Oneliner
 
 <!-- меньше комментариев, читаться должен код -->
+
+---
+
+```ruby
+
+describe SalaryReport, "calculation" do
+  subject(:report) { described_class.new employee:, work_logs: }
+
+  context "when project_owner" do
+    let(:employee) { create :employee, :project_owner }
+
+    context "when no work logged yet" do 
+      let(:work_logs) { [] }
+
+      it { is_expected.to be_valid }
+      it { expect(report.salary).to eq 0 }
+    end
+  end
+end
+```
 
 ---
 
