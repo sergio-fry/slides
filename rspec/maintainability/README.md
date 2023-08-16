@@ -371,6 +371,7 @@ let(:interactor) { Interactor.new(storage:) }
 
 TODO пример запутанного кода
 
+
 ---
 
 # Язык важен
@@ -384,9 +385,11 @@ TODO пример запутанного кода
 ```ruby
 RSpec.configure do |c|
   c.alias_example_group_to :scenario, integration: true
-  c.alias_example_group_to :scenario, integration: true
+  c.alias_example_to :he  # he { is_expected.to have_job }
 end
 ```
+
+---
 
 ---
 
@@ -406,6 +409,14 @@ TODO: пример + свой текст ошибки + alias
 
 ---
 
+TODO выбрать, развить
+
+```ruby
+context 'when he is married' do
+  subject { create :human, :man, :married }
+  he { is_expected.to have_job }
+end
+```
 
 ```ruby
 feature "Sallary report" do
@@ -419,8 +430,6 @@ feature "Sallary report" do
     it { expect{ report.notify }.to send_notification_via_sms(/Salary/) }
     it { expect(report).to report_with_ } # TODO
   end
-
-  
 end
 ```
 
