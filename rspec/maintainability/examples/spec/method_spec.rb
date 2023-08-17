@@ -1,6 +1,6 @@
-RSpec.describe 'def method' do
-  def post(*args) = nil
-  def make_request = post :create, params: { id: 1, title: 'New title' }
+RSpec.describe "def method" do
+  def post(*_args) = nil
+  def make_request = post :create, params: { id: 1, title: "New title" }
   let(:response) { double(:response, success?: true) }
 
   it do

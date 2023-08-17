@@ -8,8 +8,8 @@ class Interactor
   end
 end
 
-RSpec.describe 'expect to receive' do
-  context 'when AAA is broken' do
+RSpec.describe "expect to receive" do
+  context "when AAA is broken" do
     # Arrange
     let(:rmq) { double(:rmq) }
     let(:interactor) { Interactor.new(rmq:) }
@@ -20,7 +20,7 @@ RSpec.describe 'expect to receive' do
     end
   end
 
-  context 'when AAA is fixed' do
+  context "when AAA is fixed" do
     # Arrange
     let(:rmq) { spy(:rmq) } # <-- SPY
     let(:interactor) { Interactor.new(rmq:) }

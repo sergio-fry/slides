@@ -1,7 +1,7 @@
-RSpec.describe 'nested matcher' do
-  subject { { user: { name: 'Ivan', age: 23, updated_at: Time.now.to_s } } }
+RSpec.describe "nested matcher" do
+  subject { { user: { name: "Ivan", age: 23, updated_at: Time.now.to_s } } }
 
-  it { is_expected.to match(user: hash_including({ name: 'Ivan' })) }
+  it { is_expected.to match(user: hash_including({ name: "Ivan" })) }
 
   describe do
     let(:user_id) { 1 }
