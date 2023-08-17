@@ -37,7 +37,7 @@ TODO другое фото
 
 ---
 
-<!-- footer: https://bit.ly/RspecRR23 @SergeiUdalov Ecom -->
+<!-- footer: https://bit.ly/RR23Rspec @SergeiUdalov Ecom -->
 
 # Тестирование важно
 
@@ -477,20 +477,22 @@ TODO checklist тут?
 
 # Checklist
 
-* тесты не читаются
-* скрытый контекст
-* subject как действие
-* не пишете свои matchers
+* тесты можно прочитать
+* нет скрытого контекста
+* глаголы для действий
+* свои matchers
+* названия отражают роль
 * allow to receive chaining
-* нумерованные переменные
-* нарушаете AAA
-* проверяете сложные структуры целиком
-* тестируете приватные методы
+* соблюдается AAA
+* проверяете только необходимое
+* не тестируется реализация
+* тест на поведение пишется вначале
 
 ---
 
 # Links
 
-* TODO matchers
-* TODO books
+* Matchers https://bit.ly/RR23RspecMatchers
 * "Effective Testing with RSpec 3", Myron Marston and Ian Dees
+* слайды https://bit.ly/RR23Rspec
+* @SergeiUdalov tg vk lnkdn 
