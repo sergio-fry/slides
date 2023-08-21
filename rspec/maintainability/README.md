@@ -8,15 +8,22 @@ size: 16:9
 
 <style>
 img {
-display: block;
-max-height: 100%;
-max-width: 80%;
-
+  display: block;
+  max-height: 100%;
+  max-width: 80%;
 }
 pre {
-background: white ;
-border: 0px;
+  background: white;
+  border: 0px;
 }
+
+section.fail marp-pre { 
+  border: 0.05em solid red !important;
+  background: #ffea91 !important;
+
+  padding: 1em;
+}
+
 </style>
 
 # Rspec. Поддерживаемость
@@ -163,6 +170,7 @@ end
 ---
 
 <!-- header: Читаемость. Ошибки -->
+<!-- _class: fail -->
 
 # Раз, два, три
 
@@ -190,8 +198,7 @@ let(:manager) { User.new(role: :manager) }
 
 ---
 
-# Arrange Act Assert. Нарушение
-
+<!-- _class: fail -->
 
 ```ruby
 rmq = double(:rmq)                # Arrange
@@ -204,8 +211,6 @@ interactor.call                   # Act
 
 ---
 
-# Arrange Act Assert. Исправлено
-
 ```ruby
 rmq = spy(:rmq)                       # Arrange
 interactor = Interactor.new(rmq:)     # Arrange
@@ -216,6 +221,8 @@ expect(rmq).to have_receive(:produce) # Assert
 ```
 
 ---
+
+<!-- _class: fail -->
 
 # Subject как действие
 
@@ -243,6 +250,8 @@ end
 
 ---
 
+<!-- _class: fail -->
+
 # Скрытый контекст
 
 ```ruby
@@ -258,6 +267,8 @@ it_behaves_like "A user of age", 42
 ```
 
 ---
+
+<!-- _class: fail -->
 
 # Ожидаемое ожидание
 
@@ -301,6 +312,7 @@ TODO пример, инкапсуляция нарушается
 
 ---
 <!-- header: Антихрупкость. Ошибки -->
+<!-- _class: fail -->
 
 
 # Требовать лишнего
@@ -342,7 +354,11 @@ end
 
 ---
 
+<!-- _class: fail -->
+
 # Сложные stubs
+
+TODO: упростить пример
 
 ```ruby
 allow(Redis).to receive(:new).and_return(FakeRedis.new)
@@ -392,6 +408,8 @@ TODO пример запутанного кода
 ---
 
 # Синонимы
+
+TODO: пример example
 
 ```ruby
 RSpec.configure do |c|
