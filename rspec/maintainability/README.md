@@ -90,7 +90,7 @@ TODO другое фото
 
 ```ruby
 include_context "with authenticated user"
-include_context "when cache is unavailable"
+include_context "when redis is unavailable"
 ```
 
 ---
@@ -131,7 +131,7 @@ end
 
 ---
 
-# Oneliner
+# Без комментариев
 
 <!-- меньше комментариев, читаться должен код -->
 
@@ -140,6 +140,24 @@ end
 ```ruby
 it { is_expected.to be_valid }
 it { expect(report.salary).to eq 0 }
+```
+
+---
+
+```ruby
+describe "#salary" do
+  let(:salary) { 100 }
+
+  context do
+    let(:days) { 0 }
+    it { expect(report.salary).to eq 0 }
+  end
+
+  context do
+    let(:days) { 1 }
+    it { expect(report.salary).to eq 100 }
+  end
+end
 ```
 
 ---
@@ -463,6 +481,7 @@ TODO уменьшить шрифт, чтобы влезло
 
 * тесты можно прочитать NOTE: чем ближе к англ, тем лучше
 * нет скрытого контекста
+* без комментариев
 * глаголы для действий
 * свои matchers
 * названия отражают роль
