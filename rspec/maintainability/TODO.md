@@ -1,12 +1,24 @@
 # TODO
 
-* выделить хорошие примеры от плохих
+- Метод с параметрами в expectation
+- Subject стоит использовать в коротких блоках
+- Избегать большой вложенности контекстов
+- Разделять тесты класса на несколько файлов
+- Subject с именем
+- Проблема, когда сложные stubs повторяются для проверки expectation
+- Checklist примеры краткие
+- It should, it is expected to
+- Marchers: have attributes, high order, eq , be_, 
+
 * слайд про компанию после слайде обо мне (Анна)
 * минимальность контекста
 * изучить все keywords rspec
 
 * посмотреть тесты, которые генерирует rails
 * посмотреть доклады по RSpec
+- Составить пример для рефакторинга после доклада. 
+- All the little things talk by sandi Metz
+- The magic tricks of testing sandi Metz
 
 
 ---
