@@ -119,10 +119,10 @@ Blob }|-- File
 ```plantuml
 actor Browser
 
-Browser --> DAM: Create file
+Browser --> DAM: Create Upload
 DAM --> Browser:  Presigned URL
 Browser --> S3: Upload
-Browser --> DAM: File Updated Event!
+Browser --> DAM: Create File
 ```
 
 ---
