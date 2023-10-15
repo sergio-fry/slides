@@ -5,33 +5,44 @@ paginate: true
 
 ---
 
+
 <style>
   img {
     display: block;
     max-height: 100%;
     max-width: 80%;
   }
+
+
+  h1, p, ul li { color: black; }
+  pre { border: 0px; background: white; }
+
+  footer { color: #bbb }
+  footer a { color: #bbb }
+
 </style>
 
 
-# Эффективное использование RSpec
 
-Сергей Удалов, PTL DAM Samokat.tech
+# RSpec. Эффектиность
+
+@SergeiUdalov, PTL DAM, Samokat.tech
 
 ---
+
 
 # Сергей Удалов
 
 ![bg right](img/su.jpeg)
 
-- PTL DAM, Ecom
+- PTL DAM, Samokat.tech
 - тимлид с 2017
 - пишу тесты на RSpec с 2009
 - разработчик с 2006
 - финтех, платные дороги, SEO-инструменты, СМИ, HR
 
 ---
-<!-- footer: Эффективное использование RSpec, Сергей Удалов, Samokat.tech -->
+<!-- footer: https://bit.ly/3M2y1xo › @SergeiUdalov › Samokat.tech  -->
 
 # Тестирование важно
 
@@ -45,8 +56,6 @@ paginate: true
 
 # Быстрая обратная связь
 
-<!-- главным образом будем говорить об этом -->
-
 ---
 
 # Проблемы
@@ -57,20 +66,9 @@ paginate: true
 
 ---
 
-# План
-
-1. Производительность
-2. Запуск тестов
-3. Надежность
-4. Ошибки
-
----
-
 # Производительность
 
 ![bg right](img/performance.jpeg)
-
-<!-- header: Производительность -->
 
 <!-- _footer: Photo by Marc Sendra Martorell -->
 
@@ -193,8 +191,6 @@ end
 
 # Запуск тестов
 
-<!-- header: Запуск тестов -->
-
 
 
 ![bg right](img/launch.jpeg)
@@ -206,9 +202,10 @@ end
 
 # Что именно запускать
 
+* `rspec`
+* `rspec spec/models`
 * `rspec spec/models/user_spec.rb`
 * `rspec spec/models/user_spec.rb:42`
-* `rspec spec/models`
 
 ---
 
@@ -240,8 +237,6 @@ $ rspec --next-failure
 Run options: include {:last_run_status=>"failed"}
 F
 ```
-
-OR `rspec -n`
 
 ---
 
@@ -287,8 +282,6 @@ end
 
 ![bg right](img/hammer.jpeg)
 
-<!-- header: Надежность -->
-
 <!-- _footer: Photo by iMattSmart -->
 
 ---
@@ -322,7 +315,6 @@ Randomized with seed 18281
 
 # Ошибки
 
-<!-- header: Ошибки -->
 
 ![bg right](img/broken.jpeg)
 
@@ -407,17 +399,8 @@ RSpec tested with Cucmeber
 # Ссылки
 
 * "Effective Testing with RSpec 3", Myron Marston and Ian Dees
+* https://youtu.be/oNIAJtWuHKg "RSpec. Поддерживаемость"
 * `rspec --help`
-* https://rspec.info/features/3-12/rspec-core/example-groups/
 * https://github.com/sergio-fry/spec_helper
 * https://github.com/sergio-fry/slides rspec/efficient
-
----
-
-# Контакты
-
-- https://sergei.udalovs.ru
-- udalov.x@mail.ru
-- tg @SergeiUdalov
-- linkedin @sergeiudalov
-
+* @SergeiUdalov
