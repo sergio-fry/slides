@@ -33,7 +33,8 @@ paginate: true
 
 # Сергей Удалов
 
-![bg right](img/su.jpeg)
+
+![bg right](img/suzdal_gradient_square.png)
 
 - PTL DAM, Samokat.tech
 - тимлид с 2017
@@ -51,6 +52,12 @@ paginate: true
 * дизайн кода
 * документирование
 * это прикольно
+
+---
+
+# RSpec. Поддерживаемость
+
+![](img/rspec_maintainability.jpeg)
 
 ---
 
@@ -256,11 +263,33 @@ end
 
 ---
 
+```bash
+rspec --tag @integration --tag ~@caching
+```
+
+---
+
+# .rspec
+
+```
+--require spec_helper
+--progress documentation
+```
+
+---
+
 # .rspec-local
 
 ```bash
 --exclude spec/integration/**
+--tag ~@flaky
 --seed 123
+```
+
+---
+
+```bash
+echo ".rspec-local" >> .gitignore
 ```
 
 ---
@@ -396,11 +425,17 @@ RSpec tested with Cucmeber
 
 ---
 
+![](img/myronmartson.png)
+
+![bg right](img/book_rspec3.jpeg)
+
+
+---
+
 # Ссылки
 
-* "Effective Testing with RSpec 3", Myron Marston and Ian Dees
 * https://youtu.be/oNIAJtWuHKg "RSpec. Поддерживаемость"
 * `rspec --help`
 * https://github.com/sergio-fry/spec_helper
-* https://github.com/sergio-fry/slides rspec/efficient
+* https://github.com/sergio-fry/nvim-config
 * @SergeiUdalov
