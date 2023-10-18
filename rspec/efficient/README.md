@@ -23,6 +23,8 @@ paginate: true
 </style>
 
 
+<!-- _paginate: skip -->
+
 
 # RSpec. Эффектиность
 
@@ -114,6 +116,19 @@ it { expect(response.status).to eq 200 }
 
 ---
 
+```ruby
+describe 'Response' do
+  let(:response) { Internet.new.get('http://example.com/test') }
+
+  it {
+    expect(response['x-time'].to_f).to be < 0.1
+    expect(response.status).to eq 200
+  }
+end
+```
+
+---
+
 # `:aggregate_failures` tag
 
 ```ruby
@@ -126,27 +141,53 @@ describe 'Response', :aggregate_failures do
   }
 end
 ```
+---
 
+# Долгий старт
+
+<pre>
+$ rspec
+................................
+
+Finished in 0.01547 seconds (files took <mark>12.75</mark> seconds to load)
+32 examples, 0 failures
+</pre>
 
 ---
 
+<style scoped>
+img { width: 400px }
+</style>
+
 # Spring
 
+
+```plantuml
+
+RSpec -> Spring: run #1
+Spring -> Spring: load Rails
+Spring -> RSpec: result #1
+RSpec -> Spring: run #2
+Spring -> RSpec: result #2
+```
+
+---
+
 ```ruby
-group :development do
-  gem 'spring'
-  gem 'spring-commands-rspec'
-end
+gem 'spring-commands-rspec', group: :development
 ```
 
-```bash
-$ bundle exec spring rspec
-Running via Spring preloader in process 90905
-...............................................................
+---
 
-Finished in 0.01258 seconds (files took 0.11336 seconds to load)
-63 examples, 0 failures
-```
+<pre>
+$ rspec
+<mark>Running via Spring preloader in process 45148</mark>
+................................
+
+Finished in 0.01284 seconds (files took <mark>0.09912</mark> seconds to load)
+32 examples, 0 failures
+</pre>
+
 
 ---
 
@@ -211,6 +252,7 @@ end
 
 * `rspec`
 * `rspec spec/models`
+* `rspec spec/**/*user*`
 * `rspec spec/models/user_spec.rb`
 * `rspec spec/models/user_spec.rb:42`
 
@@ -410,12 +452,12 @@ let(:cache) { instance_double(Cache, get: 123) }
 ---
 
 
-# Итоги
+# Что делать?
 
 * изучайте инструменты
+* настройте среду разработки
 * читайте тесты библиотек
 * читайте книги
-* настройте среду разработки
 
 <!--
 
