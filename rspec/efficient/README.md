@@ -197,14 +197,15 @@ Finished in 0.01284 seconds (files took <mark>0.09912</mark> seconds to load)
 
 ---
 
-# Spec Helpers
-
-```ruby
-require 'spec_helper'
-```
-vs 
 ```ruby
 require 'rails_helper'
+
+RSpec.describe Ages do
+  subject(:ages) { described_class.new(users:) }
+  let(:users) { [create(:user, age: 25)] }
+
+  it { expect(ages.average).to eq 25 }
+end
 ```
 
 ---
@@ -212,11 +213,15 @@ require 'rails_helper'
 # Double
 
 ```ruby
- subject { CachedStats.new(cache:) }
+require 'lib/ages'
 
- let(:cache) { double(:cache, get: 123) }
+RSpec.describe Ages do
+  subject(:ages) { described_class.new(users:, cache:) }
+  let(:users) { [double(:user, age: 25)] }
+  let(:cache) { double(:cache, value: nil) }
 
- it { expect(subject.count).to eq 123 }
+  it { expect(ages.average).to eq 25 }
+end
 ```
 
 ---
@@ -236,6 +241,17 @@ module Testing
 end
 ```
 ---
+
+# Spec Helpers
+
+* spec_helper
+* rails_helper
+* graphql_helper
+* integration_helper
+
+
+---
+
 
 # Запуск тестов
 
