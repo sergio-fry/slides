@@ -116,20 +116,32 @@ it { expect(response.status).to eq 200 }
 
 ---
 
+# Before All
+
+```ruby
+before(:all) { @response = Internet.new.get('http://example.com/test') }
+
+it { expect(@response['x-time'].to_f).to be < 0.1 }
+it { expect(@response.status).to eq 200 }
+```
+
+
+---
+
 ```ruby
 describe 'Response' do
   let(:response) { Internet.new.get('http://example.com/test') }
 
   it {
-    expect(response['x-time'].to_f).to be < 0.1
-    expect(response.status).to eq 200
+    expect(response['x-time'].to_f).to be < 0.1 # fail
+    expect(response.status).to eq 200 # unknown
   }
 end
 ```
 
 ---
 
-# `:aggregate_failures` tag
+# `:aggregate_failures`
 
 ```ruby
 describe 'Response', :aggregate_failures do
@@ -141,6 +153,31 @@ describe 'Response', :aggregate_failures do
   }
 end
 ```
+
+---
+
+
+<pre>
+Failures:
+
+  1) Aggregate Failures Response aggregate is expected to eq 200
+     Got 2 failures:
+
+     <mark>1.1) Failure/Error: expect(response['x-time'].to_f).to be < 0.1</mark>
+
+            expected: < 0.1
+                 got:   0.2
+          # ./spec/aggreagte_failures_spec.rb:37:in `block (3 levels) in <top (required)>'
+
+     <mark>1.2) Failure/Error: expect(response.status).to eq 200</mark>
+
+            expected: 200
+                 got: 201
+
+            (compared using ==)
+          # ./spec/aggreagte_failures_spec.rb:38:in `block (3 levels) in <top (required)>'
+</pre>
+
 ---
 
 # Долгий старт

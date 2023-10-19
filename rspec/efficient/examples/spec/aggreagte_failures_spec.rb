@@ -30,7 +30,7 @@ RSpec.describe 'Aggregate Failures' do
     it { expect(response.status).to eq 200 }
   end
 
-  describe 'Response', :aggregate_failures do
+  describe 'Response aggregate', :aggregate_failures do
     let(:response) { Internet.new.get('http://example.com/test') }
 
     it {
@@ -39,7 +39,7 @@ RSpec.describe 'Aggregate Failures' do
     }
   end
 
-  describe 'Response' do
+  describe 'Response aggregate block' do
     let(:response) { Internet.new.get('http://example.com/test') }
 
     it {
