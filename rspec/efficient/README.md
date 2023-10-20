@@ -19,7 +19,6 @@ paginate: true
 
   footer { color: #bbb }
   footer a { color: #bbb }
-
 </style>
 
 

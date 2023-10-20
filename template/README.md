@@ -11,7 +11,17 @@ paginate: true
     max-height: 100%;
     max-width: 80%;
   }
+
+
+  h1, p, ul li { color: black; }
+  pre { border: 0px; background: white; }
+
+  footer { color: #bbb }
+  footer a { color: #bbb }
 </style>
+
+
+<!-- _paginate: skip -->
 
 
 # New Slides
