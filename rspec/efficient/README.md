@@ -234,13 +234,27 @@ Finished in 0.01284 seconds (files took <mark>0.09912</mark> seconds to load)
 ---
 
 ```ruby
+class GithubUser
+  def initialize(name)
+    @name = name
+  end
+    
+  def data = JSON.parse(Faraday.get(url).body, symbolize_names: true)
+  def url = "https://api.github.com/users/#{@name}"
+
+  def blog = data[:blog]
+end
+```
+
+---
+
+```ruby
 require 'rails_helper'
 
-RSpec.describe Ages do
-  subject(:ages) { described_class.new(users:) }
-  let(:users) { [create(:user, age: 25)] }
+RSpec.describe GithubUser do
+  subject(:user) { described_class.new("sergio-fry") }
 
-  it { expect(ages.average).to eq 25 }
+  it { expect(user.blog).to eq "https://sergei.udalovs.ru" }
 end
 ```
 
@@ -249,14 +263,15 @@ end
 # Double
 
 ```ruby
-require 'lib/ages'
+require 'lib/github_user'
 
-RSpec.describe Ages do
-  subject(:ages) { described_class.new(users:, cache:) }
-  let(:users) { [double(:user, age: 25)] }
-  let(:cache) { double(:cache, value: nil) }
+require 'rails_helper'
 
-  it { expect(ages.average).to eq 25 }
+RSpec.describe GithubUser do
+  subject(:user) { described_class.new("sergio-fry", internet:) }
+  let(:internet) { double(get: double(body: '{"blog": "https://sergei.udalovs.ru"}')) }
+
+  it { expect(user.blog).to eq "https://sergei.udalovs.ru" }
 end
 ```
 
@@ -266,13 +281,18 @@ end
 
 ```ruby
 module Testing
-  class FakeCache
-    def initialize
-      @data = {}
+  class FakeInternet
+    def get(url)
+      if online?(url)
+        Response.new(@data[url], status: 200)
+      else
+        sleep rand
+        Response.new("Failed to fetch", status: 502)
+      end
     end
-  
-    def get(key) = @data[key]
-    def put(key, value) = @data[key] = value
+
+    def put(url, body) = @data[url] = body
+    def set_offline(url) = @offline[url] = true
   end
 end
 ```
@@ -409,12 +429,35 @@ echo ".rspec-local" >> .gitignore
 
 ---
 
+```ruby
+before { report.update }
+it { expect(report.updated_at.hour).to eq Time.now.hour }
+```
+
+---
 
 # Timecop
 
 ```ruby
 before { Timecop.travel '2023-01-01 12:00' }
+
+before { report.update }
+it { expect(report.updated_at.hour).to eq Time.now.hour }
+
 after { Timecop.return }
+```
+
+---
+
+# ActiveSupport::Testing::TimeHelpers
+
+```ruby
+before { travel_to '2023-01-01 12:00' }
+
+before { report.update }
+it { expect(report.updated_at.hour).to eq Time.now.hour }
+
+after { travel_back }
 ```
 
 ---
@@ -422,7 +465,10 @@ after { Timecop.return }
 # Random Seed
 
 ```ruby
-Kernel.srand config.seed
+RSpec.configure do |config|
+  Kernel.srand config.seed
+  config.order = :random
+end
 ```
 
 ```bash

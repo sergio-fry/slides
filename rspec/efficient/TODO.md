@@ -1,6 +1,6 @@
 # TODO
 
 * сделать единый пример для DI: сначала связанный код, потом DI double, потом fake 
-* пример flaky со временнем
-* выделить 2-й тест в примере с aggregate
-* пример выдачи с несколькими ошибками
+* переработать итоги
+* gitlab coverage SimpleCov.formatter = SimpleCov::Formatter::CoberturaFormatter
+
