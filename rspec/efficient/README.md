@@ -48,17 +48,18 @@ paginate: true
 
 # Тестирование важно
 
-* поддерживаемость
-* быстрая обратная связь
-* дизайн кода
-* документирование
-* это прикольно
+1. поддерживаемость
+2. быстрая обратная связь
+3. дизайн кода
+4. документирование
+5. это прикольно
 
 ---
 
-# RSpec. Поддерживаемость
+<!-- _footer: "" -->
+<!-- _class: invert -->
 
-![](img/rspec_maintainability.jpeg)
+![bg](img/rspec_maintainability.jpeg)
 
 ---
 
@@ -68,9 +69,9 @@ paginate: true
 
 # Проблемы
 
-* долго ждать
-* неудобно запускать
-* ненадежность
+1. долго ждать
+2. неудобно запускать
+3. ненадежность
 
 ---
 
@@ -300,10 +301,10 @@ end
 
 # Spec Helpers
 
-* spec_helper
-* rails_helper
-* graphql_helper
-* integration_helper
+- spec_helper
+- rails_helper
+- graphql_helper
+- integration_helper
 
 
 ---
@@ -322,11 +323,11 @@ end
 
 # Что именно запускать
 
-* `rspec`
-* `rspec spec/models`
-* `rspec spec/**/*user*`
-* `rspec spec/models/user_spec.rb`
-* `rspec spec/models/user_spec.rb:42`
+1. `rspec`
+2. `rspec spec/models`
+3. `rspec spec/**/*user*`
+4. `rspec spec/models/user_spec.rb`
+5. `rspec spec/models/user_spec.rb:42`
 
 ---
 
@@ -491,13 +492,11 @@ Randomized with seed 18281
 
 ---
 
-# Не настроен CI
+# Настройка CI
 
-<!--
-* источник правды
-* Merge request
-* полнота обратной связи
--->
+1. не запускается
+2. тесты после линтера
+3. удобный вывод
 
 ---
 
@@ -539,9 +538,9 @@ let(:cache) { instance_double(Cache, get: 123) }
 
 # Тест после кода
 
-* ручной дебаг
-* отравление техническими деталями
-* тратим мыслетопливо на рутину
+1. ручной дебаг
+2. отравление техническими деталями
+3. тратим мыслетопливо на рутину
 
 ---
 
@@ -552,16 +551,10 @@ let(:cache) { instance_double(Cache, get: 123) }
 
 # Что делать?
 
-* изучайте инструменты
-* настройте среду разработки
-* читайте тесты библиотек
-* читайте книги
-
-<!--
-
-RSpec tested with Cucmeber
-
- -->
+1. изучайте инструменты
+2. настройте среду разработки
+3. читайте тесты библиотек
+4. читайте книги
 
 ---
 
@@ -574,8 +567,9 @@ RSpec tested with Cucmeber
 
 # Ссылки
 
-* https://youtu.be/oNIAJtWuHKg "RSpec. Поддерживаемость"
-* `rspec --help`
-* https://github.com/sergio-fry/spec_helper
-* https://github.com/sergio-fry/nvim-config
-* @SergeiUdalov
+1. `rspec --help`
+2. https://github.com/connorshea/vscode-ruby-test-adapter
+3. https://youtu.be/oNIAJtWuHKg "RSpec. Поддерживаемость"
+4. https://github.com/sergio-fry/spec_helper
+5. https://github.com/sergio-fry/nvim-config
+6. @SergeiUdalov
