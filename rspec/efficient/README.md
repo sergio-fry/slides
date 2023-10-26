@@ -105,13 +105,26 @@ Top 5 slowest examples (4.02 seconds, 57.4% of total time):
 
 ---
 
-# Single Expectation
+# Медленный контекст
 
 ```ruby
 let(:response) { Internet.new.get('http://example.com/test') }
 
 it { expect(response['x-time'].to_f).to be < 0.1 }
 it { expect(response.status).to eq 200 }
+```
+
+---
+
+```ruby
+describe 'Response' do
+  let(:response) { Internet.new.get('http://example.com/test') }
+
+  it {
+    expect(response['x-time'].to_f).to be < 0.1 # fail
+    expect(response.status).to eq 200 # unknown
+  }
+end
 ```
 
 ---
@@ -126,18 +139,6 @@ it { expect(@response.status).to eq 200 }
 ```
 
 
----
-
-```ruby
-describe 'Response' do
-  let(:response) { Internet.new.get('http://example.com/test') }
-
-  it {
-    expect(response['x-time'].to_f).to be < 0.1 # fail
-    expect(response.status).to eq 200 # unknown
-  }
-end
-```
 
 ---
 
@@ -265,8 +266,6 @@ end
 
 ```ruby
 require 'lib/github_user'
-
-require 'rails_helper'
 
 RSpec.describe GithubUser do
   subject(:user) { described_class.new("sergio-fry", internet:) }
@@ -516,7 +515,7 @@ Randomized with seed 18281
 
 ---
 
-# Factory
+# Случайные значения
 
 ```ruby
 factory :user do
@@ -539,8 +538,8 @@ let(:cache) { instance_double(Cache, get: 123) }
 # Тест после кода
 
 1. ручной дебаг
-2. отравление техническими деталями
-3. тратим мыслетопливо на рутину
+2. хуже API
+3. меньше творческих сил
 
 ---
 
@@ -551,10 +550,11 @@ let(:cache) { instance_double(Cache, get: 123) }
 
 # Что делать?
 
-1. изучайте инструменты
-2. настройте среду разработки
-3. читайте тесты библиотек
-4. читайте книги
+1. часто запускайте тесты
+2. изучайте инструменты
+3. настройте среду разработки
+4. читайте тесты библиотек
+5. читайте книги
 
 ---
 
