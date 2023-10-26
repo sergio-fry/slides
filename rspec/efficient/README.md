@@ -63,7 +63,21 @@ paginate: true
 
 ---
 
+<style scoped>
+img { width: 400px }
+</style>
+
 # Быстрая обратная связь
+
+```plantuml
+(Change) as change
+(Test) as run
+(Fix) as fix
+
+change -right-> run
+run -up-> fix: "<font color=red>Fail</font>"
+fix -down-> change: "<font color=green>OK</font>"
+```
 
 ---
 
@@ -184,7 +198,7 @@ Failures:
 # Долгий старт
 
 <pre>
-$ rspec
+$ rspec spec/policies/user_policy_spec.rb
 ................................
 
 Finished in 0.01547 seconds (files took <mark>12.75</mark> seconds to load)
@@ -218,7 +232,7 @@ gem 'spring-commands-rspec', group: :development
 ---
 
 <pre>
-$ rspec
+$ rspec spec/policies/user_policy_spec.rb
 <mark>Running via Spring preloader in process 45148</mark>
 ................................
 
@@ -226,12 +240,17 @@ Finished in 0.01284 seconds (files took <mark>0.09912</mark> seconds to load)
 32 examples, 0 failures
 </pre>
 
-
 ---
 
-# Изоляция
+<pre>
+$ rspec spec/policies/user_policy_spec.rb
+Running via Spring preloader in process 45148
+................................
 
-![](img/clean_architectur.jpeg)
+Finished in <mark>0.01284</mark> seconds (files took 0.09912 seconds to load)
+32 examples, 0 failures
+</pre>
+
 
 ---
 
@@ -283,19 +302,30 @@ end
 module Testing
   class FakeInternet
     def get(url)
-      if online?(url)
-        Response.new(@data[url], status: 200)
-      else
-        sleep rand
-        Response.new("Failed to fetch", status: 502)
-      end
+      sleep delay(url) if slow?(url)
+
+      Response.new(@data[url], status: 200)
     end
 
     def put(url, body) = @data[url] = body
-    def set_offline(url) = @offline[url] = true
+    def set_delay(url, delay) = @delays[url] = delay
+    def delay(url) = @delays[url]
   end
 end
 ```
+
+---
+
+```ruby
+before { internet.set_delay("https://api.github.com/users/sergio-fry", 10) }
+
+it { expect(user.blog).to raise_error(Timeout::Error) }
+```
+
+---
+
+![](img/clean_architectur.jpeg)
+
 ---
 
 # Spec Helpers
