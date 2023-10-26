@@ -592,7 +592,6 @@ let(:cache) { instance_double(Cache, get: 123) }
 
 ![bg right](img/book_rspec3.jpeg)
 
-
 ---
 
 # Ссылки
