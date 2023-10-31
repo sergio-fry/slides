@@ -69,16 +69,6 @@ img { width: 400px }
 
 # Быстрая обратная связь
 
-```plantuml
-(Change) as change
-(Test) as run
-(Fix) as fix
-
-change -right-> run
-run -up-> fix: "<font color=red>Fail</font>"
-fix -down-> change: "<font color=green>OK</font>"
-```
-
 ---
 
 # Проблемы
@@ -288,7 +278,11 @@ require 'lib/github_user'
 
 RSpec.describe GithubUser do
   subject(:user) { described_class.new("sergio-fry", internet:) }
-  let(:internet) { double(get: double(body: '{"blog": "https://sergei.udalovs.ru"}')) }
+  let(:internet) {
+    double(
+      get: double(body: '{"blog": "https://sergei.udalovs.ru"}')
+    )
+  }
 
   it { expect(user.blog).to eq "https://sergei.udalovs.ru" }
 end
@@ -302,14 +296,13 @@ end
 module Testing
   class FakeInternet
     def get(url)
-      sleep delay(url) if slow?(url)
+      sleep @delay
 
       Response.new(@data[url], status: 200)
     end
 
     def put(url, body) = @data[url] = body
-    def set_delay(url, delay) = @delays[url] = delay
-    def delay(url) = @delays[url]
+    def set_delay(new_delay) = @delay = new_delay
   end
 end
 ```
@@ -317,7 +310,7 @@ end
 ---
 
 ```ruby
-before { internet.set_delay("https://api.github.com/users/sergio-fry", 10) }
+before { internet.set_delay(10) }
 
 it { expect(user.blog).to raise_error(Timeout::Error) }
 ```
