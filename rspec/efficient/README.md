@@ -205,7 +205,6 @@ img { width: 400px }
 
 
 ```plantuml
-
 RSpec -> Spring: run #1
 Spring -> Spring: load Rails
 Spring -> RSpec: result #1
