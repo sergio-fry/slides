@@ -141,17 +141,3 @@ https://github.com/ruby-concurrency/concurrent-ruby/blob/1982b92daa8aee0d88db521
 
 ---
 
-
-```ruby
-      subject do
-        Class.new {
-          def zero() nil; end
-          def three(a, b, c, &block) nil; end
-          def two_plus_two(a, b, c=nil, d=nil, &block) nil; end
-          def many(*args, &block) nil; end
-        }.new
-      end
-```
-https://github.com/ruby-concurrency/concurrent-ruby/blob/1982b92daa8aee0d88db5212a61b790142c4106f/spec/concurrent/async_spec.rb#L78-L85
-
-
