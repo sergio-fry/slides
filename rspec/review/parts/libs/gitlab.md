@@ -31,6 +31,7 @@ https://github.com/gitlabhq/gitlabhq/blob/652dfd8e201e1cf15fc720e0ab96a9ae4c6915
 
 
 
+
 ```ruby
 
   subject { post_graphql(query, current_user: current_user) }
