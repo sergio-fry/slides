@@ -36,3 +36,31 @@
 ```
 https://github.com/hanami/hanami/blob/a2bdb77f10d7873e0685f47317583a581f382d02/spec/integration/settings/using_types_spec.rb
 
+
+---
+
+
+
+```ruby
+
+    def passing_example(fail_if_no_examples)
+      "
+        RSpec.configure { |c| c.fail_if_no_examples = #{fail_if_no_examples} }
+
+        RSpec.describe 'something' do
+          it 'succeeds' do
+            true
+          end
+        end
+      "
+    end
+
+    it 'succeeds if fail_if_no_examples set to true' do
+      write_file 'spec/example_spec.rb', passing_example(true)
+      run_command ""
+      expect(last_cmd_stdout).to include("1 example, 0 failures")
+      expect(last_cmd_exit_status).to eq(0)
+    end
+```
+
+https://github.com/rspec/rspec-core/blob/1eeadce5aa7137ead054783c31ff35cbfe9d07cc/spec/integration/fail_if_no_examples_spec.rb

@@ -117,3 +117,26 @@ https://github.com/rom-rb/rom-sql/blob/beb1154e13e29087e514c0f143fd1bf0b5185fcf/
 ```
 
 https://github.com/rom-rb/rom-sql/blob/beb1154e13e29087e514c0f143fd1bf0b5185fcf/spec/spec_helper.rb
+
+---
+
+```ruby
+RSpec.configure do |c|
+  c.around do |ex|
+    RSpec::Core::Sandbox.sandboxed do |config|
+      # If there is an example-within-an-example, we want to make sure the inner example
+      # does not get a reference to the outer example (the real spec) if it calls
+      # something like `pending`
+      config.before(:context) { RSpec.current_example = nil }
+
+      config.color_mode = :off
+
+      orig_load_path = $LOAD_PATH.dup
+      ex.run
+      $LOAD_PATH.replace(orig_load_path)
+    end
+  end
+end
+```
+
+https://github.com/rspec/rspec-core/blob/1eeadce5aa7137ead054783c31ff35cbfe9d07cc/spec/support/sandboxing.rb

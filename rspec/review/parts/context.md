@@ -61,3 +61,88 @@ RSpec.shared_context "changeset / database" do
 ```
 
 https://github.com/rom-rb/rom/blob/7fb82cf7ffa86805d9c5499a4ecc64d5d3c20f14/spec/shared/rom/changeset/database.rb
+
+
+---
+
+
+```ruby
+
+    context "when used in combination with the BisectDRbFormatter", :slow do
+      include FormatterSupport
+
+      attr_reader :server
+
+      around do |ex|
+        Bisect::Server.run do |the_server|
+          @server = the_server
+          ex.run
+        end
+      end
+
+      def run_formatter_specs
+        RSpec.configuration.drb_port = server.drb_port
+        run_rspec_with_formatter("bisect-drb")
+      end
+
+      it 'receives suite results' do
+        results = server.capture_run_results(['spec/rspec/core/resources/formatter_specs.rb']) do
+```
+
+https://github.com/rspec/rspec-core/blob/1eeadce5aa7137ead054783c31ff35cbfe9d07cc/spec/rspec/core/bisect/server_spec.rb
+
+
+---
+
+
+
+
+```ruby
+
+  def without_env_vars(*vars)
+    original = ENV.to_hash
+    vars.each { |k| ENV.delete(k) }
+
+    begin
+      yield
+    ensure
+      ENV.replace(original)
+    end
+  end
+```
+
+https://github.com/rspec/rspec-core/blob/1eeadce5aa7137ead054783c31ff35cbfe9d07cc/spec/spec_helper.rb
+
+
+```ruby
+
+      with_env_vars 'XDG_CONFIG_HOME' => "~/.custom-config" do
+        options = parse_options()
+        expect(options[:formatters]).to eq([['overridden_xdg']])
+      end
+
+      without_env_vars 'XDG_CONFIG_HOME' do
+        options = parse_options()
+        expect(options[:formatters]).to eq([['default_xdg']])
+      end
+```
+
+https://github.com/rspec/rspec-core/blob/1eeadce5aa7137ead054783c31ff35cbfe9d07cc/spec/rspec/core/configuration_options_spec.rb
+
+
+---
+
+```ruby
+RSpec.describe JavaSingleThreadExecutor, :type=>:jruby do
+
+      after(:each) do
+        subject.shutdown
+        expect(subject.wait_for_termination(pool_termination_timeout)).to eq true
+      end
+
+      subject { JavaSingleThreadExecutor.new }
+
+      it_should_behave_like :executor_service
+    end
+```
+https://github.com/ruby-concurrency/concurrent-ruby/blob/1982b92daa8aee0d88db5212a61b790142c4106f/spec/concurrent/executor/java_single_thread_executor_spec.rb#L8
