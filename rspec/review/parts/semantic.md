@@ -8,7 +8,7 @@ FactoryBot.define do
   end
 end
 ```
-https://github.com/gitlabhq/gitlabhq/blob/652dfd8e201e1cf15fc720e0ab96a9ae4c691503/spec/factories/users.rb#L4
+<a class="link--source" href="https://github.com/gitlabhq/gitlabhq/blob/652dfd8e201e1cf15fc720e0ab96a9ae4c691503/spec/factories/users.rb#L4">https://github.com/gitlabhq/gitlabhq/blob/652dfd8e201e1cf15fc720e0ab96a9ae4c691503/spec/factories/users.rb#L4</a>
 
 
 ---
@@ -23,7 +23,7 @@ it 'fails when the timestamp is an empty string' do
 end
 ```
 
-https://github.com/ged/ruby-pg/blob/1c67bbf1cb858634578a56e77f34270b938b9d0a/spec/pg/type_spec.rb
+<a class="link--source" href="https://github.com/ged/ruby-pg/blob/1c67bbf1cb858634578a56e77f34270b938b9d0a/spec/pg/type_spec.rb">https://github.com/ged/ruby-pg/blob/1c67bbf1cb858634578a56e77f34270b938b9d0a/spec/pg/type_spec.rb</a>
 
 
 ---
@@ -53,7 +53,7 @@ https://github.com/ged/ruby-pg/blob/1c67bbf1cb858634578a56e77f34270b938b9d0a/spe
     end
 ```
 
-https://github.com/rspec/rspec-core/blob/1eeadce5aa7137ead054783c31ff35cbfe9d07cc/spec/rspec/core/configuration_options_spec.rb
+<a class="link--source" href="https://github.com/rspec/rspec-core/blob/1eeadce5aa7137ead054783c31ff35cbfe9d07cc/spec/rspec/core/configuration_options_spec.rb">https://github.com/rspec/rspec-core/blob/1eeadce5aa7137ead054783c31ff35cbfe9d07cc/spec/rspec/core/configuration_options_spec.rb</a>
 
 
 ---
@@ -80,5 +80,7 @@ https://github.com/rspec/rspec-core/blob/1eeadce5aa7137ead054783c31ff35cbfe9d07c
     end
 ```
 
-https://github.com/rspec/rspec-core/blob/1eeadce5aa7137ead054783c31ff35cbfe9d07cc/spec/rspec/core/configuration_options_spec.rb
+<a class="link--source" href="https://github.com/rspec/rspec-core/blob/1eeadce5aa7137ead054783c31ff35cbfe9d07cc/spec/rspec/core/configuration_options_spec.rb">https://github.com/rspec/rspec-core/blob/1eeadce5aa7137ead054783c31ff35cbfe9d07cc/spec/rspec/core/configuration_options_spec.rb</a>
 
+
+---

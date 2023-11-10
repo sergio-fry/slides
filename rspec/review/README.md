@@ -2,6 +2,7 @@
 
 marp: true
 paginate: true
+size: 4:3
 
 ---
 
@@ -18,7 +19,11 @@ paginate: true
 
   footer { color: #bbb }
   footer a { color: #bbb }
+
+  .link--source { color: #bbb; font-size: 0.5em; max-width: fit-content; }
 </style>
+
+TODO: source link fix 
 
 
 <!-- _paginate: skip -->
@@ -47,6 +52,12 @@ Sergei Udalov, PTL DAM at Samokat.tech
 
 ---
 
+# Slide Formatting
+
+TODO: slide formatting example
+
+---
+
 # How to fix
 
 ---
@@ -55,15 +66,16 @@ Sergei Udalov, PTL DAM at Samokat.tech
 
 ---
 
+!!!include(parts/acceptance.md)!!!
+!!!include(parts/config.md)!!!
+!!!include(parts/context.md)!!!
+!!!include(parts/context_classes.md)!!!
+!!!include(parts/expectation.md)!!!
+!!!include(parts/faker.md)!!!
+!!!include(parts/helpers.md)!!!
+!!!include(parts/libraries.md)!!!
+!!!include(parts/semantic.md)!!!
 
-!!!include(parts/classes.md)!!!
-
----
-
-!!!include(parts/fixtures.md)!!!
-
-
----
 
 # Summary
 

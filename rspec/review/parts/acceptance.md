@@ -1,66 +1,66 @@
+# Acceptance
 
+---
 
 ```ruby
+specify 'types from a provided types module can be used as setting constructors to coerce values' do
+  with_tmp_directory(Dir.mktmpdir) do
+    write 'config/app.rb', <<~RUBY
+      require "hanami"
 
-  specify "types from a provided types module can be used as setting constructors to coerce values" do
-    with_tmp_directory(Dir.mktmpdir) do
-      write "config/app.rb", <<~RUBY
-        require "hanami"
-
-        module TestApp
-          class App < Hanami::App
-          end
+      module TestApp
+        class App < Hanami::App
         end
-      RUBY
+      end
+    RUBY
 
-      write "config/settings.rb", <<~RUBY
-        module TestApp
-          class Settings < Hanami::Settings
-            Bool = Types::Params::Bool
+    write 'config/settings.rb', <<~RUBY
+      module TestApp
+        class Settings < Hanami::Settings
+          Bool = Types::Params::Bool
 
-            setting :numeric, constructor: Types::Params::Integer
-            setting :flag, constructor: Bool
-          end
+          setting :numeric, constructor: Types::Params::Integer
+          setting :flag, constructor: Bool
         end
-      RUBY
+      end
+    RUBY
 
-      ENV["NUMERIC"] = "42"
-      ENV["FLAG"] = "true"
+    ENV['NUMERIC'] = '42'
+    ENV['FLAG'] = 'true'
 
-      require "hanami/prepare"
+    require 'hanami/prepare'
 
-      expect(Hanami.app["settings"].numeric).to eq 42
-      expect(Hanami.app["settings"].flag).to be true
-    end
+    expect(Hanami.app['settings'].numeric).to eq 42
+    expect(Hanami.app['settings'].flag).to be true
   end
+end
 ```
-https://github.com/hanami/hanami/blob/a2bdb77f10d7873e0685f47317583a581f382d02/spec/integration/settings/using_types_spec.rb
+
+<a class="link--source" href="https://github.com/hanami/hanami/blob/a2bdb77f10d7873e0685f47317583a581/spec/integration/settings/using_types_spec.rb">https://github.com/hanami/hanami/blob/a2bdb77f10d787/spec/integration/settings/using_types_spec.rb</a>
 
 
 ---
 
-
-
 ```ruby
-
-    def passing_example(fail_if_no_examples)
-      "
-        RSpec.configure { |c| c.fail_if_no_examples = #{fail_if_no_examples} }
-
-        RSpec.describe 'something' do
-          it 'succeeds' do
-            true
-          end
+context 'when used in a multithreaded environment with a cassette', with_monkey_patches: :excon do
+  it 'properly stubs threaded requests' do
+    VCR.use_cassette('/foo') do
+      threads = 50.times.map do
+        Thread.start do
+          Excon.get "http://localhost:#{VCR::SinatraApp.port}/foo"
         end
-      "
+      end
+      threads.each(&:join)
     end
 
-    it 'succeeds if fail_if_no_examples set to true' do
-      write_file 'spec/example_spec.rb', passing_example(true)
-      run_command ""
-      expect(last_cmd_stdout).to include("1 example, 0 failures")
-      expect(last_cmd_exit_status).to eq(0)
-    end
+    expect(
+      recorded_content_for('foo')
+    ).to include('FOO!')
+  end
+end
 ```
 
-https://github.com/rspec/rspec-core/blob/1eeadce5aa7137ead054783c31ff35cbfe9d07cc/spec/integration/fail_if_no_examples_spec.rb
+<a class="link--source" href="https://github.com/vcr/vcr/blob/master/spec/acceptance/concurrency_spec.rb">https://github.com/vcr/vcr/blob/master/spec/acceptance/concurrency_spec.rb</a>
+
+
+---

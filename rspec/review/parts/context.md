@@ -34,7 +34,7 @@ rom-rb
 		end
 ```
 
-https://github.com/ged/ruby-pg/blob/1c67bbf1cb858634578a56e77f34270b938b9d0a/spec/pg/type_map_in_ruby_spec.rb
+<a class="link--source" href="https://github.com/ged/ruby-pg/blob/1c67bbf1cb858634578a56e77f34270b938b9d0a/spec/pg/type_map_in_ruby_spec.rb">https://github.com/ged/ruby-pg/blob/1c67bbf1cb858634578a56e77f34270b938b9d0a/spec/pg/type_map_in_ruby_spec.rb</a>
 
 ---
 
@@ -60,7 +60,7 @@ RSpec.shared_context "changeset / database" do
     end
 ```
 
-https://github.com/rom-rb/rom/blob/7fb82cf7ffa86805d9c5499a4ecc64d5d3c20f14/spec/shared/rom/changeset/database.rb
+<a class="link--source" href="https://github.com/rom-rb/rom/blob/7fb82cf7ffa86805d9c5499a4ecc64d5d3c20f14/spec/shared/rom/changeset/database.rb">https://github.com/rom-rb/rom/blob/7fb82cf7ffa86805d9c5499a4ecc64d5d3c20f14/spec/shared/rom/changeset/database.rb</a>
 
 
 ---
@@ -89,7 +89,7 @@ https://github.com/rom-rb/rom/blob/7fb82cf7ffa86805d9c5499a4ecc64d5d3c20f14/spec
         results = server.capture_run_results(['spec/rspec/core/resources/formatter_specs.rb']) do
 ```
 
-https://github.com/rspec/rspec-core/blob/1eeadce5aa7137ead054783c31ff35cbfe9d07cc/spec/rspec/core/bisect/server_spec.rb
+<a class="link--source" href="https://github.com/rspec/rspec-core/blob/1eeadce5aa7137ead054783c31ff35cbfe9d07cc/spec/rspec/core/bisect/server_spec.rb">https://github.com/rspec/rspec-core/blob/1eeadce5aa7137ead054783c31ff35cbfe9d07cc/spec/rspec/core/bisect/server_spec.rb</a>
 
 
 ---
@@ -111,7 +111,7 @@ https://github.com/rspec/rspec-core/blob/1eeadce5aa7137ead054783c31ff35cbfe9d07c
   end
 ```
 
-https://github.com/rspec/rspec-core/blob/1eeadce5aa7137ead054783c31ff35cbfe9d07cc/spec/spec_helper.rb
+<a class="link--source" href="https://github.com/rspec/rspec-core/blob/1eeadce5aa7137ead054783c31ff35cbfe9d07cc/spec/spec_helper.rb">https://github.com/rspec/rspec-core/blob/1eeadce5aa7137ead054783c31ff35cbfe9d07cc/spec/spec_helper.rb</a>
 
 
 ```ruby
@@ -127,7 +127,7 @@ https://github.com/rspec/rspec-core/blob/1eeadce5aa7137ead054783c31ff35cbfe9d07c
       end
 ```
 
-https://github.com/rspec/rspec-core/blob/1eeadce5aa7137ead054783c31ff35cbfe9d07cc/spec/rspec/core/configuration_options_spec.rb
+<a class="link--source" href="https://github.com/rspec/rspec-core/blob/1eeadce5aa7137ead054783c31ff35cbfe9d07cc/spec/rspec/core/configuration_options_spec.rb">https://github.com/rspec/rspec-core/blob/1eeadce5aa7137ead054783c31ff35cbfe9d07cc/spec/rspec/core/configuration_options_spec.rb</a>
 
 
 ---
@@ -145,4 +145,57 @@ RSpec.describe JavaSingleThreadExecutor, :type=>:jruby do
       it_should_behave_like :executor_service
     end
 ```
-https://github.com/ruby-concurrency/concurrent-ruby/blob/1982b92daa8aee0d88db5212a61b790142c4106f/spec/concurrent/executor/java_single_thread_executor_spec.rb#L8
+
+<a class="link--source" href="https://github.com/ruby-concurrency/concurrent-ruby/blob/1982b92daa8aee0d88db5212a61b790142c4106f/spec/concurrent/executor/java_single_thread_executor_spec.rb#L8">https://github.com/ruby-concurrency/concurrent-ruby/blob/1982b92daa8aee0d88db5212a61b790142c4106f/spec/concurrent/executor/java_single_thread_executor_spec.rb#L8</a>
+
+---
+
+```ruby
+
+        allow(config).to receive(:logger).and_return(double.as_null_object)
+```
+
+<a class="link--source" href="https://github.com/vcr/vcr/blob/master/spec/lib/vcr/cassette/http_interaction_list_spec.rb">https://github.com/vcr/vcr/blob/master/spec/lib/vcr/cassette/http_interaction_list_spec.rb</a>
+
+---
+
+
+```ruby
+
+    describe 'clean_outdated_http_interactions' do
+      before(:each) do
+        subject.instance_variable_set(:@clean_outdated_http_interactions, true)
+        subject.instance_variable_set(:@previously_recorded_interactions, subject.instance_variable_get(:@new_recorded_interactions))
+        subject.instance_variable_set(:@new_recorded_interactions, [])
+      end
+```
+
+<a class="link--source" href="https://github.com/vcr/vcr/blob/master/spec/lib/vcr/cassette_spec.rb">https://github.com/vcr/vcr/blob/master/spec/lib/vcr/cassette_spec.rb</a>
+
+---
+
+```ruby
+
+    def passing_example(fail_if_no_examples)
+      "
+        RSpec.configure { |c| c.fail_if_no_examples = #{fail_if_no_examples} }
+
+        RSpec.describe 'something' do
+          it 'succeeds' do
+            true
+          end
+        end
+      "
+    end
+
+    it 'succeeds if fail_if_no_examples set to true' do
+      write_file 'spec/example_spec.rb', passing_example(true)
+      run_command ""
+      expect(last_cmd_stdout).to include("1 example, 0 failures")
+      expect(last_cmd_exit_status).to eq(0)
+    end
+```
+
+<a class="link--source" href="https://github.com/rspec/rspec-core/blob/1eeadce5aa7137ead054783c31ff35cbfe9d07cc/spec/integration/fail_if_no_examples_spec.rb">https://github.com/rspec/rspec-core/blob/1eeadce5aa7137ead054783c31ff35cbfe9d07cc/spec/integration/fail_if_no_examples_spec.rb</a>
+
+---

@@ -14,16 +14,18 @@ context 'when all inputs are correct' do
   end
 end
 ```
-https://github.com/gitlabhq/gitlabhq/blob/652dfd8e201e1cf15fc720e0ab96a9ae4c691503/spec/tasks/import_rake_spec.rb#L31
+<a class="link--source" href="https://github.com/gitlabhq/gitlabhq/blob/652dfd8e201e1cf15fc720e0ab96a9ae4c691503/spec/tasks/import_rake_spec.rb#L31">https://github.com/gitlabhq/gitlabhq/blob/652dfd8e201e1cf15fc720e0ab96a9ae4c691503/spec/tasks/import_rake_spec.rb#L31</a>
 
+---
 
 ```ruby
  def expect_next_instance_of(klass, *new_args, &blk)
     stub_new(expect(klass), nil, false, *new_args, &blk)
   end
 ```
-https://github.com/gitlabhq/gitlabhq/blob/652dfd8e201e1cf15fc720e0ab96a9ae4c691503/spec/support/helpers/next_instance_of.rb#L4C3-L4C3
+<a class="link--source" href="https://github.com/gitlabhq/gitlabhq/blob/652dfd8e201e1cf15fc720e0ab96a9ae4c691503/spec/support/helpers/next_instance_of.rb#L4C3-L4C3">https://github.com/gitlabhq/gitlabhq/blob/652dfd8e201e1cf15fc720e0ab96a9ae4c691503/spec/support/helpers/next_instance_of.rb#L4C3-L4C3</a>
 
+---
 
 ```ruby
 def stub_new(target, number, ordered = false, *new_args, &blk)
@@ -44,5 +46,6 @@ def stub_new(target, number, ordered = false, *new_args, &blk)
     end
   end
 ```
-https://github.com/gitlabhq/gitlabhq/blob/652dfd8e201e1cf15fc720e0ab96a9ae4c691503/spec/support/helpers/next_instance_of.rb#L22
+<a class="link--source" href="https://github.com/gitlabhq/gitlabhq/blob/652dfd8e201e1cf15fc720e0ab96a9ae4c691503/spec/support/helpers/next_instance_of.rb#L22">https://github.com/gitlabhq/gitlabhq/blob/652dfd8e201e1cf15fc720e0ab96a9ae4c691503/spec/support/helpers/next_instance_of.rb#L22</a>
 
+---
