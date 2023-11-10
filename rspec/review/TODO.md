@@ -1,4 +1,4 @@
 # TODO
 
-* move to rspec
 * выделить общее (тестируется то, что важно)
+* link shorter (blob/6 chars)
