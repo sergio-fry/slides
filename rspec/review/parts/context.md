@@ -1,3 +1,8 @@
+# Контекст
+
+---
+
+<!-- header: Контекст -->
 
 ```
 ▾ fixtures/
@@ -199,3 +204,5 @@ end
 <a class="link--source" href="https://github.com/rspec/rspec-core/blob/1eeadc/spec/integration/fail_if_no_examples_spec.rb">https://github.com/rspec/rspec-core/blob/1eeadc/spec/integration/fail_if_no_examples_spec.rb</a>
 
 ---
+
+<!-- header: "" -->

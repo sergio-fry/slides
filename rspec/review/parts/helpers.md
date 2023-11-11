@@ -1,3 +1,7 @@
+# Helpers
+
+---
+<!-- header: Helpers -->
 
 ```ruby
 context 'when all inputs are correct' do
@@ -52,3 +56,5 @@ end
 <a class="link--source" href="https://github.com/gitlabhq/gitlabhq/blob/652dfd/spec/support/helpers/next_instance_of.rb">https://github.com/gitlabhq/gitlabhq/blob/652dfd/spec/support/helpers/next_instance_of.rb</a>
 
 ---
+
+<!-- header: "" -->

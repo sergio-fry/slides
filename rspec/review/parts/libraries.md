@@ -1,3 +1,7 @@
+# Библиотеки
+
+---
+<!-- header: Библиотеки  -->
 
 ```ruby
 require "warning"
@@ -35,3 +39,9 @@ gem 'test-prof', '~> 1.2.3'
 <a class="link--source" href="https://github.com/test-prof/test-prof/blob/2c8ff6/docs/recipes/let_it_be.md#caveats">https://github.com/test-prof/test-prof/blob/2c8ff6/docs/recipes/let_it_be.md#caveats</a>
 
 ---
+
+TODO: библиотека для описания таблиц (gitlab?)
+
+---
+
+<!-- header: "" -->

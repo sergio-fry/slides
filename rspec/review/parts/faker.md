@@ -1,3 +1,8 @@
+# Faker
+
+---
+
+<!-- header: Faker -->
 
 ```ruby
 
@@ -21,6 +26,10 @@
 ```
 <a class="link--source" href="https://github.com/ged/ruby-pg/blob/1c67bb/spec/helpers/tcp_gate_switcher.rb">https://github.com/ged/ruby-pg/blob/1c67bb/spec/helpers/tcp_gate_switcher.rb</a>
 
+---
+
 TODO: add usage
 
 ---
+
+<!-- header: "" -->

@@ -1,3 +1,9 @@
+# Expectation
+
+---
+
+<!-- header: Expectation -->
+
 
 ```ruby
 it "returns a new instance" do
@@ -268,3 +274,5 @@ end
 <a class="link--source" href="https://github.com/ged/ruby-pg/blob/1c67bb/spec/pg/type_spec.rb">https://github.com/ged/ruby-pg/blob/1c67bb/spec/pg/type_spec.rb</a>
 
 ---
+
+<!-- header: "" -->

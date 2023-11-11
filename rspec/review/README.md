@@ -23,58 +23,75 @@ size: 4:3
   .link--source { color: #bbb; font-size: 0.5em; max-width: fit-content; }
 </style>
 
-TODO: source link fix 
-
-
 <!-- _paginate: skip -->
 
 
 # RSpec. Review
 
-Sergei Udalov, PTL DAM at Samokat.tech
+Сергей Удалов, PTL DAM at Samokat.tech
+
+---
+<style scoped>
+ 
+ h1 { font-size: 1.5em; }
+ ul li { font-size: 0.6em; }
+</style>
+
+# Сергей Удалов
+
+![bg right](img/me.png)
+
+- PTL DAM, Samokat.tech
+- тимлид с 2017
+- пишу тесты на RSpec с 2009
+- разработчик с 2006
+- финтех, платные дороги, SEO-инструменты, СМИ, HR
 
 ---
 
-# Why?
+<!-- _footer: "" -->
+<!-- _class: invert -->
+
+![bg](img/rubyrussia_2023.jpeg)
 
 ---
 
-# Agenda
+<!-- footer: bit.ly/3SBDkYI › @SergeiUdalov › Samokat.tech  -->
 
-- dry-rb
-- gitlab
-- hanami
-- pg
-- rom-rb
-- rspec
-- ruby-concurrency
-- vcr
+# Зачем сомтреть код?
 
 ---
 
-# Slide Formatting
+# Рассмотрим
 
-TODO: slide formatting example
-
----
-
-# How to fix
+dry-rb gitlab hanami pg rom-rb
+rspec ruby-concurrency vcr
 
 ---
 
-# Issues
+# План
+
+1. Конфигурация
+2. Контекст
+3. Тестовые классы
+4. Expectation
+5. Acceptance
+6. Faker
+7. Helpers
+8. Выразительность
+9. Библиотеки
 
 ---
 
-!!!include(parts/acceptance.md)!!!
 !!!include(parts/config.md)!!!
 !!!include(parts/context.md)!!!
 !!!include(parts/context_classes.md)!!!
 !!!include(parts/expectation.md)!!!
+!!!include(parts/acceptance.md)!!!
 !!!include(parts/faker.md)!!!
 !!!include(parts/helpers.md)!!!
-!!!include(parts/libraries.md)!!!
 !!!include(parts/semantic.md)!!!
+!!!include(parts/libraries.md)!!!
 
 
 # Summary
@@ -94,7 +111,8 @@ TODO: slide formatting example
 
 # Links
 
-* https://github.com/sergio-fry/slides/tree/master/template
+1. https://youtu.be/oNIAJtWuHKg "RSpec. Поддерживаемость"
+1. https://youtu.be/oNIAJtWuHKg "RSpec. Поддерживаемость"
 
 ---
 

@@ -2,6 +2,8 @@
 
 ---
 
+<!-- header: Acceptance -->
+
 ```ruby
 specify 'types from a provided types module can be used as setting constructors to coerce values' do
   with_tmp_directory(Dir.mktmpdir) do
@@ -64,3 +66,5 @@ end
 
 
 ---
+
+<!-- header: "" -->

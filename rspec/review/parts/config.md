@@ -1,3 +1,8 @@
+# Конфигурация
+
+---
+
+<!-- header: Конфигурация -->
 
 # ls spec/*_helper.rb
 
@@ -144,3 +149,5 @@ end
 <a class="link--source" href="https://github.com/rspec/rspec-core/blob/1eeadc/spec/support/sandboxing.rb">https://github.com/rspec/rspec-core/blob/1eeadc/spec/support/sandboxing.rb</a>
 
 ---
+
+<!-- header: "" -->
