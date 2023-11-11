@@ -18,7 +18,7 @@ RSpec.configure do |config|
 end
 ```
 
-<a class="link--source" href="https://github.com/gitlabhq/gitlabhq/blob/652dfd/spec/rubocop_spec_helper.rb#L14C1-L29C4">https://github.com/gitlabhq/gitlabhq/blob/652dfd/spec/rubocop_spec_helper.rb#L14C1-L29C4</a>
+<a class="link--source" href="https://github.com/gitlabhq/gitlabhq/blob/652dfd/spec/rubocop_spec_helper.rb">https://github.com/gitlabhq/gitlabhq/blob/652dfd/spec/rubocop_spec_helper.rb</a>
 
 ---
 

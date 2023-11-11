@@ -8,7 +8,7 @@ FactoryBot.define do
   end
 end
 ```
-<a class="link--source" href="https://github.com/gitlabhq/gitlabhq/blob/652dfd/spec/factories/users.rb#L4">https://github.com/gitlabhq/gitlabhq/blob/652dfd/spec/factories/users.rb#L4</a>
+<a class="link--source" href="https://github.com/gitlabhq/gitlabhq/blob/652dfd/spec/factories/users.rb">https://github.com/gitlabhq/gitlabhq/blob/652dfd/spec/factories/users.rb</a>
 
 
 ---

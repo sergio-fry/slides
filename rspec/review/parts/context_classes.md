@@ -11,7 +11,7 @@
   end
 ```
 
-<a class="link--source" href="https://github.com/dry-rb/dry-monads/blob/704c1b/spec/integration/all_monads_inclusion_spec.rb#L16C1-L25C6">https://github.com/dry-rb/dry-monads/blob/704c1b/spec/integration/all_monads_inclusion_spec.rb#L16C1-L25C6</a>
+<a class="link--source" href="https://github.com/dry-rb/dry-monads/blob/704c1b/spec/integration/all_monads_inclusion_spec.rb">https://github.com/dry-rb/dry-monads/blob/704c1b/spec/integration/all_monads_inclusion_spec.rb</a>
 
 
 ---
@@ -46,7 +46,7 @@
         }.new
       end
 ```
-<a class="link--source" href="https://github.com/ruby-concurrency/concurrent-ruby/blob/1982b9/spec/concurrent/async_spec.rb#L78-L85">https://github.com/ruby-concurrency/concurrent-ruby/blob/1982b9/spec/concurrent/async_spec.rb#L78-L85</a>
+<a class="link--source" href="https://github.com/ruby-concurrency/concurrent-ruby/blob/1982b9/spec/concurrent/async_spec.rb">https://github.com/ruby-concurrency/concurrent-ruby/blob/1982b9/spec/concurrent/async_spec.rb</a>
 
 
 ---

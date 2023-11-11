@@ -146,7 +146,7 @@ RSpec.describe JavaSingleThreadExecutor, :type=>:jruby do
     end
 ```
 
-<a class="link--source" href="https://github.com/ruby-concurrency/concurrent-ruby/blob/1982b9/spec/concurrent/executor/java_single_thread_executor_spec.rb#L8">https://github.com/ruby-concurrency/concurrent-ruby/blob/1982b9/spec/concurrent/executor/java_single_thread_executor_spec.rb#L8</a>
+<a class="link--source" href="https://github.com/ruby-concurrency/concurrent-ruby/blob/1982b9/spec/concurrent/executor/java_single_thread_executor_spec.rb">https://github.com/ruby-concurrency/concurrent-ruby/blob/1982b9/spec/concurrent/executor/java_single_thread_executor_spec.rb</a>
 
 ---
 
