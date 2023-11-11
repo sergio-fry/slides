@@ -25,6 +25,6 @@ RSpec.describe Projects::BranchesByModeService, feature_category: :source_code_m
 
 gem 'test-prof', '~> 1.2.3'
 
-<a class="link--source" href="https://github.com/test-prof/test-prof/blob/master/docs/recipes/let_it_be.md?ysclid=lo1bo0z7cw295609270#caveats">https://github.com/test-prof/test-prof/blob/master/docs/recipes/let_it_be.md?ysclid=lo1bo0z7cw295609270#caveats</a>
+<a class="link--source" href="https://github.com/test-prof/test-prof/blob/2c8ff66ff57c59a85ee1015a6bcf44612845c555/docs/recipes/let_it_be.md#caveats">https://github.com/test-prof/test-prof/blob/2c8ff66ff57c59a85ee1015a6bcf44612845c555/docs/recipes/let_it_be.md#caveats</a>
 
 ---

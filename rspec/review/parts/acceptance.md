@@ -60,7 +60,7 @@ context 'when used in a multithreaded environment with a cassette', with_monkey_
 end
 ```
 
-<a class="link--source" href="https://github.com/vcr/vcr/blob/master/spec/acceptance/concurrency_spec.rb">https://github.com/vcr/vcr/blob/master/spec/acceptance/concurrency_spec.rb</a>
+<a class="link--source" href="https://github.com/vcr/vcr/blob/8f563658061895f0d48110680b992dfd34f3520a/spec/acceptance/concurrency_spec.rb">https://github.com/vcr/vcr/blob/8f563658061895f0d48110680b992dfd34f3520a/spec/acceptance/concurrency_spec.rb</a>
 
 
 ---

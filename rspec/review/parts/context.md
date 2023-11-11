@@ -155,7 +155,7 @@ RSpec.describe JavaSingleThreadExecutor, :type=>:jruby do
         allow(config).to receive(:logger).and_return(double.as_null_object)
 ```
 
-<a class="link--source" href="https://github.com/vcr/vcr/blob/master/spec/lib/vcr/cassette/http_interaction_list_spec.rb">https://github.com/vcr/vcr/blob/master/spec/lib/vcr/cassette/http_interaction_list_spec.rb</a>
+<a class="link--source" href="https://github.com/vcr/vcr/blob/8f563658061895f0d48110680b992dfd34f3520a/spec/lib/vcr/cassette/http_interaction_list_spec.rb">https://github.com/vcr/vcr/blob/8f563658061895f0d48110680b992dfd34f3520a/spec/lib/vcr/cassette/http_interaction_list_spec.rb</a>
 
 ---
 
@@ -170,7 +170,7 @@ RSpec.describe JavaSingleThreadExecutor, :type=>:jruby do
       end
 ```
 
-<a class="link--source" href="https://github.com/vcr/vcr/blob/master/spec/lib/vcr/cassette_spec.rb">https://github.com/vcr/vcr/blob/master/spec/lib/vcr/cassette_spec.rb</a>
+<a class="link--source" href="https://github.com/vcr/vcr/blob/8f563658061895f0d48110680b992dfd34f3520a/spec/lib/vcr/cassette_spec.rb">https://github.com/vcr/vcr/blob/8f563658061895f0d48110680b992dfd34f3520a/spec/lib/vcr/cassette_spec.rb</a>
 
 ---
 

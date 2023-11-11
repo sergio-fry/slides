@@ -245,7 +245,7 @@ end
         expect(subject.to_s).to match(/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{6} \+\d{4} UTC/)
       end
 ```
-<a class="link--source" href="https://github.com/ruby-concurrency/concurrent-ruby/blob/master/spec/concurrent/channel/tick_spec.rb#L31C1-L31C1">https://github.com/ruby-concurrency/concurrent-ruby/blob/master/spec/concurrent/channel/tick_spec.rb#L31C1-L31C1</a>
+<a class="link--source" href="https://github.com/ruby-concurrency/concurrent-ruby/blob/dadc2ad81f8c57a03400585187c3405c96713198/spec/concurrent/channel/tick_spec.rb">https://github.com/ruby-concurrency/concurrent-ruby/blob/dadc2ad81f8c57a03400585187c3405c96713198/spec/concurrent/channel/tick_spec.rb</a>
 
 ---
 
