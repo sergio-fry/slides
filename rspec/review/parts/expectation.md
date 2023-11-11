@@ -7,7 +7,7 @@ it "returns a new instance" do
   expect(none.trace).to include("spec/integration/maybe_spec.rb:9:in `block")
 end
 ```
-<a class="link--source" href="https://github.com/dry-rb/dry-monads/blob/704c1bfdfd27be7677b5f875ac59585173a8237e/spec/integration/maybe_spec.rb#L17C1-L20C10">https://github.com/dry-rb/dry-monads/blob/704c1bfdfd27be7677b5f875ac59585173a8237e/spec/integration/maybe_spec.rb#L17C1-L20C10</a>
+<a class="link--source" href="https://github.com/dry-rb/dry-monads/blob/704c1b/spec/integration/maybe_spec.rb#L17C1-L20C10">https://github.com/dry-rb/dry-monads/blob/704c1b/spec/integration/maybe_spec.rb#L17C1-L20C10</a>
 
 
 
@@ -22,7 +22,7 @@ RSpec.describe(Dry::Monads) do
 end
 ```
 
-<a class="link--source" href="https://github.com/dry-rb/dry-monads/blob/704c1bfdfd27be7677b5f875ac59585173a8237e/spec/integration/monads_spec.rb#L5">https://github.com/dry-rb/dry-monads/blob/704c1bfdfd27be7677b5f875ac59585173a8237e/spec/integration/monads_spec.rb#L5</a>
+<a class="link--source" href="https://github.com/dry-rb/dry-monads/blob/704c1b/spec/integration/monads_spec.rb#L5">https://github.com/dry-rb/dry-monads/blob/704c1b/spec/integration/monads_spec.rb#L5</a>
 
 
 ---
@@ -41,7 +41,7 @@ end
    expect(logs).to match %r{GET 404 \d+(µs|ms) 127.0.0.1 /}
 ```
 
-<a class="link--source" href="https://github.com/hanami/hanami/blob/675b441c3f0a64f980f78c6b05e61be0ab61caa5/spec/integration/logging/exception_logging_spec.rb#L6">https://github.com/hanami/hanami/blob/675b441c3f0a64f980f78c6b05e61be0ab61caa5/spec/integration/logging/exception_logging_spec.rb#L6</a>
+<a class="link--source" href="https://github.com/hanami/hanami/blob/675b44/spec/integration/logging/exception_logging_spec.rb#L6">https://github.com/hanami/hanami/blob/675b44/spec/integration/logging/exception_logging_spec.rb#L6</a>
 
 ---
 
@@ -53,7 +53,7 @@ end
   end
 
 ```
-<a class="link--source" href="https://github.com/hanami/hanami/blob/a2bdb77f10d7873e0685f47317583a581f382d02/spec/unit/hanami/config/actions/default_values_spec.rb">https://github.com/hanami/hanami/blob/a2bdb77f10d7873e0685f47317583a581f382d02/spec/unit/hanami/config/actions/default_values_spec.rb</a>
+<a class="link--source" href="https://github.com/hanami/hanami/blob/a2bdb7/spec/unit/hanami/config/actions/default_values_spec.rb">https://github.com/hanami/hanami/blob/a2bdb7/spec/unit/hanami/config/actions/default_values_spec.rb</a>
 
 ---
 
@@ -82,7 +82,7 @@ end
 		] )
 	end
 ```
-<a class="link--source" href="https://github.com/ged/ruby-pg/blob/1c67bbf1cb858634578a56e77f34270b938b9d0a/spec/pg/type_map_by_oid_spec.rb">https://github.com/ged/ruby-pg/blob/1c67bbf1cb858634578a56e77f34270b938b9d0a/spec/pg/type_map_by_oid_spec.rb</a>
+<a class="link--source" href="https://github.com/ged/ruby-pg/blob/1c67bb/spec/pg/type_map_by_oid_spec.rb">https://github.com/ged/ruby-pg/blob/1c67bb/spec/pg/type_map_by_oid_spec.rb</a>
 
 ---
 
@@ -96,7 +96,7 @@ end
 
 ```
 
-<a class="link--source" href="https://github.com/ged/ruby-pg/blob/1c67bbf1cb858634578a56e77f34270b938b9d0a/spec/pg/type_map_by_oid_spec.rb">https://github.com/ged/ruby-pg/blob/1c67bbf1cb858634578a56e77f34270b938b9d0a/spec/pg/type_map_by_oid_spec.rb</a>
+<a class="link--source" href="https://github.com/ged/ruby-pg/blob/1c67bb/spec/pg/type_map_by_oid_spec.rb">https://github.com/ged/ruby-pg/blob/1c67bb/spec/pg/type_map_by_oid_spec.rb</a>
 
 ---
 
@@ -125,7 +125,7 @@ end
 			end
 ```
 
-<a class="link--source" href="https://github.com/ged/ruby-pg/blob/1c67bbf1cb858634578a56e77f34270b938b9d0a/spec/pg/basic_type_map_for_results_spec.rb">https://github.com/ged/ruby-pg/blob/1c67bbf1cb858634578a56e77f34270b938b9d0a/spec/pg/basic_type_map_for_results_spec.rb</a>
+<a class="link--source" href="https://github.com/ged/ruby-pg/blob/1c67bb/spec/pg/basic_type_map_for_results_spec.rb">https://github.com/ged/ruby-pg/blob/1c67bb/spec/pg/basic_type_map_for_results_spec.rb</a>
 
 
 ---
@@ -145,7 +145,7 @@ end
       }.to raise_error("boom")
 ```
 
-<a class="link--source" href="https://github.com/rspec/rspec-core/blob/1eeadce5aa7137ead054783c31ff35cbfe9d07cc/spec/rspec/core/bisect/server_spec.rb">https://github.com/rspec/rspec-core/blob/1eeadce5aa7137ead054783c31ff35cbfe9d07cc/spec/rspec/core/bisect/server_spec.rb</a>
+<a class="link--source" href="https://github.com/rspec/rspec-core/blob/1eeadc/spec/rspec/core/bisect/server_spec.rb">https://github.com/rspec/rspec-core/blob/1eeadc/spec/rspec/core/bisect/server_spec.rb</a>
 
 ---
 
@@ -161,7 +161,7 @@ end
       expect(channel.to_s).to match(/Channel.*1.*2/)
     end
 ```
-<a class="link--source" href="https://github.com/ruby-concurrency/concurrent-ruby/blob/1982b92daa8aee0d88db5212a61b790142c4106f/spec/concurrent/edge/channel_spec.rb#L10C1-L17C8">https://github.com/ruby-concurrency/concurrent-ruby/blob/1982b92daa8aee0d88db5212a61b790142c4106f/spec/concurrent/edge/channel_spec.rb#L10C1-L17C8</a>
+<a class="link--source" href="https://github.com/ruby-concurrency/concurrent-ruby/blob/1982b9/spec/concurrent/edge/channel_spec.rb#L10C1-L17C8">https://github.com/ruby-concurrency/concurrent-ruby/blob/1982b9/spec/concurrent/edge/channel_spec.rb#L10C1-L17C8</a>
 
 
 ---
@@ -221,7 +221,7 @@ end
     end
 
 ```
-<a class="link--source" href="https://github.com/ruby-concurrency/concurrent-ruby/blob/1982b92daa8aee0d88db5212a61b790142c4106f/spec/concurrent/edge/channel_spec.rb#L19">https://github.com/ruby-concurrency/concurrent-ruby/blob/1982b92daa8aee0d88db5212a61b790142c4106f/spec/concurrent/edge/channel_spec.rb#L19</a>
+<a class="link--source" href="https://github.com/ruby-concurrency/concurrent-ruby/blob/1982b9/spec/concurrent/edge/channel_spec.rb#L19">https://github.com/ruby-concurrency/concurrent-ruby/blob/1982b9/spec/concurrent/edge/channel_spec.rb#L19</a>
 
 
 ---
@@ -234,7 +234,7 @@ end
       end
 ```
 
-<a class="link--source" href="https://github.com/ruby-concurrency/concurrent-ruby/blob/1982b92daa8aee0d88db5212a61b790142c4106f/spec/concurrent/executor/cached_thread_pool_spec.rb#L25C9-L25C9">https://github.com/ruby-concurrency/concurrent-ruby/blob/1982b92daa8aee0d88db5212a61b790142c4106f/spec/concurrent/executor/cached_thread_pool_spec.rb#L25C9-L25C9</a>
+<a class="link--source" href="https://github.com/ruby-concurrency/concurrent-ruby/blob/1982b9/spec/concurrent/executor/cached_thread_pool_spec.rb#L25C9-L25C9">https://github.com/ruby-concurrency/concurrent-ruby/blob/1982b9/spec/concurrent/executor/cached_thread_pool_spec.rb#L25C9-L25C9</a>
 
 ---
 
@@ -245,7 +245,7 @@ end
         expect(subject.to_s).to match(/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{6} \+\d{4} UTC/)
       end
 ```
-<a class="link--source" href="https://github.com/ruby-concurrency/concurrent-ruby/blob/dadc2ad81f8c57a03400585187c3405c96713198/spec/concurrent/channel/tick_spec.rb">https://github.com/ruby-concurrency/concurrent-ruby/blob/dadc2ad81f8c57a03400585187c3405c96713198/spec/concurrent/channel/tick_spec.rb</a>
+<a class="link--source" href="https://github.com/ruby-concurrency/concurrent-ruby/blob/dadc2a/spec/concurrent/channel/tick_spec.rb">https://github.com/ruby-concurrency/concurrent-ruby/blob/dadc2a/spec/concurrent/channel/tick_spec.rb</a>
 
 ---
 
@@ -256,7 +256,7 @@ end
     expect(actual).to eq(%(<video src="/assets/movie.mp4"></video>))
   end
 ```
-<a class="link--source" href="https://github.com/hanami/hanami/blob/a2bdb77f10d7873e0685f47317583a581f382d02/spec/unit/hanami/helpers/assets_helper/video_tag_spec.rb">https://github.com/hanami/hanami/blob/a2bdb77f10d7873e0685f47317583a581f382d02/spec/unit/hanami/helpers/assets_helper/video_tag_spec.rb</a>
+<a class="link--source" href="https://github.com/hanami/hanami/blob/a2bdb7/spec/unit/hanami/helpers/assets_helper/video_tag_spec.rb">https://github.com/hanami/hanami/blob/a2bdb7/spec/unit/hanami/helpers/assets_helper/video_tag_spec.rb</a>
 
 
 ---
@@ -279,6 +279,6 @@ end
 			end
 ```
 
-<a class="link--source" href="https://github.com/ged/ruby-pg/blob/1c67bbf1cb858634578a56e77f34270b938b9d0a/spec/pg/type_spec.rb">https://github.com/ged/ruby-pg/blob/1c67bbf1cb858634578a56e77f34270b938b9d0a/spec/pg/type_spec.rb</a>
+<a class="link--source" href="https://github.com/ged/ruby-pg/blob/1c67bb/spec/pg/type_spec.rb">https://github.com/ged/ruby-pg/blob/1c67bb/spec/pg/type_spec.rb</a>
 
 ---

@@ -19,7 +19,7 @@
 #  '-----------'      '--------------------------------------'      '------'
 
 ```
-<a class="link--source" href="https://github.com/ged/ruby-pg/blob/1c67bbf1cb858634578a56e77f34270b938b9d0a/spec/helpers/tcp_gate_switcher.rb">https://github.com/ged/ruby-pg/blob/1c67bbf1cb858634578a56e77f34270b938b9d0a/spec/helpers/tcp_gate_switcher.rb</a>
+<a class="link--source" href="https://github.com/ged/ruby-pg/blob/1c67bb/spec/helpers/tcp_gate_switcher.rb">https://github.com/ged/ruby-pg/blob/1c67bb/spec/helpers/tcp_gate_switcher.rb</a>
 
 TODO: add usage
 

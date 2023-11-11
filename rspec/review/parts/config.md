@@ -18,7 +18,7 @@ RSpec.configure do |config|
 end
 ```
 
-<a class="link--source" href="https://github.com/gitlabhq/gitlabhq/blob/652dfd8e201e1cf15fc720e0ab96a9ae4c691503/spec/rubocop_spec_helper.rb#L14C1-L29C4">https://github.com/gitlabhq/gitlabhq/blob/652dfd8e201e1cf15fc720e0ab96a9ae4c691503/spec/rubocop_spec_helper.rb#L14C1-L29C4</a>
+<a class="link--source" href="https://github.com/gitlabhq/gitlabhq/blob/652dfd/spec/rubocop_spec_helper.rb#L14C1-L29C4">https://github.com/gitlabhq/gitlabhq/blob/652dfd/spec/rubocop_spec_helper.rb#L14C1-L29C4</a>
 
 ---
 
@@ -29,7 +29,7 @@ it 'should tell about pipeline mode', :postgresql_14 do
 end
 ```
 
-<a class="link--source" href="https://github.com/ged/ruby-pg/blob/1c67bbf1cb858634578a56e77f34270b938b9d0a/spec/pg/connection_spec.rb">https://github.com/ged/ruby-pg/blob/1c67bbf1cb858634578a56e77f34270b938b9d0a/spec/pg/connection_spec.rb</a>
+<a class="link--source" href="https://github.com/ged/ruby-pg/blob/1c67bb/spec/pg/connection_spec.rb">https://github.com/ged/ruby-pg/blob/1c67bb/spec/pg/connection_spec.rb</a>
 
 
 ---
@@ -44,7 +44,7 @@ require "rom/repository"
 require "rom/changeset"
 ```
 
-<a class="link--source" href="https://github.com/rom-rb/rom/blob/7fb82cf7ffa86805d9c5499a4ecc64d5d3c20f14/spec/spec_helper.rb">https://github.com/rom-rb/rom/blob/7fb82cf7ffa86805d9c5499a4ecc64d5d3c20f14/spec/spec_helper.rb</a>
+<a class="link--source" href="https://github.com/rom-rb/rom/blob/7fb82c/spec/spec_helper.rb">https://github.com/rom-rb/rom/blob/7fb82c/spec/spec_helper.rb</a>
 
 ---
 
@@ -62,7 +62,7 @@ config.after do
 end
 ```
 
-<a class="link--source" href="https://github.com/rom-rb/rom/blob/7fb82cf7ffa86805d9c5499a4ecc64d5d3c20f14/spec/spec_helper.rb">https://github.com/rom-rb/rom/blob/7fb82cf7ffa86805d9c5499a4ecc64d5d3c20f14/spec/spec_helper.rb</a>
+<a class="link--source" href="https://github.com/rom-rb/rom/blob/7fb82c/spec/spec_helper.rb">https://github.com/rom-rb/rom/blob/7fb82c/spec/spec_helper.rb</a>
 
 
 ---
@@ -84,7 +84,7 @@ end
 end
 ```
 
-<a class="link--source" href="https://github.com/rom-rb/rom/blob/7fb82cf7ffa86805d9c5499a4ecc64d5d3c20f14/spec/spec_helper.rb">https://github.com/rom-rb/rom/blob/7fb82cf7ffa86805d9c5499a4ecc64d5d3c20f14/spec/spec_helper.rb</a>
+<a class="link--source" href="https://github.com/rom-rb/rom/blob/7fb82c/spec/spec_helper.rb">https://github.com/rom-rb/rom/blob/7fb82c/spec/spec_helper.rb</a>
 
 
 ---
@@ -94,7 +94,7 @@ end
 ```ruby
 RSpec.describe ROM::SQL::Associations::ManyToMany, helpers: true do
 ```
-<a class="link--source" href="https://github.com/rom-rb/rom-sql/blob/beb1154e13e29087e514c0f143fd1bf0b5185fcf/spec/integration/associations/many_to_many_spec.rb">https://github.com/rom-rb/rom-sql/blob/beb1154e13e29087e514c0f143fd1bf0b5185fcf/spec/integration/associations/many_to_many_spec.rb</a>
+<a class="link--source" href="https://github.com/rom-rb/rom-sql/blob/beb115/spec/integration/associations/many_to_many_spec.rb">https://github.com/rom-rb/rom-sql/blob/beb115/spec/integration/associations/many_to_many_spec.rb</a>
 
 ---
 
@@ -104,7 +104,7 @@ RSpec.describe ROM::SQL::Associations::ManyToMany, helpers: true do
 config.include(Helpers, helpers: true)
 ```
 
-<a class="link--source" href="https://github.com/rom-rb/rom-sql/blob/beb1154e13e29087e514c0f143fd1bf0b5185fcf/spec/spec_helper.rb">https://github.com/rom-rb/rom-sql/blob/beb1154e13e29087e514c0f143fd1bf0b5185fcf/spec/spec_helper.rb</a>
+<a class="link--source" href="https://github.com/rom-rb/rom-sql/blob/beb115/spec/spec_helper.rb">https://github.com/rom-rb/rom-sql/blob/beb115/spec/spec_helper.rb</a>
 
 ---
 
@@ -116,7 +116,7 @@ Dir[root.join("shared/**/*.rb")].sort.each { |f| require f }
 Dir[root.join("support/**/*.rb")].sort.each { |f| require f }
 ```
 
-<a class="link--source" href="https://github.com/rom-rb/rom-sql/blob/beb1154e13e29087e514c0f143fd1bf0b5185fcf/spec/spec_helper.rb">https://github.com/rom-rb/rom-sql/blob/beb1154e13e29087e514c0f143fd1bf0b5185fcf/spec/spec_helper.rb</a>
+<a class="link--source" href="https://github.com/rom-rb/rom-sql/blob/beb115/spec/spec_helper.rb">https://github.com/rom-rb/rom-sql/blob/beb115/spec/spec_helper.rb</a>
 
 ---
 
@@ -141,6 +141,6 @@ RSpec.configure do |c|
 end
 ```
 
-<a class="link--source" href="https://github.com/rspec/rspec-core/blob/1eeadce5aa7137ead054783c31ff35cbfe9d07cc/spec/support/sandboxing.rb">https://github.com/rspec/rspec-core/blob/1eeadce5aa7137ead054783c31ff35cbfe9d07cc/spec/support/sandboxing.rb</a>
+<a class="link--source" href="https://github.com/rspec/rspec-core/blob/1eeadc/spec/support/sandboxing.rb">https://github.com/rspec/rspec-core/blob/1eeadc/spec/support/sandboxing.rb</a>
 
 ---

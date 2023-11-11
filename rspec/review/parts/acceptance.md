@@ -36,7 +36,7 @@ specify 'types from a provided types module can be used as setting constructors 
 end
 ```
 
-<a class="link--source" href="https://github.com/hanami/hanami/blob/a2bdb77f10d7873e0685f47317583a581/spec/integration/settings/using_types_spec.rb">https://github.com/hanami/hanami/blob/a2bdb77f10d787/spec/integration/settings/using_types_spec.rb</a>
+<a class="link--source" href="https://github.com/hanami/hanami/blob/a2bdb7/spec/integration/settings/using_types_spec.rb">https://github.com/hanami/hanami/blob/a2bdb7/spec/integration/settings/using_types_spec.rb</a>
 
 
 ---
@@ -60,7 +60,7 @@ context 'when used in a multithreaded environment with a cassette', with_monkey_
 end
 ```
 
-<a class="link--source" href="https://github.com/vcr/vcr/blob/8f563658061895f0d48110680b992dfd34f3520a/spec/acceptance/concurrency_spec.rb">https://github.com/vcr/vcr/blob/8f563658061895f0d48110680b992dfd34f3520a/spec/acceptance/concurrency_spec.rb</a>
+<a class="link--source" href="https://github.com/vcr/vcr/blob/8f5636/spec/acceptance/concurrency_spec.rb">https://github.com/vcr/vcr/blob/8f5636/spec/acceptance/concurrency_spec.rb</a>
 
 
 ---

@@ -14,7 +14,7 @@ context 'when all inputs are correct' do
   end
 end
 ```
-<a class="link--source" href="https://github.com/gitlabhq/gitlabhq/blob/652dfd8e201e1cf15fc720e0ab96a9ae4c691503/spec/tasks/import_rake_spec.rb#L31">https://github.com/gitlabhq/gitlabhq/blob/652dfd8e201e1cf15fc720e0ab96a9ae4c691503/spec/tasks/import_rake_spec.rb#L31</a>
+<a class="link--source" href="https://github.com/gitlabhq/gitlabhq/blob/652dfd/spec/tasks/import_rake_spec.rb#L31">https://github.com/gitlabhq/gitlabhq/blob/652dfd/spec/tasks/import_rake_spec.rb#L31</a>
 
 ---
 
@@ -23,7 +23,7 @@ end
     stub_new(expect(klass), nil, false, *new_args, &blk)
   end
 ```
-<a class="link--source" href="https://github.com/gitlabhq/gitlabhq/blob/652dfd8e201e1cf15fc720e0ab96a9ae4c691503/spec/support/helpers/next_instance_of.rb#L4C3-L4C3">https://github.com/gitlabhq/gitlabhq/blob/652dfd8e201e1cf15fc720e0ab96a9ae4c691503/spec/support/helpers/next_instance_of.rb#L4C3-L4C3</a>
+<a class="link--source" href="https://github.com/gitlabhq/gitlabhq/blob/652dfd/spec/support/helpers/next_instance_of.rb#L4C3-L4C3">https://github.com/gitlabhq/gitlabhq/blob/652dfd/spec/support/helpers/next_instance_of.rb#L4C3-L4C3</a>
 
 ---
 
@@ -46,6 +46,6 @@ def stub_new(target, number, ordered = false, *new_args, &blk)
     end
   end
 ```
-<a class="link--source" href="https://github.com/gitlabhq/gitlabhq/blob/652dfd8e201e1cf15fc720e0ab96a9ae4c691503/spec/support/helpers/next_instance_of.rb#L22">https://github.com/gitlabhq/gitlabhq/blob/652dfd8e201e1cf15fc720e0ab96a9ae4c691503/spec/support/helpers/next_instance_of.rb#L22</a>
+<a class="link--source" href="https://github.com/gitlabhq/gitlabhq/blob/652dfd/spec/support/helpers/next_instance_of.rb#L22">https://github.com/gitlabhq/gitlabhq/blob/652dfd/spec/support/helpers/next_instance_of.rb#L22</a>
 
 ---

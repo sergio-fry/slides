@@ -34,7 +34,7 @@ rom-rb
 		end
 ```
 
-<a class="link--source" href="https://github.com/ged/ruby-pg/blob/1c67bbf1cb858634578a56e77f34270b938b9d0a/spec/pg/type_map_in_ruby_spec.rb">https://github.com/ged/ruby-pg/blob/1c67bbf1cb858634578a56e77f34270b938b9d0a/spec/pg/type_map_in_ruby_spec.rb</a>
+<a class="link--source" href="https://github.com/ged/ruby-pg/blob/1c67bb/spec/pg/type_map_in_ruby_spec.rb">https://github.com/ged/ruby-pg/blob/1c67bb/spec/pg/type_map_in_ruby_spec.rb</a>
 
 ---
 
@@ -60,7 +60,7 @@ RSpec.shared_context "changeset / database" do
     end
 ```
 
-<a class="link--source" href="https://github.com/rom-rb/rom/blob/7fb82cf7ffa86805d9c5499a4ecc64d5d3c20f14/spec/shared/rom/changeset/database.rb">https://github.com/rom-rb/rom/blob/7fb82cf7ffa86805d9c5499a4ecc64d5d3c20f14/spec/shared/rom/changeset/database.rb</a>
+<a class="link--source" href="https://github.com/rom-rb/rom/blob/7fb82c/spec/shared/rom/changeset/database.rb">https://github.com/rom-rb/rom/blob/7fb82c/spec/shared/rom/changeset/database.rb</a>
 
 
 ---
@@ -89,7 +89,7 @@ RSpec.shared_context "changeset / database" do
         results = server.capture_run_results(['spec/rspec/core/resources/formatter_specs.rb']) do
 ```
 
-<a class="link--source" href="https://github.com/rspec/rspec-core/blob/1eeadce5aa7137ead054783c31ff35cbfe9d07cc/spec/rspec/core/bisect/server_spec.rb">https://github.com/rspec/rspec-core/blob/1eeadce5aa7137ead054783c31ff35cbfe9d07cc/spec/rspec/core/bisect/server_spec.rb</a>
+<a class="link--source" href="https://github.com/rspec/rspec-core/blob/1eeadc/spec/rspec/core/bisect/server_spec.rb">https://github.com/rspec/rspec-core/blob/1eeadc/spec/rspec/core/bisect/server_spec.rb</a>
 
 
 ---
@@ -111,7 +111,7 @@ RSpec.shared_context "changeset / database" do
   end
 ```
 
-<a class="link--source" href="https://github.com/rspec/rspec-core/blob/1eeadce5aa7137ead054783c31ff35cbfe9d07cc/spec/spec_helper.rb">https://github.com/rspec/rspec-core/blob/1eeadce5aa7137ead054783c31ff35cbfe9d07cc/spec/spec_helper.rb</a>
+<a class="link--source" href="https://github.com/rspec/rspec-core/blob/1eeadc/spec/spec_helper.rb">https://github.com/rspec/rspec-core/blob/1eeadc/spec/spec_helper.rb</a>
 
 
 ```ruby
@@ -127,7 +127,7 @@ RSpec.shared_context "changeset / database" do
       end
 ```
 
-<a class="link--source" href="https://github.com/rspec/rspec-core/blob/1eeadce5aa7137ead054783c31ff35cbfe9d07cc/spec/rspec/core/configuration_options_spec.rb">https://github.com/rspec/rspec-core/blob/1eeadce5aa7137ead054783c31ff35cbfe9d07cc/spec/rspec/core/configuration_options_spec.rb</a>
+<a class="link--source" href="https://github.com/rspec/rspec-core/blob/1eeadc/spec/rspec/core/configuration_options_spec.rb">https://github.com/rspec/rspec-core/blob/1eeadc/spec/rspec/core/configuration_options_spec.rb</a>
 
 
 ---
@@ -146,7 +146,7 @@ RSpec.describe JavaSingleThreadExecutor, :type=>:jruby do
     end
 ```
 
-<a class="link--source" href="https://github.com/ruby-concurrency/concurrent-ruby/blob/1982b92daa8aee0d88db5212a61b790142c4106f/spec/concurrent/executor/java_single_thread_executor_spec.rb#L8">https://github.com/ruby-concurrency/concurrent-ruby/blob/1982b92daa8aee0d88db5212a61b790142c4106f/spec/concurrent/executor/java_single_thread_executor_spec.rb#L8</a>
+<a class="link--source" href="https://github.com/ruby-concurrency/concurrent-ruby/blob/1982b9/spec/concurrent/executor/java_single_thread_executor_spec.rb#L8">https://github.com/ruby-concurrency/concurrent-ruby/blob/1982b9/spec/concurrent/executor/java_single_thread_executor_spec.rb#L8</a>
 
 ---
 
@@ -155,7 +155,7 @@ RSpec.describe JavaSingleThreadExecutor, :type=>:jruby do
         allow(config).to receive(:logger).and_return(double.as_null_object)
 ```
 
-<a class="link--source" href="https://github.com/vcr/vcr/blob/8f563658061895f0d48110680b992dfd34f3520a/spec/lib/vcr/cassette/http_interaction_list_spec.rb">https://github.com/vcr/vcr/blob/8f563658061895f0d48110680b992dfd34f3520a/spec/lib/vcr/cassette/http_interaction_list_spec.rb</a>
+<a class="link--source" href="https://github.com/vcr/vcr/blob/8f5636/spec/lib/vcr/cassette/http_interaction_list_spec.rb">https://github.com/vcr/vcr/blob/8f5636/spec/lib/vcr/cassette/http_interaction_list_spec.rb</a>
 
 ---
 
@@ -170,7 +170,7 @@ RSpec.describe JavaSingleThreadExecutor, :type=>:jruby do
       end
 ```
 
-<a class="link--source" href="https://github.com/vcr/vcr/blob/8f563658061895f0d48110680b992dfd34f3520a/spec/lib/vcr/cassette_spec.rb">https://github.com/vcr/vcr/blob/8f563658061895f0d48110680b992dfd34f3520a/spec/lib/vcr/cassette_spec.rb</a>
+<a class="link--source" href="https://github.com/vcr/vcr/blob/8f5636/spec/lib/vcr/cassette_spec.rb">https://github.com/vcr/vcr/blob/8f5636/spec/lib/vcr/cassette_spec.rb</a>
 
 ---
 
@@ -196,6 +196,6 @@ RSpec.describe JavaSingleThreadExecutor, :type=>:jruby do
     end
 ```
 
-<a class="link--source" href="https://github.com/rspec/rspec-core/blob/1eeadce5aa7137ead054783c31ff35cbfe9d07cc/spec/integration/fail_if_no_examples_spec.rb">https://github.com/rspec/rspec-core/blob/1eeadce5aa7137ead054783c31ff35cbfe9d07cc/spec/integration/fail_if_no_examples_spec.rb</a>
+<a class="link--source" href="https://github.com/rspec/rspec-core/blob/1eeadc/spec/integration/fail_if_no_examples_spec.rb">https://github.com/rspec/rspec-core/blob/1eeadc/spec/integration/fail_if_no_examples_spec.rb</a>
 
 ---
