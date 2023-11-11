@@ -14,38 +14,41 @@ context 'when all inputs are correct' do
   end
 end
 ```
+
 <a class="link--source" href="https://github.com/gitlabhq/gitlabhq/blob/652dfd/spec/tasks/import_rake_spec.rb">https://github.com/gitlabhq/gitlabhq/blob/652dfd/spec/tasks/import_rake_spec.rb</a>
 
 ---
 
 ```ruby
- def expect_next_instance_of(klass, *new_args, &blk)
-    stub_new(expect(klass), nil, false, *new_args, &blk)
-  end
+def expect_next_instance_of(klass, *new_args, &blk)
+  stub_new(expect(klass), nil, false, *new_args, &blk)
+end
 ```
+
 <a class="link--source" href="https://github.com/gitlabhq/gitlabhq/blob/652dfd/spec/support/helpers/next_instance_of.rb">https://github.com/gitlabhq/gitlabhq/blob/652dfd/spec/support/helpers/next_instance_of.rb</a>
 
 ---
 
 ```ruby
 def stub_new(target, number, ordered = false, *new_args, &blk)
-    receive_new = receive(:new)
-    receive_new.ordered if ordered
-    receive_new.with(*new_args) if new_args.present?
+  receive_new = receive(:new)
+  receive_new.ordered if ordered
+  receive_new.with(*new_args) if new_args.present?
 
-    if number.is_a?(Range)
-      receive_new.at_least(number.begin).times if number.begin
-      receive_new.at_most(number.end).times if number.end
-    elsif number
-      receive_new.exactly(number).times
-    end
-
-    target.to receive_new.and_wrap_original do |*original_args, **original_kwargs|
-      method, *original_args = original_args
-      method.call(*original_args, **original_kwargs).tap(&blk)
-    end
+  if number.is_a?(Range)
+    receive_new.at_least(number.begin).times if number.begin
+    receive_new.at_most(number.end).times if number.end
+  elsif number
+    receive_new.exactly(number).times
   end
+
+  target.to receive_new.and_wrap_original do |*original_args, **original_kwargs|
+    method, *original_args = original_args
+    method.call(*original_args, **original_kwargs).tap(&blk)
+  end
+end
 ```
+
 <a class="link--source" href="https://github.com/gitlabhq/gitlabhq/blob/652dfd/spec/support/helpers/next_instance_of.rb">https://github.com/gitlabhq/gitlabhq/blob/652dfd/spec/support/helpers/next_instance_of.rb</a>
 
 ---
