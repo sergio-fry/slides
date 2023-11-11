@@ -4,13 +4,18 @@
 
 <!-- header: Конфигурация -->
 
-# ls spec/*_helper.rb
+# helper 1/2
 
 - spec_helper
 - fast_spec_helper
 - rake_helper
 - rubocop_spec_helper
 
+<a class="link--source" href="https://github.com/gitlabhq/gitlabhq/blob/652dfd/spec">https://github.com/gitlabhq/gitlabhq/blob/652dfd/spec</a>
+
+---
+
+# helper 2/2
 
 ```ruby
 RSpec.configure do |config|
@@ -41,7 +46,8 @@ end
 
 
 ```ruby
-# TODO: each spec file should require its dependencies. Maybe we'll get there one day
+# TODO: each spec file should require its dependencies.
+# Maybe we'll get there one day
 require "rom"
 require "rom/sql"
 require "rom/memory"
@@ -50,25 +56,6 @@ require "rom/changeset"
 ```
 
 <a class="link--source" href="https://github.com/rom-rb/rom/blob/7fb82c/spec/spec_helper.rb">https://github.com/rom-rb/rom/blob/7fb82c/spec/spec_helper.rb</a>
-
----
-
-
-```ruby
-module Test
-  def self.remove_constants
-    constants.each(&method(:remove_const))
-  end
-end
-
-config.after do
-  gateway.disconnect if respond_to?(:gateway) && gateway.respond_to?(:disconnect)
-  Test.remove_constants
-end
-```
-
-<a class="link--source" href="https://github.com/rom-rb/rom/blob/7fb82c/spec/spec_helper.rb">https://github.com/rom-rb/rom/blob/7fb82c/spec/spec_helper.rb</a>
-
 
 ---
 
@@ -131,8 +118,10 @@ Dir[root.join("support/**/*.rb")].sort.each { |f| require f }
 RSpec.configure do |c|
   c.around do |ex|
     RSpec::Core::Sandbox.sandboxed do |config|
-      # If there is an example-within-an-example, we want to make sure the inner example
-      # does not get a reference to the outer example (the real spec) if it calls
+      # If there is an example-within-an-example,
+      # we want to make sure the inner example
+      # does not get a reference to the outer example
+      # (the real spec) if it calls
       # something like `pending`
       config.before(:context) { RSpec.current_example = nil }
 

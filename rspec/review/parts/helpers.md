@@ -57,4 +57,44 @@ end
 
 ---
 
+# `without_env_vars` 1/2
+
+
+```ruby
+def without_env_vars(*vars)
+  original = ENV.to_hash
+  vars.each { |k| ENV.delete(k) }
+
+  begin
+    yield
+  ensure
+    ENV.replace(original)
+  end
+end
+```
+
+<a class="link--source" href="https://github.com/rspec/rspec-core/blob/1eeadc/spec/spec_helper.rb">https://github.com/rspec/rspec-core/blob/1eeadc/spec/spec_helper.rb</a>
+
+---
+
+# `without_env_vars` 2/2
+
+```ruby
+with_env_vars 'XDG_CONFIG_HOME' => '~/.custom-config' do
+  options = parse_options
+  expect(options[:formatters]).to eq([['overridden_xdg']])
+end
+
+without_env_vars 'XDG_CONFIG_HOME' do
+  options = parse_options
+  expect(options[:formatters]).to eq([['default_xdg']])
+end
+```
+
+<a class="link--source" href="https://github.com/rspec/rspec-core/blob/1eeadc/spec/rspec/core/configuration_options_spec.rb">https://github.com/rspec/rspec-core/blob/1eeadc/spec/rspec/core/configuration_options_spec.rb</a>
+
+
+---
+
+
 <!-- header: "" -->

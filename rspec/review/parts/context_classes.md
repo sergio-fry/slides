@@ -68,4 +68,41 @@ end
 
 ---
 
+```ruby
+it "shouldn't accept invalid return from fit_to_copy_get" do
+  tm = Class.new(PG::TypeMapInRuby) do
+    def fit_to_copy_get
+      :invalid
+    end
+  end.new.freeze
+
+  ce = PG::TextDecoder::CopyRow.new(type_map: tm).freeze
+  expect { ce.decode("5\t6\n") }.to raise_error(TypeError, /kind of Integer/)
+end
+
+```
+
+<a class="link--source" href="https://github.com/ged/ruby-pg/blob/1c67bb/spec/pg/type_map_in_ruby_spec.rb">https://github.com/ged/ruby-pg/blob/1c67bb/spec/pg/type_map_in_ruby_spec.rb</a>
+
+---
+
+```ruby
+module Test
+  def self.remove_constants
+    constants.each(&method(:remove_const))
+  end
+end
+
+config.after do
+  gateway.disconnect if respond_to?(:gateway) && gateway.respond_to?(:disconnect)
+  Test.remove_constants
+end
+```
+
+<a class="link--source" href="https://github.com/rom-rb/rom/blob/7fb82c/spec/spec_helper.rb">https://github.com/rom-rb/rom/blob/7fb82c/spec/spec_helper.rb</a>
+
+
+---
+
+
 <!-- header: "" -->

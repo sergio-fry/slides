@@ -21,6 +21,7 @@ size: 4:3
   footer a { color: #bbb }
 
   .link--source { color: #bbb; font-size: 0.5em; max-width: fit-content; }
+
 </style>
 
 <!-- _paginate: skip -->
@@ -31,15 +32,10 @@ size: 4:3
 Сергей Удалов, PTL DAM at Samokat.tech
 
 ---
-<style scoped>
- 
- h1 { font-size: 1.5em; }
- ul li { font-size: 0.6em; }
-</style>
 
 # Сергей Удалов
 
-![bg right](img/me.png)
+![bg right:35%](img/me.png)
 
 - PTL DAM, Samokat.tech
 - тимлид с 2017
@@ -58,7 +54,7 @@ size: 4:3
 
 <!-- footer: bit.ly/3SBDkYI › @SergeiUdalov › Samokat.tech  -->
 
-# Зачем сомтреть код?
+TODO: Зачем это доклад?
 
 ---
 
@@ -96,6 +92,8 @@ rspec ruby-concurrency vcr
 
 # Summary
 
+TODO
+
 
 ---
 
@@ -112,16 +110,8 @@ rspec ruby-concurrency vcr
 # Links
 
 1. https://youtu.be/oNIAJtWuHKg "RSpec. Поддерживаемость"
-1. https://youtu.be/oNIAJtWuHKg "RSpec. Поддерживаемость"
+1. TODO: Efficient
 
 ---
 
-# Bonus
-
----
-
-# How to explore
-
-```bash
-find . -type f | grep rb$ | sort --random-sort | tail -n 1 | xargs nvim
-```
+# Спасибо!
