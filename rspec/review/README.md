@@ -89,20 +89,11 @@ rspec ruby-concurrency vcr
 !!!include(parts/libraries.md)!!!
 
 
-# Summary
+# Итоги
 
-TODO
-
-
----
-
-# What Next?
-
-* faraday
-* rails
-* sequel
-* sidekiq
-* ...
+1) тестируй
+2) тестируй важное
+3) читай чужой код
 
 ---
 <style scoped>
