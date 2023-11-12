@@ -4,6 +4,8 @@
 
 <!-- header: Тестовые классы  -->
 
+![bg](img/bg/dry-rb.png)
+
 ```ruby
 it 'raises no error when all monads are loaded' do
   expect do
@@ -21,6 +23,8 @@ end
 
 
 ---
+
+![bg](img/bg/rom-rb.png)
 
 ```ruby
 before do
@@ -40,6 +44,7 @@ end
 
 ---
 
+![bg](img/bg/ruby-concurrency.png)
 
 
 ```ruby
@@ -68,6 +73,8 @@ end
 
 ---
 
+![bg](img/bg/pg.png)
+
 ```ruby
 it "shouldn't accept invalid return from fit_to_copy_get" do
   tm = Class.new(PG::TypeMapInRuby) do
@@ -85,6 +92,8 @@ end
 <a class="link--source" href="https://github.com/ged/ruby-pg/blob/1c67bb/spec/pg/type_map_in_ruby_spec.rb">https://github.com/ged/ruby-pg/blob/1c67bb/spec/pg/type_map_in_ruby_spec.rb</a>
 
 ---
+
+![bg](img/bg/rom-rb.png)
 
 ```ruby
 module Test

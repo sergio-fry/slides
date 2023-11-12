@@ -3,6 +3,8 @@
 ---
 <!-- header: Helpers -->
 
+![bg](img/bg/gitlab.png)
+
 ```ruby
 context 'when all inputs are correct' do
   it 'imports a repository' do
@@ -23,6 +25,8 @@ end
 
 ---
 
+![bg](img/bg/gitlab.png)
+
 ```ruby
 def expect_next_instance_of(klass, *new_args, &blk)
   stub_new(expect(klass), nil, false, *new_args, &blk)
@@ -32,6 +36,8 @@ end
 <a class="link--source" href="https://github.com/gitlabhq/gitlabhq/blob/652dfd/spec/support/helpers/next_instance_of.rb">https://github.com/gitlabhq/gitlabhq/blob/652dfd/spec/support/helpers/next_instance_of.rb</a>
 
 ---
+
+![bg](img/bg/gitlab.png)
 
 ```ruby
 def stub_new(target, number, ordered = false, *new_args, &blk)
@@ -57,6 +63,8 @@ end
 
 ---
 
+![bg](img/bg/rspec.png)
+
 # `without_env_vars` 1/2
 
 
@@ -77,6 +85,8 @@ end
 
 ---
 
+![bg](img/bg/rspec.png)
+
 # `without_env_vars` 2/2
 
 ```ruby
@@ -95,6 +105,5 @@ end
 
 
 ---
-
 
 <!-- header: "" -->

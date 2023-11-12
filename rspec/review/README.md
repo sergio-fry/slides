@@ -106,9 +106,20 @@ size: 4:3
 3) читай чужой код
 
 ---
+
+<center>
+
+![width:10em](img/iceberg.png)
+
+</center>
+
+---
 <style scoped>
 li { font-size: 0.9em }
 </style>
+
+
+
 
 # Сылки
 

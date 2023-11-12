@@ -2,6 +2,7 @@
 
 ---
 <!-- header: Библиотеки  -->
+![bg](img/bg/dry-rb.png)
 
 ```ruby
 require "warning"
@@ -15,6 +16,7 @@ Warning[:experimental] = false if Warning.respond_to?(:[])
 <a class="link--source" href="https://github.com/dry-rb/dry-monads/blob/704c1b/spec/support/warnings.rb">https://github.com/dry-rb/dry-monads/blob/704c1b/spec/support/warnings.rb</a>
 
 ---
+![bg](img/bg/gitlab.png)
 
 # TestProf 1/2
 
@@ -34,9 +36,7 @@ end
 
 # TestProf 2/2
 
-gem 'test-prof', '~> 1.2.3'
-
-<a class="link--source" href="https://github.com/test-prof/test-prof/blob/2c8ff6/docs/recipes/let_it_be.md#caveats">https://github.com/test-prof/test-prof/blob/2c8ff6/docs/recipes/let_it_be.md#caveats</a>
+![](img/test-prof.png)
 
 ---
 

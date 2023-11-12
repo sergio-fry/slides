@@ -58,6 +58,8 @@ end
 
 ---
 
+![bg](img/bg/rspec.png)
+
 # `attr_reader`
 
 ```ruby
@@ -90,6 +92,8 @@ end
 
 ---
 
+![bg](img/bg/dry-rb.png)
+
 # Перменные вне блоков
 
 ```ruby
@@ -107,6 +111,8 @@ end
 
 
 ---
+
+![bg](img/bg/vcr.png)
 
 # `as_null_object` 1/2
 

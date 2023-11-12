@@ -4,6 +4,8 @@
 
 <!-- header: Expectation -->
 
+![bg](img/bg/dry-rb.png)
+
 
 ```ruby
 it "returns a new instance" do
@@ -17,6 +19,7 @@ end
 
 ---
 
+![bg](img/bg/hanami.png)
 
 ```ruby
 let(:logger_stream) { StringIO.new }
@@ -35,6 +38,8 @@ expect(logs).to match %r{GET 404 \d+(µs|ms) 127.0.0.1 /}
 <a class="link--source" href="https://github.com/hanami/hanami/blob/675b44/spec/integration/logging/exception_logging_spec.rb">https://github.com/hanami/hanami/blob/675b44/spec/integration/logging/exception_logging_spec.rb</a>
 
 ---
+
+![bg](img/bg/hanami.png)
 
 
 ```ruby
@@ -125,6 +130,8 @@ end
 
 ---
 
+![bg](img/bg/rspec.png)
+
 ```ruby
 expect(DRb).not_to have_running_server
 
@@ -140,6 +147,7 @@ end.to raise_error('boom')
 
 ---
 
+![bg](img/bg/ruby-concurrency.png)
 
 
 ```ruby
@@ -158,6 +166,7 @@ end
 
 ---
 
+![bg](img/bg/ruby-concurrency.png)
 
 ```ruby
 specify '#(try_)push(_op)' do
@@ -233,6 +242,8 @@ end
 
 ---
 
+![bg](img/bg/ruby-concurrency.png)
+
 ```ruby
 specify '#to_s formats as a time', truffle_bug: true do
   expect(subject.to_s).to
@@ -243,6 +254,8 @@ end
 <a class="link--source" href="https://github.com/ruby-concurrency/concurrent-ruby/blob/dadc2a/spec/concurrent/channel/tick_spec.rb">https://github.com/ruby-concurrency/concurrent-ruby/blob/dadc2a/spec/concurrent/channel/tick_spec.rb</a>
 
 ---
+
+![bg](img/bg/hanami.png)
 
 ```ruby
 it 'renders <video> tag' do

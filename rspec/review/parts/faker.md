@@ -4,6 +4,8 @@
 
 <!-- header: Faker -->
 
+![bg](img/bg/pg.png)
+
 # TcpGateSwitcher 1/2
 
 ```ruby
@@ -32,6 +34,8 @@
 <style scoped>
 .hljs-comment { color: red; background: yellow }
 </style>
+
+![bg](img/bg/pg.png)
 
 # TcpGateSwitcher 2/2
 

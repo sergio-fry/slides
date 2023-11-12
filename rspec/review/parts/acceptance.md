@@ -4,6 +4,8 @@
 
 <!-- header: Acceptance -->
 
+![bg](img/bg/hanami.png)
+
 ```ruby
 specify 'types from a provided types module can be used as setting constructors to coerce values' do
   with_tmp_directory(Dir.mktmpdir) do
@@ -43,6 +45,8 @@ end
 
 ---
 
+![bg](img/bg/vcr.png)
+
 ```ruby
 context 'when used in a multithreaded environment with a cassette', with_monkey_patches: :excon do
   it 'properly stubs threaded requests' do
@@ -66,6 +70,8 @@ end
 
 
 ---
+
+![bg](img/bg/rspec.png)
 
 ```ruby
 def passing_example(fail_if_no_examples)

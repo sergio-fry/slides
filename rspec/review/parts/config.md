@@ -4,6 +4,8 @@
 
 <!-- header: Конфигурация -->
 
+![bg](img/bg/gitlab.png)
+
 # helper 1/2
 
 - spec_helper
@@ -14,6 +16,8 @@
 <a class="link--source" href="https://github.com/gitlabhq/gitlabhq/blob/652dfd/spec">https://github.com/gitlabhq/gitlabhq/blob/652dfd/spec</a>
 
 ---
+
+![bg](img/bg/gitlab.png)
 
 # helper 2/2
 
@@ -31,6 +35,8 @@ end
 <a class="link--source" href="https://github.com/gitlabhq/gitlabhq/blob/652dfd/spec/rubocop_spec_helper.rb">https://github.com/gitlabhq/gitlabhq/blob/652dfd/spec/rubocop_spec_helper.rb</a>
 
 ---
+
+![bg](img/bg/pg.png)
 
 ```ruby
 it 'should tell about pipeline mode', :postgresql_14 do
@@ -60,6 +66,7 @@ require "rom/changeset"
 
 ---
 
+![bg](img/bg/rom-rb.png)
 
 
 ```ruby
@@ -82,6 +89,8 @@ end
 
 ---
 
+![bg](img/bg/rom-rb.png)
+
 # Helper 1/3
 
 ```ruby
@@ -90,6 +99,8 @@ RSpec.describe ROM::SQL::Associations::ManyToMany, helpers: true do
 <a class="link--source" href="https://github.com/rom-rb/rom-sql/blob/beb115/spec/integration/associations/many_to_many_spec.rb">https://github.com/rom-rb/rom-sql/blob/beb115/spec/integration/associations/many_to_many_spec.rb</a>
 
 ---
+
+![bg](img/bg/rom-rb.png)
 
 # Helper 2/3
 
@@ -114,6 +125,8 @@ Dir[root.join("support/**/*.rb")].sort.each { |f| require f }
 <a class="link--source" href="https://github.com/rom-rb/rom-sql/blob/beb115/spec/spec_helper.rb">https://github.com/rom-rb/rom-sql/blob/beb115/spec/spec_helper.rb</a>
 
 ---
+
+![bg](img/bg/rspec.png)
 
 # Sanboxed
 
