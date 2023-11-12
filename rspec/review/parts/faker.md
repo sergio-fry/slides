@@ -4,6 +4,8 @@
 
 <!-- header: Faker -->
 
+# TcpGateSwitcher 1/2
+
 ```ruby
 
 # This is a transparent TCP proxy for testing blocking behaviour in a time insensitive way.
@@ -27,8 +29,37 @@
 <a class="link--source" href="https://github.com/ged/ruby-pg/blob/1c67bb/spec/helpers/tcp_gate_switcher.rb">https://github.com/ged/ruby-pg/blob/1c67bb/spec/helpers/tcp_gate_switcher.rb</a>
 
 ---
+<style scoped>
+.hljs-comment { color: red; background: yellow }
+</style>
 
-TODO: add usage
+# TcpGateSwitcher 2/2
+
+```ruby
+run_with_gate(200) do |conn, gate|
+  conn.setnonblocking(true)
+
+  gate.stop # ТУТ
+  data = 'x' * 1000 * 1000 * 30
+  res = conn.send_query_params('SELECT LENGTH($1)',
+    [data])
+  expect(res).to be_nil
+
+  res = conn.flush
+  expect(res).to be_falsey
+
+  gate.start # И ЗДЕСЬ
+  IO.select(
+    nil, [conn.socket_io], [conn.socket_io], 10
+  ) until conn.flush
+  expect(conn.flush).to be_truthy
+
+  res = conn.get_last_result
+  expect(res.values).to eq([[data.length.to_s]])
+end
+```
+
+<a class="link--source" href="https://github.com/ged/ruby-pg/blob/2218ebf0b5a6057e74cd4d628e0b20011b8c0aff/spec/pg/connection_spec.rb">https://github.com/ged/ruby-pg/blob/2218eb/spec/pg/connection_spec.rb</a>
 
 ---
 
