@@ -1,7 +1,8 @@
 # Helpers
+6 из 9
 
 ---
-<!-- header: Helpers -->
+<!-- header: Helpers 6 из 9 -->
 
 ![bg](img/bg/gitlab.png)
 

@@ -1,8 +1,9 @@
 # Faker
+5 из 9
 
 ---
 
-<!-- header: Faker -->
+<!-- header: Faker 5 из 9 -->
 
 ![bg](img/bg/pg.png)
 
@@ -61,6 +62,7 @@ run_with_gate(200) do |conn, gate|
   res = conn.get_last_result
   expect(res.values).to eq([[data.length.to_s]])
 end
+                                                                                      
 ```
 
 <a class="link--source" href="https://github.com/ged/ruby-pg/blob/2218ebf0b5a6057e74cd4d628e0b20011b8c0aff/spec/pg/connection_spec.rb">https://github.com/ged/ruby-pg/blob/2218eb/spec/pg/connection_spec.rb</a>

@@ -1,8 +1,9 @@
 # Тестовые классы 
+3 из 9
 
 ---
 
-<!-- header: Тестовые классы  -->
+<!-- header: Тестовые классы 3 из 9 -->
 
 ![bg](img/bg/dry-rb.png)
 
@@ -67,6 +68,7 @@ subject do
     end
   end.new
 end
+                                                              
 ```
 <a class="link--source" href="https://github.com/ruby-concurrency/concurrent-ruby/blob/1982b9/spec/concurrent/async_spec.rb">https://github.com/ruby-concurrency/concurrent-ruby/blob/1982b9/spec/concurrent/async_spec.rb</a>
 

@@ -1,8 +1,9 @@
 # Expectation
+4 из 9
 
 ---
 
-<!-- header: Expectation -->
+<!-- header: Expectation 4 из 9 -->
 
 ![bg](img/bg/dry-rb.png)
 
@@ -166,7 +167,11 @@ end
 
 ---
 
-![bg](img/bg/ruby-concurrency.png)
+<style scoped>
+pre { margin-right: 100px;  }
+</style>
+
+![bg](img/warning.png)
 
 ```ruby
 specify '#(try_)push(_op)' do
@@ -207,17 +212,7 @@ specify '#(try_)push(_op)' do
   expect(channel.size).to eq 1
   expect(thread.value).to eq true
 
-  channel = Concurrent::Promises::Channel.new 1
-  expect(channel.push_op(:v1).value!).to eq channel
-  expect(channel.size).to eq 1
-  push_op = channel.push_op :v2
-  expect(channel.size).to eq 1
-  expect(push_op.pending?).to be_truthy
-  channel.pop
-  expect(channel.size).to eq 1
-  expect(push_op.value!).to eq channel
-  channel.pop
-  expect(channel.size).to eq 0
+  # ..
 end
 ```
 

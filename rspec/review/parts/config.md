@@ -1,12 +1,13 @@
 # Конфигурация
+1 из 9
 
 ---
 
-<!-- header: Конфигурация -->
+<!-- header: Конфигурация 1 из 9 -->
 
 ![bg](img/bg/gitlab.png)
 
-# helper 1/2
+# helper конфиг 1/2
 
 - spec_helper
 - fast_spec_helper
@@ -19,7 +20,7 @@
 
 ![bg](img/bg/gitlab.png)
 
-# helper 2/2
+# helper конфиг 2/2
 
 ```ruby
 RSpec.configure do |config|
