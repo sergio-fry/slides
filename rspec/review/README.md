@@ -105,11 +105,14 @@ TODO
 * ...
 
 ---
+<style scoped>
+li { font-size: 0.9em }
+</style>
 
 # Links
 
 1. https://youtu.be/oNIAJtWuHKg "RSpec. Поддерживаемость"
-1. TODO: Efficient
+1. https://bit.ly/3QSGIxh Другие выступления
 
 ---
 
