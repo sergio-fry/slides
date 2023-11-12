@@ -51,16 +51,26 @@ size: 4:3
 
 ---
 
-<!-- footer: bit.ly/3SBDkYI › @SergeiUdalov › Samokat.tech  -->
+<!-- footer: <a href="https://bit.ly/review-su">bit.ly/review-su</a> › @SergeiUdalov › Samokat.tech  -->
 
-TODO: Зачем это доклад?
+# Что будет?
+
+* много кода
+* чему можно научиться
+* что посоветовать
 
 ---
 
-# Рассмотрим
+<style scoped>
+  img { width: 7em; }
+  table, th, td, tr { border: 0px !important; background: white }
+</style>
 
-dry-rb gitlab hanami pg rom-rb
-rspec ruby-concurrency vcr
+|                          |                          |                                    |                       |
+| ------------------------ | ------------------------ | ---------------------------------- | --------------------- |
+| ![](img/logo/dry-rb.png) | ![](img/logo/gitlab.png) | ![](img/logo/hanami.png)           | ![](img/logo/pg.png)  |
+| ![](img/logo/rom-rb.png) | ![](img/logo/rspec.png)  | ![](img/logo/ruby-concurrency.png) | ![](img/logo/vcr.png) |
+
 
 ---
 
@@ -100,7 +110,7 @@ rspec ruby-concurrency vcr
 li { font-size: 0.9em }
 </style>
 
-# Links
+# Сылки
 
 1. https://youtu.be/oNIAJtWuHKg "RSpec. Поддерживаемость"
 1. https://bit.ly/3QSGIxh Другие выступления
