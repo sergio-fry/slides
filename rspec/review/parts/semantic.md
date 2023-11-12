@@ -4,6 +4,8 @@
 
 <!-- header: Выразительность -->
 
+![bg](img/bg/gitlab.png)
+
 ```ruby
 
 FactoryBot.define do
@@ -18,6 +20,8 @@ end
 
 
 ---
+
+![bg](img/bg/pg.png)
 
 ```ruby
 def textdec_timestamptz_decode_should_fail(str)
@@ -65,6 +69,7 @@ end
 
 ---
 
+![bg](img/bg/rspec.png)
 # Метод с ожиданием
 
 

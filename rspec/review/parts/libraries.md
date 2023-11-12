@@ -40,6 +40,8 @@ end
 
 ---
 
+![bg](img/bg/gitlab.png)
+
 # rspec-parameterized 1/3
 
 ```ruby
@@ -56,6 +58,8 @@ end
 <a class="link--source" href="https://github.com/gitlabhq/gitlabhq/blob/d1ad38/spec/lib/gitlab/qa_spec.rb">https://github.com/gitlabhq/gitlabhq/blob/d1ad38/spec/lib/gitlab/qa_spec.rb</a>
 
 ---
+
+![bg](img/bg/gitlab.png)
 
 # rspec-parameterized 2/3
 
