@@ -60,19 +60,19 @@ end
 # rspec-parameterized 2/3
 
 
-```ruby
+<pre>
 with_them do
   before do
-    allow(Gitlab).to receive(:com?).and_return(dot_com)
-    stub_env('GITLAB_QA_USER_AGENT', qa_user_agent)
+    allow(Gitlab).to receive(:com?).and_return(<mark>dot_com</mark>)
+    stub_env('GITLAB_QA_USER_AGENT', <mark>qa_user_agent</mark>)
   end
 
-  subject { described_class.request?(request_user_agent) }
+  subject { described_class.request?(<mark>request_user_agent</mark>) }
 
-  it { is_expected.to eq(result) }
+  it { is_expected.to eq(<mark>result</mark>) }
 end
 
-```
+</pre>
 
 <a class="link--source" href="https://github.com/gitlabhq/gitlabhq/blob/d1ad38/spec/lib/gitlab/qa_spec.rb">https://github.com/gitlabhq/gitlabhq/blob/d1ad38/spec/lib/gitlab/qa_spec.rb</a>
 
@@ -94,10 +94,6 @@ end
 
 <a class="link--source" href="https://github.com/tomykaira/rspec-parameterized">tomykaira/rspec-parameterized</a>
 
-
----
-
-https://www.rubydoc.info/gems/undercover/
 
 ---
 
