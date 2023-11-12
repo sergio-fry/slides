@@ -44,6 +44,7 @@ end
 
 ---
 
+![bg](img/warning.png)
 
 ```ruby
 # TODO: each spec file should require its dependencies.
@@ -99,6 +100,8 @@ config.include(Helpers, helpers: true)
 <a class="link--source" href="https://github.com/rom-rb/rom-sql/blob/beb115/spec/spec_helper.rb">https://github.com/rom-rb/rom-sql/blob/beb115/spec/spec_helper.rb</a>
 
 ---
+
+![bg](img/warning.png)
 
 # Helper 3/3
 

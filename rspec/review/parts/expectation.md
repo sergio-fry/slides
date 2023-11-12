@@ -8,7 +8,8 @@
 ```ruby
 it "returns a new instance" do
   expect(none).to eql(None())
-  expect(none.trace).to include("spec/integration/maybe_spec.rb:9:in `block")
+  expect(none.trace).to include("spec/integration/\ 
+    maybe_spec.rb:9:in `block")
 end
 ```
 <a class="link--source" href="https://github.com/dry-rb/dry-monads/blob/704c1b/spec/integration/maybe_spec.rb">https://github.com/dry-rb/dry-monads/blob/704c1b/spec/integration/maybe_spec.rb</a>
@@ -16,21 +17,6 @@ end
 
 ---
 
-```ruby
-RSpec.describe(Dry::Monads) do
-  let(:m) { described_class }
-  list = Dry::Monads::List
-
-  it "builds a list with List[]" do
-    expect(instance.make_list).to eql(list[1, 2, 3])
-  end
-end
-```
-
-<a class="link--source" href="https://github.com/dry-rb/dry-monads/blob/704c1b/spec/integration/monads_spec.rb">https://github.com/dry-rb/dry-monads/blob/704c1b/spec/integration/monads_spec.rb</a>
-
-
----
 
 ```ruby
 let(:logger_stream) { StringIO.new }
@@ -60,7 +46,9 @@ end
 
 ---
 
+![bg](img/warning.png)
 
+# Несколько проверок 1/3
 
 ```ruby
 let!(:textdec_int) { PG::TextDecoder::Integer.new(name: 'INT4', oid: 23).freeze }
@@ -89,6 +77,9 @@ end
 
 ---
 
+![bg](img/warning.png)
+
+# Несколько проверок 2/3
 
 ```ruby
 it 'should check format when deleting coders' do
@@ -101,6 +92,9 @@ end
 
 ---
 
+![bg](img/warning.png)
+
+# Несколько проверок 3/3
 
 ```ruby
 [1, 0].each do |format|
@@ -223,9 +217,15 @@ end
 
 ---
 
+![bg](img/warning.png)
+
+# Очевидный комментарий
+
 ```ruby
 it 'sets :max_length to DEFAULT_MAX_POOL_SIZE' do
-  expect(subject.max_length).to eq described_class::DEFAULT_MAX_POOL_SIZE
+  expect(subject.max_length).to eq(
+    described_class::DEFAULT_MAX_POOL_SIZE
+  )
 end
 ```
 
@@ -235,7 +235,8 @@ end
 
 ```ruby
 specify '#to_s formats as a time', truffle_bug: true do
-  expect(subject.to_s).to match(/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{6} \+\d{4} UTC/)
+  expect(subject.to_s).to
+    match(/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{6} \+\d{4} UTC/)
 end
 ```
 
@@ -253,6 +254,10 @@ end
 <a class="link--source" href="https://github.com/hanami/hanami/blob/a2bdb7/spec/unit/hanami/helpers/assets_helper/video_tag_spec.rb">https://github.com/hanami/hanami/blob/a2bdb7/spec/unit/hanami/helpers/assets_helper/video_tag_spec.rb</a>
 
 ---
+
+![bg](img/warning.png)
+
+# Магические циклы
 
 ```ruby
 it 'should decode integers of different lengths from text format' do

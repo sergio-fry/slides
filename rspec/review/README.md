@@ -21,7 +21,6 @@ size: 4:3
   footer a { color: #bbb }
 
   .link--source { color: #bbb; font-size: 0.5em; max-width: fit-content; }
-
 </style>
 
 <!-- _paginate: skip -->
@@ -71,10 +70,10 @@ rspec ruby-concurrency vcr
 2. Контекст
 3. Тестовые классы
 4. Expectation
-5. Acceptance
 6. Faker
 7. Helpers
 8. Выразительность
+5. Acceptance
 9. Библиотеки
 
 ---
@@ -83,10 +82,10 @@ rspec ruby-concurrency vcr
 !!!include(parts/context.md)!!!
 !!!include(parts/context_classes.md)!!!
 !!!include(parts/expectation.md)!!!
-!!!include(parts/acceptance.md)!!!
 !!!include(parts/faker.md)!!!
 !!!include(parts/helpers.md)!!!
 !!!include(parts/semantic.md)!!!
+!!!include(parts/acceptance.md)!!!
 !!!include(parts/libraries.md)!!!
 
 

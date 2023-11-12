@@ -94,7 +94,8 @@ module Test
 end
 
 config.after do
-  gateway.disconnect if respond_to?(:gateway) && gateway.respond_to?(:disconnect)
+  gateway.disconnect if respond_to?(:gateway)
+    && gateway.respond_to?(:disconnect)
   Test.remove_constants
 end
 ```

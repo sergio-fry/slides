@@ -2,6 +2,8 @@
 
 ---
 
+![bg](img/warning.png)
+
 <!-- header: Контекст -->
 
 ```
@@ -24,6 +26,8 @@
 <a class="link--source" href="https://github.com/rom-rb/rom/blob/7fb82c/spec/fixtures">https://github.com/rom-rb/rom/blob/7fb82c/spec/fixtures</a>
 
 ---
+
+![bg](img/warning.png)
 
 ```ruby
 RSpec.shared_context 'changeset / database' do
@@ -82,6 +86,24 @@ end
 ```
 
 <a class="link--source" href="https://github.com/rspec/rspec-core/blob/1eeadc/spec/rspec/core/bisect/server_spec.rb">https://github.com/rspec/rspec-core/blob/1eeadc/spec/rspec/core/bisect/server_spec.rb</a>
+
+
+---
+
+# Перменные вне блоков
+
+```ruby
+RSpec.describe(Dry::Monads) do
+  let(:m) { described_class }
+  list = Dry::Monads::List
+
+  it "builds a list with List[]" do
+    expect(instance.make_list).to eql(list[1, 2, 3])
+  end
+end
+```
+
+<a class="link--source" href="https://github.com/dry-rb/dry-monads/blob/704c1b/spec/integration/monads_spec.rb">https://github.com/dry-rb/dry-monads/blob/704c1b/spec/integration/monads_spec.rb</a>
 
 
 ---
