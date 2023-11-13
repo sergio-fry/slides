@@ -1,9 +1,9 @@
 # Faker
-5 из 9
+5 из 8
 
 ---
 
-<!-- header: Faker 5 из 9 -->
+<!-- header: Faker 5 из 8 -->
 
 ![bg](img/bg/hanami.png)
 

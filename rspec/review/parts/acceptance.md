@@ -1,9 +1,9 @@
 # Acceptance
-8 из 9
+8 из 8
 
 ---
 
-<!-- header: Acceptance 8 из 9 -->
+<!-- header: Acceptance 8 из 8 -->
 
 ![bg](img/bg/hanami.png)
 

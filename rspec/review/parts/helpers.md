@@ -1,8 +1,8 @@
 # Helpers
-6 из 9
+6 из 8
 
 ---
-<!-- header: Helpers 6 из 9 -->
+<!-- header: Helpers 6 из 8 -->
 
 ![bg](img/bg/gitlab.png)
 
@@ -11,9 +11,7 @@
 ```ruby
 context 'when all inputs are correct' do
   it 'imports a repository' do
-    expect_next_instance_of(Gitlab::GithubImport::SequentialImporter) do |importer|
-      expect(importer).to receive(:execute)
-    end
+    # ..
 
     expect_next_instance_of(Project) do |project|
       expect(project).to receive(:after_import)

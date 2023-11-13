@@ -81,7 +81,6 @@ size: 4:3
 7. Helpers
 8. Выразительность
 5. Acceptance
-9. Библиотеки
 
 ---
 
@@ -93,7 +92,6 @@ size: 4:3
 !!!include(parts/helpers.md)!!!
 !!!include(parts/semantic.md)!!!
 !!!include(parts/acceptance.md)!!!
-!!!include(parts/libraries.md)!!!
 
 
 # Итоги

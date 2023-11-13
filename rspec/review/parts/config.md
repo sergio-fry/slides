@@ -1,9 +1,9 @@
 # Конфигурация
-1 из 9
+1 из 8
 
 ---
 
-<!-- header: Конфигурация 1 из 9 -->
+<!-- header: Конфигурация 1 из 8 -->
 
 ![bg](img/bg/gitlab.png)
 
@@ -157,6 +157,21 @@ end
 ```
 
 <a class="link--source" href="https://github.com/rspec/rspec-core/blob/1eeadc/spec/support/sandboxing.rb">https://github.com/rspec/rspec-core/blob/1eeadc/spec/support/sandboxing.rb</a>
+
+---
+
+![bg](img/bg/dry-rb.png)
+
+```ruby
+require "warning"
+
+Warning.ignore(%r{rspec/core})
+Warning.ignore(%r{rspec/mocks})
+Warning.ignore(/codacy/)
+Warning[:experimental] = false if Warning.respond_to?(:[])
+```
+
+<a class="link--source" href="https://github.com/dry-rb/dry-monads/blob/704c1b/spec/support/warnings.rb">https://github.com/dry-rb/dry-monads/blob/704c1b/spec/support/warnings.rb</a>
 
 ---
 

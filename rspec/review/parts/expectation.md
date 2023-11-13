@@ -1,9 +1,9 @@
 # Expectation
-4 из 9
+4 из 8
 
 ---
 
-<!-- header: Expectation 4 из 9 -->
+<!-- header: Expectation 4 из 8 -->
 
 ![bg](img/bg/dry-rb.png)
 
