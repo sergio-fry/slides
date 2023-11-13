@@ -5,6 +5,26 @@
 
 <!-- header: Faker 5 из 9 -->
 
+![bg](img/bg/hanami.png)
+
+```ruby
+let(:logger_stream) { StringIO.new }
+
+def configure_logger
+  Hanami.app.config.logger.stream = logger_stream
+end
+
+def logs
+  @logs ||= (logger_stream.rewind and logger_stream.read)
+end
+
+expect(logs).to match %r{GET 404 \d+(µs|ms) 127.0.0.1 /}
+```
+
+<a class="link--source" href="https://github.com/hanami/hanami/blob/675b44/spec/integration/logging/exception_logging_spec.rb">https://github.com/hanami/hanami/blob/675b44/spec/integration/logging/exception_logging_spec.rb</a>
+
+---
+
 ![bg](img/bg/pg.png)
 
 # TcpGateSwitcher 1/2

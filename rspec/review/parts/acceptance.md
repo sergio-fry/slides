@@ -49,7 +49,8 @@ end
 ![bg](img/bg/vcr.png)
 
 ```ruby
-context 'when used in a multithreaded environment with a cassette', with_monkey_patches: :excon do
+context 'when used in a multithreaded environment with a cassette',
+                                       with_monkey_patches: :excon do
   it 'properly stubs threaded requests' do
     VCR.use_cassette('/foo') do
       threads = 50.times.map do

@@ -20,37 +20,6 @@ end
 
 ---
 
-![bg](img/bg/hanami.png)
-
-```ruby
-let(:logger_stream) { StringIO.new }
-
-def configure_logger
-  Hanami.app.config.logger.stream = logger_stream
-end
-
-def logs
-  @logs ||= (logger_stream.rewind and logger_stream.read)
-end
-
-expect(logs).to match %r{GET 404 \d+(µs|ms) 127.0.0.1 /}
-```
-
-<a class="link--source" href="https://github.com/hanami/hanami/blob/675b44/spec/integration/logging/exception_logging_spec.rb">https://github.com/hanami/hanami/blob/675b44/spec/integration/logging/exception_logging_spec.rb</a>
-
----
-
-![bg](img/bg/hanami.png)
-
-
-```ruby
-describe 'sessions' do
-  specify { expect(config.sessions).not_to be_enabled }
-end
-```
-<a class="link--source" href="https://github.com/hanami/hanami/blob/a2bdb7/spec/unit/hanami/config/actions/default_values_spec.rb">https://github.com/hanami/hanami/blob/a2bdb7/spec/unit/hanami/config/actions/default_values_spec.rb</a>
-
----
 
 ![bg](img/warning.png)
 
@@ -131,42 +100,6 @@ end
 
 ---
 
-![bg](img/bg/rspec.png)
-
-```ruby
-expect(DRb).not_to have_running_server
-
-expect do
-  Bisect::Server.run do
-    expect(DRb).to have_running_server
-    raise 'boom'
-  end
-end.to raise_error('boom')
-```
-
-<a class="link--source" href="https://github.com/rspec/rspec-core/blob/1eeadc/spec/rspec/core/bisect/server_spec.rb">https://github.com/rspec/rspec-core/blob/1eeadc/spec/rspec/core/bisect/server_spec.rb</a>
-
----
-
-![bg](img/bg/ruby-concurrency.png)
-
-
-```ruby
-specify '#to_s' do
-  channel = Concurrent::Promises::Channel.new
-  expect(channel.to_s).to match(/Channel.*unlimited/)
-  channel = Concurrent::Promises::Channel.new 2
-  expect(channel.to_s).to match(/Channel.*0.*2/)
-  channel.push :value
-  expect(channel.to_s).to match(/Channel.*1.*2/)
-end
-```
-
-<a class="link--source" href="https://github.com/ruby-concurrency/concurrent-ruby/blob/1982b9/spec/concurrent/edge/channel_spec.rb">https://github.com/ruby-concurrency/concurrent-ruby/blob/1982b9/spec/concurrent/edge/channel_spec.rb</a>
-
-
----
-
 <style scoped>
 pre { margin-right: 100px;  }
 </style>
@@ -237,31 +170,6 @@ end
 
 ---
 
-![bg](img/bg/ruby-concurrency.png)
-
-```ruby
-specify '#to_s formats as a time', truffle_bug: true do
-  expect(subject.to_s).to
-    match(/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{6} \+\d{4} UTC/)
-end
-```
-
-<a class="link--source" href="https://github.com/ruby-concurrency/concurrent-ruby/blob/dadc2a/spec/concurrent/channel/tick_spec.rb">https://github.com/ruby-concurrency/concurrent-ruby/blob/dadc2a/spec/concurrent/channel/tick_spec.rb</a>
-
----
-
-![bg](img/bg/hanami.png)
-
-```ruby
-it 'renders <video> tag' do
-  actual = video_tag('movie.mp4').to_s
-  expect(actual).to eq(%(<video src="/assets/movie.mp4"></video>))
-end
-```
-
-<a class="link--source" href="https://github.com/hanami/hanami/blob/a2bdb7/spec/unit/hanami/helpers/assets_helper/video_tag_spec.rb">https://github.com/hanami/hanami/blob/a2bdb7/spec/unit/hanami/helpers/assets_helper/video_tag_spec.rb</a>
-
----
 
 ![bg](img/warning.png)
 

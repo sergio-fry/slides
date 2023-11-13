@@ -39,6 +39,8 @@ end
 
 ![bg](img/bg/pg.png)
 
+# Tags
+
 ```ruby
 it 'should tell about pipeline mode', :postgresql_14 do
   @conn.enter_pipeline_mode
@@ -68,6 +70,8 @@ require "rom/changeset"
 ---
 
 ![bg](img/bg/rom-rb.png)
+
+# Определение группы
 
 
 ```ruby
@@ -129,7 +133,7 @@ Dir[root.join("support/**/*.rb")].sort.each { |f| require f }
 
 ![bg](img/bg/rspec.png)
 
-# Sanboxed
+# Sandboxed
 
 ```ruby
 RSpec.configure do |c|

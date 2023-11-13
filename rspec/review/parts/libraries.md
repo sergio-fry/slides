@@ -20,7 +20,7 @@ Warning[:experimental] = false if Warning.respond_to?(:[])
 ---
 ![bg](img/bg/gitlab.png)
 
-# TestProf 1/2
+# let_it_be
 
 ```ruby
 RSpec.describe Projects::BranchesByModeService, feature_category: :source_code_management do
@@ -36,7 +36,7 @@ end
 
 ---
 
-# TestProf 2/2
+# TestProf
 
 ![](img/test-prof.png)
 

@@ -59,6 +59,10 @@ end
 
 ---
 
+<style scoped>
+.hljs-comment { color: red; background: yellow }
+</style>
+
 ![bg](img/bg/rspec.png)
 
 # `attr_reader`
@@ -67,7 +71,7 @@ end
 context 'when used in combination with the BisectDRbFormatter', :slow do
   include FormatterSupport
 
-  attr_reader :server
+  attr_reader :server # ВОТ ТУТ
 
   around do |ex|
     Bisect::Server.run do |the_server|
@@ -129,6 +133,8 @@ allow(config).to receive(:logger).and_return(double.as_null_object)
 
 ```ruby
 logger = double.as_null_object
+
+expect { logger.info }.not_to raise_error
 expect(logger.foo.bar).to be_nil?
 ```
 

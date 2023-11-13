@@ -21,12 +21,13 @@ size: 4:3
   footer a { color: #bbb }
 
   .link--source { color: #bbb; font-size: 0.5em; max-width: fit-content; }
+
 </style>
 
 <!-- _paginate: skip -->
 
 
-# RSpec. Review
+# RSpec. Codereview
 
 Сергей Удалов, PTL DAM at Samokat.tech
 
@@ -51,13 +52,13 @@ size: 4:3
 
 ---
 
-<!-- footer: <a href="https://bit.ly/review-su">bit.ly/review-su</a> › @SergeiUdalov › Samokat.tech  -->
+<!-- footer: <a href="https://bit.ly/RSpec23">bit.ly/RSpec23</a> › @SergeiUdalov › Samokat.tech  -->
 
-# Что будет?
+# Codereview
 
-* много кода
-* чему можно научиться
-* что посоветовать
+- много кода
+- чему можно научиться
+- что посоветовать
 
 ---
 
@@ -101,9 +102,9 @@ size: 4:3
 
 # Итоги
 
-1) тестируй
-2) тестируй важное
-3) читай чужой код
+1. тестируй
+2. тестируй важное
+3. читай чужой код
 
 ---
 
@@ -123,8 +124,10 @@ li { font-size: 0.9em }
 
 # Сылки
 
-1. https://youtu.be/oNIAJtWuHKg "RSpec. Поддерживаемость"
-1. https://bit.ly/3QSGIxh Другие выступления
+1. https://bit.ly/3QSGIxh "RSpec. Поддерживаемость"
+2. https://github.com/jeremyevans/ruby-warning
+3. https://github.com/test-prof/test-prof
+4. https://github.com/rspec-parameterized/rspec-parameterized-core
 
 ---
 
