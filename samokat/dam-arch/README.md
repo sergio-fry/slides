@@ -8,24 +8,38 @@ paginate: true
 <style>
   img {
     display: block;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 90%;
-    max-height: 90%;
+    max-height: 100%;
+    max-width: 80%;
   }
+
+  img[alt="uml diagram"] {
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 90%;
+      max-height: 90%;
+  }
+
+
+  h1, p, ul li { color: black; }
+  pre { border: 0px; background: white; }
+
+  footer { color: #bbb }
+  footer a { color: #bbb }
+
+
 </style>
 
-# DAM Architecture
+# Архитектура DAM
 
 ---
 
-<!-- footer: DAM Architecture -->
+<!-- footer:  https://bit.ly/418IZYt / @SergeiUdalov / DAM -->
 
-# Requirements
+# Требования
 
-* 5 Tb
-* 2Tb/Year
-* 1Gb per file
+* 10Tb
+* +2Tb / год
+* размер файла ≤2Gb 
 * 200 users
 
 ---
@@ -36,10 +50,11 @@ paginate: true
 
 # Roadmap
 
-1. photos
-1. videos
-1. documents
-1. ?
+* media production
+* +MM
+* automation
+* редактирование inline
+* ML
 
 ---
 
@@ -51,7 +66,18 @@ paginate: true
 
 ---
 
-# Everything is File or Dir
+# Все файл или папка
+
+---
+
+# Словарь
+
+* актив
+* тип актива
+* вид актива
+* сценарий
+* метаданные
+* см https://space.samokat.ru/x/iazp4Q
 
 ---
 
@@ -93,27 +119,6 @@ s3
 
 ---
 
-# DB
-
-```plantuml
-entity Blob {
-  --
-  * s3_key
-  * status
-  * size
-  * file_id
-}
-
-entity File {
-  --
-  * name
-}
-
-Blob }|-- File
-```
-
----
-
 # Upload
 
 ```plantuml
@@ -127,31 +132,44 @@ Browser --> DAM: Create File
 
 ---
 
-# No Modification
+# Без модификаций
 
----
-
-# Versioning
-
----
-
-# Automation
-
-* scenario
-* trigger
-* asset type
-* required fields
-* events
-* context menu
+```bash
+s3
+└── 2023
+    └── 12
+        ├── 678a550d-9e11-46bc-820f-ebac29907342 # version 1
+        └── d607e4f9-2758-4364-a6e1-a72965be3c5b # version 2
+```
 
 
 ---
 
-# Download Dir Problem
+# Версионирование
+
+
 
 ---
 
-# Directory Size
+# Вызовы
+
+* производительность
+* превью
+* скачивание папки
+* расчет размера папки
+* система плагинов
+
+---
+
+# Плагин
+
+
+* виды активов
+* мета
+* сценарии автоматизации
+* тригеры и события
+* действия контекстного меню
+* режим работы
 
 ---
 
@@ -159,26 +177,13 @@ Browser --> DAM: Create File
 
 ---
 
-# Modes
+# Итоги
+
+* все файлы и папки
+* меньше Ruby
+* избегать update
+* хранилище + плагины
 
 ---
 
-# Summary
-
-* storage first
-* less Ruby
-* less updates
-
-
-<!--
-
-# TODO
-
-- сценарии
-  - тригеры
-  - действия
-  - обязательность полей
-  - условия для статусных переходов
-  - контекстное меню
-
-      -->
+# Спасибо!
