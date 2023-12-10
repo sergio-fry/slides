@@ -28,3 +28,5 @@ Build PDF: `make pdf`
 ## TODO
 
 * Generate QR from markdown links to inline SVG
+* publish latest to website
+
