@@ -33,125 +33,32 @@ paginate: true
 
 ---
 
-<!-- footer:  https://bit.ly/418IZYt / @SergeiUdalov / DAM -->
+<!-- footer: @SergeiUdalov / DAM -->
 
+# Вступление
 
-- сильная команда
-  - рефактринг
-  - автотесты
-  - 
-- крутой продукт
-- продать дам - привлечь стейкхолдеров
-
-- плагин
-- ТС - отдельный рут
-- путь
-    - ролевая модель
-    - перенос 10Тб с google drive
-- логирование
-- kafkaesque интеграция
-- цифры
-    - скорость загрузки
-    - число пользователей
+У нас есть 3 вещи: рабочее решение, сильная команда, у которой есть видение, как сделать DAM еще лучше
 
 ---
 
-# Upload
+# Эффективность
 
-```sql
-SELECT
-  date_trunc('day', created_at)
-  date,
-  sum(size) / 1000 / 1000 AS size
-FROM
-  blobs
-GROUP BY
-  date
-ORDER BY
-  date
-```
+Простое лучше сложного. Начать с важного. Компромис, который допускает улучшение в будущем.
 
 ---
 
-# Files
+# Производительность
 
+Когда делаем что-то, думаем, а можем ли мы в будущем сделать это быстрым? Если DAM станет большим?
+Работает сейчас, но будет ли работать, когда DAM будет большим?
 
-```sql
-SELECT
-  date_trunc('day', created_at) time,
-  count(id) count
-FROM
-  files
-GROUP BY
-  time
-ORDER BY
-  time
-```
+Поиск, пересчет размера, проверка файлов.
 
 ---
 
-# Active Users
+# Расширяемость
 
-```sql
-WITH file_creators AS (
-  SELECT
-    created_at time,
-    author_id AS user_id
-  FROM
-    files
-),
-directory_creators AS (
-  SELECT
-    created_at time,
-    author_id AS user_id
-  FROM
-    directories
-),
-file_updaters AS (
-  SELECT
-    updated_at AS time,
-    UUID (META ->> 'updater_id') AS user_id
-  FROM
-    FILES
-  WHERE
-    META ? 'updater_id'
-),
-directory_updaters AS (
-  SELECT
-    updated_at AS time,
-    UUID (meta ->> 'updater_id') AS user_id
-  FROM
-    DIRECTORIES
-  WHERE
-    META ? 'updater_id'
-)
-SELECT
-  date_trunc('day', time) time1,
-  count(DISTINCT user_id)
-FROM (
-  SELECT
-    *
-  FROM
-    file_creators
-  UNION
-  SELECT
-    *
-  FROM
-    directory_creators
-  UNION
-  SELECT
-    *
-  FROM
-    file_updaters
-  UNION
-  SELECT
-    *
-  FROM
-    directory_updaters) t1
-GROUP BY
-  time1
-
-```
+Интеграции с ТС,  1С, Каталог.
 
 ---
 
