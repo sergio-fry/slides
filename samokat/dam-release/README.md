@@ -1,7 +1,7 @@
 ---
 
 marp: true
-paginate: true
+paginate: false
 
 ---
 
@@ -20,7 +20,7 @@ paginate: true
   }
 
 
-  h1, p, ul li { color: black; }
+  h1, p, ul li { color: black; text-align: center }
   pre { border: 0px; background: white; }
 
   footer { color: #bbb }
@@ -59,6 +59,10 @@ paginate: true
 # Расширяемость
 
 Интеграции с ТС,  1С, Каталог.
+
+---
+
+# План
 
 ---
 
