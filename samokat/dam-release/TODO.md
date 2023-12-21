@@ -36,15 +36,14 @@ https://why.esprezo.ru/like/steve-jobs
 
 ```sql
 SELECT
-  date_trunc('day', created_at)
-  date,
-  sum(size) / 1000 / 1000 AS size
+  date_trunc('day', created_at)::date dt,
+  sum(size) / 1000 / 1000 AS value
 FROM
   blobs
 GROUP BY
-  date
+  dt
 ORDER BY
-  date
+  dt
 ```
 
 ---
@@ -54,14 +53,14 @@ ORDER BY
 
 ```sql
 SELECT
-  date_trunc('day', created_at) time,
-  count(id) count
+  date_trunc('day', created_at)::date dt,
+  count(id) value
 FROM
   files
 GROUP BY
-  time
+  dt
 ORDER BY
-  time
+  dt
 ```
 
 ---
@@ -102,8 +101,8 @@ directory_updaters AS (
     META ? 'updater_id'
 )
 SELECT
-  date_trunc('day', time) time1,
-  count(DISTINCT user_id)
+  date_trunc('day', time)::date dt,
+  count(DISTINCT user_id) value
 FROM (
   SELECT
     *
@@ -125,7 +124,7 @@ FROM (
   FROM
     directory_updaters) t1
 GROUP BY
-  time1
+  dt
 
 ```
 

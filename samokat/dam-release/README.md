@@ -1,5 +1,5 @@
 ---
-
+false
 marp: true
 paginate: false
 
@@ -20,7 +20,7 @@ paginate: false
   }
 
 
-  h1, p, ul li { color: black; text-align: center }
+  h1, p, ul li { color: black; }
   pre { border: 0px; background: white; }
 
   footer { color: #bbb }
@@ -33,11 +33,9 @@ paginate: false
 
 ---
 
-<!-- footer: @SergeiUdalov / DAM -->
-
-# Вступление
-
-У нас есть 3 вещи: рабочее решение, сильная команда, у которой есть видение, как сделать DAM еще лучше
+* рабочее решение
+* сильная команда
+* видение
 
 ---
 
