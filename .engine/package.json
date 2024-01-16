@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@marp-team/marp-cli": "^3.0.2",
+    "@marp-team/marp-core": "^3.7.0",
+    "markdown-it-include": "^2.0.0",
+    "markdown-it-textual-uml": "^0.12.0"
+  }
+}

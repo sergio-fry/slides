@@ -1,0 +1,8 @@
+*.html
+*.pptx
+*.pdf
+node_modules/
+.DS_Store
+pilot
+sandbox
+

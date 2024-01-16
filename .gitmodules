@@ -1,0 +1,36 @@
+[submodule "extensions/vendor/devise"]
+	path = ocp/vendor/devise
+	url = https://github.com/heartcombo/devise.git
+[submodule "extensions/vendor/faraday"]
+	path = ocp/vendor/faraday
+	url = https://github.com/lostisland/faraday.git
+[submodule "extensions/vendor/jekyll"]
+	path = ocp/vendor/jekyll
+	url = https://github.com/jekyll/jekyll.git
+[submodule "extensions/vendor/rails"]
+	path = ocp/vendor/rails
+	url = https://github.com/rails/rails.git
+[submodule "extensions/vendor/rspec-core"]
+	path = extensions/vendor/rspec-core
+	url = https://github.com/rspec/rspec-core.git
+[submodule "extensions/vendor/dry-types"]
+	path = ocp/vendor/dry-types
+	url = https://github.com/dry-rb/dry-types.git
+[submodule "extensions/vendor/huginn"]
+	path = ocp/vendor/huginn
+	url = https://github.com/huginn/huginn.git
+[submodule "extensions/vendor/rack"]
+	path = ocp/vendor/rack
+	url = https://github.com/rack/rack.git
+[submodule "extensions/vendor/redmine"]
+	path = ocp/vendor/redmine
+	url = https://github.com/redmine/redmine.git
+[submodule "extensions/vendor/rspec-expectations"]
+	path = extensions/vendor/rspec-expectations
+	url = https://github.com/rspec/rspec-expectations.git
+[submodule "extensions/vendor/warden"]
+	path = ocp/vendor/warden
+	url = https://github.com/wardencommunity/warden.git
+[submodule "samokat"]
+	path = samokat
+	url = git@gitlab.samokat.io:serudalov/slides.git
