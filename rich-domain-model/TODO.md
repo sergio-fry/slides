@@ -5,6 +5,9 @@
 - [ ] testing example
 - [ ] DDD
 
+- [ ] метрики проекта
+
+
 ## Links
 
 - <https://martinfowler.com/bliki/AnemicDomainModel.html>

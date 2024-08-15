@@ -72,6 +72,16 @@ dirs.save directory
 
 ---
 
+# Other
+
+* code smells, как понять, что не rich
+* repository UML
+* testing example
+* DDD
+* rom-rb
+
+---
+
 # Summary
 
 ---
