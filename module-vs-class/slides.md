@@ -126,6 +126,9 @@ class Products
   def all
     parse get("https://example.com/api/products")
   end
+
+  def get
+  end
 end
 
 module HTTP
