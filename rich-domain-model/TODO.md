@@ -1,11 +1,14 @@
 # TODO
 
-- [ ] code smells, как понять, что не rich
-- [ ] repository UML
-- [ ] testing example
-- [ ] DDD
+- code smells, как понять, что не rich
+- repository UML
+- testing example
+- DDD
+- метрики проекта
+- 
 
-- [ ] метрики проекта
+
+
 
 
 ## Links

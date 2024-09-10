@@ -24,42 +24,92 @@ paginate: true
 
 # What?
 
-* Rich Domain Model vs Active Record
-* Interactor
-* Repository
-* SRP
-* Coupling
-
 ---
 
 # Why?
 
-* медленные тесты
-* раздувание модели
 * связанность кода и БД
+* раздувание модели
+* медленные тесты
+* интересно
 
 ---
 
-# How to fix
+# Plan
 
 ---
 
 # Active Record
 
 ```ruby
-directory = Directory.find(id)
-directory.build_file(name: "hello.txt")
-directory.save
+class Article < ApplicationRecord
+  def rating
+    views + comments.count * 5
+  end
+
+  def publish!
+    self.published_at = Time.now
+    notify_subscribers
+  end
+
+  def as_json
+    { id:, title:, published_at: published_at.rfc3339, body: body_html}
+  end
+end
 ```
 
 ---
 
-# Rich Domain Model
+# Active Record
 
 ```ruby
-directory = dirs.find(id)
-directory.new_file(name: "hello.txt")
-dirs.save directory
+class Article < ApplicationRecord
+  # CalculateArticleRatingInteractor
+  def rating
+    views + comments.count * 5
+  end
+
+  # PublishArticleInteractor
+  def publish!
+    self.published_at = Time.now
+    notify_subscribers
+  end
+
+  # ArticlePresenter
+  def as_json
+    { id:, title:, published_at: published_at.rfc3339, body: body_html}
+  end
+end
+```
+
+---
+
+
+# Anemic Domain Model
+
+```ruby
+class Article < ApplicationRecord
+end
+```
+
+---
+
+# Тестирование
+
+---
+
+```ruby
+RSpec.describe ArticlesController do 
+
+  context do 
+    before { create(:article, slug: "taken-slug") }
+
+    example do 
+      post articles_url, params: { article: { slug: "taken-slug" } }
+      expect(respose.body).to match /Slug is already taken/
+    end
+  end
+end
 ```
 
 ---
