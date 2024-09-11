@@ -2,19 +2,6 @@
 marp: true
 paginate: true
 ---
-<style>
-  img {
-    display: block;
-    max-height: 100%;
-    max-width: 80%;
-  }
-
-  h1, p, ul li { color: black; }
-  pre { border: 0px; background: white; }
-
-  footer { color: #bbb }
-  footer a { color: #bbb }
-</style>
 
 <!-- _paginate: skip -->
 
@@ -84,7 +71,6 @@ end
 
 ---
 
-
 # Anemic Domain Model
 
 ```ruby
@@ -96,11 +82,8 @@ end
 
 # Тестирование
 
----
-
 ```ruby
 RSpec.describe ArticlesController do 
-
   context do 
     before { create(:article, slug: "taken-slug") }
 
@@ -111,6 +94,19 @@ RSpec.describe ArticlesController do
   end
 end
 ```
+
+---
+
+# XXX
+
+```ruby
+before {
+  allow(Article).to receive(:find_by)
+                      .with(slig: "taken-slug")
+                      .and_return(build(:article))
+}
+```
+
 
 ---
 
