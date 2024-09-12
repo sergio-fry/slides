@@ -160,9 +160,6 @@ before {
 
 ---
 
-# Data Mapper
-
----
 
 <style scoped>
   img {
@@ -178,6 +175,33 @@ before {
 </center>
 
 ---
+
+<style scoped>
+  img {
+    width: 40%;
+  }
+</style>
+
+# Мартин Фаулер
+
+<center>
+
+![](img/martin-fowler.jpeg)
+
+</center>
+
+---
+
+# Data Mapper
+
+---
+
+<style scoped>
+  img {
+    width: 50%;
+  }
+</style>
+
 
 
 <center>
