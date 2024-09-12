@@ -6,10 +6,6 @@ paginate: true
 <style>
   img {
     display: block;
-    max-height: 100%;
-    max-width: 80%;
-    width: auto;
-    height: auto;
   }
 
   h1, p, ul li { color: black; }
@@ -25,7 +21,14 @@ paginate: true
 
 ---
 
-# What?
+<!-- footer: rich domain model -->
+
+# DAM 
+
+* 4854 lines of code
+* 8344 lines of code (RSpec)
+* 98.48% coverage
+* 2 BE devs
 
 ---
 
@@ -45,7 +48,7 @@ Finished in 2.07 seconds (files took 2.16 seconds to load)
 
 Randomized with seed 47124
 
-Coverage report generated for RSpec to /Users/sergei/code/dam/dam-api/coverage/coverage.xml. 3172 / 4119 LOC (77.01%) covered
+Coverage report generated for RSpec to /Users/sergei/code/dam/dam-api/coverage/coverage.xml. 3172 / 4854 LOC (65.34%) covered
 ```
 
 ---
@@ -157,15 +160,22 @@ before {
 
 ---
 
-# Как быть?
-
+# Data Mapper
 
 ---
 
+<style scoped>
+  img {
+    width: 40%;
+    box-shadow: 10px 5px 5px #aaa;
+  }
+</style>
 
-# Patterns of Enterprise Application Architecture
+<center>
 
-2003 
+![](img/eaa_book.jpeg)
+
+</center>
 
 ---
 
@@ -219,12 +229,6 @@ package "Data Mapper" {
 
 # Other
 
-* code smells, как понять, что не rich
-* repository UML
-* testing example
-* DDD
-* rom-rb
-
 ---
 
 # Summary
@@ -233,5 +237,5 @@ package "Data Mapper" {
 
 # Links
 
-* <https://github.com/sergio-fry/slides/template>
+- <https://martinfowler.com/bliki/AnemicDomainModel.html>
 
