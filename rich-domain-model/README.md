@@ -23,38 +23,39 @@ paginate: true
 
 <!-- footer: rich domain model -->
 
-# DAM 
+# Digital Asset Management
 
-* 4854 lines of code
-* 8344 lines of code (RSpec)
+* 1.2M files, 11TB
+* 4854 lines of code (+8344 RSpec)
 * 98.48% coverage
-* 2 BE devs
+* 2 разработчика
 
 ---
 
-```bash
+<pre>
 $ rspec -c --tag fast
 Run options: include {:fast=>true}
 
 Randomized with seed 47124
-................................................................................
-................................................................................
-................................................................................
 ............................................................................
+............................................................................
+............................................................................
+............................................................................
+............
 
 
-Finished in 2.07 seconds (files took 2.16 seconds to load)
+Finished in <mark>2.07</mark> seconds (files took 2.16 seconds to load)
 317 examples, 0 failures, 0 pending
 
-Randomized with seed 47124
-
-Coverage report generated for RSpec to /Users/sergei/code/dam/dam-api/coverage/coverage.xml. 3172 / 4854 LOC (65.34%) covered
-```
+Coverage report generated for RSpec to
+/Users/sergei/code/dam/dam-api/coverage/coverage.xml.
+3172 / 4854 LOC (<mark>65.34%</mark>) covered
+</pre>
 
 ---
 
-```bash
-Top 10 slowest examples (0.68232 seconds, 35.8% of total time):
+<pre>
+Top 10 slowest examples (0.68232 seconds, <mark>35.8%</mark> of total time):
     0.15203 seconds ./spec/domain/kinds/image_spec.rb:27
     0.13857 seconds ./spec/interactors/files/create_spec.rb:186
     0.13542 seconds ./spec/repositories/assets_in_directory/filter_spec.rb:39
@@ -64,8 +65,8 @@ Top 10 slowest examples (0.68232 seconds, 35.8% of total time):
     0.02442 seconds ./spec/domain/file_spec.rb:67
     0.0204 seconds ./spec/outbox/file/create_event_spec.rb:27
     0.01876 seconds ./spec/interactors/google_drive/create_spec.rb:27
-    0.01795 seconds ./spec/interactors/google_drive/update_spec.rb:30
-```
+    <mark>0.01795 seconds</mark> ./spec/interactors/google_drive/update_spec.rb:30
+</pre>
 
 ---
 
