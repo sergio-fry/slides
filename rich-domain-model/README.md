@@ -154,7 +154,7 @@ end
 ```ruby
 before {
   allow(Article).to receive(:find_by)
-                      .with(slig: "taken-slug")
+                      .with(slug: "taken-slug")
                       .and_return(build(:article))
 }
 ```
@@ -169,11 +169,9 @@ before {
   }
 </style>
 
-<center>
 
 ![](img/eaa_book.jpeg)
 
-</center>
 
 ---
 
@@ -185,24 +183,46 @@ before {
 
 # Мартин Фаулер
 
-<center>
 
 ![](img/martin-fowler.jpeg)
 
-</center>
+---
+
+# Active Record
+
+> Active Record is a good choice for domain logic that isn’t too complex, such as
+creates, reads, updates, and deletes.  - **Martin Fowler**
+
+
+---
+
+# Active Record
+
+> Active Record has the primary advantage of simplicity.  - **Martin Fowler**
+
+---
+
+# Active Record
+
+> Another argument against Active Record is the fact that it couples the object
+design to the database design. This makes it more difficult to refactor either
+design as a project goes forward.  - **Martin Fowler**
 
 ---
 
 # Data Mapper
 
+> A layer of Mappers (473) that moves data between objects
+and a database while keeping them independent of
+each other and the mapper itself.
+
+
 ---
 
-<style scoped>
-  img {
-    width: 50%;
-  }
-</style>
+> If you have fairly simple business logic, you probably won’t need a Domain
+Model (116) or a Data Mapper
 
+---
 
 
 <center>
@@ -241,6 +261,169 @@ package "Data Mapper" {
 ```
 
 </center>
+
+---
+
+# Жизненный цикл
+
+1. загрузка модели
+2. манипуляция с моделью
+3. сохранение модели
+
+---
+
+
+```ruby
+class Article < ApplicationRecord
+  def rating
+    views + comments.count * 5
+  end
+
+  def publish!
+    self.published_at = Time.now
+    notify_subscribers
+  end
+
+  def as_json
+    { id:, title:, published_at: published_at.rfc3339, body: body_html}
+  end
+end
+```
+
+---
+
+```ruby
+class Article
+end
+```
+
+---
+
+
+```ruby
+class Article
+  def initialize(id:, title:, body:, views: 0, published_at: nil, comments: [])
+    @id = id 
+    @title = title
+    @body = body
+    @views = views
+    @published_at = published_at
+    @comments = comments
+  end
+end
+```
+
+---
+
+
+```ruby
+class Article
+  def initialize(id:, title:, body:, views: 0, published_at: nil, comments: [])
+    @id = id 
+    @title = title
+    @body = body
+    @views = views
+    @published_at = published_at
+    @comments = comments
+  end
+
+  def rating = @views + @comments.size * 5
+
+  def publish
+    @published_at = Time.now
+    notify_subscribers
+  end
+end
+```
+
+---
+
+```ruby
+class ArticlesRepository
+  def find(id)
+    record = Database::Article.find(id)
+
+    Article.new(id: record.id, views: record.views,
+      title: record.title, body: record.body,
+      published_at: record.published_at, comments(record))
+  end
+end
+```
+
+---
+
+```ruby
+
+# 1. загрузка модели
+article = repo.find(id)
+
+# 2. манипуляция с моделью
+article.publish
+
+# 3. сохранение модели
+repo.save article
+
+```
+
+---
+
+# Тестирование
+
+```ruby
+let(:article) { Article.new(id: 1, ...) }
+
+describe "#publish" do
+  before { article.publish }
+  it { expect(article.published_at).to eq Time.now }
+end
+
+```
+
+---
+
+# Тестирование
+
+```ruby
+let(:article) { Article.new(id: 1, views:, comments:, ...) }
+
+describe "#rating" do
+  let(:views) { 1 }
+  let(:comments) { [double(:comment)] }
+  it { expect(article.rating).to eq 6 }
+end
+
+```
+
+---
+
+```ruby
+
+
+
+RSpec.describe ArticlesController do 
+  let(:articles) { Testing::FakeArticlesRepository.new }
+  before { DependenciesContainer.stub(:articles, articles) }
+  after { DependenciesContainer.unstub(:articles) }
+
+  context do 
+    before { articles.save Article.new(id: 1, slug: "taken-slug", ...) }
+
+    example do 
+      post articles_url, params: { article: { slug: "taken-slug" } }
+      expect(respose.body).to match /Slug is already taken/
+    end
+  end
+end
+```
+
+---
+
+# Что еще?
+
+* Dirty
+* Relations
+* IdentityMap
+* PubSub
 
 ---
 
