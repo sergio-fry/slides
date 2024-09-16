@@ -19,18 +19,22 @@ paginate: true
 
 # Rich Domain Model
 
+Бизнес-логика без БД
+
 ---
+
+<!-- _paginate: skip -->
 
 
 # Обо мне
 
 - tech lead
 - публичные выступления
-- канал @SergeiUdalov
+- @SergeiUdalov
 
 ---
 
-<!-- footer: rich domain model -->
+<!-- footer: "Rich Domain Model » @SergeiUdalov » ecom.tech" -->
 
 # Digital Asset Management
 
@@ -100,7 +104,7 @@ class Article < ApplicationRecord
   end
 
   def publish!
-    self.published_at = Time.now
+    self.update published_at: Time.now
     notify_subscribers
   end
 
@@ -123,7 +127,7 @@ class Article < ApplicationRecord
 
   # PublishArticleInteractor
   def publish!
-    self.published_at = Time.now
+    self.update published_at: Time.now
     notify_subscribers
   end
 
@@ -180,6 +184,19 @@ before {
 
 ---
 
+<style scoped>
+  img {
+    width: 40%;
+  }
+</style>
+
+# Мартин Фаулер
+
+
+![](img/martin-fowler.jpeg)
+
+---
+
 
 <style scoped>
   img {
@@ -192,18 +209,6 @@ before {
 ![](img/eaa_book.jpeg)
 
 
----
-
-<style scoped>
-  img {
-    width: 40%;
-  }
-</style>
-
-# Мартин Фаулер
-
-
-![](img/martin-fowler.jpeg)
 
 ---
 
@@ -235,6 +240,10 @@ database "DB" as db
 
 ---
 
+# Domain Model
+
+---
+
 # Data Mapper
 
 > A layer of Mappers (473) that moves data between objects
@@ -242,6 +251,9 @@ and a database while keeping them independent of
 each other and the mapper itself.
 
 
+---
+
+# Repository
 
 ---
 
@@ -287,7 +299,7 @@ class Article < ApplicationRecord
   end
 
   def publish!
-    self.published_at = Time.now
+    self.update published_at: Time.now
     notify_subscribers
   end
 
@@ -352,7 +364,7 @@ class ArticlesRepository
 
     Article.new(id: record.id, views: record.views,
       title: record.title, <mark>body: record.content</mark>,
-      published_at: record.published_at, comments(record))
+      published_at: record.published_at, comments: <mark>ArticleComments.new(record)</mark>)
   end
 end
 </pre>
@@ -368,7 +380,7 @@ class ArticlesRepository
       content: record.body, published_at: record.published_at
     )
 
-    assign_comments(record, article)
+    update_comments(article.comments)
 
     record.save!
   end
@@ -444,7 +456,7 @@ let(:article) { Article.new(id: 1, views:, comments:, ...) }
 
 describe "#rating" do
   let(:views) { 1 }
-  let(:comments) { [double(:comment)] }
+  let(:comments) { [Comment.new(text: "hello", ...)] }
   it { expect(article.rating).to eq 6 }
 end
 
@@ -480,6 +492,12 @@ end
 * Relations
 * IdentityMap
 * PubSub
+
+---
+
+# rom-rb
+
+Ruby object mapper
 
 ---
 
