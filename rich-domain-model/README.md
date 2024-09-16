@@ -21,14 +21,31 @@ paginate: true
 
 ---
 
+
+# Обо мне
+
+- tech lead
+- публичные выступления
+- канал @SergeiUdalov
+
+---
+
 <!-- footer: rich domain model -->
 
 # Digital Asset Management
 
-* 1.2M files, 11TB
-* 4854 lines of code (+8344 RSpec)
-* 98.48% coverage
-* 2 разработчика
+- 1.2M files, 11TB
+- 4854 lines of code (+8344 RSpec)
+- 98.48% coverage
+- 2 разработчика
+
+---
+
+```ruby
+add_filter "bin"
+add_filter "config"
+add_filter "db"
+```
 
 ---
 
@@ -70,11 +87,7 @@ Top 10 slowest examples (0.68232 seconds, <mark>35.8%</mark> of total time):
 
 ---
 
-# Why?
-
----
-
-# Plan
+# Active Record
 
 ---
 
@@ -123,12 +136,18 @@ end
 
 ---
 
-# Anemic Domain Model
-
 ```ruby
 class Article < ApplicationRecord
 end
 ```
+
+---
+
+# Anemic Domain Model
+
+> The fundamental horror of this anti-pattern is that it's so contrary to the basic idea of object-oriented design; which is to combine data and process together.
+
+https://martinfowler.com/bliki/AnemicDomainModel.html
 
 ---
 
@@ -188,25 +207,31 @@ before {
 
 ---
 
-# Active Record
-
-> Active Record is a good choice for domain logic that isn’t too complex, such as
-creates, reads, updates, and deletes.  - **Martin Fowler**
-
+> Active Record is a good choice for domain logic that isn’t too
+complex, such as creates, reads, updates, and deletes. - **Martin Fowler**
 
 ---
 
-# Active Record
 
-> Active Record has the primary advantage of simplicity.  - **Martin Fowler**
 
----
+<center>
 
-# Active Record
+```plantuml
+allow_mixing
 
-> Another argument against Active Record is the fact that it couples the object
-design to the database design. This makes it more difficult to refactor either
-design as a project goes forward.  - **Martin Fowler**
+database "DB" as db
+
+  class "Article" as article_ar {
+    +save()
+    +find(id)
+    +publish()
+  }
+
+  article_ar ..> db
+
+```
+
+</center>
 
 ---
 
@@ -217,10 +242,6 @@ and a database while keeping them independent of
 each other and the mapper itself.
 
 
----
-
-> If you have fairly simple business logic, you probably won’t need a Domain
-Model (116) or a Data Mapper
 
 ---
 
@@ -230,34 +251,20 @@ Model (116) or a Data Mapper
 ```plantuml
 allow_mixing
 
-database "DB" as db1
-database "DB" as db2
+database "DB" as db
 
-package ActiveRecrod {
-  class "Article" as article_ar {
-    +save()
-    +find(id)
-    +publish()
-  }
-
-  article_ar ..> db1
+class "Article" as article_domain {
+  published_at
+  +publish()
 }
 
-package "Data Mapper" {
-  class "Article" as article_domain {
-    published_at
-    +publish()
-  }
-
-  class ArticlesMapper {
-    +save(article)
-    +find(id): Article
-  }
-
-  ArticlesMapper ..> db2
-  ArticlesMapper .up.> article_domain
+class ArticlesMapper {
+  +save(article)
+  +find(id): Article
 }
 
+ArticlesMapper ..> db
+ArticlesMapper .up.> article_domain
 ```
 
 </center>
@@ -338,32 +345,81 @@ end
 
 ---
 
-```ruby
+<pre>
 class ArticlesRepository
   def find(id)
     record = Database::Article.find(id)
 
     Article.new(id: record.id, views: record.views,
-      title: record.title, body: record.body,
+      title: record.title, <mark>body: record.content</mark>,
       published_at: record.published_at, comments(record))
+  end
+end
+</pre>
+
+---
+
+```ruby
+class ArticlesRepository
+  def save(article)
+    record = Database::Article.find_or_initialize_by(id:)
+
+    record.assign_attributes(views: record.views, title: record.title,
+      content: record.body, published_at: record.published_at
+    )
+
+    assign_comments(record, article)
+
+    record.save!
   end
 end
 ```
 
 ---
 
-```ruby
+# Загрузка модели (1/3)
 
-# 1. загрузка модели
-article = repo.find(id)
 
-# 2. манипуляция с моделью
-article.publish
+<pre>
+class PublishArticleInteractor
+  include Import[repo: "repositories.articles"]
 
-# 3. сохранение модели
-repo.save article
+  def call(id)
+    <mark>article = repo.find(id)</mark>
+  end
+end
+</pre>
 
-```
+---
+
+# Манипуляция с моделью (2/3)
+
+<pre>
+class PublishArticleInteractor
+  include Import[repo: "repositories.articles"]
+
+  def call(id)
+    article = repo.find(id)
+    <mark>article.publish</mark>
+  end
+end
+</pre>
+
+---
+
+# Сохранение (3/3)
+
+<pre>
+class PublishArticleInteractor
+  include Import[repo: "repositories.articles"]
+
+  def call(id)
+    article = repo.find(id)
+    article.publish
+    <mark>repo.save article</mark>
+  end
+end
+</pre>
 
 ---
 
@@ -427,15 +483,8 @@ end
 
 ---
 
-# Issues
-
-* сложно
-* обучение
-* не работают коробочные решения
-
----
-
-# Other
+> If you have fairly simple business logic, you probably 
+won’t need a Domain Model (116) or a Data Mapper
 
 ---
 
@@ -446,4 +495,5 @@ end
 # Links
 
 - <https://martinfowler.com/bliki/AnemicDomainModel.html>
+- patterns book
 
