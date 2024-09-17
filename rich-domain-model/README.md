@@ -28,7 +28,7 @@ paginate: true
 
 # Обо мне
 
-- tech lead
+- техлид в ecom.tech
 - публичные выступления
 - @SergeiUdalov
 
@@ -525,7 +525,7 @@ won’t need a Domain Model (116) or a Data Mapper
 
 # Links
 
+- "Patters of Enterprise Application Architecture", Мартин Фаулер
 - <https://martinfowler.com/bliki/AnemicDomainModel.html>
-- patterns book
 - @SergeiUdalov
 
