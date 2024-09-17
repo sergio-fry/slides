@@ -160,11 +160,11 @@ https://martinfowler.com/bliki/AnemicDomainModel.html
 ```ruby
 RSpec.describe ArticlesController do 
   context do 
-    before { create(:article, slug: "taken-slug") }
+    let!(:article) { create(:article, published_at: 1.minute.ago, ...) }
 
     example do 
-      post articles_url, params: { article: { slug: "taken-slug" } }
-      expect(respose.body).to match /Slug is already taken/
+      post publish_article_url(article.id)
+      expect(respose.body).to match /Article already published/
     end
   end
 end
@@ -444,7 +444,6 @@ describe "#publish" do
   before { article.publish }
   it { expect(article.published_at).to eq Time.now }
 end
-
 ```
 
 ---
@@ -459,27 +458,41 @@ describe "#rating" do
   let(:comments) { [Comment.new(text: "hello", ...)] }
   it { expect(article.rating).to eq 6 }
 end
-
 ```
 
 ---
 
 ```ruby
-
-
-
 RSpec.describe ArticlesController do 
   let(:articles) { Testing::FakeArticlesRepository.new }
   before { DependenciesContainer.stub(:articles, articles) }
   after { DependenciesContainer.unstub(:articles) }
 
   context do 
-    before { articles.save Article.new(id: 1, slug: "taken-slug", ...) }
+    let(article) { Article.new(id: 1, published_at: 1.minute.ago, ...) }
+    before { articles.save article }
 
     example do 
-      post articles_url, params: { article: { slug: "taken-slug" } }
-      expect(respose.body).to match /Slug is already taken/
+      post pubslish_article_url(article.id)
+      expect(respose.body).to match /Article already published/
     end
+  end
+end
+```
+
+---
+
+# Fake Repository
+
+```ruby
+module Testing
+  class FakeArticlesRepository
+    def initialize
+      @entities = {}
+    end
+
+    def find(id) = @entities[id]
+    def save(entity) = @entities[entity.id] = entity
   end
 end
 ```
@@ -514,4 +527,5 @@ won’t need a Domain Model (116) or a Data Mapper
 
 - <https://martinfowler.com/bliki/AnemicDomainModel.html>
 - patterns book
+- @SergeiUdalov
 
