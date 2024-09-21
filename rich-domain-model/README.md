@@ -25,7 +25,6 @@ paginate: true
 
 <!-- _paginate: skip -->
 
-
 # Обо мне
 
 - техлид в ecom.tech
@@ -63,7 +62,6 @@ Randomized with seed 47124
 ............................................................................
 ............................................................................
 ............
-
 
 Finished in <mark>2.07</mark> seconds (files took 2.16 seconds to load)
 317 examples, 0 failures, 0 pending
@@ -151,7 +149,7 @@ end
 
 > The fundamental horror of this anti-pattern is that it's so contrary to the basic idea of object-oriented design; which is to combine data and process together.
 
-https://martinfowler.com/bliki/AnemicDomainModel.html
+<https://martinfowler.com/bliki/AnemicDomainModel.html>
 
 ---
 
@@ -192,11 +190,9 @@ before {
 
 # Мартин Фаулер
 
-
 ![](img/martin-fowler.jpeg)
 
 ---
-
 
 <style scoped>
   img {
@@ -205,10 +201,7 @@ before {
   }
 </style>
 
-
 ![](img/eaa_book.jpeg)
-
-
 
 ---
 
@@ -217,12 +210,11 @@ complex, such as creates, reads, updates, and deletes. - **Martin Fowler**
 
 ---
 
-
-
 <center>
 
 ```plantuml
 allow_mixing
+scale 2
 
 database "DB" as db
 
@@ -232,7 +224,7 @@ database "DB" as db
     +publish()
   }
 
-  article_ar ..> db
+  article_ar .right.> db
 
 ```
 
@@ -250,18 +242,18 @@ database "DB" as db
 and a database while keeping them independent of
 each other and the mapper itself.
 
-
 ---
 
 # Repository
 
 ---
 
-
 <center>
 
 ```plantuml
 allow_mixing
+scale 2
+
 
 database "DB" as db
 
@@ -275,8 +267,8 @@ class ArticlesMapper {
   +find(id): Article
 }
 
-ArticlesMapper ..> db
-ArticlesMapper .up.> article_domain
+ArticlesMapper .right.> db
+ArticlesMapper .left.> article_domain
 ```
 
 </center>
@@ -290,7 +282,6 @@ ArticlesMapper .up.> article_domain
 3. сохранение модели
 
 ---
-
 
 ```ruby
 class Article < ApplicationRecord
@@ -318,7 +309,6 @@ end
 
 ---
 
-
 ```ruby
 class Article
   def initialize(id:, title:, body:, views: 0, published_at: nil, comments: [])
@@ -333,7 +323,6 @@ end
 ```
 
 ---
-
 
 ```ruby
 class Article
@@ -390,7 +379,6 @@ end
 ---
 
 # Загрузка модели (1/3)
-
 
 <pre>
 class PublishArticleInteractor
@@ -501,10 +489,10 @@ end
 
 # Что еще?
 
-* Dirty
-* Relations
-* IdentityMap
-* PubSub
+- Dirty
+- Relations
+- IdentityMap
+- PubSub
 
 ---
 
@@ -514,7 +502,7 @@ Ruby object mapper
 
 ---
 
-> If you have fairly simple business logic, you probably 
+> If you have fairly simple business logic, you probably
 won’t need a Domain Model (116) or a Data Mapper
 
 ---
@@ -528,4 +516,3 @@ won’t need a Domain Model (116) or a Data Mapper
 - "Patters of Enterprise Application Architecture", Мартин Фаулер
 - <https://martinfowler.com/bliki/AnemicDomainModel.html>
 - @SergeiUdalov
-
