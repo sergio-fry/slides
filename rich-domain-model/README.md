@@ -616,11 +616,9 @@ end
 
 ---
 
-# Identity Map 
-
+# Identity Map
 
 ---
-
 
 ```ruby
 article = repo.find(id)
@@ -628,6 +626,8 @@ article2 = repo.find(id)
 
 article.obejct_id == article2.object_id # => true
 ```
+
+<https://bit.ly/3Nn2qXP>
 
 ---
 
