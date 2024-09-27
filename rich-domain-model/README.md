@@ -33,7 +33,7 @@ paginate: true
 
 ---
 
-<!-- footer: "Rich Domain Model » @SergeiUdalov » ecom.tech" -->
+<!-- footer: "Rich Domain Model » @SergeiUdalov » ecom.tech » bit.ly/3XYL0Xi" -->
 
 # Digital Asset Management
 
@@ -107,12 +107,15 @@ rectangle "Model" as Model
 
 rectangle {
   rectangle View
+
   rectangle Controller
   Controller <.left.> View
 }
 
+
 View .up.> Model 
 Controller .up.> Model 
+
 
 
 ```
@@ -533,10 +536,6 @@ end
 
 # Что еще?
 
-- Dirty
-- Relations
-- IdentityMap
-
 ---
 
 # Dirty
@@ -684,4 +683,4 @@ Article .right.> DB
 - <https://martinfowler.com/books/eaa.html> - Книга
 - <https://martinfowler.com/bliki/AnemicDomainModel.html>
 - <https://youtu.be/XqDfypOoNgQ> - MVC
-- <https://bit.ly/SergeiUdalov>
+- YouTube @SergeiUdalov
