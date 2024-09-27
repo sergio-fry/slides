@@ -552,6 +552,20 @@ article.changed?         # => false
 
 ---
 
+```ruby
+class ArticlesRepository
+  def save(entity)
+    # ..
+    update_tags(record, entity) if entity.changed?(:tags)
+
+    record.save!
+    entity.changes_applied
+  end
+end
+```
+
+---
+
 # rom-rb
 
 Ruby object mapper
