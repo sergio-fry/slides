@@ -304,16 +304,17 @@ database "DB" as db
 
 class "Article" as article_domain {
   published_at
+  +rating()
   +publish()
 }
 
-class ArticlesMapper {
-  +save(article)
+class ArticlesRepository {
+  +save(entity)
   +find(id): Article
 }
 
-ArticlesMapper .right.> db
-ArticlesMapper .left.> article_domain
+ArticlesRepository .right.> db
+ArticlesRepository .left.> article_domain
 ```
 
 </center>
@@ -408,14 +409,14 @@ end
 
 ```ruby
 class ArticlesRepository
-  def save(article)
-    record = Database::Article.find_or_initialize_by(id:)
+  def save(entity)
+    record = Database::Article.find_or_initialize_by(id: entity.id)
 
-    record.assign_attributes(views: record.views, title: record.title,
-      content: record.body, published_at: record.published_at
+    record.assign_attributes(views: entity.views, title: entity.title,
+      content: entity.body, published_at: entity.published_at
     )
 
-    update_comments(article.comments)
+    update_comments(entity.comments)
 
     record.save!
   end
@@ -542,8 +543,6 @@ end
 
 ---
 
-# Dirty 1 / 2
-
 ```ruby
 article.title = "New Title"
 article.changed?         # => true
@@ -553,23 +552,82 @@ article.changes_applied
 article.changed?         # => false
 ```
 
-<https://bit.ly/4ekmQMT>
+---
+
+# AcitveModel::Dirty
+
+```ruby
+class Article
+  include ActiveModel::Dirty
+
+  define_attribute_methods :title
+
+  def initialize(title:)
+    @title = title
+  end
+
+  def title=(val)
+    name_will_change! unless val == @title
+    @title = val
+  end
+end
+
+```
 
 ---
 
-# Dirty 2/2
+```ruby
+class Article
+  include Dirty
+
+  def initialize(title:)
+    @title = title
+  end
+
+  def title=(val)
+    @title = val
+  end
+end
+```
+
+---
+
+# Как это работает?
+
+```ruby
+
+module Dirty
+  extend ActiveSupport::Concern
+
+  included do
+    def initialize(**args)
+      super
+      @changes = EntityChanges.new(self)
+      @changes.commit
+    end
+```
+
+<https://bit.ly/4ekmQMT>
+
+---
 
 ```ruby
 class ArticlesRepository
   def save(entity)
     # ..
-    update_tags(record, entity) if entity.changed?(:tags)
+    update_comments(record, entity) if entity.changed?(:comments)
 
     record.save!
     entity.changes_applied
   end
 end
 ```
+
+---
+
+# Relation
+
+<!-- Для больших коллекций -->
 
 ---
 
