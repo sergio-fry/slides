@@ -539,6 +539,19 @@ end
 
 ---
 
+# Dirty
+
+```ruby
+article.title = "New Title"
+article.changed?         # => true
+article.changed?(:title) # => true
+
+article.changes_applied
+article.changed?         # => false
+```
+
+---
+
 # rom-rb
 
 Ruby object mapper
