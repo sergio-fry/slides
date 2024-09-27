@@ -674,13 +674,16 @@ Article .right.> DB
 
 ---
 
-# Summary
+# Итоги
 
 ---
 
-# Links
+# Ссылки
 
 - <https://martinfowler.com/books/eaa.html> - Книга
 - <https://martinfowler.com/bliki/AnemicDomainModel.html>
-- <https://youtu.be/XqDfypOoNgQ> - MVC
 - YouTube @SergeiUdalov
+
+---
+
+# Спасибо
