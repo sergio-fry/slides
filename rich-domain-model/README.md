@@ -541,6 +541,10 @@ end
 
 # Dirty
 
+---
+
+# Dirty 1 / 2
+
 ```ruby
 article.title = "New Title"
 article.changed?         # => true
@@ -550,7 +554,11 @@ article.changes_applied
 article.changed?         # => false
 ```
 
+<https://bit.ly/4ekmQMT>
+
 ---
+
+# Dirty 2/2
 
 ```ruby
 class ArticlesRepository
@@ -562,6 +570,63 @@ class ArticlesRepository
     entity.changes_applied
   end
 end
+```
+
+---
+
+# Relation 1/2
+
+```ruby
+class ArticleComments
+  include Enumerable
+
+  def initialize(record)
+    @record = record
+  end
+
+  def each
+    @record.comments.each do |record|
+      yield comments_repo.from_record(record)
+    end
+  end
+end
+```
+
+---
+
+# Relation  2/2
+
+<pre>
+class ArticleComments
+  include Enumerable
+
+  def initialize(record)
+    @record = record
+    <mark>@new_comments = []</mark>
+  end
+
+  def each
+    <mark>@new_comments.each { |comment| yield comment }</mark>
+    @record.comments.each do |record|
+      yield comments_repo.from_record(record)
+    end
+  end
+end
+</pre>
+
+---
+
+# Identity Map 
+
+
+---
+
+
+```ruby
+article = repo.find(id)
+article2 = repo.find(id)
+
+article.obejct_id == article2.object_id # => true
 ```
 
 ---

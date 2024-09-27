@@ -1,6 +1,6 @@
 # TODO
 
-- отдельный слайд про dirty
+- добавить QR код для оценки доклада
 - отдельный слайд про identity map
   - identity map был в rails <https://apidock.com/rails/ActiveRecord/IdentityMap>
   - <https://guides.rubyonrails.org/upgrading_ruby_on_rails.html>
