@@ -161,19 +161,12 @@ end
 class Article < ApplicationRecord
   # CalculateArticleRatingInteractor
   def rating
-    views + comments.count * 5
-  end
 
   # PublishArticleInteractor
   def publish!
-    self.update published_at: Time.now
-    notify_subscribers
-  end
 
   # ArticlePresenter
   def as_json
-    { id:, title:, published_at: published_at.rfc3339, body: body_html}
-  end
 end
 ```
 
@@ -554,7 +547,7 @@ article.changed?         # => false
 
 ---
 
-# AcitveModel::Dirty
+# ActiveModel::Dirty
 
 ```ruby
 class Article
@@ -681,7 +674,7 @@ end
 article = repo.find(id)
 article2 = repo.find(id)
 
-article.obejct_id == article2.object_id # => true
+article.object_id == article2.object_id # => true
 ```
 
 <https://bit.ly/3Nn2qXP>
