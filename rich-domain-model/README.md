@@ -40,15 +40,21 @@ paginate: true
 - 1.2M files, 11TB
 - 4854 lines of code (+8344 RSpec)
 - 98.48% coverage
-- 2 разработчика
+- команда 9 человек
 
 ---
 
 ```ruby
-add_filter "bin"
-add_filter "config"
-add_filter "db"
+SimpleCov.start do
+  add_filter "bin"
+  add_filter "config"
+  add_filter "db"
+end
 ```
+
+---
+
+# Зачем?
 
 ---
 
@@ -79,13 +85,45 @@ Top 10 slowest examples (0.68232 seconds, <mark>35.8%</mark> of total time):
     0.13857 seconds ./spec/interactors/files/create_spec.rb:186
     0.13542 seconds ./spec/repositories/assets_in_directory/filter_spec.rb:39
     0.11972 seconds ./spec/repositories/assets_in_directory/filter_spec.rb:22
-    0.02908 seconds ./spec/domain/directory_spec.rb:28
+    <mark>0.02908</mark> seconds ./spec/domain/directory_spec.rb:28
     0.02596 seconds ./spec/domain/file_spec.rb:74
     0.02442 seconds ./spec/domain/file_spec.rb:67
     0.0204 seconds ./spec/outbox/file/create_event_spec.rb:27
     0.01876 seconds ./spec/interactors/google_drive/create_spec.rb:27
-    <mark>0.01795 seconds</mark> ./spec/interactors/google_drive/update_spec.rb:30
+    0.01795 seconds ./spec/interactors/google_drive/update_spec.rb:30
 </pre>
+
+---
+
+<center>
+
+```plantuml
+skinparam monochrome true
+allow_mixing
+scale 2
+top to bottom direction
+
+rectangle "Model" as Model
+
+rectangle {
+  rectangle View
+  rectangle Controller
+  Controller <.left.> View
+}
+
+View .up.> Model 
+Controller .up.> Model 
+
+
+```
+
+<https://bit.ly/3TDxHce>
+
+</center>
+
+---
+
+# Domain
 
 ---
 
@@ -145,11 +183,11 @@ end
 
 ---
 
-# Anemic Domain Model
+# **Anemic** Domain Model
 
 > The fundamental horror of this anti-pattern is that it's so contrary to the basic idea of object-oriented design; which is to combine data and process together.
 
-<https://martinfowler.com/bliki/AnemicDomainModel.html>
+<https://bit.ly/4eu1tIp>
 
 ---
 
@@ -213,18 +251,19 @@ complex, such as creates, reads, updates, and deletes. - **Martin Fowler**
 <center>
 
 ```plantuml
+skinparam monochrome true
 allow_mixing
 scale 2
 
-database "DB" as db
+database DB
 
-  class "Article" as article_ar {
-    +save()
-    +find(id)
-    +publish()
-  }
+class Article {
+  +save()
+  +find(id)
+  +publish()
+}
 
-  article_ar .right.> db
+Article .right.> DB
 
 ```
 
@@ -233,6 +272,8 @@ database "DB" as db
 ---
 
 # Domain Model
+
+aka **Rich** Domain Model
 
 ---
 
@@ -251,6 +292,7 @@ each other and the mapper itself.
 <center>
 
 ```plantuml
+skinparam monochrome true
 allow_mixing
 scale 2
 
@@ -326,20 +368,21 @@ end
 
 ```ruby
 class Article
-  def initialize(id:, title:, body:, views: 0, published_at: nil, comments: [])
+  def initialize(id:, title:, body:, views: 0, published_at: nil, comments: [], events: [])
     @id = id 
     @title = title
     @body = body
     @views = views
     @published_at = published_at
     @comments = comments
+    @events = events
   end
 
   def rating = @views + @comments.size * 5
 
   def publish
     @published_at = Time.now
-    notify_subscribers
+    @events << ArticlePublishedEvent.new(article: self, dt: @published_at)
   end
 end
 ```
@@ -431,6 +474,7 @@ let(:article) { Article.new(id: 1, ...) }
 describe "#publish" do
   before { article.publish }
   it { expect(article.published_at).to eq Time.now }
+  it { expect(article.events).to include(...) }
 end
 ```
 
@@ -453,8 +497,8 @@ end
 ```ruby
 RSpec.describe ArticlesController do 
   let(:articles) { Testing::FakeArticlesRepository.new }
-  before { DependenciesContainer.stub(:articles, articles) }
-  after { DependenciesContainer.unstub(:articles) }
+  before { DependenciesContainer.stub("repositories.articles", articles) }
+  after { DependenciesContainer.unstub("repositories.articles") }
 
   context do 
     let(article) { Article.new(id: 1, published_at: 1.minute.ago, ...) }
@@ -492,7 +536,6 @@ end
 - Dirty
 - Relations
 - IdentityMap
-- PubSub
 
 ---
 
@@ -507,12 +550,46 @@ won’t need a Domain Model (116) or a Data Mapper
 
 ---
 
+<center>
+
+```plantuml
+skinparam monochrome true
+allow_mixing
+scale 2
+
+database DB
+
+class PublishArticle {
+  +publish()
+}
+
+class ArticleRating {
+  +rating()
+}
+
+class Article {
+  +save()
+  +find(id)
+}
+
+PublishArticle ..> Article
+ArticleRating ..> Article
+
+Article .right.> DB
+
+```
+
+</center>
+
+---
+
 # Summary
 
 ---
 
 # Links
 
-- "Patters of Enterprise Application Architecture", Мартин Фаулер
+- <https://martinfowler.com/books/eaa.html> - Книга
 - <https://martinfowler.com/bliki/AnemicDomainModel.html>
-- @SergeiUdalov
+- <https://youtu.be/XqDfypOoNgQ> - MVC
+- <https://bit.ly/SergeiUdalov>

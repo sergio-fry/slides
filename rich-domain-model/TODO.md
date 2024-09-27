@@ -1,14 +1,19 @@
 # TODO
 
-- разделльные слайды про dirty, identity map, relation
-- notifcation сделать через pub sub
-- pub sub (на примере transactional outbox)
+- summary bullets
+- саммери - почему стоит попробовать. проще рефакторинг, так как меньше связанность, SRP
+- перевод книги по-русски
+- чем известен Martin Fowler?
+- MVC - комментарий, что CV - UI
+- отдельный слайд про dirty
+- отдельный слайд про identity map
+  - identity map был в rails <https://apidock.com/rails/ActiveRecord/IdentityMap>
+  - <https://guides.rubyonrails.org/upgrading_ruby_on_rails.html>
+  - pull request <https://github.com/rails/rails/pull/5261>
+- отдельный слайд про relation
 - контроллер про создание, а в остальном про публикацию
 - factory bot
-- саммери - почему стоит попробовать. проще рефакторинг,
-  так как меньше связанность, SRP
 - украсить цитаты Именем и аватаркой
-- link ссылка на книгу фаулера
 - график с историей выхода книги и rails
 
 - Посмотреть последний доклад Дементьева
