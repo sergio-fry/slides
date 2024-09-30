@@ -124,15 +124,14 @@ Controller -left- View
 View -up- Model 
 Controller -up- Model 
 ```
+
   </td>
   <td>
-
 
   ![](img/mvc-qr.png)
   </td>
   </tr>
 </table>
-
 
 ---
 
@@ -191,9 +190,14 @@ end
 
 # **Anemic** Domain Model
 
-> The fundamental horror of this anti-pattern is that it's so contrary to the basic idea of object-oriented design; which is to combine data and process together.
+<br />
 
-<https://bit.ly/4eu1tIp>
+> The fundamental horror of this anti-pattern is that it's so contrary to the basic idea of object-oriented design; which is to combine data and process together.
+— *Martin Fowler*
+
+<br />
+
+<img src="img/martin-fowler.jpeg" width="100.2em" style="border-radius:50%;" align=right />
 
 ---
 
@@ -234,19 +238,14 @@ before {
 
 # David Heinemeier Hansson
 
-![](img/dhh.jpeg)
+<img src="img/dhh.jpeg" width="40%" style="border-radius:50%;"  />
 
 ---
 
-<style scoped>
-  img {
-    width: 40%;
-  }
-</style>
 
 # Мартин Фаулер
 
-![](img/martin-fowler.jpeg)
+<img src="img/martin-fowler.jpeg" width="40%" style="border-radius:50%;"  />
 
 ---
 
@@ -262,7 +261,12 @@ before {
 ---
 
 > Active Record is a good choice for domain logic that isn’t too
-complex, such as creates, reads, updates, and deletes. - **Martin Fowler**
+complex, such as creates, reads, updates, and deletes.
+— *Martin Fowler*
+
+<br />
+
+<img src="img/martin-fowler.jpeg" width="100.2em" style="border-radius:50%;" align=right />
 
 ---
 
@@ -277,6 +281,11 @@ aka **Rich** Domain Model
 > A layer of Mappers (473) that moves data between objects
 and a database while keeping them independent of
 each other and the mapper itself.
+— *Martin Fowler*
+
+<br />
+
+<img src="img/martin-fowler.jpeg" width="100.2em" style="border-radius:50%;" align=right />
 
 ---
 
@@ -284,6 +293,11 @@ each other and the mapper itself.
 
 > Mediates between the domain and data mapping layers using
 a collection-like interface for accessing domain objects.
+— *Martin Fowler*
+
+<br />
+
+<img src="img/martin-fowler.jpeg" width="100.2em" style="border-radius:50%;" align=right />
 
 ---
 
