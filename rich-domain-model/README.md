@@ -737,5 +737,12 @@ Article .right.> DB
 - YouTube @SergeiUdalov
 
 ---
+<style scoped>
+  img {
+    width: 20%;
+  }
+</style>
 
 # Спасибо
+
+![](img/feedback.jpeg)

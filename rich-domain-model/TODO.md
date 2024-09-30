@@ -1,6 +1,5 @@
 # TODO
 
-- добавить QR код для оценки доклада
 - контроллер про создание, а в остальном про публикацию
 - dhh before fowler
 - rails ruby conf slide before
