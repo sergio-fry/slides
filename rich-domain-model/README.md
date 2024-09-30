@@ -103,18 +103,15 @@ allow_mixing
 scale 2
 top to bottom direction
 
-rectangle "Model" as Model
+rectangle Model
+rectangle View
+rectangle Controller
 
-rectangle {
-  rectangle View
-
-  rectangle Controller
-  Controller <.left.> View
-}
+Controller -left- View
 
 
-View .up.> Model 
-Controller .up.> Model 
+View -up- Model 
+Controller -up- Model 
 
 
 
@@ -213,6 +210,10 @@ before {
                       .and_return(build(:article))
 }
 ```
+
+---
+
+# DHH
 
 ---
 
