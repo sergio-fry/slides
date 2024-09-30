@@ -95,7 +95,18 @@ Top 10 slowest examples (0.68232 seconds, <mark>35.8%</mark> of total time):
 
 ---
 
-<center>
+<style scoped>
+  img {
+    width: 40%;
+  }
+  td,table,tr {
+    border: 0px
+  }
+</style>
+
+<table>
+  <tr>
+    <td width="50%">
 
 ```plantuml
 skinparam monochrome true
@@ -112,14 +123,16 @@ Controller -left- View
 
 View -up- Model 
 Controller -up- Model 
-
-
-
 ```
+  </td>
+  <td>
 
-<https://bit.ly/3TDxHce>
 
-</center>
+  ![](img/mvc-qr.png)
+  </td>
+  </tr>
+</table>
+
 
 ---
 
@@ -213,7 +226,15 @@ before {
 
 ---
 
-# DHH
+<style scoped>
+  img {
+    width: 40%;
+  }
+</style>
+
+# David Heinemeier Hansson
+
+![](img/dhh.jpeg)
 
 ---
 
@@ -245,6 +266,27 @@ complex, such as creates, reads, updates, and deletes. - **Martin Fowler**
 
 ---
 
+# Domain Model
+
+aka **Rich** Domain Model
+
+---
+
+# Data Mapper
+
+> A layer of Mappers (473) that moves data between objects
+and a database while keeping them independent of
+each other and the mapper itself.
+
+---
+
+# Repository
+
+> Mediates between the domain and data mapping layers using
+a collection-like interface for accessing domain objects.
+
+---
+
 <center>
 
 ```plantuml
@@ -265,24 +307,6 @@ Article .right.> DB
 ```
 
 </center>
-
----
-
-# Domain Model
-
-aka **Rich** Domain Model
-
----
-
-# Data Mapper
-
-> A layer of Mappers (473) that moves data between objects
-and a database while keeping them independent of
-each other and the mapper itself.
-
----
-
-# Repository
 
 ---
 
@@ -727,6 +751,10 @@ Article .right.> DB
 ---
 
 # Итоги
+
+1. зачем?
+2. как понять, что не rich?
+3. как начать?
 
 ---
 
