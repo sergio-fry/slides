@@ -19,13 +19,13 @@ paginate: true
 
 # Rich Domain Model
 
-Бизнес-логика без БД
+Сергей Удалов
 
 ---
 
 <!-- _paginate: skip -->
 
-# Обо мне
+# Кто я такой?
 
 - техлид в ecom.tech
 - публичные выступления
@@ -35,7 +35,7 @@ paginate: true
 
 <!-- _paginate: skip -->
 
-![](img/clean-arch-2019.jpeg)
+![bg](img/clean-arch-2019.jpeg)
 
 ---
 
@@ -149,7 +149,7 @@ Controller -up- Model
 
 ---
 
-# Active Record
+<!-- _header: Active Record -->
 
 ```ruby
 class Article < ApplicationRecord
@@ -170,7 +170,7 @@ end
 
 ---
 
-# Active Record
+<!-- _header: Active Record -->
 
 ```ruby
 class Article < ApplicationRecord
@@ -187,12 +187,16 @@ end
 
 ---
 
+<!-- _header: Active Record -->
+
 ```ruby
 class Article < ApplicationRecord
 end
 ```
 
 ---
+
+<!-- _header: Active Record -->
 
 # **Anemic** Domain Model
 
@@ -207,7 +211,7 @@ end
 
 ---
 
-# Тестирование
+<!-- _header: Active Record -->
 
 ```ruby
 RSpec.describe ArticlesController do 
@@ -223,6 +227,8 @@ end
 ```
 
 ---
+
+<!-- _header: Active Record -->
 
 # XXX
 
@@ -319,6 +325,8 @@ Article .right.> DB
 
 ---
 
+<!-- _header: Domain Model -->
+
 <center>
 
 ```plantuml
@@ -348,6 +356,8 @@ ArticlesRepository .left.> article_domain
 
 ---
 
+<!-- _header: Domain Model -->
+
 # Жизненный цикл
 
 1. загрузка модели
@@ -375,6 +385,8 @@ end
 
 ---
 
+<!-- _header: Domain Model -->
+
 ```ruby
 class Article
 end
@@ -382,44 +394,54 @@ end
 
 ---
 
+<!-- _header: Domain Model -->
+
 ```ruby
-class Article
-  def initialize(id:, title:, body:, views: 0,
-                 published_at: nil, comments: [], events: [])
-    @id = id 
-    @title = title
-    @body = body
-    @views = views
-    @published_at = published_at
-    @comments = comments
-    @events = events
+module Domain
+  class Article
+    def initialize(id:, title:, body:, views: 0,
+                  published_at: nil, comments: [], events: [])
+      @id = id 
+      @title = title
+      @body = body
+      @views = views
+      @published_at = published_at
+      @comments = comments
+      @events = events
+    end
   end
 end
 ```
 
 ---
 
+<!-- _header: Domain Model -->
+
 ```ruby
-class Article
-  def initialize # ...
+module Domain
+  class Article
+    def initialize # ...
 
-  def rating = @views + @comments.size * 5
+    def rating = @views + @comments.size * 5
 
-  def publish
-    @published_at = Time.now
-    @events << ArticlePublishedEvent.new(article: self, dt: @published_at)
+    def publish
+      @published_at = Time.now
+      @events << ArticlePublishedEvent.new(article: self, dt: @published_at)
+    end
   end
 end
 ```
 
 ---
+
+<!-- _header: Domain Model -->
 
 <pre>
 class ArticlesRepository
   def find(id)
-    record = Database::Article.find(id)
+    record = Article.find(id)
 
-    Article.new(id: record.id, views: record.views,
+    Domain::Article.new(id: record.id, views: record.views,
       title: record.title, <mark>body: record.content</mark>,
       published_at: record.published_at, comments: <mark>ArticleComments.new(record)</mark>)
   end
@@ -428,10 +450,12 @@ end
 
 ---
 
+<!-- _header: Domain Model -->
+
 ```ruby
 class ArticlesRepository
   def save(entity)
-    record = Database::Article.find_or_initialize_by(id: entity.id)
+    record = Article.find_or_initialize_by(id: entity.id)
 
     record.assign_attributes(views: entity.views, title: entity.title,
       content: entity.body, published_at: entity.published_at
@@ -445,6 +469,8 @@ end
 ```
 
 ---
+
+<!-- _header: Domain Model -->
 
 # Загрузка модели (1/3)
 
@@ -460,6 +486,8 @@ end
 
 ---
 
+<!-- _header: Domain Model -->
+
 # Манипуляция с моделью (2/3)
 
 <pre>
@@ -474,6 +502,8 @@ end
 </pre>
 
 ---
+
+<!-- _header: Domain Model -->
 
 # Сохранение (3/3)
 
@@ -491,6 +521,8 @@ end
 
 ---
 
+<!-- _header: Domain Model -->
+
 # Тестирование
 
 ```ruby
@@ -505,6 +537,8 @@ end
 
 ---
 
+<!-- _header: Domain Model -->
+
 # Тестирование
 
 ```ruby
@@ -518,6 +552,8 @@ end
 ```
 
 ---
+
+<!-- _header: Domain Model -->
 
 ```ruby
 RSpec.describe ArticlesController do 
@@ -538,6 +574,8 @@ end
 ```
 
 ---
+
+<!-- _header: Domain Model -->
 
 # Fake Repository
 
@@ -563,6 +601,8 @@ end
 # Dirty
 
 ---
+
+<!-- _header: Dirty -->
 
 <style scoped>
   img {
@@ -603,6 +643,8 @@ end note
 
 ---
 
+<!-- _header: Dirty -->
+
 ```ruby
 class ArticlesRepository
   def save(entity)
@@ -616,6 +658,8 @@ end
 ```
 
 ---
+
+<!-- _header: Dirty -->
 
 # ActiveModel::Dirty
 
@@ -639,6 +683,8 @@ end
 
 ---
 
+<!-- _header: Dirty -->
+
 ```ruby
 class Article
   include Dirty
@@ -654,6 +700,8 @@ end
 ```
 
 ---
+
+<!-- _header: Dirty -->
 
 # Как это работает?
 
@@ -680,7 +728,8 @@ module Dirty
 
 ---
 
-# Relation 1/2
+<!-- _header: Relation -->
+
 
 ```ruby
 class ArticleComments
@@ -700,7 +749,7 @@ end
 
 ---
 
-# Relation  2/2
+<!-- _header: Relation -->
 
 <pre>
 class ArticleComments
@@ -789,7 +838,58 @@ Article .right.> DB
 
 ---
 
+<style scoped>
+  .kroki-image-container {
+    width: 60%;
+  }
+</style>
+
+<center>
+
+```plantuml
+skinparam monochrome true
+allow_mixing
+scale 2
+
+database DB
+
+package Domain {
+  class Article {
+  }
+
+  class Comment {
+  }
+
+  class Subscription {
+  }
+
+  class User {
+  }
+
+  Article ..> Comment
+  Comment ..> User
+  Subscription .left.> Article
+  Subscription ..> User
+}
+
+
+ArticlesRepository ..> DB
+ArticlesRepository ..> Article
+CommentsRepository ..> Comment
+ArticlesRepository ..> CommentsRepository
+CommentsRepository ..> DB
+
+```
+
+</center>
+
+---
+
 # Итоги
+
+- Active Record
+- Anemic Model
+- Rich Domain Model
 
 <!--
 1. зачем?
@@ -799,19 +899,32 @@ Article .right.> DB
 
 ---
 
-# Ссылки
-
-- <https://martinfowler.com/books/eaa.html> - Книга
-- <https://martinfowler.com/bliki/AnemicDomainModel.html>
-- YouTube @SergeiUdalov
-
----
 <style scoped>
   img {
-    width: 20%;
+    width: 80%;
+  }
+  td,table,tr {
+    border: 0px
   }
 </style>
 
-# Спасибо
+<table>
+  <tr>
+    <td width="70%">
+
+
+# Ссылки
+
+- <https://bit.ly/4eomrsQ> - PEAA Book
+- <https://bit.ly/4eu1tIp> - Anemic Domain Model
+- YouTube @SergeiUdalov
+
+  </td>
+  <td>
 
 ![](img/feedback.jpeg)
+  </td>
+  </tr>
+</table>
+
+
