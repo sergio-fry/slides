@@ -33,6 +33,12 @@ paginate: true
 
 ---
 
+<!-- _paginate: skip -->
+
+![](img/clean-arch-2019.jpeg)
+
+---
+
 <!-- footer: "Rich Domain Model » @SergeiUdalov » ecom.tech » bit.ly/3XYL0Xi" -->
 
 # Digital Asset Management
@@ -242,7 +248,6 @@ before {
 
 ---
 
-
 # Мартин Фаулер
 
 <img src="img/martin-fowler.jpeg" width="40%" style="border-radius:50%;"  />
@@ -281,11 +286,6 @@ aka **Rich** Domain Model
 > A layer of Mappers (473) that moves data between objects
 and a database while keeping them independent of
 each other and the mapper itself.
-— *Martin Fowler*
-
-<br />
-
-<img src="img/martin-fowler.jpeg" width="100.2em" style="border-radius:50%;" align=right />
 
 ---
 
@@ -293,11 +293,6 @@ each other and the mapper itself.
 
 > Mediates between the domain and data mapping layers using
 a collection-like interface for accessing domain objects.
-— *Martin Fowler*
-
-<br />
-
-<img src="img/martin-fowler.jpeg" width="100.2em" style="border-radius:50%;" align=right />
 
 ---
 
@@ -389,22 +384,8 @@ end
 
 ```ruby
 class Article
-  def initialize(id:, title:, body:, views: 0, published_at: nil, comments: [])
-    @id = id 
-    @title = title
-    @body = body
-    @views = views
-    @published_at = published_at
-    @comments = comments
-  end
-end
-```
-
----
-
-```ruby
-class Article
-  def initialize(id:, title:, body:, views: 0, published_at: nil, comments: [], events: [])
+  def initialize(id:, title:, body:, views: 0,
+                 published_at: nil, comments: [], events: [])
     @id = id 
     @title = title
     @body = body
@@ -413,6 +394,14 @@ class Article
     @comments = comments
     @events = events
   end
+end
+```
+
+---
+
+```ruby
+class Article
+  def initialize # ...
 
   def rating = @views + @comments.size * 5
 
@@ -575,13 +564,55 @@ end
 
 ---
 
-```ruby
-article.title = "New Title"
-article.changed?         # => true
-article.changed?(:title) # => true
+<style scoped>
+  img {
+    width1: 80%;
+  }
+</style>
 
-article.changes_applied
-article.changed?         # => false
+<center>
+
+```plantuml
+
+actor       Bob
+actor       Alice
+participant    Rails
+database    DB
+
+Alice -> Rails: [A] update title
+Rails -> DB: [A] find
+DB -> Rails: [A] attrs
+Bob -> Rails: [B] update body
+Rails -> DB: [B] find
+
+DB -> Rails: [B] attrs
+note right
+  получает старое
+  значение title
+end note
+
+Rails -> DB: [A] update
+Rails -> DB: [B] update
+note right
+  сохраняет новый body
+  и затирает title
+end note
+```
+
+</center>
+
+---
+
+```ruby
+class ArticlesRepository
+  def save(entity)
+    # ..
+    update_comments(record, entity) if entity.changed?(:comments)
+
+    record.save!
+    entity.changes_applied
+  end
+end
 ```
 
 ---
@@ -640,20 +671,6 @@ module Dirty
 ```
 
 <https://bit.ly/4ekmQMT>
-
----
-
-```ruby
-class ArticlesRepository
-  def save(entity)
-    # ..
-    update_comments(record, entity) if entity.changed?(:comments)
-
-    record.save!
-    entity.changes_applied
-  end
-end
-```
 
 ---
 
@@ -720,14 +737,22 @@ article.object_id == article2.object_id # => true
 
 ---
 
-# rom-rb
+<img src="img/rom-rb.svg" />
+<br/>
 
-Ruby object mapper
+**Ruby Object Mapper** is an open-source persistence<br/> and mapping toolkit for Ruby built for speed and simplicity.
+
+<https://rom-rb.org/>
 
 ---
 
 > If you have fairly simple business logic, you probably
 won’t need a Domain Model (116) or a Data Mapper
+— *Martin Fowler*
+
+<br />
+
+<img src="img/martin-fowler.jpeg" width="100.2em" style="border-radius:50%;" align=right />
 
 ---
 
@@ -766,9 +791,11 @@ Article .right.> DB
 
 # Итоги
 
+<!--
 1. зачем?
 2. как понять, что не rich?
 3. как начать?
+-->
 
 ---
 
