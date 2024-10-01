@@ -19,7 +19,7 @@ paginate: true
 
 # Rich Domain Model
 
-Сергей Удалов
+Сергей Удалов » ecom.tech
 
 ---
 
@@ -145,10 +145,6 @@ Controller -up- Model
 
 ---
 
-# Active Record
-
----
-
 <!-- _header: Active Record -->
 
 ```ruby
@@ -242,6 +238,10 @@ before {
 
 ---
 
+# Active Record
+
+---
+
 <style scoped>
   img {
     width: 40%;
@@ -258,16 +258,7 @@ before {
 
 <img src="img/martin-fowler.jpeg" width="40%" style="border-radius:50%;"  />
 
----
-
-<style scoped>
-  img {
-    width: 40%;
-    box-shadow: 10px 5px 5px #aaa;
-  }
-</style>
-
-![](img/eaa_book.jpeg)
+![bg right](img/eaa_book.jpeg)
 
 ---
 
@@ -598,7 +589,23 @@ end
 
 ---
 
-# Dirty
+# Параллельная запись
+
+```ruby
+class ArticlesRepository
+  def save(entity)
+    record = Article.find_or_initialize_by(id: entity.id)
+
+    record.assign_attributes(views: entity.views, title: entity.title,
+      content: entity.body, published_at: entity.published_at
+    )
+
+    update_comments(entity.comments)
+
+    record.save!
+  end
+end
+```
 
 ---
 
@@ -703,6 +710,22 @@ end
 
 <!-- _header: Dirty -->
 
+```ruby
+article.changed? # => false
+
+article.title = "New Title"
+article.changed? # => true
+article.changed?(:title) # => true
+
+article.changes_applied
+article.changed? # => false
+
+```
+
+---
+
+<!-- _header: Dirty -->
+
 # Как это работает?
 
 ```ruby
@@ -729,7 +752,6 @@ module Dirty
 ---
 
 <!-- _header: Relation -->
-
 
 ```ruby
 class ArticleComments
@@ -759,6 +781,8 @@ class ArticleComments
     @record = record
     <mark>@new_comments = []</mark>
   end
+
+  <mark>def <<(new_comment) = @new_comments << new_comment</mark>
 
   def each
     <mark>@new_comments.each { |comment| yield comment }</mark>
@@ -912,7 +936,6 @@ CommentsRepository ..> DB
   <tr>
     <td width="70%">
 
-
 # Ссылки
 
 - <https://bit.ly/4eomrsQ> - PEAA Book
@@ -926,5 +949,3 @@ CommentsRepository ..> DB
   </td>
   </tr>
 </table>
-
-
