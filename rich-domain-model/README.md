@@ -11,8 +11,7 @@ paginate: true
   h1, p, ul li { color: black; }
   pre { border: 0px; background: white; }
 
-  footer { color: #bbb }
-  footer a { color: #bbb }
+  footer, header { color: #bbb; font-size: 1em }
 </style>
 
 <!-- _paginate: skip -->
@@ -39,7 +38,8 @@ paginate: true
 
 ---
 
-<!-- footer: "Rich Domain Model » @SergeiUdalov » ecom.tech » bit.ly/3XYL0Xi" -->
+<!-- header: Rich Domain Model » bit.ly/3XYL0Xi -->
+<!-- footer: ecom.tech » @SergeiUdalov -->
 
 # Digital Asset Management
 
@@ -103,7 +103,7 @@ Top 10 slowest examples (0.68232 seconds, <mark>35.8%</mark> of total time):
 
 <style scoped>
   img {
-    width: 40%;
+    width: 60%;
   }
   td,table,tr {
     border: 0px
@@ -132,9 +132,9 @@ Controller -up- Model
 ```
 
   </td>
-  <td>
+  <td align=center>
 
-  ![](img/mvc-qr.png)
+<img src="img/mvc-qr.png" />
   </td>
   </tr>
 </table>
@@ -144,8 +144,6 @@ Controller -up- Model
 # Domain
 
 ---
-
-<!-- _header: Active Record -->
 
 ```ruby
 class Article < ApplicationRecord
@@ -166,8 +164,6 @@ end
 
 ---
 
-<!-- _header: Active Record -->
-
 ```ruby
 class Article < ApplicationRecord
   # CalculateArticleRatingInteractor
@@ -183,16 +179,12 @@ end
 
 ---
 
-<!-- _header: Active Record -->
-
 ```ruby
 class Article < ApplicationRecord
 end
 ```
 
 ---
-
-<!-- _header: Active Record -->
 
 # **Anemic** Domain Model
 
@@ -206,8 +198,6 @@ end
 <img src="img/martin-fowler.jpeg" width="100.2em" style="border-radius:50%;" align=right />
 
 ---
-
-<!-- _header: Active Record -->
 
 ```ruby
 RSpec.describe ArticlesController do 
@@ -223,8 +213,6 @@ end
 ```
 
 ---
-
-<!-- _header: Active Record -->
 
 # XXX
 
@@ -316,8 +304,6 @@ Article .right.> DB
 
 ---
 
-<!-- _header: Domain Model -->
-
 <center>
 
 ```plantuml
@@ -347,8 +333,6 @@ ArticlesRepository .left.> article_domain
 
 ---
 
-<!-- _header: Domain Model -->
-
 # Жизненный цикл
 
 1. загрузка модели
@@ -376,16 +360,12 @@ end
 
 ---
 
-<!-- _header: Domain Model -->
-
 ```ruby
 class Article
 end
 ```
 
 ---
-
-<!-- _header: Domain Model -->
 
 ```ruby
 module Domain
@@ -406,8 +386,6 @@ end
 
 ---
 
-<!-- _header: Domain Model -->
-
 ```ruby
 module Domain
   class Article
@@ -425,8 +403,6 @@ end
 
 ---
 
-<!-- _header: Domain Model -->
-
 <pre>
 class ArticlesRepository
   def find(id)
@@ -440,8 +416,6 @@ end
 </pre>
 
 ---
-
-<!-- _header: Domain Model -->
 
 ```ruby
 class ArticlesRepository
@@ -461,8 +435,6 @@ end
 
 ---
 
-<!-- _header: Domain Model -->
-
 # Загрузка модели (1/3)
 
 <pre>
@@ -476,8 +448,6 @@ end
 </pre>
 
 ---
-
-<!-- _header: Domain Model -->
 
 # Манипуляция с моделью (2/3)
 
@@ -493,8 +463,6 @@ end
 </pre>
 
 ---
-
-<!-- _header: Domain Model -->
 
 # Сохранение (3/3)
 
@@ -512,8 +480,6 @@ end
 
 ---
 
-<!-- _header: Domain Model -->
-
 # Тестирование
 
 ```ruby
@@ -528,8 +494,6 @@ end
 
 ---
 
-<!-- _header: Domain Model -->
-
 # Тестирование
 
 ```ruby
@@ -543,8 +507,6 @@ end
 ```
 
 ---
-
-<!-- _header: Domain Model -->
 
 ```ruby
 RSpec.describe ArticlesController do 
@@ -565,8 +527,6 @@ end
 ```
 
 ---
-
-<!-- _header: Domain Model -->
 
 # Fake Repository
 
@@ -609,8 +569,6 @@ end
 
 ---
 
-<!-- _header: Dirty -->
-
 <style scoped>
   img {
     width1: 80%;
@@ -650,8 +608,6 @@ end note
 
 ---
 
-<!-- _header: Dirty -->
-
 ```ruby
 class ArticlesRepository
   def save(entity)
@@ -665,8 +621,6 @@ end
 ```
 
 ---
-
-<!-- _header: Dirty -->
 
 # ActiveModel::Dirty
 
@@ -690,8 +644,6 @@ end
 
 ---
 
-<!-- _header: Dirty -->
-
 ```ruby
 class Article
   include Dirty
@@ -708,8 +660,6 @@ end
 
 ---
 
-<!-- _header: Dirty -->
-
 ```ruby
 article.changed? # => false
 
@@ -723,8 +673,6 @@ article.changed? # => false
 ```
 
 ---
-
-<!-- _header: Dirty -->
 
 # Как это работает?
 
@@ -751,8 +699,6 @@ module Dirty
 
 ---
 
-<!-- _header: Relation -->
-
 ```ruby
 class ArticleComments
   include Enumerable
@@ -770,8 +716,6 @@ end
 ```
 
 ---
-
-<!-- _header: Relation -->
 
 <pre>
 class ArticleComments
@@ -862,11 +806,6 @@ Article .right.> DB
 
 ---
 
-<style scoped>
-  .kroki-image-container {
-    width: 60%;
-  }
-</style>
 
 <center>
 
@@ -890,18 +829,17 @@ package Domain {
   class User {
   }
 
-  Article ..> Comment
-  Comment ..> User
-  Subscription .left.> Article
+  Article .down.> Comment
+  Subscription .right.> Article
   Subscription ..> User
 }
 
 
-ArticlesRepository ..> DB
-ArticlesRepository ..> Article
-CommentsRepository ..> Comment
+ArticlesRepository .right.> DB
+ArticlesRepository .left.> Article
+CommentsRepository .left.> Comment
 ArticlesRepository ..> CommentsRepository
-CommentsRepository ..> DB
+CommentsRepository .right.> DB
 
 ```
 
@@ -944,8 +882,9 @@ CommentsRepository ..> DB
 
   </td>
   <td>
-
-![](img/feedback.jpeg)
+    было интересно??
+<img src="img/feedback.jpeg" />
+      оставь отзыв ↑↑↑
   </td>
   </tr>
 </table>
