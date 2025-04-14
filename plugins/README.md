@@ -62,6 +62,45 @@ paginate: true
 
 ## Архитектура Продукта
 
+```plantuml
+
+skinparam rectangle {
+  
+  backgroundColor<<DAM API>> White
+}
+
+rectangle "Ruby" as API <<DAM API>>
+
+rectangle "nodejs" as Apollo <<Apollo Federation>>
+rectangle Frontend
+queue "Elixir" as ws <<Web Sockets>>
+queue "Kafka" as ES <<Event Streaming>>
+database PostgreSQL as db <<Database>>
+database Redis as cache <<Cache>>
+cloud "S3" as storage
+rectangle "Ruby" as transcoder <<Video Transcoder>>
+rectangle "Elixir" as events <<Event Relay>>
+actor user
+rectangle "Service A" as servce_a
+
+
+user -> Frontend
+Frontend -> ws: sub
+
+Frontend -> Apollo
+Apollo -> API 
+API --> cache
+API --> db
+
+API -> storage
+API --> transcoder
+API --> ws: pub
+events ..> db: outbox
+events -> ES: pub
+
+ES <.. servce_a: sub
+
+```
 
 ---
 
