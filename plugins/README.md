@@ -53,7 +53,7 @@ paginate: true
 
 ## Проблемы разработки DAM
 
-* разные группы пользователей
+* Группы пользователей
 * Много видов активов 
 * Разные интерфейсы
 * Разные валидации, механики автоматизации
@@ -116,12 +116,46 @@ ES <.. servce_a: sub
 
 * Файлы и папки
 * Разделение ядра и контекстов
-* Плагины
-* feature toggle
+* Feature toggle
+
+---
+
+## Plugin
+
+---
+
+```plantuml
+
+package "core" {
+  mutation CreateFile
+  class File
+  class FilesRepository
+}
+
+package "plugin" {
+  mutation PublishImage
+  class Image
+  class ImagesRepository
+}
+
+plugin --> core
+
+Image ..> File
+
+```
 
 ---
 
 ## Архитектура приложения
+
+```plantuml
+mutation --> interactor
+interactor --> repository
+interactor --> model
+
+repository --> database
+repository --> s3
+```
 
 ---
 
