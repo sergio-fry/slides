@@ -3,6 +3,8 @@ marp: true
 paginate: true
 ---
 
+# От монолита к экосистеме контекстов DDD
+
 <style>
   img {
     display: block;
@@ -18,7 +20,6 @@ paginate: true
 </style>
 
 <!-- _paginate: skip -->
-# От монолита к экосистеме контекстов DDD
 
 ---
 
@@ -53,10 +54,10 @@ paginate: true
 
 ## Проблемы разработки DAM
 
-* Группы пользователей
-* Много видов активов 
-* Разные интерфейсы
-* Разные валидации, механики автоматизации
+- Группы пользователей
+- Много видов активов
+- Разные интерфейсы
+- Разные валидации, механики автоматизации
 
 ---
 
@@ -104,45 +105,23 @@ ES <.. servce_a: sub
 
 ---
 
-## Domain Driven Design!
+## Domain Driven Design
 
-* Domain Model
-* **Ubiquitous Language**
-* **Bounded Context**
+- Domain Model
+- **Ubiquitous Language**
+- **Bounded Context**
 
 ---
 
 ## Принципы
 
-* Файлы и папки
-* Разделение ядра и контекстов
-* Feature toggle
+- Файлы и папки
+- Разделение ядра и контекстов
+- Feature toggle
 
 ---
 
-## Plugin
-
----
-
-```plantuml
-
-package "core" {
-  mutation CreateFile
-  class File
-  class FilesRepository
-}
-
-package "plugin" {
-  mutation PublishImage
-  class Image
-  class ImagesRepository
-}
-
-plugin --> core
-
-Image ..> File
-
-```
+## Словарь
 
 ---
 
@@ -159,54 +138,259 @@ repository --> s3
 
 ---
 
-## Основаная часть
-
----
-
-## Словарь
-
----
-
 ## MVP хранилка (ядро)
 
 ---
 
-## Устройство плагина
+## Plugin
 
-* размещение логики
-* Как технически плагины вызываются из ядра
-* пример встраивания кастомных методов и полей в API
-* Валидации ?
-* Особенности проектирования БД и логики репозиториев в плагинах
-* events, как инструмент встраивания логики
-* как организованы автотесты
+---
+
+```plantuml
+
+package "Core" {
+  class File
+  class CreateFile
+}
+
+package "Media Production" {
+  class PublishImage
+  class Image
+}
+
+
+PublishImage .> Image
+PublishImage ..> CreateFile
+Image --|> File
+CreateFile .> File
+
+```
+
+---
+
+## Размещение логики
+
+- app
+  - domain
+  - interactors
+- plugins
+  - certificates
+    - app
+      - domain
+      - interactors
+  - media_production
+  - cms
+  - video_transcoder
+
+---
+
+## Вызов из ядра
+
+---
+
+```ruby
+class File
+  include HasPlugins
+
+  def rename(new_value)
+    plug("Rename", new_value: new_value)
+
+    @name = name
+  end
+end
+```
+
+---
+
+## plug
+
+- "{Plugin}::File::Rename""
+- ищет в каждом плагине
+- последовательно вызывает
+
+---
+
+```ruby
+module MediaProduction
+  module File
+    class Rename
+      def initialize(params = {})
+        @context = params[:context] # объект, который вызвал плагин
+        @new_value = params[:new_value]
+      end
+
+      def call
+        # действие
+      end
+    end
+  end
+end
+```
+
+---
+
+## API
+
+```ruby
+module Api
+  module Directories
+    class CreateController < ::Api::BaseJsonController
+      include HasPlugins
+        schema do
+          required(:parent_id).filled(::DamTypes::Suid)
+          required(:name).filled(:string)
+          plug("Schema", schema: self)
+        end
+      end
+    end
+  end
+end
+```
+
+---
+
+```ruby
+module VideoTranscoder
+  module Directories
+    module CreateController
+      class Schema
+        def initialize(params)
+          @schema = params[:schema]
+        end
+
+        def call
+          @schema.instance_eval do
+            optional(:video_transcoder_comment).filled(:string)
+          end
+        end
+      end
+    end
+  end
+end
+```
+
+---
+
+## База данных
+
+- префикс
+- отдельные таблицы
+- связи
+
+---
+
+## Проектирование БД
+
+---
+
+```dbml
+Table directories {
+    id uuid [primary key]
+    name varchar
+    parent_id uuid
+}
+
+Ref: directories.parent_id > directories.id
+
+Table files {
+    id uuid [primary key]
+    name varchar
+    directory_id uuid
+}
+
+Ref: files.directory_id > directories.id
+
+Table mp_files {
+    id integer [primary key]
+    barcode varchar
+    status enum
+    file_id uuid
+}
+
+Ref: mp_files.file_id > files.id
+```
+
+---
+
+## Расширение Repo
+
+```ruby
+module Repositories
+  class Files
+    include HasPlugins
+
+    def save(file)
+      db[:files].where(id: file.id).update(name: file.name)
+
+      plug("Save", file:)
+    end
+  end
+end
+
+```
+
+---
+
+```ruby
+
+module MediaProduction
+  module Repositories
+    module Files
+      class Save
+        def initialize(params)
+          @file = params[:file]
+        end
+
+        def call
+          db[:mp_file]
+            .where(file_id: @file.id)
+            .update(barcode: file.meta.media_production.barcode)
+        end
+      end
+    end
+  end
+end
+```
+
+---
+
+## Что еще?
+
+- contructor
+- serializer
+- graphql
+- kafka events
+
+---
+
+## Автотесты
+
+---
+
+- spec
+  - domain
+  - integration
+  - plugins
+    - certificates
+      - domain
+      - integration
+    - media_production
+    - cms
+    - video_transcoder
+    - ...
 
 ---
 
 ## Дальнейшее развитие
 
-* кастомные интерфейсы
-* выделение в сервисы и разделение команды
+---
+
+## Кастомные интерфейсы
+
+---
+
+## Микросервисы
 
 ---
 
 ## Итоги
-
-- шаги советы в аналогичных ситуациях
-
-
-
-
-
-<!--
-
-- шаги советы в аналогичных ситуациях
-- ошибки которые совершили/ забавные исотрии
-- какине преимущества получили - объективно
-- https://www.youtube.com/watch?v=DsfnFrwKksA - как мерить качество кода. может быт полезно
-- в начале добавить кейсы неудачного распила на микрочервисы
-
-- как выделить агрегаты не только по плиагнам
-- есть 
-- словарь - не всегда оч строго, нужно уметь не путаться, если кто-то сомневается нужно добавить формулировку чтобы не было вопросов
--->
