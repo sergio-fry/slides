@@ -47,29 +47,90 @@ paginate: true
 
 ---
 
+## Domain Driven Design
+
+---
+
+## Словарь
+
+---
+
+## Bounded Context
+
+---
+
+- contexts
+  - certificates
+    - domain
+  - media_production
+    - domain
+  - cms
+    - domain
+  - video_transcoder
+    - domain
+
+---
+
 ## Хранилка файлов
 
 ---
 
-## История
+```ruby
+{
+  data: {
+    directory_id: "8f4d39b2-65e9-486d-b948-db0e005b5087",
+    upload_id: "3e1f164a-94f6-45d8-8dfa-665a5bed4f8c",
+    name: "image.jpeg",
+    meta: {
+      comment: "Отличный файл"
+    }
+  }
+}
+```
 
-- удачные кейсы: комментарии, теги, превью, корзина
-- первые проблемы: дата начала и окончания сертификатов
-- хранение в files.meta.certificate_start_date/end_date
-- ядро теперь не знает о кастом поле, но появилась проблема - нет валидации схемы
-- создали папку с плагином
-- добавили подгрузку схемы из плагина
-- но теперь ядро явно знает про плагин сертификатов
-- добавили реестр плагинов
-- добавили проход по всем плагинам для подключения схемы
-- теперь отвязались от плагинов
-- добавляется правило, что  время начала не может быть после окончания
-- ввели понятие kind=certificate и при загрузки из files repo находим kind из плагинов
-- как и где валидировать start_date/edn_date???
-- добавляем расширение для репо 
-- теперь нужно вывести это поле в API 
-- теперь можно вынести поля на верхний уровень 
-- теперь нужно добавить сохранение
-- стало много методов в реестре плагинов
-- сдедали метод plug
+---
+
+## Сертификаты
+
+---
+
+```ruby
+{
+  data: {
+    directory_id: "8f4d39b2-65e9-486d-b948-db0e005b5087",
+    upload_id: "3e1f164a-94f6-45d8-8dfa-665a5bed4f8c",
+    name: "image.jpeg",
+    start_date: "2025-01-01",
+    end_date: "2028-12-31"
+  }
+}
+```
+
+--- 
+
+```ruby
+{
+  data: {
+    directory_id: "8f4d39b2-65e9-486d-b948-db0e005b5087",
+    upload_id: "3e1f164a-94f6-45d8-8dfa-665a5bed4f8c",
+    name: "image.jpeg",
+    meta: {
+      comment: "Отличный файл",
+      start_date: "2025-01-01",
+      end_date: "2028-12-31"
+    }
+  }
+}
+```
+
+---
+
+```ruby
+params do
+  required(:directory_id).filled(:uuid)
+  required(:upload_id).filled(:uuid)
+  required(:name).filled(:string)
+  optional(:meta).hash
+end
+```
 
