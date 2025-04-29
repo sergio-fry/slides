@@ -100,13 +100,16 @@ paginate: true
     directory_id: "8f4d39b2-65e9-486d-b948-db0e005b5087",
     upload_id: "3e1f164a-94f6-45d8-8dfa-665a5bed4f8c",
     name: "image.jpeg",
+    meta: {
+      comment: "Отличный файл"
+    },
     start_date: "2025-01-01",
     end_date: "2028-12-31"
   }
 }
 ```
 
---- 
+---
 
 ```ruby
 {
@@ -131,6 +134,99 @@ params do
   required(:upload_id).filled(:uuid)
   required(:name).filled(:string)
   optional(:meta).hash
+end
+```
+
+---
+
+```ruby
+params do
+  required(:directory_id).filled(:uuid)
+  required(:upload_id).filled(:uuid)
+  required(:name).filled(:string)
+  optional(:meta).hash do
+    required(:comment).filled(:string)
+  end
+
+  Certifactes::Schema::Files.new(self).call
+end
+```
+
+---
+
+```ruby
+# plugins/certificates/schema/file.rb
+
+module Certifactes
+  module Schema
+    class File
+      def initialize(schma)
+        @schema = schema
+      end
+
+      def call
+        @schema.instance_eval do
+          optional(:certificates).hash do
+            required(:start_date).filled(:date)
+            required(:end_date).filled(:date)
+          end
+        end
+      end
+    end
+  end
+end
+```
+
+---
+
+```ruby
+{
+  data: {
+    directory_id: "8f4d39b2-65e9-486d-b948-db0e005b5087",
+    upload_id: "3e1f164a-94f6-45d8-8dfa-665a5bed4f8c",
+    name: "image.jpeg",
+    meta: {
+      comment: "Отличный файл",
+    },
+    certificates: {
+      start_date: "2025-01-01",
+      end_date: "2028-12-31"
+    }
+  }
+}
+```
+
+---
+
+```ruby
+params do
+  required(:directory_id).filled(:uuid)
+  required(:upload_id).filled(:uuid)
+  required(:name).filled(:string)
+  optional(:meta).hash do
+    required(:comment).filled(:string)
+  end
+
+  Certifactes::Schema::Files.new(self).call
+end
+```
+
+---
+
+## Реестр плагинов
+
+---
+
+```ruby
+params do
+  required(:directory_id).filled(:uuid)
+  required(:upload_id).filled(:uuid)
+  required(:name).filled(:string)
+  optional(:meta).hash do
+    required(:comment).filled(:string)
+  end
+
+  plugins.each { |plugin| plugin.apply_file_schema(self) }
 end
 ```
 
