@@ -23,23 +23,26 @@ paginate: true
 
 ---
 
-## Кто я?
+## Сергей Удалов
 
 ---
 
-## О компании
+## ecom.tech
 
 ---
 
-## Digital Assets Management
+## DAM
+
+Digital Assets Management
 
 ---
 
 ## О чем поговорим?
 
-1. Domain Driven Design
+1. DDD
 2. Монолит
 3. Плагины
+4. Ruby
 
 ---
 
@@ -148,7 +151,7 @@ params do
     required(:comment).filled(:string)
   end
 
-  Certifactes::Schema::Files.new(self).call
+  Certifictes::Schema::Files.new(self).call
 end
 ```
 
@@ -157,7 +160,7 @@ end
 ```ruby
 # plugins/certificates/schema/file.rb
 
-module Certifactes
+module Certifictes
   module Schema
     class File
       def initialize(schma)
@@ -207,8 +210,15 @@ params do
     required(:comment).filled(:string)
   end
 
-  Certifactes::Schema::Files.new(self).call
+  Certifictes::Schema::Files.new(self).call
 end
+```
+
+---
+
+```plantuml
+[Plugin] --> [Core]
+
 ```
 
 ---
@@ -226,7 +236,249 @@ params do
     required(:comment).filled(:string)
   end
 
-  plugins.each { |plugin| plugin.apply_file_schema(self) }
+  plugins.apply_file_schema(self)
 end
 ```
+
+---
+
+```ruby
+Rails.root.glob("plugins/**").map do |pathname|
+  plugin = Rails::Engine.find(pathname)
+
+  plugins.register(plugin.engine_name, plugin)
+end
+```
+
+---
+
+```ruby
+plugins = Plugins.new
+
+plugins.add Certificates::Plugin.new
+plugins.add CMS::Plugin.new
+plugins.add MediaProduction::Plugin.new
+```
+
+---
+
+
+```ruby linenums=true
+class FileAsJson
+  def initialize(file)
+    @file = file
+  end
+
+  def json
+    result = {
+      directory_id: file.directory.id,
+      name: file.name,
+      meta: { comment: file.comment },
+    }
+
+    result = plugins.apply_file_json(result, file)
+
+    result
+  end
+end
+```
+
+---
+
+
+```ruby
+class PluginsRepository
+  def apply_file_schema(schema)
+    @plugins.each { |plugin| plugin.apply_file_schema(schema) }
+  end
+
+  def apply_file_json(result, file)
+    result = result.clone
+
+    @plugins.each { |plugin| result.mrge!(plugin.file_json(schema)) }
+
+    result
+  end
+
+  def save_associations(file)
+  def load_assosiations(file)
+  def handle_file_created(file, dir)
+  def handle_file_moved(file, dir_from, dir_to)
+  # ...
+end
+```
+
+---
+
+
+```ruby
+class FilesController < ApplicationController
+  include HasPlugins
+
+  params do
+    required(:directory_id).filled(:uuid)
+    required(:upload_id).filled(:uuid)
+    required(:name).filled(:string)
+    optional(:meta).hash do
+      required(:comment).filled(:string)
+    end
+
+    plug("Schema") # -> Ceritifactes::FilesController::Schema
+  end
+end
+```
+
+---
+
+```ruby
+
+module HasPlugins
+  def plug(name, params = {})
+    params[:context] ||= self
+
+    plugins.plug(name, params)
+  end
+end
+```
+
+---
+
+```ruby
+def plug(target, params)
+  @plugs = {}
+
+  value = yield if block_given?
+
+  plugins.each do |plugin|
+    name = [plugin.engine_name.camelize, namespace(params), target].join("::")
+    @plugs[name] ||= name.safe_constantize
+
+    next if @plugs[name].nil?
+    return @plugs[name] if params[:const_only]
+
+    value = if block_given?
+      @plugs[name].new(params).() { value }
+    else
+      @plugs[name].new(params).()
+    end
+  end
+
+  value
+end
+```
+
+---
+
+```ruby
+class FilesRepository
+  include HasPlugins
+
+  def find(id)
+    file = form_record(File.find(id))
+    plug("FileAssociations", file:)
+
+    file
+  end
+end
+```
+
+---
+
+
+```ruby
+class PluginsRepository
+  def apply_file_schema(schema)
+    @plugins.each { |plugin| plugin.apply_file_schema(schema) }
+  end
+
+  def apply_file_json(result, file)
+    result = result.clone
+
+    @plugins.each { |plugin| result.mrge!(plugin.file_json(schema)) }
+
+    result
+  end
+
+  def save_associations(file)
+  def load_assosiations(file)
+  def handle_file_created(file, dir)
+  def handle_file_moved(file, dir_from, dir_to)
+  # ...
+end
+```
+
+---
+
+
+```plantuml
+package DAM as System {
+component Core as DAM {
+}
+
+component Certificates {
+}
+
+component CMS {
+}
+
+component VideoTranscoder {
+}
+}
+
+Certificates --> DAM
+CMS -> DAM
+VideoTranscoder -left-> DAM
+
+```
+
+---
+
+## База данных
+
+---
+
+## Автотесты
+
+---
+
+- spec
+  - models
+  - integration
+  - plugins
+    - certificates
+      - models
+      - integration
+    - media_production
+
+---
+
+`rspec spec/plugins/certificates`
+
+---
+
+```
+su-mac $ bundle exec rspec spec/plugins/certificates
+Run options: exclude {:integration=>true}
+
+Randomized with seed 20145
+..........................................................
+..........................................
+
+Finished in 8.92 seconds (files took 1.49 seconds to load)
+100 examples, 0 failures
+
+Randomized with seed 20145
+```
+
+---
+
+## Проблемы
+
+---
+
+## Будущее
+
+---
+
+## Спасибо
 
