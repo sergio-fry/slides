@@ -1,6 +1,7 @@
 ---
 marp: true
 paginate: true
+size: 16:9
 ---
 
 # От монолита к экосистеме контекстов DDD
@@ -195,7 +196,7 @@ params do
     required(:comment).filled(:string)
   end
 
-  Certifictes::Schema::Files.new(self).call
+  Certificates::Schema::Files.new(self).call
 end
 ```
 
@@ -204,7 +205,7 @@ end
 ```ruby
 # plugins/certificates/schema/file.rb
 
-module Certifictes
+module Certificates
   module Schema
     class File
       def initialize(schma)
@@ -254,7 +255,7 @@ params do
     required(:comment).filled(:string)
   end
 
-  Certifictes::Schema::Files.new(self).call
+  Certificates::Schema::Files.new(self).call
 end
 ```
 
