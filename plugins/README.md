@@ -208,7 +208,7 @@ end
 module Certificates
   module Schema
     class File
-      def initialize(schma)
+      def initialize(schema)
         @schema = schema
       end
 
